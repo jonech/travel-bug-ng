@@ -1,0 +1,23 @@
+<div class="span_70 col" *ngFor="let activity of _activities | async">
+
+	<div class="span_10 col">{{ activity.time }}</div>
+
+	<div class="span_20 col" *ngIf="activity.location">
+		<img class="circle" src="https://cache-graphicslib.viator.com/graphicslib/thumbs360x240/10175/SITours/french-riviera-day-trip-from-nice-in-nice-289164.jpg"/>
+	</div>
+
+	<div class="span_60 col" *ngIf="activity.location">
+		{{ activity.eventName }}
+		<br>
+		{{ activity.location.name }}
+		<br>
+		{{ activity.description }}
+	</div>
+
+	<div class="span_80 col" *ngIf="activity.transport">
+		{{ activity.transport }}
+		<br>
+		{{ activity.description }}
+	</div>
+
+</div>

@@ -1,3 +1,78 @@
-<h1>
-  {{title}}
-</h1>
+<div id="wrapper">
+	<div id="header">
+		<ul>
+			<div id="leftnav">
+
+				<li><a [routerLink]="['/']"><img src="/assets/img/logoblack.png" style="width:20px;"></a></li>
+
+				<li *ngIf="isLogin()"><a [routerLink]="['/dashboard']">My Trip</a></li>
+
+			</div>
+
+			<div id="rightnav" class="responsive">
+				<div id="responsive-head" class="hide">
+
+					<li *ngIf="!isLogin()"><a [routerLink]="['/login']">Login</a></li>
+
+					<li *ngIf="!isLogin()" class="vertical-line"><a [routerLink]="['/register']">Register</a></li>
+
+					<li *ngIf="isLogin()" class="vertical-line"><button (click)="logout()">Logout</button></li>
+
+					<li><a [routerLink]="['/']">Contact</a></li>
+
+					<li><a [routerLink]="['/about']">About</a></li>
+
+				</div>
+				<li class="icon" id="head-bars">
+					<a href="javascript:void(0);" onClick="headMenu()">&#9776;</a>
+				</li>
+			</div>
+		</ul>
+	</div>
+
+	<div id="content">
+		<router-outlet></router-outlet>
+		<div style="clear: both;"></div>
+	</div>
+
+	<div id="footer">
+		<div id = "links" class="responsive">
+			<ul>
+				<li class="icon" id="footer-bars">
+					<a href="javascript:void(0);" onclick="footerMenu()" >&#9776;</a>
+				</li>
+				<div id="responsive-footer"  class="hide2">
+					<li>
+						<a [routerLink]="['/about']">ABOUT</a>
+					</li>
+					<li>
+						<a href="#">TERM AND CONDITIONS</a>
+					</li>
+					<li>
+						<a [routerLink]="['/']" class="bug0"><img src="assets/img/logoblack.png" style="width:25px;"></a>
+					</li>
+					<li>
+						<a [routerLink]="['/']">PRIVACY POLICY</a>
+					</li>
+					<li>
+						<a [routerLink]="['/']">CONTACT</a>
+					</li>
+				</div>
+			</ul>
+		</div>
+
+		<hr>
+		<div id = "disclaimer">
+			<div class="left column" id="copyright-text">
+					<p>© TravelBug 2016. All rights reserved. Use of this site constitutes acceptance of our User Agreement and Privacy Policy. The material on this site may not be reproduced, distributed, transmitted, cached or otherwised, except with prior written permission of Travel Bug.</p>
+			</div>
+
+			<div class="right column" style="padding-top:50px;width:200px;">
+					<img src = "/assets/img/coming-soon.png"/>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+

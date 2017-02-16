@@ -1,0 +1,25 @@
+#about-wrapper{
+	padding:5% 15% 10px 15%;
+}
+
+.member{
+	padding-left: 10px;
+	font-size: 12px;
+}
+
+.member .name{
+	font-weight: 500;
+}
+
+.member .role{
+	font-weight: 500;
+	color:#9F9F9F;
+}
+
+.member hr{
+	width:15px;
+	border-top: 2px solid #41E2B0;
+	margin: 0;
+	margin-top:10px;
+	margin-bottom: 10px;
+}

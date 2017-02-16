@@ -1,0 +1,12 @@
+<h1>Upcoming Trip</h1>
+<div id="card-column">
+
+	<div id="no-trips" *ngIf="(_trips | async)?.length <= 0">
+		Looks like you have no plans yet.<br>
+		Ready to start planning? Click on add trip!
+	</div>
+
+	<div *ngFor="let trip of _trips | async">
+			<trip [tripId]="trip.$key"></trip>
+	</div>
+</div>
