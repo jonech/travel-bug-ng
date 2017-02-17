@@ -37,6 +37,8 @@ import { DayTripImageComponent } from './tripview/daytripImage.component';
 
 import { DayTripViewComponent } from './daytripview/daytripview.component';
 import { ActivityListComponent } from './daytripview/activity_list.component';
+import { TransportFormComponent } from './daytripview/transport_form.component';
+import { TransportRowComponent } from './daytripview/transport_row.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +65,8 @@ import { ActivityListComponent } from './daytripview/activity_list.component';
 
 	DayTripViewComponent,
 	ActivityListComponent,
+	TransportFormComponent,
+	TransportRowComponent
   ],
   imports: [
     BrowserModule,

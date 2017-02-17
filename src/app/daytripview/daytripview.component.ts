@@ -6,6 +6,8 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { Location } from '../_model/location.model';
 
+import { getTimeSort } from '../_util/timesort.util';
+
 @Component({
 	selector: 'day-trip-view',
 	templateUrl: './daytripview.component.html',
@@ -90,19 +92,11 @@ export class DayTripViewComponent implements OnInit
 			return;
 		}
 		this.newLocation.time = time.value;
-		this.newLocation.timeSort = this.getTimeSort(time.value);
+		this.newLocation.timeSort = getTimeSort(time.value);
 		this.newLocation.description = desc.value;
 		this.newLocation.eventName = actname.value;
 
 		this.dayTripRef.push(this.newLocation);
 		this.locationForm.nativeElement.reset();
-	}
-
-	getTimeSort(time:string): number
-	{
-		let hour = time.slice(0, 2);
-		let minute = time.slice(3, 5);
-
-		return Number("42"+hour+minute);
 	}
 }

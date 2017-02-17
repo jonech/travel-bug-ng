@@ -1,3 +1,8 @@
+<!-- for when there is nothing-->
+<div class="span_70 col" *ngIf="(_activities | async)?.length <= 0">
+	<p>There's nothing here, start planning now!</p>
+</div>
+
 <div class="span_70 col" *ngFor="let activity of _activities | async">
 
 	<div class="span_10 col">{{ activity.time }}</div>
@@ -14,10 +19,6 @@
 		{{ activity.description }}
 	</div>
 
-	<div class="span_80 col" *ngIf="activity.transport">
-		{{ activity.transport }}
-		<br>
-		{{ activity.description }}
-	</div>
+	<transport-row *ngIf="activity.transport" [transport]="activity"></transport-row>
 
 </div>
