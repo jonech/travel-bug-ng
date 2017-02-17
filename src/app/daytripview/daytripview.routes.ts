@@ -10,7 +10,7 @@ export const routes: Routes = [
 		canActivate: [ AuthGuard ],
 
 		children: [
-			{ path: ':id', component: DayTripViewComponent },
+			{ path: ':tripId/:dayTripId', component: DayTripViewComponent },
 		]
 	}
 ]

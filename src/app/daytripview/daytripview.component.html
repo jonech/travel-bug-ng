@@ -1,8 +1,18 @@
 <div class="section group">
+
+	<!-- daytrip dropdown nav -->
+	<ul>
+		<li *ngFor="let dayTrip of _dayTripListRef | async">
+			<a [routerLink]="['/daytrip', _tripId, dayTrip.$value]">{{ dayTrip.$key }}</a>
+		</li>
+	</ul>
+
+	<!-- list of activities -->
 	<div class="span_80 col">
 		<activity-list [dayTripId]="_dayTripId"></activity-list>
 	</div>
 
+	<!-- create activity form -->
 	<div class="span_10 col">
 		<h3>ADD ACTIVITIES</h3>
 		<form #activityForm>

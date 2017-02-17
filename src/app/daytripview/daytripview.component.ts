@@ -14,11 +14,13 @@ import { Location } from '../_model/location.model';
 
 export class DayTripViewComponent implements OnInit
 {
+	_tripId: string;
 	_dayTripId: string;
 	_locationSearchControl: FormControl;
 	newLocation: Location;
 
 	dayTripRef: FirebaseListObservable<any[]>;
+	_dayTripListRef: FirebaseListObservable<any[]>;
 
 	@ViewChild('location') locationElement: ElementRef;
 	@ViewChild('activityForm') locationForm: ElementRef;
@@ -33,8 +35,15 @@ export class DayTripViewComponent implements OnInit
 	ngOnInit()
 	{
 		this.route.params.subscribe(params => {
-			this._dayTripId = params['id'];
+
+			this._dayTripId = params['dayTripId'];
 			this.dayTripRef = this.firebase.database.list(`/DayTrip/${this._dayTripId}`);
+
+			// prevent daytrip navigation get refresh
+			if (this._tripId == null) {
+				this._tripId = params['tripId'];
+				this._dayTripListRef = this.firebase.database.list(`/Trip/${this._tripId}/Days`);
+			}
 		});
 
 		this._locationSearchControl = new FormControl();

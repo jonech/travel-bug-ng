@@ -11,7 +11,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 export class DayTripListComponent implements OnInit, OnDestroy
 {
 	private paramSub: any;
-	private tripId: string;
+	private _tripId: string;
 
 	private _trip: FirebaseObjectObservable<any>;
 	private _dayTrips: FirebaseListObservable<any[]>;
@@ -24,10 +24,10 @@ export class DayTripListComponent implements OnInit, OnDestroy
 	public ngOnInit()
 	{
 		this.paramSub = this.route.params.subscribe(params => {
-			this.tripId = params['id'];
+			this._tripId = params['id'];
 
-			this._trip = this.firebase.database.object(`/Trip/${this.tripId}`);
-			this._dayTrips = this.firebase.database.list(`/Trip/${this.tripId}/Days`);
+			this._trip = this.firebase.database.object(`/Trip/${this._tripId}`);
+			this._dayTrips = this.firebase.database.list(`/Trip/${this._tripId}/Days`);
 		});
 	}
 

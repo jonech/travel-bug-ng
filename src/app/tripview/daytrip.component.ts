@@ -11,6 +11,7 @@ import { AngularFire,  FirebaseListObservable } from 'angularfire2';
 export class DayTripComponent implements OnInit
 {
 	@Input() dayTripId: string;
+	@Input() tripId: string;
 	@Input() day: string;
 	@Input() date: string;
 
@@ -34,6 +35,6 @@ export class DayTripComponent implements OnInit
 
 	private toDayTripView()
 	{
-		this.router.navigate([`/daytrip/${this.dayTripId}`]);
+		this.router.navigate([`/daytrip/${this.tripId}/${this.dayTripId}`]);
 	}
 }
