@@ -35,5 +35,4 @@ export class DayTripListComponent implements OnInit, OnDestroy
 	{
 		this.paramSub.unsubscribe();
 	}
-
 }

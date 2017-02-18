@@ -20,7 +20,7 @@ export class TripComponent implements OnInit
 
 	constructor(
 		private firebase: AngularFire,
-		private router: Router
+		private router: Router,
 	){}
 
 	ngOnInit()
@@ -42,5 +42,4 @@ export class TripComponent implements OnInit
 		}
 		console.log("clicked!");
 	}
-
 }

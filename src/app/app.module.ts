@@ -21,6 +21,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './static/home.component';
 import { AboutComponent } from './static/about.component';
 
+import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
+
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
 
@@ -42,27 +44,36 @@ import { TransportRowComponent } from './daytripview/transport_row.component';
 
 @NgModule({
   declarations: [
+	// pipes
 	StringToDatePipe,
 
     AppComponent,
 
+	// static
 	HomeComponent,
 	AboutComponent,
 
+	// auth
 	RegisterComponent,
 	LoginComponent,
 
+	// reuse
+	FirebasePlaceImageComponent,
+
+	// Dashboard
 	DashboardComponent,
 	TripListComponent,
 	PastTripComponent,
 	TripComponent,
 	GoingUserComponent,
 
+	// tripview or fullview
 	TripViewComponent,
 	DayTripListComponent,
 	DayTripComponent,
 	DayTripImageComponent,
 
+	// daytripview
 	DayTripViewComponent,
 	ActivityListComponent,
 	TransportFormComponent,
@@ -83,7 +94,10 @@ import { TransportRowComponent } from './daytripview/transport_row.component';
 	AngularFireModule.initializeApp(firebaseConfig),
   ],
   providers: [
+	  // guards
 	  AuthGuard,
+
+	  // services
 	  GoogleService,
 	],
   bootstrap: [AppComponent]

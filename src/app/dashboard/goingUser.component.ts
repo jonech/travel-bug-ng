@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -16,12 +17,18 @@ export class GoingUserComponent implements OnInit
 	_user: FirebaseObjectObservable<any>;
 
 	constructor(
-		private firebase: AngularFire
+		private firebase: AngularFire,
+		private sanitizer: DomSanitizer
 	){}
 
 	ngOnInit()
 	{
 		this._user = this.firebase.database.object(`/User/${this.goingUserId}/UserDetails`);
+	}
+
+	sanitize(url: string)
+	{
+		return this.sanitizer.bypassSecurityTrustResourceUrl(url);
 	}
 
 }

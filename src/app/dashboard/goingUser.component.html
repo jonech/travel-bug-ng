@@ -1,3 +1,6 @@
 <div class="going">
+	<div class="span_10 circle">
+		<img *ngIf="(_user | async)?.profileImage" [src]="sanitize('data:image/jpg;base64,' + (_user | async)?.profileImage)">
+	</div>
 	{{ ( _user | async)?.firstName }}
 </div>

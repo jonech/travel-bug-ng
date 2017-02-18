@@ -1,8 +1,9 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Http } from '@angular/http'
+import { Http, Headers } from '@angular/http'
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import 'rxjs/add/operator/map';
+import { DomSanitizer } from '@angular/platform-browser'
 
 @Injectable()
 export class GoogleService
@@ -10,7 +11,8 @@ export class GoogleService
 
 	constructor(
 		private googleApiLoader: MapsAPILoader,
-		private http: Http
+		private http: Http,
+		private sanitizer: DomSanitizer
 	){}
 
 	// getPhotoUrl(placeId: string, image: ElementRef)
@@ -40,11 +42,12 @@ export class GoogleService
 
 			service.getDetails(request, (place, status) => {
 				if (status == google.maps.places.PlacesServiceStatus.OK) {
-					console.log(place);
-					var url = place.photos[1].getUrl({maxWidth: 300, maxHeight: 300});
+					var url = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
 					//console.log(url);
+					//this.download(url);
 					// this.getImage(url).subscribe(imageData => {
-					// 	image.nativeElement.src = URL.createObjectURL(new Blob([imageData]));
+					// 	console.log(imageData);
+					//  	image.nativeElement.src = URL.createObjectURL(new Blob([imageData]));
 					// });
 					image.nativeElement.src = url || 'https://melbournebitsandpieces.files.wordpress.com/2010/08/sany0251.jpg';
 				}
@@ -54,11 +57,11 @@ export class GoogleService
 
 	getImage(url: string)
 	{
-		console.log(url);
 		return Observable.create(observer => {
 			let req = new XMLHttpRequest();
-			req.open('get',url);
+			req.open('GET',url);
 			req.responseType = "arraybuffer";
+			req.setRequestHeader('Access-Control-Allow-Origin', '*');
 			req.onreadystatechange = function() {
 				if (req.readyState == 4 && req.status == 200) {
 					observer.next(req.response);
@@ -71,7 +74,9 @@ export class GoogleService
 
 	download(url: string)
 	{
-		this.http.get(url).subscribe(
+		let headers = new Headers();
+		headers.append('Access-Control-Allow-Origin', '*');
+		this.http.get(url, { headers: headers}).subscribe(
 			data => {
 				var image = data.arrayBuffer();
 			},

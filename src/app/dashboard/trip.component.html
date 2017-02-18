@@ -1,31 +1,38 @@
-<div *ngIf="(_trip | async)?.$key != null" class="">
+<div *ngIf="(_trip | async)?.$key != null" class="" [routerLink]="['/trip', (_trip|async)?.$key]">
 	<div class="date-box">
 		<div class="date">{{ (_trip | async)?.startDate | stringToDate | date:'d' }}</div>
 		<div class="month">{{ (_trip | async)?.startDate | stringToDate | date:'MMM' }}</div>
 	</div>
 	<div class="card-left">
-		<img src='https://melbournebitsandpieces.files.wordpress.com/2010/08/sany0251.jpg'>
+
+		<firebase-place-image [placeId]="(_trip | async)?.tripLocationId"></firebase-place-image>
 	</div>
+
 	<div class="card-right">
+
 		<div class="trip-textbox">
+
 			<div class="days">{{ (_tripDays | async)?.length }} DAYS</div>
-			<div class="title" [routerLink]="['/trip', (_trip|async)?.$key]">{{ (_trip | async)?.tripName }}</div>
+			<div class="title">{{ (_trip | async)?.tripName }}</div>
 			<div class="full-dates">{{ (_trip | async)?.startDate | stringToDate | date }} - {{ (_trip | async)?.endDate | stringToDate | date }}</div>
-			<!--<div class="host">Hosted by {{ (_trip.tripAdmins | async) }}</div>-->
+
 			<hr/>
 			<div>Hosted by</div>
-			<div *ngFor="let user of _tripAdmins | async">
+			<div class="" *ngFor="let user of _tripAdmins | async">
 				<going-user [goingUserId]="user.$key"></going-user>
 			</div>
+
 			<br/>
 			<div>Invited users</div>
 			<div *ngIf="(_tripRegulars|async)?.length <=0"> no one... </div>
-			<div *ngFor="let user of _tripRegulars | async">
+			<div class="" *ngFor="let user of _tripRegulars | async">
 				<going-user [goingUserId]="user.$key"></going-user>
 			</div>
+
 			<div class="location">
 				<i class="fa fa-map-marker" aria-hidden="true"></i>{{ (_trip | async)?.location }}
 			</div>
+
 		</div>
 	</div>
 </div>
