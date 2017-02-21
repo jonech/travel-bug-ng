@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit
 			method: AuthMethods.Password
 		})
 		.then((success) => {
-			localStorage.setItem('currentUserId', success.auth.uid);
+			//localStorage.setItem('currentUserId', success.auth.uid);
 			this.toDashboard();
 		})
 		.catch((error) => {

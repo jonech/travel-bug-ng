@@ -25,11 +25,8 @@ export class TripComponent implements OnInit
 
 	ngOnInit()
 	{
-		var uid = localStorage.getItem('currentUserId');
 		console.log("stuff-->" + this.tripId);
 		this._trip = this.firebase.database.object('/Trip/' + this.tripId);
-
-
 		this._tripDays = this.firebase.database.list(`/Trip/${this.tripId}/Days`);
 		this._tripRegulars = this.firebase.database.list(`/Trip/${this.tripId}/User/Regular`);
 		this._tripAdmins = this.firebase.database.list(`/Trip/${this.tripId}/User/Admin`);

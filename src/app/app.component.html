@@ -5,18 +5,18 @@
 
 				<li><a [routerLink]="['/']"><img src="/assets/img/logoblack.png" style="width:20px;"></a></li>
 
-				<li *ngIf="isLogin()"><a [routerLink]="['/dashboard']">My Trip</a></li>
+				<li *ngIf="_isLogin"><a [routerLink]="['/dashboard']">My Trip</a></li>
 
 			</div>
 
 			<div id="rightnav" class="responsive">
 				<div id="responsive-head" class="hide">
 
-					<li *ngIf="!isLogin()"><a [routerLink]="['/login']">Login</a></li>
+					<li *ngIf="!_isLogin"><a [routerLink]="['/login']">Login</a></li>
 
-					<li *ngIf="!isLogin()" class="vertical-line"><a [routerLink]="['/register']">Register</a></li>
+					<li *ngIf="!_isLogin" class="vertical-line"><a [routerLink]="['/register']">Register</a></li>
 
-					<li *ngIf="isLogin()" class="vertical-line"><button (click)="logout()">Logout</button></li>
+					<li *ngIf="_isLogin" class="vertical-line"><button (click)="logout()">Logout</button></li>
 
 					<li><a [routerLink]="['/']">Contact</a></li>
 

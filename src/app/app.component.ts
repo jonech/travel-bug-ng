@@ -10,24 +10,26 @@ import { AngularFire } from 'angularfire2';
 
 export class AppComponent
 {
+	private _isLogin: boolean = false;
+
 	constructor(
 		private firebase: AngularFire,
 		private router: Router
-	){}
+	)
+	{
+		firebase.auth.subscribe(auth => {
+			if (auth) {
+				this._isLogin = true;
+			}
+			else {
+				this._isLogin = false;
+			}
+		})
+	}
 
 	private logout()
 	{
 		this.firebase.auth.logout();
-		localStorage.removeItem('currentUserId');
-
 		this.router.navigate(['/'])
-	}
-
-	private isLogin():boolean
-	{
-		if (localStorage.getItem('currentUserId')) {
-			return true;
-		}
-		return false;
 	}
 }

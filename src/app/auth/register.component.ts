@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2'
+import { AngularFire, FirebaseObjectObservable, AuthProviders, AuthMethods } from 'angularfire2'
 
 import { User } from '../_model/user.model';
 import { ProfileDefaultBase64, EmailRegEx } from '../_util/string.util';
@@ -65,6 +65,20 @@ export class RegisterComponent implements OnInit
 		.catch(error => {
 			this._error = error.message;
 		});
+	}
+
+	private loginWithFacebook()
+	{
+		this._firebase.auth.login({
+			provider: AuthProviders.Facebook,
+			method: AuthMethods.Popup
+		})
+		.then(resolve => {
+			//localStorage.setItem('currentUser', )
+		})
+		.catch(error => {
+			console.log(error.message);
+		})
 	}
 
 	private saveUserDetails(uid:string, user:User)

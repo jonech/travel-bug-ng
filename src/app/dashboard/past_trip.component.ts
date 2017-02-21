@@ -16,7 +16,11 @@ export class PastTripComponent
 		private firebase: AngularFire
 	)
 	{
-		let uid = localStorage.getItem('currentUserId');
-		this._trips = this.firebase.database.list('/User/' + uid + "/PastTrip");
+		firebase.auth.subscribe(auth => {
+			if (!auth) { return; }
+
+			let uid = auth.uid;
+			this._trips = this.firebase.database.list('/User/' + uid + "/PastTrip");
+		})
 	}
 }
