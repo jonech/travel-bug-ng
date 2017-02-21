@@ -15,14 +15,6 @@ export class AuthGuard implements CanActivate
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
 	{
-		// this.firebase.auth.subscribe(snapshot => {
-		// 	if (!snapshot.expires) {
-		// 		return true;
-		// 	}
-		// })
-		// if (!this.firebase.auth.getAuth().expires) {
-		// 	return true;
-		// }
 		return this.fireAuth.map((auth) => {
 			if (auth) {
 				console.log("authed!");
