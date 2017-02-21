@@ -1,4 +1,4 @@
-<div *ngIf="(_trip | async)?.$key != null" class="" [routerLink]="['/trip', (_trip|async)?.$key]">
+<div *ngIf="(_trip | async)?.$key != null" class="trip" [routerLink]="['/trip', (_trip|async)?.$key]">
 	<div class="date-box">
 		<div class="date">{{ (_trip | async)?.startDate | stringToDate | date:'d' }}</div>
 		<div class="month">{{ (_trip | async)?.startDate | stringToDate | date:'MMM' }}</div>

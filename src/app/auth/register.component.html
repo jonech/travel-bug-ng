@@ -1,0 +1,69 @@
+<div id = "form-wrapper">
+
+	<img style="padding-bottom:20px;" src="assets/img/logo.png"/>
+
+	<div class="title">Join Travel Bug</div>
+	<p>Already have an account with us?</p>
+	<div class="login">Log in</div>
+
+	<div class="or-divider"><span>OR</span></div>
+
+		<div class="facebook">LOG IN WITH FACEBOOK</div>
+
+	<div class="or-divider"><span>OR</span></div>
+
+	<div *ngIf="_error">
+		<span style="color: red; font-size: 10px;">
+			<p>{{ _error }}</p>
+		</span>
+	</div>
+
+	<form class="" [formGroup]="registerForm" novalidate>
+		<div class="form-group">
+			<small class="reactive-error" [hidden]="registerForm.controls.email.valid || (registerForm.controls.email.pristine && !_submitted)">
+					Valid email required.
+					<br>
+			</small>
+			<input class="form-control span_69" id="email" type="text" placeholder="email" formControlName="email">
+		</div>
+
+		<div class="form-group">
+			<small class="reactive-error" [hidden]="registerForm.controls.firstname.valid || (registerForm.controls.firstname.pristine && !_submitted)">
+					First name required (minimum 2 characters).
+					<br>
+			</small>
+			<input class="form-control span_69" id="firstname" type="text" placeholder="firstname" formControlName="firstname">
+		</div>
+
+		<div class="form-group">
+			<small class="reactive-error" [hidden]="registerForm.controls.lastname.valid || (registerForm.controls.lastname.pristine && !_submitted)">
+					Last name required (minimum 2 characters).
+					<br>
+			</small>
+			<input class="form-control span_69" id="lastname" type="text" placeholder="lastname" formControlName="lastname">
+		</div>
+
+		<div class="form-group" formGroupName="matchingPwd">
+			<small class="reactive-error" [hidden]="registerForm.controls.matchingPwd.controls.password.valid || (registerForm.controls.matchingPwd.controls.password.pristine && !_submitted)">
+					Password required (minimum 8 characters).
+					<br>
+			</small>
+			<input class="form-control span_69" id="password" type="text" placeholder="password (min 8 characters)" formControlName="password">
+		</div>
+
+		<div class="form-group" formGroupName="matchingPwd">
+			<small class="reactive-error" [hidden]="registerForm.controls.matchingPwd.valid || (!registerForm.controls.matchingPwd.touched && !_submitted)">
+					Password mismatch.
+					<br/>
+			</small>
+			<input class="form-control span_69" id="passwordconf" type="text" placeholder="confirm password" formControlName="passwordconf">
+		</div>
+
+
+		<div class="form-group">
+			<button type="submit" class="submit span_69" (click)="registerWithEmail(registerForm.value, registerForm.valid); false">REGISTER</button>
+		</div>
+
+	</form>
+
+</div>

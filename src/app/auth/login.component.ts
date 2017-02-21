@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
 @Component({
@@ -8,14 +8,24 @@ import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 	styleUrls: ['./auth.component.css'],
 })
 
-export class LoginComponent
+export class LoginComponent implements OnInit
 {
+	private _redirect: string;
+	private _error: string;
 
 	constructor
 	(
 		private firebase:AngularFire,
-		private _router:Router
+		private _router:Router,
+		private _route: ActivatedRoute,
 	){}
+
+	ngOnInit()
+	{
+		this._route.params.subscribe(params => {
+			this.handleRedirectMsg(params['redirect']);
+		});
+	}
 
 	private loginWithEmail(emailEl:any, passwordEl:any)
 	{
@@ -32,8 +42,19 @@ export class LoginComponent
 			this.toDashboard();
 		})
 		.catch((error) => {
+			this._error = error.message;
 			console.log(JSON.stringify(error));
 		});
+	}
+
+	private handleRedirectMsg(redirect:string)
+	{
+		if (redirect === 'register') {
+			this._redirect = "Registration successful. Please log in with your registered email and password."
+		}
+		else if (redirect === 'unauth') {
+			this._redirect = "Please log in.";
+		}
 	}
 
 	private toDashboard()
