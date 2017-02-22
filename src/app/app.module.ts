@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 
 import { HomeComponent } from './static/home.component';
 import { AboutComponent } from './static/about.component';
+import { PrivacyPolicyComponent } from './static/privacy_policy.component';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 
@@ -52,6 +53,7 @@ import { TransportRowComponent } from './daytripview/transport_row.component';
 	// static
 	HomeComponent,
 	AboutComponent,
+	PrivacyPolicyComponent,
 
 	// auth
 	RegisterComponent,
