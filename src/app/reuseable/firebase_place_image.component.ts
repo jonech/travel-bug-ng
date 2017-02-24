@@ -37,7 +37,7 @@ export class FirebasePlaceImageComponent implements OnInit {
 		}
 
 		// disable this return if loading dashboard is slow and annoying, just return the static url image from web...
-		return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + base64Image);
-		//return 'https://melbournebitsandpieces.files.wordpress.com/2010/08/sany0251.jpg';
+		//return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + base64Image);
+		return 'https://melbournebitsandpieces.files.wordpress.com/2010/08/sany0251.jpg';
 	}
 }

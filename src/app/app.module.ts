@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { Ng2PopupModule } from 'ng2-popup';
 
 import { Routing } from './app.routes';
 
@@ -13,6 +14,7 @@ import { StringToDatePipe } from './_pipe/string-to-date.pipe';
 
 import { AngularFireModule } from 'angularfire2';
 import { firebaseConfig } from './../environments/firebase.config';
+import { googleConfig } from './../environments/google.config';
 
 import { AgmCoreModule } from "angular2-google-maps/core"
 
@@ -40,6 +42,7 @@ import { DayTripImageComponent } from './tripview/daytripImage.component';
 
 import { DayTripViewComponent } from './daytripview/daytripview.component';
 import { ActivityListComponent } from './daytripview/activity_list.component';
+import { LocationFormComponent } from './daytripview/location_form.component';
 import { TransportFormComponent } from './daytripview/transport_form.component';
 import { TransportRowComponent } from './daytripview/transport_row.component';
 
@@ -78,6 +81,7 @@ import { TransportRowComponent } from './daytripview/transport_row.component';
 	// daytripview
 	DayTripViewComponent,
 	ActivityListComponent,
+	LocationFormComponent,
 	TransportFormComponent,
 	TransportRowComponent
   ],
@@ -86,12 +90,10 @@ import { TransportRowComponent } from './daytripview/transport_row.component';
     FormsModule,
 	ReactiveFormsModule,
     HttpModule,
+	//Ng2PopupModule,
 	Routing,
 
-	AgmCoreModule.forRoot({
-		apiKey: "AIzaSyDYofVbNPz44rYZJanHhMKjnaXoMRZ8--c",
-		libraries:["places"]
-	}),
+	AgmCoreModule.forRoot(googleConfig),
 
 	AngularFireModule.initializeApp(firebaseConfig),
   ],
