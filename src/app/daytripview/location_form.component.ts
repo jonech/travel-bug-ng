@@ -33,7 +33,6 @@ export class LocationFormComponent implements OnInit
 	ngOnInit()
 	{
 		this.dayTripRef = this.firebase.database.list(`/DayTrip/${this.dayTripId}`);
-		console.log("here");
 		this._locationSearchControl = new FormControl();
 
 		this.googleApiLoader.load().then(() => {

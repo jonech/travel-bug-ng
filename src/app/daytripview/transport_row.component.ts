@@ -4,25 +4,27 @@ import { Component, OnInit, Input } from '@angular/core';
 	selector: 'transport-row',
 	template:
 	`
-		<div class="span_80 col">
+		<div class="span_80 col row">
 			<img class="span_10" src="{{ _iconUrl }}">
 			<br>
-			{{ transport.transport }}
+			{{ _transport.transport }}
 			<br>
-			{{ transport.description }}
+			{{ _transport.description }}
 		</div>
-	`
+	`,
+	styles: ['./transport_row.component.css']
 })
 
 export class TransportRowComponent implements OnInit {
 
-	@Input() transport: any;
+	@Input('transport') _transport: any;
+	@Input('activityId') _activityId: string;
 	_iconUrl: string = "";
 	baseDir: string = "./assets/img/material_icon";
 
 	ngOnInit()
 	{
-		this.getTransportIconUrl(this.transport.transport);
+		this.getTransportIconUrl(this._transport.transport);
 	}
 
 	getTransportIconUrl(transport: string)

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Ng2PopupComponent  } from 'ng2-popup';
 
 @Component({
 	moduleId: module.id,
 	selector: 'detail-view',
+	template:
+	`
+		<h1>HERE!</h1>
+	`
 })
 
 export class DetailViewComponent implements OnInit

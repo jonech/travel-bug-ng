@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { Ng2PopupModule } from 'ng2-popup';
 
 import { Routing } from './app.routes';
 
@@ -12,11 +11,13 @@ import { GoogleService } from './_service/google.service';
 
 import { StringToDatePipe } from './_pipe/string-to-date.pipe';
 
-import { AngularFireModule } from 'angularfire2';
+
 import { firebaseConfig } from './../environments/firebase.config';
 import { googleConfig } from './../environments/google.config';
 
+import { AngularFireModule } from 'angularfire2';
 import { AgmCoreModule } from "angular2-google-maps/core"
+import { DialogModule  } from "primeng/primeng"
 
 import { AppComponent } from './app.component';
 
@@ -43,8 +44,12 @@ import { DayTripImageComponent } from './tripview/daytripImage.component';
 import { DayTripViewComponent } from './daytripview/daytripview.component';
 import { ActivityListComponent } from './daytripview/activity_list.component';
 import { LocationFormComponent } from './daytripview/location_form.component';
+import { LocationRowComponent } from './daytripview/location_row.component';
 import { TransportFormComponent } from './daytripview/transport_form.component';
 import { TransportRowComponent } from './daytripview/transport_row.component';
+import { ActivityDetailComponent } from './daytripview/activity_detail.component';
+
+import { DetailViewComponent } from './activitydetail/detail_view.component';
 
 @NgModule({
   declarations: [
@@ -82,20 +87,25 @@ import { TransportRowComponent } from './daytripview/transport_row.component';
 	DayTripViewComponent,
 	ActivityListComponent,
 	LocationFormComponent,
+	LocationRowComponent,
 	TransportFormComponent,
-	TransportRowComponent
+	TransportRowComponent,
+	ActivityDetailComponent,
+
+	// activity detail
+	DetailViewComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
 	ReactiveFormsModule,
     HttpModule,
-	//Ng2PopupModule,
 	Routing,
 
 	AgmCoreModule.forRoot(googleConfig),
-
 	AngularFireModule.initializeApp(firebaseConfig),
+	DialogModule,
+
   ],
   providers: [
 	  // guards

@@ -5,20 +5,8 @@
 
 <div class="span_70 col" *ngFor="let activity of _activities | async">
 
-	<div class="span_10 col">{{ activity.time }}</div>
+	<location-row *ngIf="activity.location" [activityId]="activity.$key" [location]="activity"></location-row>
 
-	<div class="span_20 col" *ngIf="activity.location">
-		<img class="circle" src="https://cache-graphicslib.viator.com/graphicslib/thumbs360x240/10175/SITours/french-riviera-day-trip-from-nice-in-nice-289164.jpg"/>
-	</div>
-
-	<div class="span_60 col" *ngIf="activity.location">
-		{{ activity.eventName }}
-		<br>
-		{{ activity.location.name }}
-		<br>
-		{{ activity.description }}
-	</div>
-
-	<transport-row *ngIf="activity.transport" [transport]="activity"></transport-row>
+	<transport-row *ngIf="activity.transport" [activityId]="activity.$key" [transport]="activity"></transport-row>
 
 </div>

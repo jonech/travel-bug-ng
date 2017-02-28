@@ -8,11 +8,10 @@
 
 	<div class="span_70 col">
 		<!-- daytrip dropdown nav -->
-		<ul>
-			<li *ngFor="let dayTrip of _dayTripListRef | async">
-				<a [routerLink]="['/daytrip', _tripId, dayTrip.$value]">{{ dayTrip.$key }}</a>
-			</li>
-		</ul>
+		<div class="dropdown-nav" (click)="showDropDown()" >{{ _currentDay }}</div>
+		<div [ngClass]="{'show': _show}" class="dropdown-content" [hidden]="!_show" *ngFor="let dayTrip of _dayTripListRef | async">
+			<a (click)="showDropDown()" [routerLink]="['/daytrip', _tripId, dayTrip.$value]">{{ dayTrip.$key }}</a>
+		</div>
 
 		<!-- list of activities -->
 		<activity-list [dayTripId]="_dayTripId"></activity-list>
@@ -28,5 +27,6 @@
 		<transport-form></transport-form>
 	</div>
 
+	<router-outlet name="pop-up"></router-outlet>
 
 </div>

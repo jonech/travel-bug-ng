@@ -1,3 +1,7 @@
+.daytrip {
+	cursor: pointer;
+}
+
 .daytrip:hover {
 	background-color: lightgrey;
 }
