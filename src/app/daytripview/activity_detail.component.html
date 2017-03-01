@@ -1,0 +1,17 @@
+<div class="modal">
+
+	<div class="modal-content"  #container>
+		<div class="modal-header">
+			<div (click)="closePopUp()" class="close">&times;</div>
+			<h1>
+				{{ (_activity | async)?.eventName }}
+			</h1>
+		</div>
+
+		<div class="modal-body">
+			{{ (_activity | async)?.description }}
+		</div>
+
+	</div>
+
+</div>

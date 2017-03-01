@@ -47,7 +47,6 @@ export class DayTripViewComponent implements OnInit
 				this._currentDay = snapshots[0].key;
 			});
 		});
-		console.log("constructing");
 	}
 
 	ngOnInit()

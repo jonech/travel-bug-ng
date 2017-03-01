@@ -1,27 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
-	moduleId: module.id,
 	selector: 'activity-detail',
-	template:
-	`
-		<p-dialog [modal]=true [dismissableMask]=true [visible]="_display">
-			<p-header>
-				<div style="float: right; color: red;" class="close"><a [routerLink]="[parentRoute(), { outlets: { 'pop-up': null }}]">CLOSE</a></div>
-			</p-header>
-    		<p>
-				{{ (_activity | async)?.description }}
-			</p>
-		</p-dialog>
-	`,
-	styles: ['./activity_detail.component.css']
+	templateUrl: './activity_detail.component.html',
+	styleUrls:['./activity_detail.component.css'],
+	host: {
+		'(document:click)': 'handleClick($event)'
+	}
 })
 
 export class ActivityDetailComponent implements OnInit
 {
+	@ViewChild('container') container;
 
 	private _display: boolean = true;
 	private _activity: FirebaseObjectObservable<any>;
@@ -29,11 +22,13 @@ export class ActivityDetailComponent implements OnInit
 	private dayTripId: string;
 	private tripId: string;
 	private activityId: string;
+	private firstclick: boolean = true;
 
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
 		private firebase: AngularFire,
+		private elementRef: ElementRef,
 	)
 	{}
 
@@ -50,8 +45,21 @@ export class ActivityDetailComponent implements OnInit
 		});
 	}
 
-	parentRoute()
+	closePopUp()
 	{
-		return `/daytrip/${this.tripId}/${this.dayTripId}`;
+		this.router.navigate([`/daytrip/${this.tripId}/${this.dayTripId}`, { outlets: { 'pop-up': null }}]);
+	}
+
+	handleClick(event)
+	{
+		// prevent pop up closing too soon
+		if (this.firstclick) {
+			this.firstclick = false;
+			return;
+		}
+
+		if (!this.container.nativeElement.contains(event.target)) {
+			this.closePopUp();
+		}
 	}
 }

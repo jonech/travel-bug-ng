@@ -17,7 +17,6 @@ import { googleConfig } from './../environments/google.config';
 
 import { AngularFireModule } from 'angularfire2';
 import { AgmCoreModule } from "angular2-google-maps/core"
-import { DialogModule  } from "primeng/primeng"
 
 import { AppComponent } from './app.component';
 
@@ -104,7 +103,6 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 
 	AgmCoreModule.forRoot(googleConfig),
 	AngularFireModule.initializeApp(firebaseConfig),
-	DialogModule,
 
   ],
   providers: [
