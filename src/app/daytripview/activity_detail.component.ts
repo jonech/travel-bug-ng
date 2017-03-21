@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { GoogleService } from '../_service/google.service';
 
 @Component({
 	selector: 'activity-detail',
@@ -15,6 +16,7 @@ import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 export class ActivityDetailComponent implements OnInit
 {
 	@ViewChild('container') container;
+	@ViewChild('image') image: ElementRef;
 
 	private _display: boolean = true;
 	private _activity: FirebaseObjectObservable<any>;
@@ -29,6 +31,7 @@ export class ActivityDetailComponent implements OnInit
 		private router: Router,
 		private firebase: AngularFire,
 		private elementRef: ElementRef,
+		private google: GoogleService,
 	)
 	{}
 
@@ -61,5 +64,10 @@ export class ActivityDetailComponent implements OnInit
 		if (!this.container.nativeElement.contains(event.target)) {
 			this.closePopUp();
 		}
+	}
+
+	getImageUrl(placeId: string)
+	{
+		this.google.getPhotoUrl(placeId, this.image);
 	}
 }

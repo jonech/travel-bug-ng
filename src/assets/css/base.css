@@ -27,6 +27,24 @@ html,body{
 	border-radius: 50%;
 }
 
+.circle-md {
+	border-radius: 100px;
+ 	-webkit-border-radius: 100px;
+ 	-moz-border-radius: 100px;
+	background-size: cover;
+	width: 200px;
+	height: 200px;
+	display: block;
+}
+
+.circle-sm {
+	-webkit-border-radius: 100%;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+	width: 30px;
+	height: 30px;
+	/*display: block;*/
+}
 
 
 #content {

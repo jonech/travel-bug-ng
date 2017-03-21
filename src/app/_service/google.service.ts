@@ -8,6 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser'
 @Injectable()
 export class GoogleService
 {
+	private baseUrl: string = "https://maps.googleapis.com/maps/api/place/photo";
 
 	constructor(
 		private googleApiLoader: MapsAPILoader,
@@ -42,14 +43,51 @@ export class GoogleService
 
 			service.getDetails(request, (place, status) => {
 				if (status == google.maps.places.PlacesServiceStatus.OK) {
-					var url = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
-					//console.log(url);
-					//this.download(url);
-					// this.getImage(url).subscribe(imageData => {
-					// 	console.log(imageData);
-					//  	image.nativeElement.src = URL.createObjectURL(new Blob([imageData]));
-					// });
-					image.nativeElement.src = url || 'https://melbournebitsandpieces.files.wordpress.com/2010/08/sany0251.jpg';
+
+					// places with no photos
+					if (!place.hasOwnProperty('photos')) {
+						console.log(place);
+						let ref = place.html_attributions;
+						console.log(ref);
+						//image.nativeElement.src = `${this.baseUrl}?maxwidth=400&photoreference=${place.reference}`
+					}
+					else {
+						var url = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+						//console.log(url);
+						//this.download(url);
+						// this.getImage(url).subscribe(imageData => {
+						// 	console.log(imageData);
+						//  	image.nativeElement.src = URL.createObjectURL(new Blob([imageData]));
+						// });
+						image.nativeElement.src = url || 'https://melbournebitsandpieces.files.wordpress.com/2010/08/sany0251.jpg';
+					}
+				}
+			})
+		});
+	}
+
+	getImageUrl(placeId: string, image: ElementRef)
+	{
+		this.googleApiLoader.load().then(() => {
+			let service = new google.maps.places.PlacesService(image.nativeElement);
+			var request = {
+				placeId: placeId,
+			};
+
+
+			service.getDetails(request, (place, status) => {
+				if (status == google.maps.places.PlacesServiceStatus.OK) {
+
+					// places with no photos
+					if (!place.hasOwnProperty('photos')) {
+						console.log(place);
+						let ref = place.html_attributions;
+						console.log(ref);
+					}
+					else {
+						var url = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+						return url;
+					}
 				}
 			})
 		});

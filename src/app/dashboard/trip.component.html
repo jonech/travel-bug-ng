@@ -12,24 +12,24 @@
 
 		<div class="trip-textbox">
 
-			<div class="days">{{ (_tripDays | async)?.length }} DAYS</div>
 			<div class="title">{{ (_trip | async)?.tripName }}</div>
-			<div class="full-dates">{{ (_trip | async)?.startDate | stringToDate | date }} - {{ (_trip | async)?.endDate | stringToDate | date }}</div>
+			<div class="full-dates">{{ (_trip | async)?.startDate | stringToDate | date:'d' }} - {{ (_trip | async)?.endDate | stringToDate | date:'d MMMM' }}</div>
 
-			<hr/>
-			<div>Hosted by</div>
-			<div class="" *ngFor="let user of _tripAdmins | async">
-				<going-user [goingUserId]="user.$key"></going-user>
+			<div id="host-row" class="host">Hosted by
+				<span class="admin" *ngFor="let user of _tripAdmins | async">
+					{{ ( getUserDetail(user.$key) | async)?.firstName }}
+				</span>
 			</div>
 
-			<br/>
-			<div>Invited users</div>
-			<div *ngIf="(_tripRegulars|async)?.length <=0"> no one... </div>
-			<div class="" *ngFor="let user of _tripRegulars | async">
-				<going-user [goingUserId]="user.$key"></going-user>
-			</div>
-
-			<div class="location">
+			<!--<div *ngIf="(_tripRegulars|async)?.length <=0"> no one... </div>-->
+			<table id="going-user-row">
+				<tr>
+					<td *ngFor="let user of _tripRegulars | async">
+						<going-user [goingUserId]="user.$key"></going-user>
+					</td>
+				</tr>
+			</table>
+			<div id="location">
 				<i class="fa fa-map-marker" aria-hidden="true"></i>{{ (_trip | async)?.location }}
 			</div>
 

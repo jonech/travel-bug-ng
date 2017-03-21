@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 @Component({
 	selector: 'trip',
 	templateUrl: './trip.component.html',
-	styleUrls: ['./trip.component.css', './dashboard.component.css']
+	styleUrls: ['./trip.component.css']
 })
 
 export class TripComponent implements OnInit
@@ -38,5 +38,10 @@ export class TripComponent implements OnInit
 			this.router.navigate(['/trip', id]);
 		}
 		console.log("clicked!");
+	}
+
+	private getUserDetail(userId: string)
+	{
+		return this.firebase.database.object(`/User/${userId}/UserDetails`);
 	}
 }

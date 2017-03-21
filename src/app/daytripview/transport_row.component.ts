@@ -12,7 +12,7 @@ import { Component, OnInit, Input } from '@angular/core';
 			{{ _transport.description }}
 		</div>
 	`,
-	styles: ['./transport_row.component.css']
+	styleUrls: ['./transport_row.component.css']
 })
 
 export class TransportRowComponent implements OnInit {
