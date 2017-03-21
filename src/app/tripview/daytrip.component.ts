@@ -5,7 +5,7 @@ import { AngularFire,  FirebaseListObservable } from 'angularfire2';
 @Component({
 	selector: 'day-trip',
 	templateUrl: './daytrip.component.html',
-	styleUrls: ['./daytrip.component.css', './daytriplist.component.css', '../dashboard/dashboard.component.css'],
+	styleUrls: ['./daytrip.component.css'],
 })
 
 export class DayTripComponent implements OnInit

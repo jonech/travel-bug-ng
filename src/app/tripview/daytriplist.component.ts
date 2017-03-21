@@ -5,7 +5,7 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 @Component({
 	selector: 'daytriplist',
 	templateUrl: './daytriplist.component.html',
-	styleUrls: ['./daytriplist.component.css', '../dashboard/dashboard.component.css']
+	styleUrls: ['./daytriplist.component.css']
 })
 
 export class DayTripListComponent implements OnInit, OnDestroy

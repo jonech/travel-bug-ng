@@ -11,7 +11,7 @@ import { GoogleService } from '../_service/google.service';
 			</figure>
 		</div>
 	`,
-	styleUrls: ['./daytrip.component.css', './daytriplist.component.css', '../dashboard/dashboard.component.css'],
+	styleUrls: ['./daytrip.component.css', './daytriplist.component.css',],
 })
 
 export class DayTripImageComponent implements OnChanges
