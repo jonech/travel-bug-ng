@@ -9,18 +9,19 @@
 				<div class="date">the date!</div>
 			</div>
 	</div>
-	<hr>
 
-	<div class="activity" *ngFor="let activity of _activities | async">
-			<div *ngIf="activity.eventName" class="activity-name">
-				{{ activity.eventName }}
-				<!--<div *ngIf="activity.transport">{{ activity.transport }}</div>-->
-				<div class="activity-pic"></div>
-				<div class="activity-location" *ngIf="activity.location">
-					<i class="fa fa-map-marker" aria-hidden="true"></i>{{ activity.location.name }}
+	<div class="section group" *ngFor="let activity of _activities | async">
+			<div *ngIf="activity.eventName" class="activity">
+				<div class="activity-pic col"></div>
+				<div class="col">
+					<div class="activity-name">{{ activity.eventName }}</div>
+					<div class="activity-location" *ngIf="activity.location">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>{{ activity.location.name }}
+					</div>
 				</div>
 			</div>
-			<hr>
+
+			<hr/>
 	</div>
 </div>
 

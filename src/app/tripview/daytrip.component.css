@@ -14,6 +14,15 @@
 
 	cursor: pointer;
 }
+
+hr {
+	height: 0;
+	width: 95%;
+	border: 0;
+	border-top: 1px solid lightgray;
+
+}
+
 .day-card:hover {
 	background-color: rgba(0,0,0,0.1);
 }
@@ -62,31 +71,30 @@
 	color: black;
 	/*background-image: url('/assets/img/logo.png');*/
 	background-color: #41E2B0;
-	float:left;
-	margin-left: -60px;
-
+	/*float:left;*/
+	/*margin-left: -60px;*/
 }
 
 .day-card .activity .activity-name{
-	margin-top: 10px;
-	margin-left: 70px;
+	/*margin-top: 10px;*/
 	font-size: 15px;
+	margin-left: 10px;
 }
 
-.day-card .activity .activity-name .activity-location{
+.day-card .activity .activity-location{
 	font-size: 10px;
+	margin-left: 10px;
 }
 
-.day-card .activity hr {
-	margin-top: 20px;
-	clear: both;
+.day-card hr{
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 
 .day-card .activity{
-	padding: 10px 0px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	height:60px;
+	/* not doing shit */
+	padding: 5px 10px;
+	height: 50px;
 }
 
 .day-card .day-label .date-circle .daynum{
@@ -98,6 +106,4 @@
 	font-size: 8px;
 }
 
-.day-card hr{
-	margin-top: 0px;
-}
+
