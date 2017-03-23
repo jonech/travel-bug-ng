@@ -1,5 +1,5 @@
 .day-card{
-	height:250px;
+	height:270px;
 	width:270px;
 	float:left;
 	margin-right: 20px;
@@ -28,7 +28,7 @@ hr {
 }
 
 .day-card .day-label{
-	height:40px;
+	height:45px;
 	/*border-top-left: 6px;
 	border-top-right: 6px;*/
 	padding-top: 20px;
@@ -48,8 +48,8 @@ hr {
 }
 
 .day-card .day-label .date-circle{
-	width:45px;
-	height:45px;
+	width:50px;
+	height:50px;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	border-radius: 50%;
@@ -92,8 +92,10 @@ hr {
 }
 
 .day-card .activity{
-	/* not doing shit */
-	padding: 5px 10px;
+
+	padding: 0px 15px;
+	padding-top: 7px;
+	padding-bottom: 10px;
 	height: 50px;
 }
 

@@ -66,7 +66,7 @@ export class GoogleService
 		});
 	}
 
-	getImageUrl(placeId: string, image: ElementRef)
+	getImageUrlBG(placeId: string, image: ElementRef, url: string)
 	{
 		this.googleApiLoader.load().then(() => {
 			let service = new google.maps.places.PlacesService(image.nativeElement);
@@ -85,8 +85,8 @@ export class GoogleService
 						console.log(ref);
 					}
 					else {
-						var url = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
-						return url;
+						url = place.photos[0].getUrl({maxWidth: 300, maxHeight: 300});
+						//image.nativeElement.style.background-image =
 					}
 				}
 			})

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router'
 import { AngularFire,  FirebaseListObservable } from 'angularfire2';
 
@@ -14,13 +14,14 @@ export class DayTripComponent implements OnInit
 	@Input() tripId: string;
 	@Input() day: string;
 	@Input() date: string;
+	@Input('startDate') _startDate: string;
 
 	private _activities: FirebaseListObservable<any[]>;
 	private _activityNoLimit: FirebaseListObservable<any[]>;
 
 	constructor(
 		private firebase: AngularFire,
-		private router: Router
+		private router: Router,
 	){}
 
 	public ngOnInit()

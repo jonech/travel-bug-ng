@@ -2,6 +2,7 @@
 	<day-trip-image [placeId]="( _trip | async )?.tripLocationId"></day-trip-image>
 </div>
 
+
 <div class="section group">
 
 	<div class="trip-details col span_20">
@@ -27,6 +28,6 @@
 
 <div id="daytrip-list">
 	<div class="" *ngFor="let daytrip of _dayTrips | async">
-		<day-trip [tripId]="_tripId" [dayTripId]="daytrip?.$value" [day]="daytrip?.$key"></day-trip>
+		<day-trip [tripId]="_tripId" [dayTripId]="daytrip?.$value" [day]="daytrip?.$key" [startDate]="(_trip|async)?.startDate"></day-trip>
 	</div>
 </div>

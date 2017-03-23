@@ -25,7 +25,7 @@ import { AboutComponent } from './static/about.component';
 import { PrivacyPolicyComponent } from './static/privacy_policy.component';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
-import { GooglePlaceImageComponent } from './reuseable/google_place_image.component';
+import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
@@ -69,7 +69,7 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 
 	// reuse
 	FirebasePlaceImageComponent,
-	GooglePlaceImageComponent,
+	SmallRoundImageComponent,
 
 	// Dashboard
 	DashboardComponent,
