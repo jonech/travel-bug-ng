@@ -6,7 +6,7 @@ import { MapsAPILoader } from 'angular2-google-maps/core'
 	selector: 'small-round-image',
 	template:
 	`
-		<div #image class="round-sm" [ngStyle]="{'background-image': 'url(' +  (_imageUrl|async) + ')'}"></div>
+		<div #image class="circle-sm" [ngStyle]="{'background-image': 'url(' +  (_imageUrl|async) + ')'}"></div>
 	`,
 	styleUrls: ['./small_round_image.component.css']
 })
