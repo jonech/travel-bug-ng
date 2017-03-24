@@ -48,7 +48,7 @@ export class SmallRoundImageComponent implements OnInit
 						console.log(ref);
 					}
 					else {
-						var url = place.photos[0].getUrl({maxWidth: 80, maxHeight: 80});
+						var url = place.photos[0].getUrl({maxWidth: 100, maxHeight: 100});
 						this._imageUrl = Promise.resolve(url);
 					}
 				}
