@@ -9,3 +9,9 @@
 	height: 75px;
 	background-color: #41E2B0;
 }
+
+.row {
+	padding-left: 10px;
+	height: 200px;
+	position: relative;
+}

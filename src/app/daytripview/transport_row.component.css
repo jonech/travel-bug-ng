@@ -1,3 +1,21 @@
 .row {
 	color: lightgray;
 }
+
+.transport-holder {
+	/*margin-left: 10px;*/
+	padding-left: 10px;
+	background: #EDEDED;
+	border-radius: 10px;
+}
+
+.transport-icon {
+	height: 30px;
+	width: auto;
+}
+
+#description {
+	padding: 2px 5px;
+	border: 1px solid darkgray;
+	border-radius: 5px;
+}

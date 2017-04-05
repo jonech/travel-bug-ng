@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { GoogleService } from '../_service/google.service';
 
 @Component({
@@ -20,6 +20,9 @@ export class ActivityDetailComponent implements OnInit
 
 	private _display: boolean = true;
 	private _activity: FirebaseObjectObservable<any>;
+	private _upVotes: FirebaseListObservable<any[]>;
+	private _downVotes: FirebaseListObservable<any[]>;
+	private _comments: FirebaseListObservable<any[]>;
 
 	private dayTripId: string;
 	private tripId: string;
@@ -45,6 +48,20 @@ export class ActivityDetailComponent implements OnInit
 		this.route.params.subscribe(params => {
 			this.activityId = params['activityId'];
 			this._activity = this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`);
+
+			this._comments = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments`)
+
+			this._upVotes = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes`,
+				{ query: {
+					orderByValue: true,
+					equalTo: 'true'
+				}});
+
+			this._downVotes = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes`,
+				{ query: {
+					orderByValue: true,
+					equalTo: 'false'
+				}})
 		});
 	}
 

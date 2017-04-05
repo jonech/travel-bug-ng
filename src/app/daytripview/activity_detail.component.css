@@ -45,3 +45,10 @@
 .title {
 	font-size: 10px;
 }
+
+hr {
+	height:1px;
+	border:none;
+	color: #9F9F9F;
+	background-color:#9F9F9F;
+}

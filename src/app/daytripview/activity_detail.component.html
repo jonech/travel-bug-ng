@@ -1,6 +1,6 @@
 <div class="modal">
 
-	<div class="modal-content"  #container>
+	<div class="modal-content" #container>
 		<div class="modal-header">
 			<div (click)="closePopUp()" class="close">&times;</div>
 			<h1>
@@ -9,8 +9,32 @@
 		</div>
 
 		<div class="modal-body">
-			<!--<google-place-image [placeId]="(_activity|async)?.location.id"></google-place-image>-->
-			{{ (_activity | async)?.description }}
+			<div class="section group">
+
+				<div class="col">
+					<google-place-image  [placeId]="(_activity|async)?.location.id"></google-place-image>
+				</div>
+
+				<div class="col">
+					<div id="time">{{ (_activity | async)?.time }}</div>
+					<div id="location_name">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>
+						{{ (_activity | async)?.location.name }}
+					</div>
+					<div id="description">{{ (_activity | async)?.description }}</div>
+
+					<i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ (_upVotes | async)?.length }}
+					<i class="fa fa-thumbs-down" aria-hidden="true"></i>{{ (_downVotes | async)?.length }}
+					<hr/>
+				</div>
+
+				<div class="section group">
+					<div *ngFor="let comment of _comments | async">
+						<comment-component [commentId]="comment.$key" [userId]="comment.$value"></comment-component>
+					</div>
+				</div>
+
+			</div>
 		</div>
 
 	</div>

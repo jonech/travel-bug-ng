@@ -4,12 +4,10 @@ import { Component, OnInit, Input } from '@angular/core';
 	selector: 'transport-row',
 	template:
 	`
-		<div class="span_80 col row">
-			<img class="span_10" src="{{ _iconUrl }}">
-			<br>
-			{{ _transport.transport }}
-			<br>
-			{{ _transport.description }}
+		<div class="section group transport-holder">
+			<div class="col" id="time">{{ _transport.time }}</div>
+			<img class="transport-icon col" src="{{ _iconUrl }}">
+			<div class="col" id="description">{{ _transport.description }}</div>
 		</div>
 	`,
 	styleUrls: ['./transport_row.component.css']

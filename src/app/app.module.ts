@@ -26,6 +26,7 @@ import { PrivacyPolicyComponent } from './static/privacy_policy.component';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
+import { GooglePlaceImageComponent } from './reuseable/google_place_image.component';
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
@@ -48,6 +49,7 @@ import { LocationRowComponent } from './daytripview/location_row.component';
 import { TransportFormComponent } from './daytripview/transport_form.component';
 import { TransportRowComponent } from './daytripview/transport_row.component';
 import { ActivityDetailComponent } from './daytripview/activity_detail.component';
+import { CommentComponent } from './daytripview/comment.component';
 
 import { DetailViewComponent } from './activitydetail/detail_view.component';
 
@@ -70,6 +72,7 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 	// reuse
 	FirebasePlaceImageComponent,
 	SmallRoundImageComponent,
+	GooglePlaceImageComponent,
 
 	// Dashboard
 	DashboardComponent,
@@ -92,6 +95,7 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 	TransportFormComponent,
 	TransportRowComponent,
 	ActivityDetailComponent,
+	CommentComponent,
 
 	// activity detail
 	DetailViewComponent
