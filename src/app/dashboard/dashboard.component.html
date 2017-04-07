@@ -5,9 +5,12 @@
 
 <div id="button-row">
 	<div >
-		<a class="right">new trip+</a>
+		<a id="create-trip-button" class="right" (click)="OpenCreateTrip()">new trip+</a>
 	</div>
 </div>
 
 <router-outlet></router-outlet>
 
+<div *ngIf="_isSplashOpen">
+	<create-trip-component (NewTrip)="CreateNewTrip($event)" (CloseSplash)="CloseCreateTrip()"></create-trip-component>
+</div>

@@ -36,6 +36,7 @@ import { TripListComponent } from './dashboard/trip_list.component';
 import { PastTripComponent } from './dashboard/past_trip.component';
 import { TripComponent } from './dashboard/trip.component';
 import { GoingUserComponent } from './dashboard/goingUser.component';
+import { CreateTripComponent } from './dashboard/create_trip.component';
 
 import { TripViewComponent } from './tripview/tripview.component';
 import { DayTripListComponent } from './tripview/daytriplist.component';
@@ -80,6 +81,7 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 	PastTripComponent,
 	TripComponent,
 	GoingUserComponent,
+	CreateTripComponent,
 
 	// tripview or fullview
 	TripViewComponent,

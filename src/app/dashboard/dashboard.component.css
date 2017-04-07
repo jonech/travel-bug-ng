@@ -23,3 +23,7 @@
 	font-weight: 300;
 	padding-top:60px;
 }
+
+#create-trip-button {
+	cursor: pointer;
+}

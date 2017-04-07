@@ -1,4 +1,4 @@
-.trip:hover {
+.trip .card-right:hover {
 	background-color: lightgrey;
 }
 .trip {
