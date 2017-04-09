@@ -20,7 +20,7 @@
 
 	<form class="" [formGroup]="registerForm" novalidate>
 		<div class="form-group">
-			<small class="reactive-error" [hidden]="registerForm.controls.email.valid || (registerForm.controls.email.pristine && !_submitted)">
+			<small class="reactive-error" [hidden]="registerForm.get('email').valid || (registerForm.get('email').pristine && !_submitted)">
 					Valid email required.
 					<br>
 			</small>
@@ -28,7 +28,7 @@
 		</div>
 
 		<div class="form-group">
-			<small class="reactive-error" [hidden]="registerForm.controls.firstname.valid || (registerForm.controls.firstname.pristine && !_submitted)">
+			<small class="reactive-error" [hidden]="registerForm.get('firstname').valid || (registerForm.get('firstname').pristine && !_submitted)">
 					First name required (minimum 2 characters).
 					<br>
 			</small>
@@ -36,7 +36,7 @@
 		</div>
 
 		<div class="form-group">
-			<small class="reactive-error" [hidden]="registerForm.controls.lastname.valid || (registerForm.controls.lastname.pristine && !_submitted)">
+			<small class="reactive-error" [hidden]="registerForm.get('lastname').valid || (registerForm.get('lastname').pristine && !_submitted)">
 					Last name required (minimum 2 characters).
 					<br>
 			</small>
@@ -44,7 +44,7 @@
 		</div>
 
 		<div class="form-group" formGroupName="matchingPwd">
-			<small class="reactive-error" [hidden]="registerForm.controls.matchingPwd.controls.password.valid || (registerForm.controls.matchingPwd.controls.password.pristine && !_submitted)">
+			<small class="reactive-error" [hidden]="registerForm.get('matchingPwd').get('password').valid || (registerForm.get('matchingPwd').get('password').pristine && !_submitted)">
 					Password required (minimum 8 characters).
 					<br>
 			</small>
@@ -52,7 +52,7 @@
 		</div>
 
 		<div class="form-group" formGroupName="matchingPwd">
-			<small class="reactive-error" [hidden]="registerForm.controls.matchingPwd.valid || (!registerForm.controls.matchingPwd.touched && !_submitted)">
+			<small class="reactive-error" [hidden]="registerForm.get('matchingPwd').valid || (!registerForm.get('matchingPwd').touched && !_submitted)">
 					Password mismatch.
 					<br/>
 			</small>
