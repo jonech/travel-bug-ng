@@ -38,11 +38,11 @@ export class LocationRowComponent implements OnInit
 	@Input('activityId') _activityId: string;
 	@Input('dayTripId') _dayTripId : string;
 	@ViewChild('image') image;
-	private _imageUrl: string;
+	_imageUrl: string;
 
-	private _comments: FirebaseListObservable<any[]>;
-	private _upVotes: FirebaseListObservable<any[]>;
-	private _downVotes: FirebaseListObservable<any[]>;
+	_comments: FirebaseListObservable<any[]>;
+	_upVotes: FirebaseListObservable<any[]>;
+	_downVotes: FirebaseListObservable<any[]>;
 
 	constructor(
 		private googleAPILoader: MapsAPILoader,

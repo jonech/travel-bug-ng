@@ -1,13 +1,13 @@
 interface PasswordGroup
 {
-	password: string;
-	passwordconf: string;
+	password?: string;
+	passwordconf?: string;
 }
 
 export class User
 {
-	public email: string;
-	public firstname: string;
-	public lastname: string;
-	public matchingPwd: PasswordGroup;
+	public email?: string;
+	public firstname?: string;
+	public lastname?: string;
+	public matchingPwd?: PasswordGroup;
 }

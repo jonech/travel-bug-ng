@@ -13,10 +13,10 @@ import 'rxjs/add/operator/map';
 export class TripComponent implements OnInit
 {
 	@Input() tripId:string;
-	private _trip: FirebaseObjectObservable<any>;
-	private _tripDays: FirebaseListObservable<any[]>;
-	private _tripRegulars: FirebaseListObservable<any[]>;
-	private _tripAdmins: FirebaseListObservable<any[]>;
+	_trip: FirebaseObjectObservable<any>;
+	_tripDays: FirebaseListObservable<any[]>;
+	_tripRegulars: FirebaseListObservable<any[]>;
+	_tripAdmins: FirebaseListObservable<any[]>;
 
 	constructor(
 		private firebase: AngularFire,
@@ -31,7 +31,7 @@ export class TripComponent implements OnInit
 		this._tripAdmins = this.firebase.database.list(`/Trip/${this.tripId}/User/Admin`);
 	}
 
-	private showTripDetail(id: string)
+	showTripDetail(id: string)
 	{
 		if (id != null) {
 			this.router.navigate(['/trip', id]);
@@ -39,7 +39,7 @@ export class TripComponent implements OnInit
 		console.log("clicked!");
 	}
 
-	private getUserDetail(userId: string)
+	getUserDetail(userId: string)
 	{
 		return this.firebase.database.object(`/User/${userId}/UserDetails`);
 	}

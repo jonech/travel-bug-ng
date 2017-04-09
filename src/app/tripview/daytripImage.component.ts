@@ -16,8 +16,8 @@ export class DayTripImageComponent implements OnChanges
 	@Input() placeId: string;
 	@ViewChild('image') image:ElementRef;
 
-	private _photoRef: string = "";
-	private _imageUrl: Promise<any>;
+	_photoRef: string = "";
+	_imageUrl: Promise<any>;
 
 	constructor(
 		//private google: GoogleService,

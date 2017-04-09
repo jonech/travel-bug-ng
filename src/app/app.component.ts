@@ -10,7 +10,7 @@ import { AngularFire } from 'angularfire2';
 
 export class AppComponent
 {
-	private _isLogin: boolean = false;
+	_isLogin: boolean = false;
 
 	constructor(
 		private firebase: AngularFire,

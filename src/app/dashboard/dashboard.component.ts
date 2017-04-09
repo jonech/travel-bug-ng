@@ -12,7 +12,7 @@ import { Trip } from '../_model/trip.model';
 
 export class DashboardComponent implements OnInit
 {
-	private _isSplashOpen:boolean = false;
+	_isSplashOpen:boolean = false;
 	private uid:string;
 
 	constructor(
@@ -27,18 +27,18 @@ export class DashboardComponent implements OnInit
 		})
 	}
 
-	private OpenCreateTrip()
+	OpenCreateTrip()
 	{
 		this._isSplashOpen = true;
 		console.log(this._isSplashOpen)
 	}
 
-	private CloseCreateTrip()
+	CloseCreateTrip()
 	{
 		this._isSplashOpen = false;
 	}
 
-	private CreateNewTrip(trip: Trip)
+	CreateNewTrip(trip: Trip)
 	{
 		var days = {};
 		for (var i=0; i< Number(trip.numberOfDays); i++) {

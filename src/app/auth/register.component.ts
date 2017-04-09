@@ -16,10 +16,10 @@ import { ProfileDefaultBase64, EmailRegEx } from '../_util/string.util';
 export class RegisterComponent implements OnInit
 {
 	public registerForm: FormGroup;
-	private _submitted: boolean = false;
+	_submitted: boolean = false;
 
-	private _userRef: FirebaseObjectObservable<any>;
-	private _error: string;
+	_userRef: FirebaseObjectObservable<any>;
+	_error: string;
 
 	constructor(
 		private _firebase: AngularFire,
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit
 		});
 	}
 
-	private registerWithEmail(user:User, isValid:boolean)
+	RegisterWithEmail(user:User, isValid:boolean)
 	{
 		if (!isValid) {
 			this._submitted = true;
@@ -59,7 +59,7 @@ export class RegisterComponent implements OnInit
 		.then(resolve => {
 			console.log(resolve);
 			this.saveUserDetails(resolve.uid, user);
-			this.toLogin();
+			this.ToLogin();
 			this.registerForm.reset;
 		})
 		.catch(error => {
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit
 		});
 	}
 
-	private loginWithFacebook()
+	LoginWithFacebook()
 	{
 		this._firebase.auth.login({
 			provider: AuthProviders.Facebook,
@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit
 		}
 	}
 
-	private toLogin()
+	ToLogin()
 	{
 		this._router.navigate(['/login', {redirect: 'register'}]);
 	}

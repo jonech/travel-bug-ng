@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { environment } from '../../environments/environment';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
@@ -37,7 +37,11 @@ export class FirebasePlaceImageComponent implements OnInit {
 		}
 
 		// disable this return if loading dashboard is slow and annoying, just return the static url image from web...
-		//return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + base64Image);
-		return 'https://melbournebitsandpieces.files.wordpress.com/2010/08/sany0251.jpg';
+		if (environment.production) {
+			return this.sanitizer.bypassSecurityTrustUrl('data:image/png;base64,' + base64Image);
+		}
+		else {
+			return 'https://melbournebitsandpieces.files.wordpress.com/2010/08/sany0251.jpg';
+		}
 	}
 }

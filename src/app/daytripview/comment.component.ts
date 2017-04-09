@@ -14,10 +14,10 @@ import { FirebaseObjectObservable, AngularFire } from 'angularfire2';
 
 export class CommentComponent implements OnInit
 {
-	@Input() private commentId : string;
-	@Input() private userId : string;
+	@Input() commentId : string;
+	@Input() userId : string;
 
-	private _comment: FirebaseObjectObservable<any>;
+	_comment: FirebaseObjectObservable<any>;
 
 	constructor(
 		private firebase: AngularFire

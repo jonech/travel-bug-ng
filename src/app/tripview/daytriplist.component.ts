@@ -11,10 +11,10 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 export class DayTripListComponent implements OnInit, OnDestroy
 {
 	private paramSub: any;
-	private _tripId: string;
+	_tripId: string;
 
-	private _trip: FirebaseObjectObservable<any>;
-	private _dayTrips: FirebaseListObservable<any[]>;
+	_trip: FirebaseObjectObservable<any>;
+	_dayTrips: FirebaseListObservable<any[]>;
 
 	constructor(
 		private firebase: AngularFire,

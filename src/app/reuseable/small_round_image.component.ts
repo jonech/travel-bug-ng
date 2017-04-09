@@ -15,7 +15,7 @@ export class SmallRoundImageComponent implements OnInit
 	@Input() placeId: string;
 	@ViewChild('image') image: ElementRef;
 
-	private _imageUrl: Promise<any>;
+	 _imageUrl: Promise<any>;
 
 	constructor(
 		private googleApiLoader: MapsAPILoader

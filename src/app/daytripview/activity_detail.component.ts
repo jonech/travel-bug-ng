@@ -18,11 +18,11 @@ export class ActivityDetailComponent implements OnInit
 	@ViewChild('container') container;
 	@ViewChild('image') image: ElementRef;
 
-	private _display: boolean = true;
-	private _activity: FirebaseObjectObservable<any>;
-	private _upVotes: FirebaseListObservable<any[]>;
-	private _downVotes: FirebaseListObservable<any[]>;
-	private _comments: FirebaseListObservable<any[]>;
+	_display: boolean = true;
+	_activity: FirebaseObjectObservable<any>;
+	_upVotes: FirebaseListObservable<any[]>;
+	_downVotes: FirebaseListObservable<any[]>;
+	_comments: FirebaseListObservable<any[]>;
 
 	private dayTripId: string;
 	private tripId: string;

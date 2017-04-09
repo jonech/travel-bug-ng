@@ -10,8 +10,8 @@ import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
 export class LoginComponent implements OnInit
 {
-	private _redirect: string;
-	private _error: string;
+	_redirect: string;
+	_error: string;
 
 	constructor
 	(
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit
 		});
 	}
 
-	private loginWithEmail(emailEl:any, passwordEl:any)
+	LoginWithEmail(emailEl:any, passwordEl:any)
 	{
 		this.firebase.auth.login({
 			email: emailEl.value,
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit
 		})
 		.then((success) => {
 			//localStorage.setItem('currentUserId', success.auth.uid);
-			this.toDashboard();
+			this.ToDashboard();
 		})
 		.catch((error) => {
 			this._error = error.message;
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit
 		}
 	}
 
-	private toDashboard()
+	ToDashboard()
 	{
 		this._router.navigate(['/dashboard']);
 	}

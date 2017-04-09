@@ -17,7 +17,7 @@ export class CreateTripComponent implements OnInit
 	@ViewChild('location') locationElement: ElementRef;
 	@ViewChild('tripForm') tripFormElement: ElementRef;
 
-	private _error:string = "";
+	_error:string = "";
 	trip: Trip = new Trip();
 
 	constructor(
@@ -49,12 +49,12 @@ export class CreateTripComponent implements OnInit
 		});
 	}
 
-	private CloseCreateTrip()
+	CloseCreateTrip()
 	{
 		this.CloseSplash.emit();
 	}
 
-	private CreateTrip(tripNameElef:any, startElef:any, endElef:any)
+	CreateTrip(tripNameElef:any, startElef:any, endElef:any)
 	{
 		// TODO: Need better param checking, with different case, for location
 		// selected a location, but then cancel etc
