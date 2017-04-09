@@ -18,9 +18,9 @@
 
 					<li *ngIf="_isLogin" class="vertical-line"><button (click)="logout()">Logout</button></li>
 
-					<li><a [routerLink]="['/']">Contact</a></li>
+					<li><a [routerLink]="['/about']">Contact</a></li>
 
-					<li><a [routerLink]="['/about']">About</a></li>
+					<!--<li><a [routerLink]="['/about']">About</a></li>-->
 
 				</div>
 				<li class="icon" id="head-bars">
@@ -43,10 +43,10 @@
 				</li>
 				<div id="responsive-footer"  class="hide2">
 					<li>
-						<a [routerLink]="['/about']">ABOUT</a>
+						<a [routerLink]="['/team']">MEET THE TEAM</a>
 					</li>
 					<li>
-						<a href="#">TERM AND CONDITIONS</a>
+						<a [routerLink]="['/privacyandpolicy']">TERM AND CONDITIONS</a>
 					</li>
 					<li>
 						<a [routerLink]="['/']" class="bug0"><img src="assets/img/logoblack.png" style="width:25px;"></a>
@@ -55,7 +55,7 @@
 						<a [routerLink]="['/privacyandpolicy']">PRIVACY POLICY</a>
 					</li>
 					<li>
-						<a [routerLink]="['/']">CONTACT</a>
+						<a [routerLink]="['/about']">CONTACT</a>
 					</li>
 				</div>
 			</ul>

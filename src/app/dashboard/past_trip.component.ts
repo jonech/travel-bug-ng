@@ -23,7 +23,7 @@ export class PastTripComponent implements OnInit
 			if (!auth) { return; }
 
 			let uid = auth.uid;
-			this._trips = this.firebase.database.list(`/User/${uid}/Trip`);
+			this._trips = this.firebase.database.list(`/User/${uid}/PastTrip`);
 		})
 	}
 }

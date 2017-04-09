@@ -23,6 +23,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './static/home.component';
 import { AboutComponent } from './static/about.component';
 import { PrivacyPolicyComponent } from './static/privacy_policy.component';
+import { TeamComponent } from './static/team.component';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
@@ -65,6 +66,7 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 	HomeComponent,
 	AboutComponent,
 	PrivacyPolicyComponent,
+	TeamComponent,
 
 	// auth
 	RegisterComponent,
