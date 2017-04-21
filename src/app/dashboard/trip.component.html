@@ -15,10 +15,11 @@
 			<div class="title">{{ (_trip | async)?.tripName }}</div>
 			<div class="full-dates">{{ (_trip | async)?.startDate | stringToDate | date:'d' }} - {{ (_trip | async)?.endDate | stringToDate | date:'d MMMM' }}</div>
 
+
 			<div id="host-row" class="host">Hosted by
-				<span class="admin" *ngFor="let user of _tripAdmins | async">
-					{{ ( getUserDetail(user.$key) | async)?.firstName }}
-				</span>
+				<div class="admin" *ngFor="let user of _tripAdmins | async">
+					<host [userId]="user.$key"></host>
+				</div>
 			</div>
 
 			<!--<div *ngIf="(_tripRegulars|async)?.length <=0"> no one... </div>-->

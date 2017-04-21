@@ -1,8 +1,6 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router'
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'trip',
@@ -25,7 +23,7 @@ export class TripComponent implements OnInit
 
 	ngOnInit()
 	{
-		this._trip = this.firebase.database.object('/Trip/' + this.tripId);
+		this._trip = this.firebase.database.object(`/Trip/${this.tripId}`);
 		this._tripDays = this.firebase.database.list(`/Trip/${this.tripId}/Days`);
 		this._tripRegulars = this.firebase.database.list(`/Trip/${this.tripId}/User/Regular`);
 		this._tripAdmins = this.firebase.database.list(`/Trip/${this.tripId}/User/Admin`);
@@ -36,11 +34,5 @@ export class TripComponent implements OnInit
 		if (id != null) {
 			this.router.navigate(['/trip', id]);
 		}
-		console.log("clicked!");
-	}
-
-	getUserDetail(userId: string)
-	{
-		return this.firebase.database.object(`/User/${userId}/UserDetails`);
 	}
 }
