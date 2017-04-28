@@ -11,7 +11,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 
 export class ActivityListComponent implements OnChanges
 {
-	@Input() dayTripId: string;
+	@Input('dayTripId') _dayTripId: string;
 
 	_activities: FirebaseListObservable<any[]>;
 
@@ -22,12 +22,19 @@ export class ActivityListComponent implements OnChanges
 
 	ngOnChanges(changes: SimpleChanges)
 	{
-		if (changes['dayTripId'] && this.dayTripId != null) {
-			this._activities = this.firebase.database.list(`/DayTrip/${this.dayTripId}`, {
-				query: {
-					orderByChild: 'timeSort'
-				}
-			});
-		}
+		//console.log(this._dayTripId);
+		// if (changes['dayTripId'] && this._dayTripId != null) {
+		// 	console.log(this._dayTripId);
+		// 	this._activities = this.firebase.database.list(`/DayTrip/${this._dayTripId}`, {
+		// 		query: {
+		// 			orderByChild: 'timeSort'
+		// 		}
+		// 	});
+		// }
+		this._activities = this.firebase.database.list(`/DayTrip/${this._dayTripId}`, {
+			query: {
+				orderByChild: 'timeSort'
+			}
+		});
 	}
 }

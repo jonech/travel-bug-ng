@@ -1,5 +1,18 @@
-.going {
-	position: relative;
-	float: left;
-	padding: 0px 2px;
+.going-user {
+	/*float: left;
+	display: block;*/
+	margin: 1px 0px;
+}
+
+.circle-sm {
+	background-size: cover;
+	background-position: center;
+
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	width: 35px;
+	height: 35px;
+	background-color: #41E2B0;
+	/*display: block;*/
 }

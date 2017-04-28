@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl } from '@angular/forms';
 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { MapsAPILoader } from 'angular2-google-maps/core';
-import { Location } from '../_model/location.model';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+
+import { Subject } from 'rxjs/Subject';
 
 @Component({
 	selector: 'day-trip-view',
@@ -14,86 +13,55 @@ import { Location } from '../_model/location.model';
 
 export class DayTripViewComponent implements OnInit
 {
+	_tripId: string;
 	_dayTripId: string;
-	_locationSearchControl: FormControl;
-	newLocation: Location;
+	_dayTripListRef: FirebaseListObservable<any[]>;
 
-	dayTripRef: FirebaseListObservable<any[]>;
+	_currentDay: string; // display of current day on dropdown nav
+	_show: boolean = false; // dropdown list show or not
 
-	@ViewChild('location') locationElement: ElementRef;
-	@ViewChild('activityForm') locationForm: ElementRef;
+	daySubject: Subject<any>;
 
 	constructor(
 		private route: ActivatedRoute,
-		private googleApiLoader: MapsAPILoader,
-		private ngZone: NgZone,
 		private firebase: AngularFire
-	){}
+	)
+	{
+		this.daySubject = new Subject();
+
+		this.route.params.subscribe(params => {
+
+			this._tripId = params['tripId'];
+			this._dayTripListRef = this.firebase.database.list(`/Trip/${this._tripId}/Days`);
+
+			// dayref will be varrying depending on which day is nav to
+			firebase.database.list(`/Trip/${this._tripId}/Days`,
+			{
+				query: {
+					orderByValue: true,
+					equalTo: this.daySubject
+				},
+				preserveSnapshot: true
+			})
+			.subscribe(snapshots => {
+				this._currentDay = snapshots[0].key;
+			});
+		});
+	}
 
 	ngOnInit()
 	{
+		// always close dropdown nav when navigated to another day
+		this._show = false;
 		this.route.params.subscribe(params => {
-			this._dayTripId = params['id'];
-			this.dayTripRef = this.firebase.database.list(`/DayTrip/${this._dayTripId}`);
-		});
 
-		this._locationSearchControl = new FormControl();
-
-		this.googleApiLoader.load().then(() => {
-			let autocomplete = new google.maps.places.Autocomplete(this.locationElement.nativeElement, {
-				types: ["establishment"]
-			});
-
-			autocomplete.addListener("place_changed", () => {
-				this.ngZone.run(() => {
-					let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-
-					if (place.geometry === undefined || place.geometry === null) {
-						return;
-					}
-					console.log(place.name);
-					console.log(place.geometry.location.lat());
-					console.log(place.geometry.location.lng());
-					console.log(place.formatted_address);
-					console.log(place.place_id);
-
-					this.newLocation = {
-						location: {
-							address: place.formatted_address,
-							lat: place.geometry.location.lat(),
-							lng: place.geometry.location.lng(),
-							id: place.place_id,
-							name: place.name
-						}
-					}
-				});
-			});
+			this._dayTripId = params['dayTripId'];
+			this.daySubject.next(this._dayTripId);
 		});
 	}
 
-	createActivity(actname:any, time:any, desc:any)
+	showDropDown()
 	{
-		if (actname.value == null || time.value == null) {
-			return;
-		}
-
-		if (this.newLocation == null) {
-			return;
-		}
-		this.newLocation.time = time.value;
-		this.newLocation.timeSort = this.getTimeSort(time.value);
-		this.newLocation.description = desc.value;
-		this.newLocation.eventName = actname.value;
-
-		this.dayTripRef.push(this.newLocation);
-		this.locationForm.nativeElement.reset();
-	}
-
-	getTimeSort(time:string): number
-	{
-		let hour = time.slice(0, 2);
-		let minute = time.slice(3, 5);
-
-		return Number("42"+hour+minute);
+		this._show = !this._show;
 	}
 }

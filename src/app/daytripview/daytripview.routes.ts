@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { DayTripViewComponent } from './daytripview.component';
 import { ActivityListComponent } from './activity_list.component';
+import { ActivityDetailComponent } from './activity_detail.component';
 
 import { AuthGuard } from '../_guard/auth.guard';
 
@@ -10,7 +11,13 @@ export const routes: Routes = [
 		canActivate: [ AuthGuard ],
 
 		children: [
-			{ path: ':id', component: DayTripViewComponent },
+			{
+				path: ':tripId/:dayTripId', component: DayTripViewComponent,
+
+				children: [
+					{ path: ':activityId', component: ActivityDetailComponent, outlet: 'pop-up' }
+				]
+			},
 		]
 	}
 ]

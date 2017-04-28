@@ -1,0 +1,36 @@
+.dropdown-nav {
+	background: lightseagreen;;
+	color: white;
+	padding: 10px;
+	border: none;
+	cursor: pointer;
+}
+
+.dropdown-nav:hover, .dropdown-nav:focus {
+	background: teal;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	/*position: absolute;*/
+	background-color: lightgray;
+	z-index: 1;
+}
+
+.dropdown-content a {
+	color: black;
+	padding: 5px;
+	display: block;
+}
+
+.dropdown-content a:hover {
+	background-color: darkgrey;
+}
+
+.show {
+	display: block;
+}

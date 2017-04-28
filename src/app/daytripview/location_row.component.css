@@ -1,0 +1,17 @@
+.circle-md {
+	background-size: cover;
+	background-position: center;
+
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+	width: 75px;
+	height: 75px;
+	background-color: #41E2B0;
+}
+
+.row {
+	padding-left: 10px;
+	height: 200px;
+	position: relative;
+}

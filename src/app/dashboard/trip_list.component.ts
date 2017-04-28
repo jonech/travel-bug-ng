@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
@@ -7,7 +7,7 @@ import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'a
 	styleUrls: ['./dashboard.component.css', './trip_list.component.css'],
 })
 
-export class TripListComponent
+export class TripListComponent implements OnInit
 {
 	_trips: FirebaseListObservable<any[]>;
 	//_Users: Observable<any[]>;
@@ -15,8 +15,15 @@ export class TripListComponent
 	constructor(
 		private firebase: AngularFire
 	)
+	{}
+
+	ngOnInit()
 	{
-		let uid = localStorage.getItem('currentUserId');
-		this._trips = this.firebase.database.list('/User/' + uid + "/Trip");
+		this.firebase.auth.subscribe(auth => {
+			if (!auth) { return; }
+
+			let uid = auth.uid;
+			this._trips = this.firebase.database.list(`/User/${uid}/Trip`);
+		});
 	}
 }

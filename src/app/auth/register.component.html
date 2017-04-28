@@ -1,0 +1,69 @@
+<div id = "form-wrapper">
+
+	<img style="padding-bottom:20px;" src="assets/img/logo.png"/>
+
+	<div class="title">Join Travel Bug</div>
+	<p>Already have an account with us?</p>
+	<div class="login" (click)="ToLogin()">Log in</div>
+
+	<div class="or-divider"><span>OR</span></div>
+
+		<div class="facebook">LOG IN WITH FACEBOOK</div>
+
+	<div class="or-divider"><span>OR</span></div>
+
+	<div *ngIf="_error">
+		<span style="color: red; font-size: 10px;">
+			<p>{{ _error }}</p>
+		</span>
+	</div>
+
+	<form class="" [formGroup]="registerForm" novalidate>
+		<div class="form-group">
+			<small class="reactive-error" [hidden]="registerForm.get('email').valid || (registerForm.get('email').pristine && !_submitted)">
+					Valid email required.
+					<br>
+			</small>
+			<input class="form-control span_69" id="email" type="text" placeholder="email" formControlName="email">
+		</div>
+
+		<div class="form-group">
+			<small class="reactive-error" [hidden]="registerForm.get('firstname').valid || (registerForm.get('firstname').pristine && !_submitted)">
+					First name required (minimum 2 characters).
+					<br>
+			</small>
+			<input class="form-control span_69" id="firstname" type="text" placeholder="firstname" formControlName="firstname">
+		</div>
+
+		<div class="form-group">
+			<small class="reactive-error" [hidden]="registerForm.get('lastname').valid || (registerForm.get('lastname').pristine && !_submitted)">
+					Last name required (minimum 2 characters).
+					<br>
+			</small>
+			<input class="form-control span_69" id="lastname" type="text" placeholder="lastname" formControlName="lastname">
+		</div>
+
+		<div class="form-group" formGroupName="matchingPwd">
+			<small class="reactive-error" [hidden]="registerForm.get('matchingPwd').get('password').valid || (registerForm.get('matchingPwd').get('password').pristine && !_submitted)">
+					Password required (minimum 8 characters).
+					<br>
+			</small>
+			<input class="form-control span_69" id="password" type="password" placeholder="password (min 8 characters)" formControlName="password">
+		</div>
+
+		<div class="form-group" formGroupName="matchingPwd">
+			<small class="reactive-error" [hidden]="registerForm.get('matchingPwd').valid || (!registerForm.get('matchingPwd').touched && !_submitted)">
+					Password mismatch.
+					<br/>
+			</small>
+			<input class="form-control span_69" id="passwordconf" type="password" placeholder="confirm password" formControlName="passwordconf">
+		</div>
+
+
+		<div class="form-group">
+			<button type="submit" class="submit span_69" (click)="RegisterWithEmail(registerForm.value, registerForm.valid); false">REGISTER</button>
+		</div>
+
+	</form>
+
+</div>

@@ -35,6 +35,10 @@ testem.log
 /e2e/*.js
 /e2e/*.map
 
-#System Files
+# System Files
 .DS_Store
 Thumbs.db
+
+# keys
+/src/environments/google.config.ts
+/src/environments/firebase.config.ts

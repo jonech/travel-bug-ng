@@ -1,24 +1,28 @@
-<div class="day-card" (click)="toDayTripView()">
+
+<div class="day-card" (click)="ToDayTripView()">
 	<div class="day-label">
 			<div class="day-title">
 				<div class="num-act">{{ (_activityNoLimit | async)?.length }} activities planned</div>
 			</div>
 			<div class="date-circle">
-				<div class="daynum">{{ day }}</div>
-				<div class="date">the date!</div>
+				<div class="daynum">{{ day.slice(3) }}</div>
+				<div class="date">{{ _startDate }}</div>
 			</div>
 	</div>
-	<hr>
 
-	<div class="activity" *ngFor="let activity of _activities | async">
-			<div class="activity-name">
-				<div *ngIf="activity.eventName">{{ activity.eventName }}</div>
-				<div *ngIf="activity.transport">{{ activity.transport }}</div>
-				<div class="activity-pic"></div>
-				<div class="activity-location" *ngIf="activity.location">
-					<i class="fa fa-map-marker" aria-hidden="true"></i>{{ activity.location.name }}
+	<div class="section group" *ngFor="let activity of _activities | async">
+			<div *ngIf="activity.eventName" class="activity">
+				<!--<div class="activity-pic col"></div>-->
+				<small-round-image class="col" [placeId]="activity.location.id"></small-round-image>
+				<div class="col">
+					<div class="activity-name">{{ activity.eventName }}</div>
+					<div class="activity-location" *ngIf="activity.location">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>{{ activity.location.name }}
+					</div>
 				</div>
 			</div>
+
+			<hr/>
 	</div>
-	<hr>
 </div>
+

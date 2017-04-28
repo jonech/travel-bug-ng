@@ -1,35 +1,31 @@
 <div class="section group">
-	<div class="span_80 col">
+
+	<!-- go back to tripview -->
+	<div class="span_10 col">
+		<a [routerLink]="['/trip',_tripId]">back to trip</a>
+	</div>
+
+
+	<div class="span_70 col">
+		<!-- daytrip dropdown nav -->
+		<div class="dropdown-nav" (click)="showDropDown()" >{{ _currentDay }}</div>
+		<div [ngClass]="{'show': _show}" class="dropdown-content" [hidden]="!_show" *ngFor="let dayTrip of _dayTripListRef | async">
+			<a (click)="showDropDown()" [routerLink]="['/daytrip', _tripId, dayTrip.$value]">{{ dayTrip.$key }}</a>
+		</div>
+
+		<!-- list of activities -->
 		<activity-list [dayTripId]="_dayTripId"></activity-list>
 	</div>
 
+	<!-- create activity form -->
 	<div class="span_10 col">
-		<h3>ADD ACTIVITIES</h3>
-		<form #activityForm>
-			<div class="form-group">
-				<label for="actname">Activity Name:</label>
-				<input class="form-control" id="actname" type="text" placeholder="activity name" #actname>
-			</div>
+		<location-form [dayTripId]="_dayTripId"></location-form>
+	</div>
 
-			<div class="form-group">
-				<label for="location">Location:</label>
-				<input placeholder="location" autocorrect="off" autocapitalize="off" spellcheck="off"
-			type="text" class="form-control" #location [formControl]="_locationSearchControl">
-			</div>
-
-			<div class="form-group">
-				<label for="time">Time:</label>
-				<input class="form-control" id="time" type="time" placeholder="12:00" #time>
-			</div>
-
-			<div class="form-group">
-				<label for="desc">Description:</label>
-				<input class="form-control" id="desc" type="text" placeholder="description" #desc>
-			</div>
-
-			<div class="form-group">
-				<button class="btn btn-success" (click)="createActivity(actname,time,desc); false">Create</button>
-			</div>
-		</form>
+	<!-- create transport form-->
+	<div class="span_10 col">
+		<transport-form></transport-form>
 	</div>
 </div>
+
+<router-outlet name="pop-up"></router-outlet>

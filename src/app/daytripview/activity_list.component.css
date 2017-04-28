@@ -1,0 +1,4 @@
+/* make all .col align nicely with .col:first-child in base css */
+.col {
+	margin-left: 0;
+}

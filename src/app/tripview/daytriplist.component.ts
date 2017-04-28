@@ -5,16 +5,16 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 @Component({
 	selector: 'daytriplist',
 	templateUrl: './daytriplist.component.html',
-	styleUrls: ['./daytriplist.component.css', '../dashboard/dashboard.component.css']
+	styleUrls: ['./daytriplist.component.css']
 })
 
 export class DayTripListComponent implements OnInit, OnDestroy
 {
 	private paramSub: any;
-	private tripId: string;
+	_tripId: string;
 
-	private _trip: FirebaseObjectObservable<any>;
-	private _dayTrips: FirebaseListObservable<any[]>;
+	_trip: FirebaseObjectObservable<any>;
+	_dayTrips: FirebaseListObservable<any[]>;
 
 	constructor(
 		private firebase: AngularFire,
@@ -24,10 +24,10 @@ export class DayTripListComponent implements OnInit, OnDestroy
 	public ngOnInit()
 	{
 		this.paramSub = this.route.params.subscribe(params => {
-			this.tripId = params['id'];
+			this._tripId = params['id'];
 
-			this._trip = this.firebase.database.object(`/Trip/${this.tripId}`);
-			this._dayTrips = this.firebase.database.list(`/Trip/${this.tripId}/Days`);
+			this._trip = this.firebase.database.object(`/Trip/${this._tripId}`);
+			this._dayTrips = this.firebase.database.list(`/Trip/${this._tripId}/Days`);
 		});
 	}
 
@@ -35,5 +35,4 @@ export class DayTripListComponent implements OnInit, OnDestroy
 	{
 		this.paramSub.unsubscribe();
 	}
-
 }
