@@ -23,7 +23,8 @@ export class DashboardComponent implements OnInit
 	ngOnInit()
 	{
 		this.auth.subscribe(auth => {
-			this.uid = auth.uid;
+			if (auth)
+				this.uid = auth.uid;
 		})
 	}
 

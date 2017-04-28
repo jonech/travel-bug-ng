@@ -7,6 +7,8 @@ import { Observable } from "rxjs/Rx";
 @Injectable()
 export class AuthGuard implements CanActivate
 {
+	isAuth: boolean = false;
+
 	constructor(
 		private router: Router,
 		private fireAuth: AngularFireAuth
@@ -15,14 +17,18 @@ export class AuthGuard implements CanActivate
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
 	{
-		return this.fireAuth.map((auth) => {
+		this.fireAuth.subscribe((auth) => {
 			if (auth) {
-				console.log("authed!");
-				return true;
+				console.log("authed!!")
+				this.isAuth = true;
 			}
+		})
+
+		if (!this.isAuth) {
 			console.log("not auth");
 			this.router.navigate(['/login', { redirect: 'unauth' }]);
-			return false;
-		})
+		}
+
+		return this.isAuth;
 	}
 }
