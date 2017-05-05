@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AngularFire, FirebaseListObservable, FirebaseAuth } from 'angularfire2';
+import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
 
 import { Trip } from '../_model/trip.model';
 
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit
 
 	constructor(
 		private firebase: AngularFire,
-		private auth: FirebaseAuth,
+		private auth: AngularFireAuth,
 	){}
 
 	ngOnInit()

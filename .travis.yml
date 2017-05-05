@@ -1,0 +1,24 @@
+language: node_js
+node_js:
+- '7'
+notifications:
+  slack:
+    secure: OUukMvKCpJKznJ5nzK6+DGW6nl6kUs8BUXtRPXM4ap//AguT14xY9FNCG92n0jqkDMPp4PPyJR4PwcQKCFSinQKi0ERusLEHqLsPJYDLXD4vV6w74njtyilWr6kvxRgj2MP8gJcgX9B4Q5Jn8VtMfwFQVVsWa3Uc6hAe4PlCjl46H2UKwmcX3tuhfmmEl1csiv/i2ARayxrZ6aAXFGRqqQq1cijF8dLjMCTHU+cjrxFGNIUvBc4mwzh5r7ZsjnSikpc05Bwvk6JhyelB8xHr1139sTgQj+d+ekVY5dUY+VR4cyzghg20hTlhneMQasqeGilzl5BHdJtK7o5xwvtBgdFD+GeqOHTVodbPl4gOVho+TaX/rdqeZsALAuhlqh1k7iUxMZuj/Cv8hfOLjpnVT7BhhlRZqEph0cGrkr0x/QXXOXnHww0tEYBlAlYPT0TO5LJ6o2vai7ysV4Gr+msDH/MPXK95Ikve+Sbqt8f1hjwPm4G3YFgfkSrvJpPGAkJW+CpCKd+0lWpP5ETcQ4bdchVO3QWS7vI8voAtQ7nhniOAj4bmvK4zwpkInxXz7XJcCXFi5C8Q7PzgS99JEp+asL7JxLIveu54PCutlQCi8aYdkfAA3UAc5rhiX8uZ9HNOEE6irxKxLhJuaFaO/4DzFfOTrXRsTnaiiwXK4ZYo1rk=
+branches:
+  only:
+  - "/.*/"
+
+before_install:
+- openssl aes-256-cbc -K $encrypted_cbf83cf799e1_key -iv $encrypted_cbf83cf799e1_iv
+  -in google.config.ts.enc -out src/environments/google.config.ts -d
+
+install:
+- npm install
+script:
+- ng build --prod
+
+deploy:
+  provider: firebase
+  token:
+    secure: j9Kz06Xtwaz8CNh9vERGDmrCrepW6FjJDEsiC/bulazS2xJpv5GjL1M85j+cDCSzK9EN3kJQLTeU3jM5Lirts1VZqAyiIbAHHbrKWWHeS5jE3NiGgHofro3c5JS6TgObx5gsvJr9Sc53aVV2KgKfgGVGRN+vESkI4skjK+VZ/wWtP6SEuCpRKktk7sgYTn7L52aLiX/Tayy/as3IGoube68ZhSXP5TEutXiZ21vCtVLTcL9cgNPyrtvg8cYkdaeSI49zqTqHxwxpQGmmXvlbX3Bdoywz781pddeT9t2CrWvwaTMYv68Lhhev2sFCr5SUBiJLz8NFrsdeW6/T2fcUGoaWWOl4rsgxydaBLIszImDRCtmGsokvIG3dzI9qLxB6zrvZd17nnbqwmQ4j+HFVIpTTTeWErtDQ5Wjepw1zLjGS6f2OMaIHSh1iCpW1vzPI17hAezj/LeK62uIot5SjifalM5xWNmoKWwDXxBZmjbakNnSNhddOs+7CZRCrZ5lms+ZAvUdTQVAnHo063Gqp5MVzkZu97IxxqUEhqPojppf+L7SAdAjzq84W8y0y/5BC1vtYaYyhcfoKun+QVqhwMxLIknxNQE9B2Ey30upcAeDTJ+DiEgMnHKerG6w4yGKcc7PErSVucjBQEag0XIn6HSfuWQsQc9a7w6vbtXmV/aQ=
+  project: travel-bugg
