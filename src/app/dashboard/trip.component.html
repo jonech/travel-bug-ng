@@ -4,24 +4,19 @@
 		<div class="month">{{ (_trip | async)?.startDate | stringToDate | date:'MMM' }}</div>
 	</div>
 	<div class="card-left">
-
 		<firebase-place-image [placeId]="(_trip | async)?.tripLocationId"></firebase-place-image>
 	</div>
-
 	<div class="card-right">
 
 		<div class="trip-textbox">
-
 			<div class="title">{{ (_trip | async)?.tripName }}</div>
 			<div class="full-dates">{{ (_trip | async)?.startDate | stringToDate | date:'d' }} - {{ (_trip | async)?.endDate | stringToDate | date:'d MMMM' }}</div>
-
 
 			<div id="host-row" class="host">Hosted by
 				<div class="admin" *ngFor="let user of _tripAdmins | async">
 					<host [userId]="user.$key"></host>
 				</div>
 			</div>
-
 			<!--<div *ngIf="(_tripRegulars|async)?.length <=0"> no one... </div>-->
 			<table id="going-user-row">
 				<tr>
@@ -33,7 +28,6 @@
 			<div id="location">
 				<i class="fa fa-map-marker" aria-hidden="true"></i>{{ (_trip | async)?.location }}
 			</div>
-
 		</div>
 	</div>
 </div>

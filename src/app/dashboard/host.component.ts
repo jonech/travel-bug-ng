@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
 
 @Component({
-	moduleId: module.id,
+	//moduleId: module.id,
 	selector: 'host',
 	styleUrls:['./trip.component.css'],
 	template:

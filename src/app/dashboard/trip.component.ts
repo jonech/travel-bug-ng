@@ -27,6 +27,7 @@ export class TripComponent implements OnInit
 		this._tripDays = this.firebase.database.list(`/Trip/${this.tripId}/Days`);
 		this._tripRegulars = this.firebase.database.list(`/Trip/${this.tripId}/User/Regular`);
 		this._tripAdmins = this.firebase.database.list(`/Trip/${this.tripId}/User/Admin`);
+		//this._tripRegulars.push(this._tripAdmins);
 	}
 
 	showTripDetail(id: string)
