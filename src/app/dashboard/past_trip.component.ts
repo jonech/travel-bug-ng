@@ -21,7 +21,6 @@ export class PastTripComponent implements OnInit
 	{
 		this.firebase.auth.subscribe(auth => {
 			if (!auth) { return; }
-
 			let uid = auth.uid;
 			this._trips = this.firebase.database.list(`/User/${uid}/PastTrip`);
 		})
