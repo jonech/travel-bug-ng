@@ -3,7 +3,7 @@
 </div>
 
 <div class="section group">
-		<div class="trip-details col span_20">
+	<div class="trip-details col span_20">
 		{{ ( _trip | async )?.tripName }}
 		<br>
 		<span style="color:#9F9F9F">{{ ( _trip | async )?.startDate }} - {{ ( _trip | async )?.endDate }}</span>
@@ -17,8 +17,13 @@
 	</div>
 
 	<div class="trip-details col">
-		<div class="title">Travellers</div>
-		<div class="att-list">
+		<div class="title divide">Travellers</div>
+		<!--<div id="button-row" class="divide">
+				<div >
+					<a class="invitation" (click)="OpenInvitation()">Invite members + </a>
+				</div>
+		</div>-->
+		<div class="att-list divide">
 			<table id="going-user-row">
 				<tr>
 					<td *ngFor="let user of _tripRegulars | async">
@@ -26,12 +31,13 @@
 					</td>
 				</tr>
 			</table>
-			<!--<ul>
-				<li *ngFor = "let user of _tripRegulars | async">
-					<i class="fa fa-check-circle-o" aria-hidden="true" style="color:#41E2B0;"></i>
-					<going-user [goingUserId]="user.$key"></going-user>
-				</li>
-			</ul>-->
+		</div>
+	</div>
+	<div class="trip-details col">
+		<div id="button-row">
+				<div >
+					<a class="invitation" (click)="OpenInvitation()">Invite members + </a>
+				</div>
 		</div>
 	</div>
 </div>
@@ -39,4 +45,7 @@
 	<div class="" *ngFor="let daytrip of _dayTrips | async">
 		<day-trip [tripId]="_tripId" [dayTripId]="daytrip?.$value" [day]="daytrip?.$key" [startDate]="(_trip|async)?.startDate"></day-trip>
 	</div>
+</div>
+<div *ngIf="_isInvitationOpen">
+	<app-invite-members-component (newMember)="inviteMembers($event)" (closeSplash)="closeInvitation()"></app-invite-members-component>
 </div>

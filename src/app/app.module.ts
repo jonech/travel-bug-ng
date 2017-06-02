@@ -56,6 +56,7 @@ import { ActivityDetailComponent } from './daytripview/activity_detail.component
 import { CommentComponent } from './daytripview/comment.component';
 
 import { DetailViewComponent } from './activitydetail/detail_view.component';
+import { InviteMembersComponentComponent } from './dashboard/invite-members-component/invite-members-component.component';
 
 
 @NgModule({
@@ -107,6 +108,8 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 
 	// activity detail
 	DetailViewComponent,
+
+	InviteMembersComponentComponent,
 
 
   ],

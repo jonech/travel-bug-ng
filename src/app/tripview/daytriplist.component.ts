@@ -11,6 +11,8 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 
 export class DayTripListComponent implements OnInit, OnDestroy
 {
+	_isInvitationOpen:boolean = false;
+
 	private paramSub: any;
 	_tripId: string;
 
@@ -39,6 +41,20 @@ export class DayTripListComponent implements OnInit, OnDestroy
 			this._tripRegulars = this.firebase.database.list(`/Trip/${this._tripId}/User/Regular`);
 			this._tripAdmins = this.firebase.database.list(`/Trip/${this._tripId}/User/Admin`);
 		});
+	}
+
+	OpenInvitation() 
+	{
+		this._isInvitationOpen = true;
+	}
+
+	closeInvitation()
+	{
+		this._isInvitationOpen = false;
+	}
+
+	inviteMembers(uemail: string) {
+		console.log(uemail);
 	}
 
 	public ngOnDestroy()
