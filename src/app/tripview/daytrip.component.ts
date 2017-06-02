@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router'
 import { AngularFire,  FirebaseListObservable } from 'angularfire2';
+import { DateCount } from '../_util/datetime.util';
 
 @Component({
 	selector: 'day-trip',
@@ -38,4 +39,9 @@ export class DayTripComponent implements OnInit
 	{
 		this.router.navigate([`/daytrip/${this.tripId}/${this.dayTripId}`]);
 	}
+
+    GetDate(startDate: string, daynum: string)
+    {
+        return DateCount(startDate, daynum);
+    }
 }

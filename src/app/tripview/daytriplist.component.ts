@@ -36,10 +36,17 @@ export class DayTripListComponent implements OnInit, OnDestroy
 			this._tripId = params['id'];
 
 			this._trip = this.firebase.database.object(`/Trip/${this._tripId}`);
-			this._dayTrips = this.firebase.database.list(`/Trip/${this._tripId}/Days`);
+
 
 			this._tripRegulars = this.firebase.database.list(`/Trip/${this._tripId}/User/Regular`);
 			this._tripAdmins = this.firebase.database.list(`/Trip/${this._tripId}/User/Admin`);
+
+			this._dayTrips = this.firebase.database.list(`/Trip/${this._tripId}/Days`, {
+                // arrange daytrip in ascending order
+                // works well for now, rely on firebase auto-increment when creating daytrip
+                query: { orderByValue: true }
+            });
+
 		});
 	}
 

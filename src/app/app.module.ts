@@ -12,8 +12,8 @@ import { GoogleService } from './_service/google.service';
 import { StringToDatePipe } from './_pipe/string-to-date.pipe';
 
 
-import { firebaseConfig } from './../environments/firebase.config';
-import { googleConfig } from './../environments/google.config';
+import { firebaseConfig } from '../environments/firebase.config';
+import { googleConfig } from '../environments/google.config';
 
 import { AngularFireModule } from 'angularfire2';
 import { AgmCoreModule } from "angular2-google-maps/core"
@@ -28,6 +28,7 @@ import { TeamComponent } from './static/team.component';
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
 import { GooglePlaceImageComponent } from './reuseable/google_place_image.component';
+import { ClickEditTextComponent } from './reuseable/click_edit_text.component';
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
@@ -80,6 +81,7 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 	FirebasePlaceImageComponent,
 	SmallRoundImageComponent,
 	GooglePlaceImageComponent,
+    ClickEditTextComponent,
 
 	// Dashboard
 	DashboardComponent,
