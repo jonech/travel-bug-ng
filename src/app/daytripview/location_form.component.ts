@@ -5,7 +5,7 @@ import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { Location } from '../_model/location.model';
 
-import { getTimeSort } from '../_util/timesort.util';
+import { GetTimeSort } from '../_util/datetime.util';
 
 @Component({
 	moduleId: module.id,
@@ -77,7 +77,7 @@ export class LocationFormComponent implements OnInit
 			return;
 		}
 		this.newLocation.time = time.value;
-		this.newLocation.timeSort = getTimeSort(time.value);
+		this.newLocation.timeSort = GetTimeSort(time.value);
 		this.newLocation.description = desc.value;
 		this.newLocation.eventName = actname.value;
 

@@ -43,8 +43,11 @@
 }
 
 .title {
-	font-size: 10px;
+	font-size: 30px;
+    padding: 5px;
+    font-weight: bold;
 }
+
 
 hr {
 	height:1px;

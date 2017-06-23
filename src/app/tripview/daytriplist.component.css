@@ -75,4 +75,14 @@
 	padding:10px 0px 10px 10%;
 }
 
-
+.archive {
+    background-color: lightskyblue;
+    margin: 5px 0px;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.archive:hover {
+    background-color: cyan;
+}

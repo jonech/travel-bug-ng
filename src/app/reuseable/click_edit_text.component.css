@@ -1,0 +1,10 @@
+
+.editable:hover {
+    outline: 1px black solid;
+}
+
+.title > input[type="text"] {
+    padding: 2px;
+    font-size: 30px;
+    font-weight: bold;
+}

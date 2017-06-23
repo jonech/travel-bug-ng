@@ -17,18 +17,28 @@ export class AuthGuard implements CanActivate
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot)
 	{
-		this.fireAuth.subscribe((auth) => {
-			if (auth) {
-				console.log("authed!!")
-				this.isAuth = true;
-			}
-		})
+		// this.fireAuth.subscribe((auth) => {
+		// 	if (auth) {
+		// 		console.log("authed!!")
+		// 		this.isAuth = true;
+		// 	}
+		// })
 
-		if (!this.isAuth) {
-			console.log("not auth");
-			this.router.navigate(['/login', { redirect: 'unauth' }]);
-		}
+		// if (!this.isAuth) {
+		// 	console.log("not auth");
+		// 	this.router.navigate(['/login', { redirect: 'unauth' }]);
+		// }
 
-		return this.isAuth;
+		// return this.isAuth;
+
+        return this.fireAuth.map((auth) => {
+            if (auth) {
+ 				console.log("authed!");
+ 				return true;
+ 			}
+ 			console.log("not auth");
+ 			this.router.navigate(['/login', { redirect: 'unauth' }]);
+ 			return false;
+        });
 	}
 }
