@@ -9,11 +9,18 @@
 		{{ ( _trip | async )?.tripName }}
 		<br>
 		<span style="color:#9F9F9F">{{ ( _trip | async )?.startDate }} - {{ ( _trip | async )?.endDate }}</span>
+    <div *ngIf="(_trip|async)?.isPast">(PAST)</div>
 		<div class="host">Hosted by ????</div>
 		<hr align="left">
 		<div class="location">
 			<i class="fa fa-map-marker" aria-hidden="true"></i>{{ ( _trip | async )?.location }}
 		</div>
+
+    <div class="tools">
+      <div *ngIf="!(_trip|async)?.isPast">
+        <button class="archive" (click)="ArchiveTrip(_tripId)">Archive</button>
+      </div>
+    </div>
 	</div>
 
 	<div class="trip-details col">
