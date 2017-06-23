@@ -58,6 +58,7 @@ import { CommentComponent } from './daytripview/comment.component';
 
 import { DetailViewComponent } from './activitydetail/detail_view.component';
 
+
 @NgModule({
   declarations: [
 	// pipes
@@ -107,7 +108,9 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 	CommentComponent,
 
 	// activity detail
-	DetailViewComponent
+	DetailViewComponent,
+
+
   ],
   imports: [
     BrowserModule,
