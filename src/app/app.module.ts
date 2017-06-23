@@ -29,6 +29,7 @@ import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.co
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
 import { GooglePlaceImageComponent } from './reuseable/google_place_image.component';
 import { ClickEditTextComponent } from './reuseable/click_edit_text.component';
+import { ClickEditLongTextComponent } from './reuseable/click_edit_long_text.component';
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
@@ -81,6 +82,7 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 	SmallRoundImageComponent,
 	GooglePlaceImageComponent,
     ClickEditTextComponent,
+    ClickEditLongTextComponent,
 
 	// Dashboard
 	DashboardComponent,
