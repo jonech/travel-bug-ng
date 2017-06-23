@@ -8,7 +8,8 @@
           [permission]="true"
           [id]="'eventName'"
           [value]="(_activity | async)?.eventName"
-          [classstyle]="'title'">
+          [classstyle]="'title'"
+          (OnSave)="HandleTitleChange($event)">
         </click-edit-text>
       </div>
 		</div>
