@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./invite-members-component.component.css']
 })
 export class InviteMembersComponentComponent implements OnInit {
-  @ViewChild('f') invitationForm: ElementRef
+  @ViewChild('invitForm') invitationForm: ElementRef;
 
   @Output() closeSplash = new EventEmitter<any>();
   @Output() newMember = new EventEmitter<string>();
@@ -16,9 +16,8 @@ export class InviteMembersComponentComponent implements OnInit {
   myUid: string;
   //TO DO: arrayList uids
   uid: string;
-
-  //For Test
-  uemail: string;
+  invitedUser: FirebaseListObservable<any[]>;
+  _error: string = "";
 
   constructor(
     private firebase: AngularFire,
@@ -34,13 +33,35 @@ export class InviteMembersComponentComponent implements OnInit {
     )
   }
 
+  //TODO: validate email
   inviteMembers(emailAdd: any) {
-  
-    console.log(emailAdd.value);
-    this.uemail = emailAdd.value;
-    this.newMember.emit(this.uemail);
-    this.invitationForm.nativeElement.reset();
+    //console.log(emailAdd.value);
+    this.invitedUser = this.firebase.database.list('/User', {
+      preserveSnapshot: true,
+      query: {
+        orderByChild: 'UserDetails/email',
+        equalTo: emailAdd.value
+      }
+    });
+ 
+    this.invitedUser
+      .subscribe(snapshots =>{
+        if(snapshots.length!=0){
+          snapshots.forEach(snapshot => {
+            this.uid = snapshot.key;
+            this.newMember.emit(this.uid);
+            //console.log(this.uid);
+            this.invitationForm.nativeElement.reset();
+            this.closeInvitation();
+          })
+        }else{
+          this._error = 'User email does not exist!';
+        }
+      });
+
+    
   }
+
   closeInvitation() {
     this.closeSplash.emit();
   }

@@ -60,9 +60,11 @@ export class DayTripListComponent implements OnInit, OnDestroy
 		this._isInvitationOpen = false;
 	}
 
-	inviteMembers(uemail: string) {
-		console.log(uemail);
-	}
+	inviteMembers(uid: string) {
+		//console.log(uid);
+		this.firebase.database.object(`/User/${uid}/Trip/${this._tripId}`).set('not sure');
+		this.firebase.database.object(`/Trip/${this._tripId}/User/Regular/${uid}`).set('not sure');
+}
 
 	public ngOnDestroy()
 	{
