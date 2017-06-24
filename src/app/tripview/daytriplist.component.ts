@@ -12,6 +12,8 @@ import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'a
 
 export class DayTripListComponent implements OnInit, OnDestroy
 {
+	_isInvitationOpen:boolean = false;
+
 	private paramSub: any;
 	_tripId: string;
 
@@ -25,8 +27,6 @@ export class DayTripListComponent implements OnInit, OnDestroy
 	constructor(
 		private firebase: AngularFire,
 		private route: ActivatedRoute,
-
-
 	){}
 
 	public ngOnInit()
@@ -35,16 +35,36 @@ export class DayTripListComponent implements OnInit, OnDestroy
 			this._tripId = params['id'];
 
 			this._trip = this.firebase.database.object(`/Trip/${this._tripId}`);
+
+
+			this._tripRegulars = this.firebase.database.list(`/Trip/${this._tripId}/User/Regular`);
+			this._tripAdmins = this.firebase.database.list(`/Trip/${this._tripId}/User/Admin`);
+
 			this._dayTrips = this.firebase.database.list(`/Trip/${this._tripId}/Days`, {
                 // arrange daytrip in ascending order
                 // works well for now, rely on firebase auto-increment when creating daytrip
                 query: { orderByValue: true }
             });
-
 			this._tripRegulars = this.firebase.database.list(`/Trip/${this._tripId}/User/Regular`);
 			this._tripAdmins = this.firebase.database.list(`/Trip/${this._tripId}/User/Admin`);
 		});
 	}
+
+	OpenInvitation() 
+	{
+		this._isInvitationOpen = true;
+	}
+
+	closeInvitation()
+	{
+		this._isInvitationOpen = false;
+	}
+
+	inviteMembers(uid: string) {
+		//console.log(uid);
+		this.firebase.database.object(`/User/${uid}/Trip/${this._tripId}`).set('not sure');
+		this.firebase.database.object(`/Trip/${this._tripId}/User/Regular/${uid}`).set('not sure');
+}
 
 	public ngOnDestroy()
 	{

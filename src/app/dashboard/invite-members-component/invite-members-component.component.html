@@ -1,0 +1,34 @@
+<div class="splash">
+  <div class="splash-inner splash-open">
+		<div class="splash-content text-center">
+
+			<form #invitForm>
+				<h3>Invite Members</h3>
+				<div *ngIf="_error_flag">
+					<div class="help-block"> {{ _error }} </div>
+				</div>
+				<div class="form-group">
+					<!-- use label for to allow clicking on label to navigate cursor to the specific input field -->
+					<label for="email">User's Email Address</label>
+					<input 
+					type="email"
+					id="email" 
+					class="form-control"				 
+					ngModel
+					name="email"
+					required
+					pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+					#email="ngModel">
+					<span class="help-block" *ngIf="(!email.valid && email.touched)">Please enter a valid email!</span>
+				</div>
+				<div class="form-group">
+					<button 
+						class="btn btn-success" 
+						(click)="inviteMembers(email); false">Invite</button>
+				</div>
+			</form>
+
+			<button class="btn btn-lg btn-outline" (click)="closeInvitation()">Cancel</button>
+		</div>
+	</div>
+</div>
