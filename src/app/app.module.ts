@@ -24,11 +24,13 @@ import { HomeComponent } from './static/home.component';
 import { AboutComponent } from './static/about.component';
 import { PrivacyPolicyComponent } from './static/privacy_policy.component';
 import { TeamComponent } from './static/team.component';
+import { TermsConditionComponent } from './static/terms_cond.component';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
 import { GooglePlaceImageComponent } from './reuseable/google_place_image.component';
 import { ClickEditTextComponent } from './reuseable/click_edit_text.component';
+import { ClickEditLongTextComponent } from './reuseable/click_edit_long_text.component';
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
@@ -60,6 +62,7 @@ import { DetailViewComponent } from './activitydetail/detail_view.component';
 import { InviteMembersComponentComponent } from './dashboard/invite-members-component/invite-members-component.component';
 
 
+
 @NgModule({
   declarations: [
 	// pipes
@@ -72,6 +75,7 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 	AboutComponent,
 	PrivacyPolicyComponent,
 	TeamComponent,
+    TermsConditionComponent,
 
 	// auth
 	RegisterComponent,
@@ -82,6 +86,7 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 	SmallRoundImageComponent,
 	GooglePlaceImageComponent,
     ClickEditTextComponent,
+    ClickEditLongTextComponent,
 
 	// Dashboard
 	DashboardComponent,
@@ -112,7 +117,6 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 	DetailViewComponent,
 
 	InviteMembersComponentComponent,
-
 
   ],
   imports: [

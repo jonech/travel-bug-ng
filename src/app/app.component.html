@@ -5,20 +5,20 @@
 
 				<li><a [routerLink]="['/']"><img src="/assets/img/logoblack.png" style="width:20px;"></a></li>
 
-				<li *ngIf="_isLogin"><a [routerLink]="['/dashboard']">My Trip</a></li>
+				<li *ngIf="_isLogin"><div class="link" [routerLink]="['/dashboard']">My Trip</div></li>
 
 			</div>
 
 			<div id="rightnav" class="responsive">
 				<div id="responsive-head" class="hide">
 
-					<li *ngIf="!_isLogin"><a [routerLink]="['/login']">Login</a></li>
+					<li *ngIf="!_isLogin"><div class="link" [routerLink]="['/login']">Login</div></li>
 
-					<li *ngIf="!_isLogin" class="vertical-line"><a [routerLink]="['/register']">Register</a></li>
+					<li *ngIf="!_isLogin" class="vertical-line"><div class="link" [routerLink]="['/register']">Register</div></li>
 
-					<li *ngIf="_isLogin" class="vertical-line"><button (click)="logout()">Logout</button></li>
+					<li *ngIf="_isLogin" class="vertical-line"><div class="link" (click)="logout()">Logout</div></li>
 
-					<li><a [routerLink]="['/about']">Contact</a></li>
+					<li><div class="link" [routerLink]="['/about']">Contact</div></li>
 
 					<!--<li><a [routerLink]="['/about']">About</a></li>-->
 
@@ -46,7 +46,7 @@
 						<a [routerLink]="['/team']">MEET THE TEAM</a>
 					</li>
 					<li>
-						<a [routerLink]="['/privacyandpolicy']">TERM AND CONDITIONS</a>
+						<a [routerLink]="['/tnc']">TERM AND CONDITIONS</a>
 					</li>
 					<li>
 						<a [routerLink]="['/']" class="bug0"><img src="assets/img/logoblack.png" style="width:25px;"></a>

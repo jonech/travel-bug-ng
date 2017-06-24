@@ -87,4 +87,10 @@ export class ActivityDetailComponent implements OnInit
 	{
 		this.google.getPhotoUrl(placeId, this.image);
 	}
+
+    HandleTitleChange(changes)
+    {
+        console.log(changes);
+        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({eventName: changes});
+    }
 }

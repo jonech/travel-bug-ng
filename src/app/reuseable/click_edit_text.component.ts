@@ -1,18 +1,23 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
     moduleId: module.id,
     selector: 'click-edit-text',
-    styleUrls: ['click_edit.component.css'],
+    styleUrls: ['click_edit_text.component.css'],
+    host: {
+		'(document:click)': 'handleMouseClick($event)'
+	},
     template:
     `
-        <div [hidden]="editing" (click)="ToggleEdit()" [ngClass]="{'editable': permission}">
-            {{ value }}
-        </div>
+        <div #container>
+            <div [hidden]="editing" (click)="ToggleEdit()" [ngClass]="{'editable': permission}">
+                {{ value }}
+            </div>
 
-        <div [hidden]="!editing" (keypress)="KeypressHandler($event)">
-            <div [className]="classstyle" (click)="InputClickHandler($event)">
-                <input type="text" value="{{ value }}">
+            <div [hidden]="!editing" (keypress)="KeypressHandler($event)">
+                <div [className]="classstyle">
+                    <input type="text" value="{{ value }}" #modValueElef>
+                </div>
             </div>
         </div>
     `
@@ -27,7 +32,11 @@ export class ClickEditTextComponent implements OnInit
 
     @Output() OnSave = new EventEmitter<string>();
 
+    @ViewChild('container') container: ElementRef;
+    @ViewChild('modValueElef') modValueElement: ElementRef;
+
     editing: boolean;
+    firstclick: boolean = true;
 
     constructor()
     {
@@ -49,16 +58,36 @@ export class ClickEditTextComponent implements OnInit
         }
     }
 
+    handleMouseClick(event)
+	{
+		// prevent pop up closing too soon
+        if (this.firstclick) {
+			this.firstclick = false;
+			return;
+		}
+
+		if (!this.container.nativeElement.contains(event.target) && this.editing) {
+			//console.log(event.target);
+
+            this.UpdateChanges();
+            this.ToggleEdit();
+		}
+	}
+
     KeypressHandler(event)
     {
         if (event.keyCode == 13) {
+            this.UpdateChanges();
             this.ToggleEdit();
         }
-        console.log(event, event.keyCode, event.keyIdentifier);
+        //console.log(event, event.keyCode, event.keyIdentifier);
     }
 
-    InputClickHandler(event)
+    UpdateChanges()
     {
-        console.log(event)
+        if (this.value !== this.modValueElement.nativeElement.value) {
+            this.value = this.modValueElement.nativeElement.value;
+            this.OnSave.emit(this.value);
+        }
     }
 }

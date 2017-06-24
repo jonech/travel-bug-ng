@@ -32,7 +32,9 @@ export class DayTripViewComponent implements OnInit
 		this.route.params.subscribe(params => {
 
 			this._tripId = params['tripId'];
-			this._dayTripListRef = this.firebase.database.list(`/Trip/${this._tripId}/Days`);
+			this._dayTripListRef = this.firebase.database.list(`/Trip/${this._tripId}/Days`, {
+                query: { orderByValue: true }
+            });
 
 			// dayref will be varrying depending on which day is nav to
 			firebase.database.list(`/Trip/${this._tripId}/Days`,
