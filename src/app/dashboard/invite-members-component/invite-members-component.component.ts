@@ -18,6 +18,7 @@ export class InviteMembersComponentComponent implements OnInit {
   uid: string;
   invitedUser: FirebaseListObservable<any[]>;
   _error: string = "";
+  _error_flag: boolean = false;
 
   constructor(
     private firebase: AngularFire,
@@ -55,6 +56,7 @@ export class InviteMembersComponentComponent implements OnInit {
             this.closeInvitation();
           })
         }else{
+          this._error_flag = true;
           this._error = 'User email does not exist!';
         }
       });
