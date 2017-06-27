@@ -34,7 +34,6 @@ export class InviteMembersComponentComponent implements OnInit {
     )
   }
 
-  //TODO: validate email
   inviteMembers(emailAdd: any) {
     //console.log(emailAdd.value);
     this.invitedUser = this.firebase.database.list('/User', {
