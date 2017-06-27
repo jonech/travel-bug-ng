@@ -1,0 +1,37 @@
+form {
+    width: 100%;
+}
+textarea {
+    width: 100%;
+    height: 150px;
+    padding: 9px 6px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+button {
+    margin: 5px 0px;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: white;
+}
+
+.save {
+    background-color: #24b20e;
+}
+.save:hover {
+    background-color: #1c910a;
+}
+
+.cancel {
+    background-color: #db5757;
+}
+.cancel:hover {
+    background-color: #a02e2e;
+}

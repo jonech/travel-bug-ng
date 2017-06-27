@@ -93,4 +93,10 @@ export class ActivityDetailComponent implements OnInit
         console.log(changes);
         this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({eventName: changes});
     }
+
+    HandleDescriptionChange(changes)
+    {
+        console.log(changes);
+        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({description: changes});
+    }
 }

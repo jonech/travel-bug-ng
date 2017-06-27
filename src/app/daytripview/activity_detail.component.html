@@ -15,34 +15,38 @@
 		</div>
 
 		<div class="modal-body">
-			<div class="section group">
 
-				<div class="col">
-					<google-place-image  [placeId]="(_activity|async)?.location.id"></google-place-image>
-				</div>
+      <div class="section group">
+        <google-place-image  [placeId]="(_activity|async)?.location.id"></google-place-image>
+      </div>
 
-				<div class="col">
-					<div id="time">{{ (_activity | async)?.time }}</div>
-					<div id="location_name">
-						<i class="fa fa-map-marker" aria-hidden="true"></i>
-						{{ (_activity | async)?.location.name }}
-					</div>
-					<div id="description">{{ (_activity | async)?.description }}</div>
+      <div class="section group">
+        <div id="time">Time: {{ (_activity | async)?.time }}</div>
+        <div id="location_name">Location:
+          <i class="fa fa-map-marker" aria-hidden="true"></i>
+          {{ (_activity | async)?.location.name }}
+        </div>
+        <div id="description">Description<br>
+          <click-edit-long-text
+            [permission]="true"
+            [id]="'description'"
+            [value]="(_activity | async)?.description"
+            (OnSave)="HandleDescriptionChange($event)">
+          </click-edit-long-text>
+        </div>
 
-					<i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ (_upVotes | async)?.length }}
-					<i class="fa fa-thumbs-down" aria-hidden="true"></i>{{ (_downVotes | async)?.length }}
-					<hr/>
-				</div>
+        <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ (_upVotes | async)?.length }}
+        <i class="fa fa-thumbs-down" aria-hidden="true"></i>{{ (_downVotes | async)?.length }}
+        <hr/>
+      </div>
 
-				<div class="section group">
-					<div *ngFor="let comment of _comments | async">
-						<comment-component [commentId]="comment.$key" [userId]="comment.$value"></comment-component>
-					</div>
-				</div>
+      <div class="section group">
+        <div *ngFor="let comment of _comments | async">
+          <comment-component [commentId]="comment.$key" [userId]="comment.$value"></comment-component>
+        </div>
+      </div>
 
-			</div>
-		</div>
-
-	</div>
+    </div>
+  </div>
 
 </div>
