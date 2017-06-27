@@ -41,8 +41,8 @@
       </div>
 
       <div class="section group">
-        <div *ngFor="let comment of _comments | async">
-          <comment-component [commentId]="comment.$key" [userId]="comment.$value"></comment-component>
+        <div *ngFor="let comment of _comments | async; let i = index">
+          <comment-component [commentId]="comment.$key" [userId]="comment.$value" [index]="i"></comment-component>
         </div>
       </div>
 
