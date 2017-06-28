@@ -33,13 +33,18 @@
 				</div>
 		</div>-->
 		<div class="att-list divide">
-			<table id="going-user-row">
+			<!--<table id="going-user-row">
 				<tr>
 					<td *ngFor="let user of _tripRegulars | async">
 						<going-user [goingUserId]="user.$key"></going-user>
 					</td>
 				</tr>
-			</table>
+			</table>-->
+			<ul  >
+				<li *ngFor="let user of _tripRegulars | async">
+					<going-user [goingUserId]="user.$key"></going-user>
+				</li>
+			</ul>
 		</div>
 	</div>
 	<div class="trip-details col">
