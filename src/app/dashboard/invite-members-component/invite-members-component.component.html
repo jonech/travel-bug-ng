@@ -24,6 +24,7 @@
 				<div class="form-group">
 					<button 
 						class="btn btn-success" 
+						[disabled]="!email.valid" 
 						(click)="inviteMembers(email); false">Invite</button>
 				</div>
 			</form>
