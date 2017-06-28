@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { GoogleService } from '../_service/google.service';
+import { GetCurrentDateTime } from '../_util/datetime.util';
 
 @Component({
 	selector: 'activity-detail',
@@ -90,13 +91,27 @@ export class ActivityDetailComponent implements OnInit
 
     HandleTitleChange(changes)
     {
-        console.log(changes);
         this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({eventName: changes});
     }
 
     HandleDescriptionChange(changes)
     {
-        console.log(changes);
         this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({description: changes});
+    }
+
+    HandleCommentCreate(comment)
+    {
+        this.firebase.auth.subscribe(user => {
+            // push to comment table
+            var tempComment = this.firebase.database.list(`/Comment`).push({
+                activityId : this.activityId, // match with corresponding activity
+                comment : comment,
+                date : GetCurrentDateTime(),
+                userId: user.uid,
+            });
+
+            // add to daytrip as reference
+            this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments/${tempComment.key}`).set(user.uid);
+        })
     }
 }

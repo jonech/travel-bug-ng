@@ -55,10 +55,11 @@ import { LocationFormComponent } from './daytripview/location_form.component';
 import { LocationRowComponent } from './daytripview/location_row.component';
 import { TransportFormComponent } from './daytripview/transport_form.component';
 import { TransportRowComponent } from './daytripview/transport_row.component';
-import { ActivityDetailComponent } from './daytripview/activity_detail.component';
-import { CommentComponent } from './daytripview/comment.component';
 
-import { DetailViewComponent } from './activitydetail/detail_view.component';
+import { ActivityDetailComponent } from './activitydetail/activity_detail.component';
+import { CommentComponent } from './activitydetail/comment.component';
+import { CreateCommentComponent } from './activitydetail/create_comment.component';
+
 import { InviteMembersComponentComponent } from './dashboard/invite-members-component/invite-members-component.component';
 
 
@@ -110,11 +111,12 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 	LocationRowComponent,
 	TransportFormComponent,
 	TransportRowComponent,
-	ActivityDetailComponent,
-	CommentComponent,
+
 
 	// activity detail
-	DetailViewComponent,
+	ActivityDetailComponent,
+	CommentComponent,
+    CreateCommentComponent,
 
 	InviteMembersComponentComponent,
 

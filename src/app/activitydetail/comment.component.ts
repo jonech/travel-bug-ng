@@ -55,7 +55,6 @@ export class CommentComponent implements OnInit
 
         if (this.index % 2 != 0) {
             this.isOdd = true;
-            this.isEven = false;
         }
         else {
             this.isEven = true;
