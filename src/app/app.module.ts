@@ -34,6 +34,7 @@ import { ClickEditLongTextComponent } from './reuseable/click_edit_long_text.com
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
+import { AuthService } from './auth/auth.service';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TripListComponent } from './dashboard/trip_list.component';
@@ -136,6 +137,9 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 
 	  // services
 	  GoogleService,
+
+	  //services
+	  AuthService
 	],
   bootstrap: [AppComponent]
 })

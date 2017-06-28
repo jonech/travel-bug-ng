@@ -8,6 +8,8 @@ import { User } from '../_model/user.model';
 import { FbUser } from '../_model/fb-user.model';
 import { ProfileDefaultBase64, EmailRegEx } from '../_util/string.util';
 
+import{ AuthService } from './auth.service';
+
 @Component({
 	selector: 'register',
 	templateUrl: './register.component.html',
@@ -27,6 +29,7 @@ export class RegisterComponent implements OnInit
 		private _firebase: AngularFire,
 		private _formBuild: FormBuilder,
 		private _router: Router,
+		private authService: AuthService
 	) {}
 
 	ngOnInit()
@@ -72,50 +75,10 @@ export class RegisterComponent implements OnInit
 //TODO: change default photo 
 	LoginWithFacebook()
 	{
-		this._firebase.auth.login({
-			provider: AuthProviders.Facebook,
-			method: AuthMethods.Popup
-		})
-		.then(resolve => {
-			let fbUser: FbUser = new FbUser();
-
-			let fullName: string[] = resolve.auth.providerData[0].displayName.split(" ");
-
-			fbUser.firstname = fullName[0];
-			fbUser.lastname = fullName[1];
-			fbUser.facebookUserId = resolve.auth.providerData[0].uid;
-
-			let emailTemp: string = resolve.auth.providerData[0].email;
-			console.log(emailTemp);
-			
-			if(emailTemp==null){
-				fbUser.email = "No Email Added";
-			}else{
-				fbUser.email = emailTemp;
-			}
-			
-			this.saveFbUserDetails(resolve.uid, fbUser);
-
-			this.ToLogin();
-		})
-		.catch(error => {
-			console.log(error.message);
-		})
+		this.authService.LoginWithFacebook();
 	}
 
-	private saveFbUserDetails(uid:string, fBuser:FbUser)
-	{
-		this._firebase.database.object(`/User/${uid}/UserDetails`).update(
-			{
-				email: fBuser.email,
-				facebookUserId: fBuser.facebookUserId,
-				firstName: fBuser.firstname,
-				lastName: fBuser.lastname,
-				phone: "No Phone Added",
-				profileImage: ProfileDefaultBase64
-			}
-		)
-	}
+
 
 	private saveUserDetails(uid:string, user:User)
 	{
