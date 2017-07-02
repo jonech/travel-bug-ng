@@ -9,21 +9,35 @@ import { MapsAPILoader } from 'angular2-google-maps/core';
 	`
 		<a [routerLink]="[{ outlets: { 'pop-up':[_activityId] } }]">
 			<div class="section group row">
-				<div class="span_10 col">{{ _location.time }}</div>
+				<div id="time" class="span_10 col">{{ _location.time }}</div>
 
 				<div #image [style.background-image]="getBackgroundImageUrl()" class="col circle-md">
 				</div>
 
-				<div class="span_70 col">
-					{{ _location.eventName }}
-					<br>
-					{{ _location.location.name }}
-					<br>
-					{{ _location.description }}
-					<br>
-					<i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ (_upVotes | async)?.length }}
-					<i class="fa fa-thumbs-down" aria-hidden="true"></i>{{ (_downVotes | async)?.length }}
-					<i class="fa fa-commenting" aria-hidden="true"></i>{{ (_comments | async)?.length }}
+				<div class="col span_70 text-col">
+                    <div class="section group text-row">
+                        <div class="title">
+                            <span id="eventname">{{ _location.eventName }}</span>
+                            <span id="location">{{ _location.location.name }}</span>
+                        </div>
+                        <div id="description">
+                            {{ _location.description }}
+                        </div>
+                    </div>
+                    <div class="section group tool-row">
+                        <span [ngClass]="{'upvoted': upvoted}">
+                            <i class="fa fa-smile-o" (click)="Upvote(); false" aria-hidden="false"></i>
+                            {{ (_upVotes | async)?.length }}
+                        </span>
+                        <span [ngClass]="{'downvoted': downvoted}">
+                            <i class="fa fa-frown-o" (click)="Downvote(); false" aria-hidden="false"></i>
+                            {{ (_downVotes | async)?.length }}
+                        </span>
+                        <span [ngClass]="{'commented': commented}">
+                            <i class="fa fa-commenting" aria-hidden="false"></i>
+                            {{ (_comments | async)?.length }}
+                        </span>
+                    </div>
 				</div>
 			</div>
 		</a>
@@ -43,6 +57,11 @@ export class LocationRowComponent implements OnInit
 	_comments: FirebaseListObservable<any[]>;
 	_upVotes: FirebaseListObservable<any[]>;
 	_downVotes: FirebaseListObservable<any[]>;
+
+    upvoted: boolean;
+    downvoted: boolean;
+    voteable: boolean = false;
+    commented: boolean;
 
 	constructor(
 		private googleAPILoader: MapsAPILoader,
@@ -68,8 +87,62 @@ export class LocationRowComponent implements OnInit
 			{ query: {
 				orderByValue: true,
 				equalTo: 'false'
-			}})
+			}});
+
+        this.CheckUpDownVoteComment();
 	}
+
+    CheckUpDownVoteComment()
+    {
+        this.firebase.auth.subscribe((user) => {
+
+            this.firebase.database.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`, {
+                preserveSnapshot: true
+            }).subscribe(snapshot => {
+                if (snapshot.val() == "true") {
+                    this.upvoted = true;
+                    this.voteable = true;
+                }
+                else if (snapshot.val() == "false") {
+                    this.downvoted = true;
+                    this.voteable = true;
+                }
+                else {
+                    this.voteable = true;
+                }
+            });
+
+            this.firebase.database.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`, {
+                preserveSnapshot: true,
+                query: {
+                    orderByValue: true,
+                    equalTo: user.uid
+                }
+            }).subscribe(snapshots => {
+                if (snapshots.length > 0) {
+                    this.commented = true;
+                }
+            });
+        });
+    }
+
+    Upvote()
+    {
+        if (this.voteable) {
+            this.firebase.auth.subscribe((user) => {
+                this.firebase.database.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("true");
+            });
+        }
+    }
+
+    Downvote()
+    {
+        if (this.voteable) {
+            this.firebase.auth.subscribe((user) => {
+                this.firebase.database.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("false");
+            });
+        }
+    }
 
 	getImageUrl(placeId: string, eleRef: ElementRef)
 	{

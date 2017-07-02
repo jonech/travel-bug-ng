@@ -35,8 +35,16 @@
           </click-edit-long-text>
         </div>
 
-        <i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ (_upVotes | async)?.length }}
-        <i class="fa fa-thumbs-down" aria-hidden="true"></i>{{ (_downVotes | async)?.length }}
+        <div class="tool-row">
+          <span class="vote" [ngClass]="{'upvoted': upvoted}">
+            <i class="fa fa-smile-o" (click)="Upvote(); false" aria-hidden="false"></i>
+            {{ (_upVotes | async)?.length }}
+          </span>
+          <span class="vote" [ngClass]="{'downvoted': downvoted}">
+            <i class="fa fa-frown-o" (click)="Downvote(); false" aria-hidden="false"></i>
+            {{ (_downVotes | async)?.length }}
+          </span>
+        </div>
         <hr/>
       </div>
 

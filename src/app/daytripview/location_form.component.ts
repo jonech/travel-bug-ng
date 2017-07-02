@@ -10,7 +10,8 @@ import { GetTimeSort } from '../_util/datetime.util';
 @Component({
 	moduleId: module.id,
 	selector: 'location-form',
-	templateUrl: 'location_form.component.html'
+	templateUrl: 'location_form.component.html',
+    //styleUrls:['location_form.component.css']
 })
 
 export class LocationFormComponent implements OnInit

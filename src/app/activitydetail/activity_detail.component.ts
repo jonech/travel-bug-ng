@@ -30,6 +30,10 @@ export class ActivityDetailComponent implements OnInit
 	private activityId: string;
 	private firstclick: boolean = true;
 
+    upvoted: boolean;
+    downvoted: boolean;
+    voteable: boolean = false;
+
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
@@ -53,16 +57,18 @@ export class ActivityDetailComponent implements OnInit
 			this._comments = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments`)
 
 			this._upVotes = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes`,
-				{ query: {
-					orderByValue: true,
-					equalTo: 'true'
-				}});
+            { query: {
+                orderByValue: true,
+                equalTo: 'true'
+            }});
 
 			this._downVotes = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes`,
-				{ query: {
-					orderByValue: true,
-					equalTo: 'false'
-				}})
+            { query: {
+                orderByValue: true,
+                equalTo: 'false'
+            }});
+
+            this.CheckUpDownVote();
 		});
 	}
 
@@ -88,6 +94,48 @@ export class ActivityDetailComponent implements OnInit
 	{
 		this.google.getPhotoUrl(placeId, this.image);
 	}
+
+    CheckUpDownVote()
+    {
+        this.firebase.auth.subscribe((user) => {
+
+            this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`, {
+                preserveSnapshot: true
+            }).subscribe(snapshot => {
+                if (snapshot.val() == "true") {
+                    this.upvoted = true;
+                    this.downvoted = false;
+                    this.voteable = true;
+                }
+                else if (snapshot.val() == "false") {
+                    this.downvoted = true;
+                    this.upvoted = false;
+                    this.voteable = true;
+                }
+                else {
+                    this.voteable = true;
+                }
+            });
+        });
+    }
+
+    Upvote()
+    {
+        if (this.voteable) {
+            this.firebase.auth.subscribe((user) => {
+                this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`).set("true");
+            });
+        }
+    }
+
+    Downvote()
+    {
+        if (this.voteable) {
+            this.firebase.auth.subscribe((user) => {
+                this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`).set("false");
+            });
+        }
+    }
 
     HandleTitleChange(changes)
     {

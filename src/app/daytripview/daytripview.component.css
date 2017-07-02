@@ -1,3 +1,9 @@
+.left-vertical-bar {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .dropdown-nav {
 	background: lightseagreen;;
 	color: white;
@@ -33,4 +39,40 @@
 
 .show {
 	display: block;
+}
+
+#back {
+    padding: 7px;
+    padding-bottom: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+#back a:hover {
+    color: #ff8080;
+}
+
+.daylist-content a {
+    padding: 7px;
+    display: block;
+}
+.daylist-content a:hover {
+    background-color: #41E2B0;
+    color: white;
+}
+.router-link-active {
+    background-color: #41E2B0;
+    color: white;
+}
+.fa-map-o {
+    margin-right: 10px;
+}
+
+.activity-col {
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.form-col {
+    background-color: #8c8c8c;
+    border-radius: 5px;
 }

@@ -5,8 +5,10 @@ import { Component, OnInit, Input } from '@angular/core';
 	template:
 	`
 		<div class="section group transport-holder">
-			<div class="col" id="time">{{ _transport.time }}</div>
-			<img class="transport-icon col" src="{{ _iconUrl }}">
+			<div class="col span_10" id="time">{{ _transport.time }}</div>
+
+			    <img class="transport-icon col" src="{{ _iconUrl }}">
+
 			<div class="col" id="description">{{ _transport.description }}</div>
 		</div>
 	`,
