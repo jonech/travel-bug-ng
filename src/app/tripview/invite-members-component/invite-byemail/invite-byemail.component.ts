@@ -1,21 +1,21 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
 import { NgForm } from '@angular/forms';
+import { InviteService } from '../invite.service';
 
 @Component({
-  selector: 'app-invite-members-component',
-  templateUrl: './invite-members-component.component.html',
-  styleUrls: ['./invite-members-component.component.css']
+  selector: 'app-invite-byemail',
+  templateUrl: './invite-byemail.component.html',
+  styleUrls: ['./invite-byemail.component.css']
 })
-export class InviteMembersComponentComponent implements OnInit {
-  @ViewChild('invitForm') invitationForm: ElementRef;
+export class InviteByemailComponent implements OnInit {
 
-  @Output() closeSplash = new EventEmitter<any>();
-  @Output() newMember = new EventEmitter<string>();
+@ViewChild('invitForm') invitationForm: ElementRef;
 
   myUid: string;
   //TO DO: arrayList uids
   uid: string;
+  email: string;
   invitedUser: FirebaseListObservable<any[]>;
   _error: string = "";
   _error_flag: boolean = false;
@@ -23,6 +23,7 @@ export class InviteMembersComponentComponent implements OnInit {
   constructor(
     private firebase: AngularFire,
     private auth: AngularFireAuth,
+    private inviteService: InviteService
     ) {}
 
   ngOnInit() {
@@ -36,6 +37,7 @@ export class InviteMembersComponentComponent implements OnInit {
 
   inviteMembers(emailAdd: any) {
     //console.log(emailAdd.value);
+    this.email = emailAdd.value;
     this.invitedUser = this.firebase.database.list('/User', {
       preserveSnapshot: true,
       query: {
@@ -49,10 +51,11 @@ export class InviteMembersComponentComponent implements OnInit {
         if(snapshots.length!=0){
           snapshots.forEach(snapshot => {
             this.uid = snapshot.key;
-            this.newMember.emit(this.uid);
+            this.inviteService.newMember.next(this.uid);
             //console.log(this.uid);
             this.invitationForm.nativeElement.reset();
-            this.closeInvitation();
+            alert("Invite "+ this.email+" successfully.")
+            
           })
         }else{
           this._error_flag = true;
@@ -62,9 +65,4 @@ export class InviteMembersComponentComponent implements OnInit {
 
     
   }
-
-  closeInvitation() {
-    this.closeSplash.emit();
-  }
-
 }

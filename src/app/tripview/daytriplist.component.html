@@ -33,13 +33,6 @@
 				</div>
 		</div>-->
 		<div class="att-list divide">
-			<!--<table id="going-user-row">
-				<tr>
-					<td *ngFor="let user of _tripRegulars | async">
-						<going-user [goingUserId]="user.$key"></going-user>
-					</td>
-				</tr>
-			</table>-->
 			<ul  >
 				<li *ngFor="let user of _tripRegulars | async">
 					<going-user [goingUserId]="user.$key"></going-user>
@@ -61,5 +54,5 @@
 	</div>
 </div>
 <div *ngIf="_isInvitationOpen">
-	<app-invite-members-component (newMember)="inviteMembers($event)" (closeSplash)="closeInvitation()"></app-invite-members-component>
+	<app-invite-members-component (closeSplash)="closeInvitation()"></app-invite-members-component>
 </div>

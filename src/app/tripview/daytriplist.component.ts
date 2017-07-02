@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
-
+import { InviteService } from './invite-members-component/invite.service';
 
 @Component({
 	selector: 'daytriplist',
@@ -27,6 +27,7 @@ export class DayTripListComponent implements OnInit, OnDestroy
 	constructor(
 		private firebase: AngularFire,
 		private route: ActivatedRoute,
+		private inviteService: InviteService
 	){}
 
 	public ngOnInit()
@@ -48,6 +49,12 @@ export class DayTripListComponent implements OnInit, OnDestroy
 			this._tripRegulars = this.firebase.database.list(`/Trip/${this._tripId}/User/Regular`);
 			this._tripAdmins = this.firebase.database.list(`/Trip/${this._tripId}/User/Admin`);
 		});
+
+		this.inviteService.newMember.subscribe(
+			(uid:string) => {
+				this.inviteMembers(uid);
+			}
+		);
 	}
 
 	OpenInvitation() 
@@ -64,7 +71,7 @@ export class DayTripListComponent implements OnInit, OnDestroy
 		//console.log(uid);
 		this.firebase.database.object(`/User/${uid}/Trip/${this._tripId}`).set('not sure');
 		this.firebase.database.object(`/Trip/${this._tripId}/User/Regular/${uid}`).set('not sure');
-}
+	}
 
 	public ngOnDestroy()
 	{

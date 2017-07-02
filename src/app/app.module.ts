@@ -60,8 +60,10 @@ import { ActivityDetailComponent } from './daytripview/activity_detail.component
 import { CommentComponent } from './daytripview/comment.component';
 
 import { DetailViewComponent } from './activitydetail/detail_view.component';
-import { InviteMembersComponentComponent } from './dashboard/invite-members-component/invite-members-component.component';
-
+import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
+import { InviteByemailComponent } from './tripview/invite-members-component/invite-byemail/invite-byemail.component';
+import { InviteFbComponent } from './tripview/invite-members-component/invite-fb/invite-fb.component';
+import { InviteService } from './tripview/invite-members-component/invite.service';
 
 
 @NgModule({
@@ -119,6 +121,10 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 
 	InviteMembersComponentComponent,
 
+	InviteByemailComponent,
+
+	InviteFbComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -139,7 +145,10 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 	  GoogleService,
 
 	  //services
-	  AuthService
+	  AuthService,
+
+	  //services
+	  InviteService
 	],
   bootstrap: [AppComponent]
 })

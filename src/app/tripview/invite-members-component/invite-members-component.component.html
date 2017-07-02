@@ -1,0 +1,19 @@
+<div class="splash">
+  <div class="splash-inner splash-open"> 
+		<div class="splash-content text-center">
+			<h3 class="title">Invite Members</h3>
+			<div id="leftnav">
+				<ul>
+					<li><div [routerLinkActive]="['active']" class="link" [routerLink]="['invite_by_email']">Email</div></li>
+					<li><div [routerLinkActive]="['active']" class="link" [routerLink]="['invite_by_fb']">Facebook</div></li>				
+				</ul>
+			</div>
+		</div>
+  		<div class="splash-content2 text-center">
+			<div id="choices">
+				<router-outlet></router-outlet>			
+			</div>
+			<button class="btn btn-lg btn-outline" (click)="closeInvitation()">Cancel</button>
+		</div>
+	</div>
+</div>

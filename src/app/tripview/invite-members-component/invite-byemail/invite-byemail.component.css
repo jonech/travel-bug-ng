@@ -1,0 +1,27 @@
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+
+.help-block {
+    font-size: 12px;
+    color: red;
+}
+
+.invitationForm {
+    padding: 40px 0px 0px -40px;
+}
+/*.invitationForm .invite {
+	border:none;
+	background-color:#3b5998;
+	color:white;
+
+	font-size:10px;
+	font-weight: 200;
+	padding:10px 15px 10px 15px;
+	margin:10px;
+
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}*/
