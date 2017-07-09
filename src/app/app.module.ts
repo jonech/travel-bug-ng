@@ -25,6 +25,7 @@ import { AboutComponent } from './static/about.component';
 import { PrivacyPolicyComponent } from './static/privacy_policy.component';
 import { TeamComponent } from './static/team.component';
 import { TermsConditionComponent } from './static/terms_cond.component';
+import { FacebookModule } from 'ngx-facebook';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
@@ -135,6 +136,7 @@ import { InviteService } from './tripview/invite-members-component/invite.servic
 
 	AgmCoreModule.forRoot(googleConfig),
 	AngularFireModule.initializeApp(firebaseConfig),
+	FacebookModule.forRoot()
 
   ],
   providers: [
