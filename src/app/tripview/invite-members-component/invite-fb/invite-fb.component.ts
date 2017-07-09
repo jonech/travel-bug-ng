@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
+import { Friend } from '../../../_model/friend';
+
 @Component({
   selector: 'app-invite-fb',
   templateUrl: './invite-fb.component.html',
   styleUrls: ['./invite-fb.component.css']
 })
 export class InviteFbComponent implements OnInit {
+
+  friends: Friend[];
 
   constructor(private fb: FacebookService) {
 
@@ -24,20 +28,24 @@ export class InviteFbComponent implements OnInit {
 
   ngOnInit() {
     this.fb.getLoginStatus()
-    .then((succ)=>{
-      console.log();
-      
-      console.log(this.fb.api(
-        "/me/friends",
-        'get',
-        null
-        ));
-      
+    .then(()=>{
+      this.findAllFriends();
     })
     .catch((error)=>{
       console.log(error);
     })
 
+  }
+
+  private findAllFriends() {
+     this.fb.api("/me/friends",'get',null)
+      .then((friendsList)=>{
+        this.friends = friendsList.data;  
+        console.log(this.friends);
+      })
+      .catch((error)=>{
+        console.log(error);
+      });
   }
 
 }

@@ -1,3 +1,6 @@
-<p>
-  invite-fb works!
-</p>
+<p>{{friends?.length}}</p>
+<ul>
+  <li *ngFor="let friend of friends">
+    {{friend.name}}
+  </li>
+</ul>

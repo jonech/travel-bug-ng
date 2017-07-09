@@ -66,6 +66,8 @@ import { InviteByemailComponent } from './tripview/invite-members-component/invi
 import { InviteFbComponent } from './tripview/invite-members-component/invite-fb/invite-fb.component';
 import { InviteService } from './tripview/invite-members-component/invite.service';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 
 @NgModule({
   declarations: [
