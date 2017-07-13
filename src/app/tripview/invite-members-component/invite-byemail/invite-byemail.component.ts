@@ -24,7 +24,9 @@ export class InviteByemailComponent implements OnInit {
     private firebase: AngularFire,
     private auth: AngularFireAuth,
     private inviteService: InviteService
-    ) {}
+    ) {
+      
+    }
 
   ngOnInit() {
     this.auth.subscribe(

@@ -28,6 +28,7 @@ export class AuthService {
 
 			let emailTemp: string = resolve.auth.providerData[0].email;
 			console.log(emailTemp);
+			console.log(fbUser.facebookUserId );
 			
 			if(emailTemp==null){
 				fbUser.email = "No Email Added";
