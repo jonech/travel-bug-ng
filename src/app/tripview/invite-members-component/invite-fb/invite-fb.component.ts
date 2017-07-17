@@ -29,14 +29,14 @@ export class InviteFbComponent implements OnInit {
     .catch(()=>console.log("initialized unsuccessfully")
     );
 
-    af.auth.subscribe(auth => {
-      af.database.object(`/User/${auth.uid}/UserDetails/facebookUserId`)
-        .subscribe(fbUserId=> {
-          this.fbUserId = fbUserId.$value;      
-        });
-		})
+    // af.auth.subscribe(auth => {
+    //   af.database.object(`/User/${auth.uid}/UserDetails/facebookUserId`)
+    //     .subscribe(fbUserId=> {
+    //       this.fbUserId = fbUserId.$value;      
+    //     });
+		// })
 
-    console.log("currentFbUserId: "+this.fbUserId);
+    // console.log("currentFbUserId: "+this.fbUserId);
     
 
   }
@@ -61,10 +61,11 @@ export class InviteFbComponent implements OnInit {
   }
 
   private findAllFriends() {
+
      this.fb.api('/me/friends','get',{access_token: this.accessToken})
       .then((friendsList)=>{
         this.friends = friendsList.data;  
-        console.log("access friends: "+this.friends);
+        console.log(this.friends);
       })
       .catch((error)=>{
         console.log(error);
