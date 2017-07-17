@@ -68,6 +68,7 @@ import { InviteService } from './tripview/invite-members-component/invite.servic
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import { FriendsListComponent } from './tripview/invite-members-component/invite-fb/friends-list/friends-list.component';
 
 @NgModule({
   declarations: [
@@ -127,6 +128,8 @@ import 'rxjs/add/operator/do';
 	InviteByemailComponent,
 
 	InviteFbComponent,
+
+	FriendsListComponent,
 
   ],
   imports: [

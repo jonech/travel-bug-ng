@@ -57,7 +57,6 @@ export class InviteByemailComponent implements OnInit {
             //console.log(this.uid);
             this.invitationForm.nativeElement.reset();
             alert("Invite "+ this.email+" successfully.")
-            
           })
         }else{
           this._error_flag = true;

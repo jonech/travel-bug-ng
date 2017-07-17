@@ -54,5 +54,5 @@
 	</div>
 </div>
 <div *ngIf="_isInvitationOpen">
-	<app-invite-members-component (closeSplash)="closeInvitation()"></app-invite-members-component>
+	<app-invite-members-component (closeSplash)="closeInvitation()" [tripId]="_tripId"></app-invite-members-component>
 </div>

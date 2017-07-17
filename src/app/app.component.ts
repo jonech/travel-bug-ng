@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFire } from 'angularfire2';
-
+import { FacebookService } from 'ngx-facebook';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ export class AppComponent
 	constructor(
 		private firebase: AngularFire,
 		private router: Router,
+		private fb: FacebookService
 	)
 	{
 		firebase.auth.subscribe(auth => {
@@ -34,6 +35,6 @@ export class AppComponent
 		this.firebase.auth.logout();
 		console.log("Log out successfully");
 		
-		this.router.navigate(['/']);
+ 		this.router.navigate(['/']);
 	}
 }

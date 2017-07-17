@@ -55,11 +55,15 @@ export class DayTripListComponent implements OnInit, OnDestroy
 				this.inviteMembers(uid);
 			}
 		);
+
+		
 	}
 
 	OpenInvitation() 
 	{
 		this._isInvitationOpen = true;
+		//console.log(this._tripId);
+		
 	}
 
 	closeInvitation()

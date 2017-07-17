@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./invite-members-component.component.css']
 })
 export class InviteMembersComponentComponent implements OnInit {
+  @Input() tripId:string;
   @Output() closeSplash = new EventEmitter<any>();
   constructor(
     private router: Router,

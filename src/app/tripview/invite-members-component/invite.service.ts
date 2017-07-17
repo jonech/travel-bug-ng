@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
@@ -13,5 +13,7 @@ export class InviteService {
               private fb: FacebookService) { }
 
   newMember = new Subject();
+
+  tripId = new EventEmitter<string>();
 
 }

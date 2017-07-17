@@ -3,12 +3,14 @@ import { Router } from '@angular/router';
 import { FbUser } from '../_model/fb-user.model';
 import { ProfileDefaultBase64 } from '../_util/string.util';
 import { AngularFire, FirebaseObjectObservable, AuthProviders, AuthMethods } from 'angularfire2'
+import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
 
 @Injectable()
 export class AuthService {
     constructor(
 		private _firebase: AngularFire,
 		private _router: Router,
+		private fb: FacebookService
 	) {}
     //TODO: change default photo 
 	LoginWithFacebook()
@@ -18,6 +20,8 @@ export class AuthService {
 			method: AuthMethods.Popup
 		})
 		.then(resolve => {
+			console.log(resolve);
+			
 			let fbUser: FbUser = new FbUser();
 
 			let fullName: string[] = resolve.auth.providerData[0].displayName.split(" ");

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
 import { Friend } from '../../../_model/friend';
 import { AngularFire } from 'angularfire2';
+import { InviteService } from '../../invite-members-component/invite.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-invite-fb',
@@ -9,17 +11,20 @@ import { AngularFire } from 'angularfire2';
   styleUrls: ['./invite-fb.component.css']
 })
 export class InviteFbComponent implements OnInit {
-
+  private paramSub: any;
   friends: Friend[];
   accessToken:string;
   fbUserId: string;
+  tripId: string;
 
   constructor(
     private fb: FacebookService,
-    private af: AngularFire) {
+    private af: AngularFire,
+    private inviteService: InviteService,
+    private route: ActivatedRoute) {
 
     const params: InitParams = {
-      appId            : '306096826434287',
+      appId            : '527503254109672',
       xfbml            : true,
       version          : 'v2.7'
     };
@@ -36,12 +41,14 @@ export class InviteFbComponent implements OnInit {
     //     });
 		// })
 
-    // console.log("currentFbUserId: "+this.fbUserId);
-    
-
+    //console.log("currentFbUserId: "+this.fbUserId);
   }
 
   ngOnInit() {
+    this.paramSub = this.route.parent.params.subscribe(params => {
+      this.tripId = params['id'];
+    });
+
     this.fb.getLoginStatus()
     .then((suc)=>{
       if(suc.status==='connected') {
@@ -71,4 +78,5 @@ export class InviteFbComponent implements OnInit {
         console.log(error);
       });
   }
+
 }
