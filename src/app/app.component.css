@@ -8,3 +8,17 @@ li {
 .link:hover {
     color: lightpink;
 }
+
+.static-top {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background-color: white;
+    border-bottom: black solid 1px;
+    z-index: 1;
+}
+
+#content {
+    margin-top: 50px;
+}
