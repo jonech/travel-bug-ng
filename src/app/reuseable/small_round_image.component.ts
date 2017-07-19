@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
-import { MapsAPILoader } from 'angular2-google-maps/core'
+//import { MapsAPILoader } from 'angular2-google-maps/core'
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
 	moduleId: module.id,

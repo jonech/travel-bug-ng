@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
 import { GoogleService } from '../_service/google.service';
-import { GetCurrentDateTime } from '../_util/datetime.util';
+import { GetCurrentDateTime, GetTimeSort } from '../_util/datetime.util';
 
 @Component({
 	selector: 'activity-detail',
@@ -84,9 +84,13 @@ export class ActivityDetailComponent implements OnInit
 			this.firstclick = false;
 			return;
 		}
-
+        //console.log(event.target);
 		if (!this.container.nativeElement.contains(event.target)) {
-			this.closePopUp();
+            // console.log(event.target);
+            // console.log("closing!!!");
+            // remove closing pop up when clicking outside region
+            // not working well when clicking on google place dropdown
+			//this.closePopUp();
 		}
 	}
 
@@ -137,14 +141,28 @@ export class ActivityDetailComponent implements OnInit
         }
     }
 
+    HandleTimeChange(changes)
+    {
+        var time = changes;
+        var timesort = GetTimeSort(time);
+        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({time: time, timeSort: timesort});
+        //console.log(changes);
+    }
+
     HandleTitleChange(changes)
     {
         this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({eventName: changes});
     }
 
+    HandleLocationChange(changes)
+    {
+        //console.log(changes);
+        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/location`).update(changes);
+    }
+
     HandleDescriptionChange(changes)
     {
-        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({description: changes});
+        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/location`).update({description: changes});
     }
 
     HandleCommentCreate(comment)

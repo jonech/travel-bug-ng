@@ -1,0 +1,29 @@
+
+.time > input[type="text"] {
+    padding: 2px;
+    font-size: 15px;
+    width: 100%;
+}
+
+button {
+    margin: 5px 0px;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: white;
+}
+
+.save {
+    background-color: #24b20e;
+}
+.save:hover {
+    background-color: #1c910a;
+}
+
+.cancel {
+    background-color: #db5757;
+}
+.cancel:hover {
+    background-color: #a02e2e;
+}

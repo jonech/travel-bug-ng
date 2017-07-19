@@ -1,7 +1,8 @@
 import { Component, Input, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { DomSanitizer  } from '@angular/platform-browser';
 import { FirebaseListObservable, AngularFire } from 'angularfire2'
-import { MapsAPILoader } from 'angular2-google-maps/core';
+//import { MapsAPILoader } from 'angular2-google-maps/core';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
 	selector: 'location-row',
@@ -41,7 +42,6 @@ import { MapsAPILoader } from 'angular2-google-maps/core';
 				</div>
 			</div>
 		</a>
-
 	`,
 	styleUrls: ['./location_row.component.css'],
 })

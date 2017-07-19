@@ -21,11 +21,26 @@
       </div>
 
       <div class="section group">
-        <div id="time">Time: {{ (_activity | async)?.time }}</div>
-        <div id="location_name">Location:
-          <i class="fa fa-map-marker" aria-hidden="true"></i>
-          {{ (_activity | async)?.location.name }}
+        <div id="time">Time:
+          <click-edit-time
+            [permission]="true"
+            [id]="'time'"
+            [value]="(_activity | async)?.time"
+            [classstyle]="'time'"
+            (OnSave)="HandleTimeChange($event)">
+          </click-edit-time>
         </div>
+
+        <div id="location_name">Location:
+          <click-edit-place
+            [permission]="true"
+            [id]="'location'"
+            [value]="(_activity | async)?.location.name"
+            [classstyle]="'location'"
+            (OnSave)="HandleLocationChange($event)">
+          </click-edit-place>
+        </div>
+
         <div id="description">Description<br>
           <click-edit-long-text
             [permission]="true"

@@ -2,7 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef, NgZone, Input } from '@angula
 import { FormControl } from '@angular/forms';
 
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import { MapsAPILoader } from 'angular2-google-maps/core';
+//import { MapsAPILoader } from 'angular2-google-maps/core';
+import { MapsAPILoader } from '@agm/core';
 import { Location } from '../_model/location.model';
 
 import { GetTimeSort } from '../_util/datetime.util';

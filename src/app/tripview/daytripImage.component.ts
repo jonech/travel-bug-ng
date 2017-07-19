@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
-import { MapsAPILoader } from 'angular2-google-maps/core';
+//import { MapsAPILoader } from 'angular2-google-maps/core';
+import { MapsAPILoader } from '@agm/core';
 //import { GoogleService } from '../_service/google.service';
 
 @Component({

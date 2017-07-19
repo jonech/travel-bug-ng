@@ -1,0 +1,40 @@
+.editable:hover {
+    outline: 1px #333333 solid;
+}
+
+.location > input[type="text"] {
+    padding: 2px;
+    font-size: 15px;
+    width: 100%;
+}
+
+button {
+    margin: 5px 0px;
+    padding: 9px;
+    border: none;
+    border-radius: 5px;
+    font-size: 15px;
+    color: white;
+}
+
+.fa {
+    padding-right: 5px;
+}
+
+.fa-map-marker {
+    color: #ff6666;
+}
+
+.save {
+    background-color: #24b20e;
+}
+.save:hover {
+    background-color: #1c910a;
+}
+
+.cancel {
+    background-color: #db5757;
+}
+.cancel:hover {
+    background-color: #a02e2e;
+}
