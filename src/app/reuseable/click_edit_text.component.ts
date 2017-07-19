@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     moduleId: module.id,
@@ -23,7 +23,7 @@ import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild }
     `
 })
 
-export class ClickEditTextComponent implements OnInit
+export class ClickEditTextComponent implements OnInit, OnChanges
 {
     @Input('permission') permission: boolean;
     @Input('value') value: string;
@@ -41,15 +41,25 @@ export class ClickEditTextComponent implements OnInit
     constructor()
     {
         this.permission = true;
-        this.value = "none";
+        this.value = "Write a Title...";
         this.editing = false;
     }
 
     ngOnInit()
     {
-        if (this.permission) {
+        if (this.value == null || this.value == '') {
+            this.value = "Write a Title...";
         }
     }
+
+    public ngOnChanges(changes: SimpleChanges)
+	{
+		if (changes['value']) {
+			if (this.value == null || this.value == '') {
+				this.value = "Write a Title...";
+			};
+		}
+	}
 
     ToggleEdit()
     {

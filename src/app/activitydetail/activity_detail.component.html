@@ -17,7 +17,7 @@
 		<div class="modal-body">
 
       <div class="section group">
-        <google-place-image  [placeId]="(_activity|async)?.location.id"></google-place-image>
+        <google-place-image  [placeId]="(_activity|async)?.location?.id"></google-place-image>
       </div>
 
       <div class="section group">
@@ -35,7 +35,7 @@
           <click-edit-place
             [permission]="true"
             [id]="'location'"
-            [value]="(_activity | async)?.location.name"
+            [value]="(_activity | async)?.location?.name"
             [classstyle]="'location'"
             (OnSave)="HandleLocationChange($event)">
           </click-edit-place>

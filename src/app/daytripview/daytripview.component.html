@@ -32,25 +32,15 @@
 	</div>
 
 
-	<div class="col form-col">
-    <!-- create activity form -->
+	<div class="col">
     <div class="section group">
-		  <location-form [dayTripId]="_dayTripId"></location-form>
-    </div>
-
-    <!-- create transport form-->
-    <div class="section group">
-      <transport-form></transport-form>
+      <button class="form-button" (click)="AddActivity()"><i class="fa fa-plus" aria-hidden="true"></i><br>Add Activity</button>
     </div>
 
     <div class="section group">
-      <div class="col">
-        <button><i class="fa fa-plus" aria-hidden="true"></i><br>Add Activity</button>
-      </div>
-      <div class="col">
-        <button><i class="fa fa-plus" aria-hidden="true"></i><br>Add Transport</button>
-      </div>
+      <button class="form-button"><i class="fa fa-plus" aria-hidden="true"></i><br>Add Transport</button>
     </div>
+
 	</div>
 </div>
 

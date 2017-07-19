@@ -72,11 +72,23 @@
     padding: 20px;
 }
 
-.form-col {
-    background-color: #8c8c8c;
-    border-radius: 5px;
-}
 
 button {
     background-color: #41E2B0;
+}
+
+.form-button {
+    font-size: 20px;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    width: 180px;
+    margin: 10px;
+}
+.form-button:hover {
+    background-color: #ff8080;
+}
+.form-button:focus {
+    border: none;
 }

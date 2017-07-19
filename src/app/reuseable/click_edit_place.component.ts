@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild, NgZone, SimpleChanges, OnChanges } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
 import { GoogleLocation } from '../_model/googleLocation.model';
 
@@ -30,7 +30,7 @@ import { GoogleLocation } from '../_model/googleLocation.model';
     `
 })
 
-export class ClickEditPlaceComponent implements OnInit
+export class ClickEditPlaceComponent implements OnInit, OnChanges
 {
     @Input('permission') permission: boolean;
     @Input('value') value: string;
@@ -50,10 +50,26 @@ export class ClickEditPlaceComponent implements OnInit
     constructor(
         private googleApiLoader: MapsAPILoader,
 		private ngZone: NgZone
-    ) { }
+    )
+    {
+        this.value = "Find a location";
+    }
+
+    ngOnChanges(changes: SimpleChanges)
+    {
+        if (changes['value']) {
+			if (this.value == null || this.value == '') {
+				this.value = "Find a location";
+			};
+		}
+    }
 
     ngOnInit()
     {
+        if (this.value == null || this.value == '') {
+            this.value = "Find a location";
+        }
+
         this.googleApiLoader.load().then(() => {
 			let autocomplete = new google.maps.places.Autocomplete(this.locationElement.nativeElement, {
 				types: ["establishment"]

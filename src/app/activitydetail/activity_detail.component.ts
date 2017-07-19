@@ -46,12 +46,15 @@ export class ActivityDetailComponent implements OnInit
 	ngOnInit()
 	{
 		this.route.parent.params.subscribe(params => {
+            console.log(params['dayTripId']);
+            console.log(params['tripId']);
 			this.dayTripId = params['dayTripId'];
 			this.tripId = params['tripId'];
 		});
 
 		this.route.params.subscribe(params => {
 			this.activityId = params['activityId'];
+            console.log(params['activityId']);
 			this._activity = this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`);
 
 			this._comments = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments`)
@@ -162,7 +165,7 @@ export class ActivityDetailComponent implements OnInit
 
     HandleDescriptionChange(changes)
     {
-        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/location`).update({description: changes});
+        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({description: changes});
     }
 
     HandleCommentCreate(comment)

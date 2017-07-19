@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
     selector: 'click-edit-long-text',
@@ -24,7 +24,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef }
     `
 })
 
-export class ClickEditLongTextComponent implements OnInit
+export class ClickEditLongTextComponent implements OnInit, OnChanges
 {
     @Input('permission') permission: boolean;
     @Input('value') value: string;
@@ -42,13 +42,26 @@ export class ClickEditLongTextComponent implements OnInit
     constructor()
     {
         this.permission = true;
-        this.value = "none";
+        this.value = "Write a description...";
         this.editing = false;
     }
 
 
     ngOnInit()
-    {}
+    {
+        if (this.value == null || this.value == '') {
+            this.value = "Write a description...";
+        }
+    }
+
+    public ngOnChanges(changes: SimpleChanges)
+	{
+		if (changes['value']) {
+			if (this.value == null || this.value == '') {
+				this.value = "Write a description...";
+			};
+		}
+	}
 
     ToggleEdit()
     {
