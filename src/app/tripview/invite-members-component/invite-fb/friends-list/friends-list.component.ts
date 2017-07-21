@@ -14,7 +14,9 @@ export class FriendsListComponent implements OnInit {
   @Input() tripId: string;
   userId: string;
   _Inviteduser: FirebaseObjectObservable<any>;
-  _hasInvitedUserId: string;
+  _hasInvitedUser1: boolean;
+  _hasInvitedUser2: boolean;
+  _hasInvited: boolean = true;
   constructor(
     private firebase: AngularFire,
     private sanitizer: DomSanitizer,
@@ -40,9 +42,36 @@ export class FriendsListComponent implements OnInit {
         snapshots.forEach(snapshot=>{
           console.log(snapshot.key);
           this.userId = snapshot.key;
-
+          console.log("all facebook friends id: "+this.userId);
+          console.log("tripid: "+this.tripId);
+          
           this.firebase.database.object(`/Trip/${this.tripId}/User/Regular/${this.userId}`)
-          .subscribe(user => this._hasInvitedUserId = user.$key);
+          .subscribe((user1) => {
+            if(user1.$value===null){
+              this._hasInvitedUser1 = false;             
+            }else{
+              this._hasInvitedUser1 = true;
+            }
+            console.log(this._hasInvitedUser1);
+          });
+
+          this.firebase.database.object(`/Trip/${this.tripId}/User/Admin/${this.userId}`)
+          .subscribe((user2) => {
+            if(user2.$value===null){
+              this._hasInvitedUser2 = false;                          
+            }else{
+              this._hasInvitedUser2 = true;
+            }
+            console.log(this._hasInvitedUser2);
+          });
+
+          // if((!this._hasInvitedUser1) && (!this._hasInvitedUser2)) {
+          //   this._hasInvited = false;
+          // }else{
+          //   this._hasInvited = true;
+          // }
+          // console.log(this._hasInvited);
+          
           
           this._Inviteduser = this.firebase.database.object(`/User/${this.userId}/UserDetails`);
         })
