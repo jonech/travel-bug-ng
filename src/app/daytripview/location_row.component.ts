@@ -8,18 +8,19 @@ import { MapsAPILoader } from '@agm/core';
 	selector: 'location-row',
 	template:
 	`
-		<a [routerLink]="[{ outlets: { 'pop-up':[_activityId] } }]">
-			<div class="section group row">
-				<div id="time" class="span_10 col">{{ _location.time }}</div>
 
-				<div #image [style.background-image]="getBackgroundImageUrl()" class="col circle-md">
-				</div>
+        <div class="section group row">
+            <a [routerLink]="[{ outlets: { 'pop-up':[_activityId] } }]">
+                <div id="time" class="span_10 col">{{ _location.time }}</div>
 
-				<div class="col span_70 text-col">
+                <div #image [style.background-image]="getBackgroundImageUrl()" class="col circle-md">
+                </div>
+
+                <div class="col span_70 text-col">
                     <div class="section group text-row">
                         <div class="title">
                             <span id="eventname">{{ _location.eventName }}</span>
-                            <span id="location">{{ _location.location.name }}</span>
+                            <span id="location">{{ _location.location?.name }}</span>
                         </div>
                         <div id="description">
                             {{ _location.description }}
@@ -39,9 +40,10 @@ import { MapsAPILoader } from '@agm/core';
                             {{ (_comments | async)?.length }}
                         </span>
                     </div>
-				</div>
-			</div>
-		</a>
+                </div>
+            </a>
+        </div>
+
 	`,
 	styleUrls: ['./location_row.component.css'],
 })
@@ -72,7 +74,7 @@ export class LocationRowComponent implements OnInit
 
 	ngOnInit()
 	{
-		if (this._location.location.id != null)
+		if (this._location.location != null && this._location.location.id != null)
 			this.getImageUrl(this._location.location.id, this.image);
 
 		this._comments = this.firebase.database.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`)

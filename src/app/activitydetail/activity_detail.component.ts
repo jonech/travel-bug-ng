@@ -170,17 +170,39 @@ export class ActivityDetailComponent implements OnInit
 
     HandleCommentCreate(comment)
     {
-        this.firebase.auth.subscribe(user => {
-            // push to comment table
-            var tempComment = this.firebase.database.list(`/Comment`).push({
-                activityId : this.activityId, // match with corresponding activity
-                comment : comment,
-                date : GetCurrentDateTime(),
-                userId: user.uid,
-            });
+        this.CheckLocationNull((location) => {
+            if (location) {
+                this.firebase.auth.subscribe(user => {
+                    // push to comment table
 
-            // add to daytrip as reference
-            this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments/${tempComment.key}`).set(user.uid);
+                    var tempComment = this.firebase.database.list(`/Comment`).push({
+                        activityId : this.activityId, // match with corresponding activity
+                        comment : comment,
+                        date : GetCurrentDateTime(),
+                        userId: user.uid,
+                    });
+
+                    // add to daytrip as reference
+                    this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments/${tempComment.key}`).set(user.uid);
+                });
+            }
+        });
+    }
+
+
+    /* need activity to have a location, otherwise wont be listed out on list because thats how we differentiate location and transport */
+    CheckLocationNull(x: (location: boolean) => void)
+    {
+        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/location`, {
+            preserveSnapshot: true
+        }).subscribe(snapshot => {
+            console.log(snapshot.val());
+            if (snapshot.val() == null || snapshot.val() == '') {
+                x(false);
+            }
+            else {
+                x(true);
+            }
         })
     }
 }

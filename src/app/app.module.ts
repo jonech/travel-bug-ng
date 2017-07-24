@@ -18,6 +18,7 @@ import { googleConfig } from '../environments/google.config';
 import { AngularFireModule } from 'angularfire2';
 //import { AgmCoreModule } from "angular2-google-maps/core"
 import { AgmCoreModule } from '@agm/core';
+import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
 
@@ -135,6 +136,7 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 
 	AgmCoreModule.forRoot(googleConfig),
 	AngularFireModule.initializeApp(firebaseConfig),
+    DragulaModule,
 
   ],
   providers: [
