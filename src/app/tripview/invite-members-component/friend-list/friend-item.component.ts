@@ -1,22 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
-import { Friend } from '../../../../_model/friend';
-import { InviteService } from '../../../invite-members-component/invite.service';
+import { Friend } from '../../../_model/friend';
+import { InviteService } from '../../invite-members-component/invite.service';
 @Component({
-  selector: 'friends-list',
-  templateUrl: './friends-list.component.html',
-  styleUrls: ['./friends-list.component.css']
+  selector: 'friend-item',
+  templateUrl: './friend-item.component.html',
+  styleUrls: ['./friend-item.component.css']
 })
-export class FriendsListComponent implements OnInit {
+export class FriendItemComponent implements OnInit {
 
   @Input() friend: Friend;
   @Input() tripId: string;
   userId: string;
   _Inviteduser: FirebaseObjectObservable<any>;
-  _hasInvitedUser1: boolean;
-  _hasInvitedUser2: boolean;
-  _hasInvited: boolean = true;
+  _hasInvitedUser1: boolean = true;
+  _hasInvitedUser2: boolean = false;
   constructor(
     private firebase: AngularFire,
     private sanitizer: DomSanitizer,

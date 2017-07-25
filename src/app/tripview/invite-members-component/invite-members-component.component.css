@@ -53,27 +53,27 @@
     height: 350px;
     position: absolute;
     top: 80%;
-    left: 69%;
+    left: 50%;
+    /* left: 69%; */
     margin: -350px 0 0 -330px;
     color: black;
     font-size: 18px;
 }
 
-li {
-   cursor: pointer;
-   list-style-type: none;
-}
-.link{
-    font-size: 14px;
-    color: black;
-}
-.link:hover {
-    color: #80c3f7;
-}
-.active {
-     color: #1D80CF;
-     text-decoration: underline;
-}
 .title {
     margin-left: 60px;
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}
+
+
+.help-block {
+    font-size: 12px;
+    color: red;
+}
+
+.invitationForm {
+    padding: 40px 0px 0px -40px;
 }

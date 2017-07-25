@@ -62,13 +62,12 @@ import { CommentComponent } from './daytripview/comment.component';
 
 import { DetailViewComponent } from './activitydetail/detail_view.component';
 import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
-import { InviteByemailComponent } from './tripview/invite-members-component/invite-byemail/invite-byemail.component';
-import { InviteFbComponent } from './tripview/invite-members-component/invite-fb/invite-fb.component';
 import { InviteService } from './tripview/invite-members-component/invite.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
-import { FriendsListComponent } from './tripview/invite-members-component/invite-fb/friends-list/friends-list.component';
+import { FriendListComponent } from './tripview/invite-members-component/friend-list/friend-list.component';
+import { FriendItemComponent } from './tripview/invite-members-component/friend-list/friend-item.component';
 
 @NgModule({
   declarations: [
@@ -122,14 +121,9 @@ import { FriendsListComponent } from './tripview/invite-members-component/invite
 
 	// activity detail
 	DetailViewComponent,
-
 	InviteMembersComponentComponent,
-
-	InviteByemailComponent,
-
-	InviteFbComponent,
-
-	FriendsListComponent,
+	FriendListComponent,
+	FriendItemComponent
 
   ],
   imports: [
