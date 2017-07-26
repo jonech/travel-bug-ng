@@ -91,3 +91,31 @@
 #email {
     width: 270px;
 }
+
+.att-list{
+	overflow: auto;
+	height:200px;
+	width:200px;
+	padding:34px 0 0 100px;
+	/*border-left: 1px solid #EDEDED;*/
+}
+
+.att-list ul li{
+	list-style: none;
+	font-size: 14px;
+	font-weight: 400;
+	
+	color: black;
+	text-transform: none;
+}
+
+.att-list ul{
+	margin-top: 0;
+	margin-left: -40px;
+	list-style-type: none;
+}
+
+.remove {
+    margin: 8px 0 0 10px;
+}
+

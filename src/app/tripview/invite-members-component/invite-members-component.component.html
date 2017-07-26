@@ -28,7 +28,7 @@
 					<div class="form-group">
 									<button 
 										class="invite" 
-										[disabled]="!input.valid" 
+										[disabled]="!input.valid && !hasChosenFriend" 
 										(click)="inviteMembers(input); false">Invite
 									</button>
 					</div>
@@ -37,13 +37,13 @@
 				<button class="btn btn-lg btn-outline" (click)="closeInvitation()">Cancel</button>
 			</div>
 		</div>
-		<div class="splash-content3 text-center">
+		<div class="splash-content3 text-center att-list">
 				<ul>
-					<li *ngFor="let friend of friends">
-						<!-- <chosen-friend [tripId]="tripId"></chosen-friend> -->
-						<button class="btn btn-lg btn-outline" (click)="remove(chosenFriend)">Remove</button>
+					<li *ngFor="let chosenFriend of chosenFriends">
+						<chosen-friend [chosenFriend]="chosenFriend"></chosen-friend>
 					</li>					
 				</ul>
 			</div>
 	</div>
 </div>
+

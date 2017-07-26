@@ -1,3 +1,6 @@
-<p>
-  chosen-friend works!
-</p>
+<div class="clicked-user">
+		<img class="circle-sm" *ngIf="(chosenFriend | async)?.profileImage" 
+    [src]="sanitize('data:image/jpg;base64,' + (chosenFriend | async)?.profileImage)">
+    <p class="friend-name">{{(chosenFriend | async)?.firstName}} {{(chosenFriend | async)?.lastName}}</p>
+    <button class="remove" (click)="remove(chosenFriend)">Remove</button>
+</div>

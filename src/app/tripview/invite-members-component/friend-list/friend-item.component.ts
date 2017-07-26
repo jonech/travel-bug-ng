@@ -16,7 +16,7 @@ export class FriendItemComponent implements OnInit {
   _Inviteduser: FirebaseObjectObservable<any>;
   _hasInvitedUser1: boolean ;
   _hasInvitedUser2: boolean ;
-  _isChecked:boolean=false;
+  @Input() _isChecked:boolean=false;
   
   constructor(
     private firebase: AngularFire,
@@ -27,7 +27,12 @@ export class FriendItemComponent implements OnInit {
   ngOnInit() {
     //console.log(this.friend.id);
     console.log("trip id: "+this.tripId);
-    
+    this.inviteService.isChecked.subscribe(
+      (isChecked:boolean)=>{
+        this._isChecked=isChecked;
+      }
+    );
+
     this.findAllFbFriends();
   }
 
@@ -81,20 +86,23 @@ export class FriendItemComponent implements OnInit {
     if(!(this._hasInvitedUser2 || this._hasInvitedUser1)) {
       if(this._isChecked){
         this._isChecked = false;
+        this.inviteService.deleteChosenFriend(this._Inviteduser);
       }else{
         this._isChecked = true;
+        this.inviteService.addChosenFriend(this._Inviteduser);
       }
-      console.log(this._isChecked);
     }  
   }
 
   checkbox(){
     if(this._isChecked){
       this._isChecked = false;
+      this.inviteService.deleteChosenFriend(this._Inviteduser);
     }else{
       this._isChecked = true;
+      this.inviteService.addChosenFriend(this._Inviteduser);
     } 
-    console.log(this._isChecked);  
   }
+
 
 }

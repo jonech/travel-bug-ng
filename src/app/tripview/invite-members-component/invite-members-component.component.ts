@@ -1,5 +1,5 @@
-import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
-import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
+import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef} from '@angular/core';
+import { AngularFire, FirebaseListObservable, AngularFireAuth, FirebaseObjectObservable } from 'angularfire2';
 import { NgForm } from '@angular/forms';
 import { InviteService } from './invite.service';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
@@ -18,11 +18,11 @@ export class InviteMembersComponentComponent implements OnInit {
   tripId:string;
   allFriends: Friend[];
   filtered: Friend[];
-  chosenFriends: Friend[];
- 
+  chosenFriends: FirebaseObjectObservable<any>[] = [];
   myUid: string;
   accessToken:string;
   fbUserId: string;
+  hasChosenFriend:boolean;
 
   private paramSub: any;
   uid: string;
@@ -30,7 +30,6 @@ export class InviteMembersComponentComponent implements OnInit {
   invitedUser: FirebaseListObservable<any[]>;
   _error: string = "";
   _error_flag: boolean = false;
-  matchname:boolean = false;
 
     constructor(
     private firebase: AngularFire,
@@ -78,6 +77,12 @@ export class InviteMembersComponentComponent implements OnInit {
     .catch((error)=>{
       console.log(error);
     })    
+
+    this.chosenFriends = this.inviteService.getChosenFriends();
+
+    this.inviteService.isChecked.subscribe((checked:boolean)=>{
+      this.hasChosenFriend = checked;
+    });    
   }
 
   private findAllFriends() {
@@ -124,6 +129,7 @@ export class InviteMembersComponentComponent implements OnInit {
   }
 
   closeInvitation() {
+    this.inviteService.clearChosenFriend();
     this.location.back();
   }
 
