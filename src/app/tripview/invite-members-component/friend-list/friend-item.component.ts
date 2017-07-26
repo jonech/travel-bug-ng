@@ -14,8 +14,10 @@ export class FriendItemComponent implements OnInit {
   @Input() tripId: string;
   userId: string;
   _Inviteduser: FirebaseObjectObservable<any>;
-  _hasInvitedUser1: boolean = true;
-  _hasInvitedUser2: boolean = false;
+  _hasInvitedUser1: boolean ;
+  _hasInvitedUser2: boolean ;
+  _isChecked:boolean=false;
+  
   constructor(
     private firebase: AngularFire,
     private sanitizer: DomSanitizer,
@@ -62,26 +64,37 @@ export class FriendItemComponent implements OnInit {
               this._hasInvitedUser2 = true;
             }
             console.log(this._hasInvitedUser2);
-          });
+          });     
 
-          // if((!this._hasInvitedUser1) && (!this._hasInvitedUser2)) {
-          //   this._hasInvited = false;
-          // }else{
-          //   this._hasInvited = true;
-          // }
-          // console.log(this._hasInvited);
-          
-          
+
           this._Inviteduser = this.firebase.database.object(`/User/${this.userId}/UserDetails`);
         })
       });
-      
-
   }
 
   	sanitize(url: string)
 	{
 		return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-	}
+  }
+  
+  onCheck() {  
+    if(!(this._hasInvitedUser2 || this._hasInvitedUser1)) {
+      if(this._isChecked){
+        this._isChecked = false;
+      }else{
+        this._isChecked = true;
+      }
+      console.log(this._isChecked);
+    }  
+  }
+
+  checkbox(){
+    if(this._isChecked){
+      this._isChecked = false;
+    }else{
+      this._isChecked = true;
+    } 
+    console.log(this._isChecked);  
+  }
 
 }

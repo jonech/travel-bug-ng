@@ -4,7 +4,8 @@ import { NgForm } from '@angular/forms';
 import { InviteService } from './invite.service';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
 import { Friend } from '../../_model/friend';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-invite-members-component',
@@ -14,9 +15,10 @@ import { ActivatedRoute } from '@angular/router';
 export class InviteMembersComponentComponent implements OnInit {
   @ViewChild('invitForm') invitationForm: ElementRef;
   @Output() closeSplash = new EventEmitter<any>();
-  @Input() tripId:string;
+  tripId:string;
   allFriends: Friend[];
   filtered: Friend[];
+  chosenFriends: Friend[];
  
   myUid: string;
   accessToken:string;
@@ -35,7 +37,9 @@ export class InviteMembersComponentComponent implements OnInit {
     private auth: AngularFireAuth,
     private inviteService: InviteService,
     private route: ActivatedRoute,
-    private facebook: FacebookService ) {
+    private router: Router,
+    private facebook: FacebookService,
+    private location: Location ) {
 
     const params: InitParams = {
       appId            : '527503254109672',
@@ -50,6 +54,9 @@ export class InviteMembersComponentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.paramSub = this.route.parent.params.subscribe(params => {
+      this.tripId = params['id'];
+    })
     this.auth.subscribe(
       auth => {
         if(auth)
@@ -117,7 +124,7 @@ export class InviteMembersComponentComponent implements OnInit {
   }
 
   closeInvitation() {
-    this.closeSplash.emit();
+    this.location.back();
   }
 
 }

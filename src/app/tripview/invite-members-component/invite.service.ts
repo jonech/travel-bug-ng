@@ -13,7 +13,10 @@ export class InviteService {
               private fb: FacebookService) { }
 
   newMember = new Subject();
+  private chosenFriends: Friend[]=[];
 
-  tripId = new EventEmitter<string>();
+  getChosenFriends(){
+    return this.chosenFriends;
+  }
 
 }

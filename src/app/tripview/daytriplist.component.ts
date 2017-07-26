@@ -12,7 +12,6 @@ import { InviteService } from './invite-members-component/invite.service';
 
 export class DayTripListComponent implements OnInit, OnDestroy
 {
-	_isInvitationOpen:boolean = false;
 
 	private paramSub: any;
 	_tripId: string;
@@ -59,17 +58,7 @@ export class DayTripListComponent implements OnInit, OnDestroy
 		
 	}
 
-	OpenInvitation() 
-	{
-		this._isInvitationOpen = true;
-		//console.log(this._tripId);
-		
-	}
 
-	closeInvitation()
-	{
-		this._isInvitationOpen = false;
-	}
 
 	inviteMembers(uid: string) {
 		//console.log(uid);

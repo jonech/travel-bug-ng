@@ -1,6 +1,8 @@
 <div class="clicked-user" *ngIf="(_Inviteduser | async)?.profileImage">
 		<img class="circle-sm"  
 		[src]="sanitize('data:image/jpg;base64,' + (_Inviteduser | async)?.profileImage)">
-    <p class="friend-name">{{friend.name}}</p>
-		<input type="checkbox" [disabled]="(_hasInvitedUser2)||(_hasInvitedUser1)" [checked]="(_hasInvitedUser2)||(_hasInvitedUser1)"/>
+    <a class="friend-name" (click)="onCheck()">{{friend.name}}</a>
+		<input type="checkbox" [disabled]="(_hasInvitedUser2)||(_hasInvitedUser1)" 
+		[checked]="(_hasInvitedUser2)||(_hasInvitedUser1)||(_isChecked)"
+		(change)="checkbox()"/>
 </div>		

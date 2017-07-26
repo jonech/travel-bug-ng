@@ -68,6 +68,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import { FriendListComponent } from './tripview/invite-members-component/friend-list/friend-list.component';
 import { FriendItemComponent } from './tripview/invite-members-component/friend-list/friend-item.component';
+import { ChosenFriendComponent } from './tripview/invite-members-component/chosen-friend/chosen-friend.component';
+
 
 @NgModule({
   declarations: [
@@ -123,8 +125,8 @@ import { FriendItemComponent } from './tripview/invite-members-component/friend-
 	DetailViewComponent,
 	InviteMembersComponentComponent,
 	FriendListComponent,
-	FriendItemComponent
-
+	FriendItemComponent,
+	ChosenFriendComponent,
   ],
   imports: [
     BrowserModule,
