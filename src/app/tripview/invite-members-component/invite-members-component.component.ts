@@ -30,6 +30,7 @@ export class InviteMembersComponentComponent implements OnInit {
   invitedUser: FirebaseListObservable<any[]>;
   _error: string = "";
   _error_flag: boolean = false;
+  matchname:boolean;
 
     constructor(
     private firebase: AngularFire,
@@ -98,16 +99,40 @@ export class InviteMembersComponentComponent implements OnInit {
 
   search(name:string) {
     this.filtered = this.allFriends.filter(friend=>friend.name.toLowerCase().includes(name.toLowerCase()));
+    if(this.filtered.length==0) {
+      this.matchname = false;
+    }else{
+      this.matchname = true;
+    }
   }
 
   inviteMembers(emailAdd: any) {
+    if(emailAdd.valid) {
+      this.inviteByEmail(emailAdd.value);
+    }
     //console.log(emailAdd.value);
-    this.email = emailAdd.value;
+    if(this.chosenFriends.length>0) {
+      this.inviteFbFriends();
+    }
+    this.closeInvitation();
+  }
+
+  inviteFbFriends() {
+    for(let fbFriend of this.chosenFriends) {
+      fbFriend.subscribe( facebookFriend =>{
+        this.inviteByEmail(facebookFriend.email);       
+      });
+    }
+    
+  }
+
+  inviteByEmail(emailAdd:string) {
+    this.email = emailAdd;
     this.invitedUser = this.firebase.database.list('/User', {
       preserveSnapshot: true,
       query: {
         orderByChild: 'UserDetails/email',
-        equalTo: emailAdd.value
+        equalTo: emailAdd
       }
     });
  
@@ -125,7 +150,8 @@ export class InviteMembersComponentComponent implements OnInit {
           this._error_flag = true;
           this._error = 'User email does not exist!';
         }
-      });    
+      }); 
+
   }
 
   closeInvitation() {

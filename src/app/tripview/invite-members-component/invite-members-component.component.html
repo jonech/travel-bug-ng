@@ -20,9 +20,9 @@
 							required
 							pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
 							#input="ngModel"
-							placeholder="email or facebook friend's name"
+							placeholder="type email or facebook friend's name"
 							(keyup)=search(input.value)>
-						<!-- <span class="help-block" *ngIf="(!input.valid && !matchname && input.touched)">Please enter a valid email or a name!</span> -->
+						 <span class="help-block" *ngIf="(!input.valid && !matchname && input.touched)">Please enter a valid email or a name!</span> 
 					</div>			
 					<friend-list [friends]="filtered" [tripId]="tripId"></friend-list>
 					<div class="form-group">
@@ -39,7 +39,7 @@
 		</div>
 		<div class="splash-content3 text-center att-list">
 				<ul>
-					<li *ngFor="let chosenFriend of chosenFriends">
+					<li *ngFor="let chosenFriend of chosenFriends; let i=index">
 						<chosen-friend [chosenFriend]="chosenFriend"></chosen-friend>
 					</li>					
 				</ul>
