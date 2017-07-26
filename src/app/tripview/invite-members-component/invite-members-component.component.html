@@ -1,7 +1,26 @@
 <div class="splash">
     <div class="splash-inner splash-open"> 
-		<div class="splash-content text-center">
-			<h3 class="title">Invite Members</h3>
+		<div class="splash-content text-center title">
+			<div class="tripInfo">
+				<h3>Invite Members</h3>
+				<h4>
+					{{ ( trip | async )?.tripName }}
+				<span style="color:#9F9F9F">{{ ( trip | async )?.startDate }} - {{ ( trip | async )?.endDate }}</span>
+				</h4>
+			</div>
+			<div class="hasInvitedUser">
+				<div class="att-list1 divide">
+					<ul>
+						<li *ngFor="let user of tripRegulars | async">
+							<going-user [goingUserId]="user.$key"></going-user>
+						</li>
+						<li *ngFor="let user of tripAdmins | async">
+							<going-user [goingUserId]="user.$key"></going-user>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
 		</div>
 		<div class="splash-content2 text-center">
 			<div class="invitationForm" >
@@ -38,11 +57,13 @@
 			</div>
 		</div>
 		<div class="splash-content3 text-center att-list">
+			<div class="numberof"><p>Number of inviters: {{numberOfInviters}}</p></div>
 				<ul>
 					<li *ngFor="let chosenFriend of chosenFriends; let i=index">
 						<chosen-friend [chosenFriend]="chosenFriend"></chosen-friend>
 					</li>					
 				</ul>
+				
 			</div>
 	</div>
 </div>

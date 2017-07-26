@@ -32,6 +32,12 @@ export class InviteMembersComponentComponent implements OnInit {
   _error_flag: boolean = false;
   matchname:boolean;
 
+  trip: FirebaseObjectObservable<any>;
+  tripRegulars: FirebaseListObservable<any[]>;
+  tripAdmins: FirebaseListObservable<any[]>;
+
+  numberOfInviters: number;
+
     constructor(
     private firebase: AngularFire,
     private auth: AngularFireAuth,
@@ -84,6 +90,18 @@ export class InviteMembersComponentComponent implements OnInit {
     this.inviteService.isChecked.subscribe((checked:boolean)=>{
       this.hasChosenFriend = checked;
     });    
+
+    this.trip = this.firebase.database.object(`/Trip/${this.tripId}`);
+    this.tripRegulars = this.firebase.database.list(`/Trip/${this.tripId}/User/Regular`);
+    this.tripAdmins = this.firebase.database.list(`/Trip/${this.tripId}/User/Admin`);
+
+    this.numberOfInviters = this.inviteService.getChosenFriends().length;
+    this.inviteService.numberOfInvi.subscribe(
+      (numberOf: number)=>{
+        this.numberOfInviters = numberOf;
+      }
+      
+    );
   }
 
   private findAllFriends() {

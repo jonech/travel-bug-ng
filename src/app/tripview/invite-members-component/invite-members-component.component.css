@@ -43,7 +43,7 @@
     height: 350px;
     position: absolute;
     top: 40%;
-    left: 65%;
+    left: 50%;
     margin: -175px 0 0 -330px;
     color: black;
     font-size: 18px;
@@ -62,6 +62,9 @@
 
 .title {
     margin-left: 60px;
+}
+.subtitle {
+    margin-left: -120px;
 }
 .splash .splash-content3 {
     width: 660px;
@@ -100,22 +103,55 @@
 	/*border-left: 1px solid #EDEDED;*/
 }
 
+.att-list1{
+	overflow:auto;
+	height:70px;
+	width:200px;
+	padding:10px;
+	/*border-left: 1px solid #EDEDED;*/
+}
+
 .att-list ul li{
 	list-style: none;
 	font-size: 14px;
 	font-weight: 400;
 	
 	color: black;
-	text-transform: none;
-}
+    text-transform: none;
 
+}
+.att-list1 ul li{
+	list-style: none;
+	font-size: 14px;
+	font-weight: 400;
+	
+	color: black;
+    text-transform: none;
+}
+.att-list1 ul{
+	margin-top: 0;
+	margin-left: -40px;
+	list-style-type: none;
+}
 .att-list ul{
 	margin-top: 0;
 	margin-left: -40px;
 	list-style-type: none;
 }
-
 .remove {
     margin: 8px 0 0 10px;
 }
 
+.hasInvitedUser {
+   margin: -100px 0 0 400px;
+}
+
+.divide{
+	border-left: 1px solid black;
+	padding-left: 30px;
+}
+
+.numberof {
+    margin: -45px 0 0 30px;
+    font-size: 14px;
+}

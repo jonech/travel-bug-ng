@@ -14,6 +14,7 @@ export class InviteService {
 
   newMember = new Subject();
   isChecked = new Subject();
+  numberOfInvi = new Subject();
   private chosenFriends: FirebaseObjectObservable<any>[] = [];
 
   getChosenFriends(){   
@@ -48,5 +49,6 @@ export class InviteService {
     }else{
       this.isChecked.next(isChecked);
     }
+    this.numberOfInvi.next(this.chosenFriends.length);
   }
 }
