@@ -16,6 +16,7 @@
 	padding:10px;
 	/*border-left: 1px solid #EDEDED;*/
 }
+
 .divide{
 	border-left: 1px solid #EDEDED;
 	padding-left: 30px;
@@ -29,17 +30,20 @@
 	
 }
 
-.att-list li{
+.att-list ul li{
 	list-style: none;
 	font-size: 14px;
 	font-weight: 400;
-	margin-left:-40px;
+	
 	color: black;
 	text-transform: none;
+	float: left;
 }
 
 .att-list ul{
 	margin-top: 0;
+	margin-left: -40px;
+	list-style-type: none;
 }
 
 .trip-details{

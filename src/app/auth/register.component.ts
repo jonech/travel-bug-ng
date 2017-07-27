@@ -5,7 +5,10 @@ import { Router } from '@angular/router';
 import { AngularFire, FirebaseObjectObservable, AuthProviders, AuthMethods } from 'angularfire2'
 
 import { User } from '../_model/user.model';
+import { FbUser } from '../_model/fb-user.model';
 import { ProfileDefaultBase64, EmailRegEx } from '../_util/string.util';
+
+import{ AuthService } from './auth.service';
 
 @Component({
 	selector: 'register',
@@ -20,11 +23,13 @@ export class RegisterComponent implements OnInit
 
 	_userRef: FirebaseObjectObservable<any>;
 	_error: string;
+	
 
 	constructor(
 		private _firebase: AngularFire,
 		private _formBuild: FormBuilder,
 		private _router: Router,
+		private authService: AuthService
 	) {}
 
 	ngOnInit()
@@ -67,19 +72,13 @@ export class RegisterComponent implements OnInit
 		});
 	}
 
+//TODO: change default photo 
 	LoginWithFacebook()
 	{
-		this._firebase.auth.login({
-			provider: AuthProviders.Facebook,
-			method: AuthMethods.Popup
-		})
-		.then(resolve => {
-			//localStorage.setItem('currentUser', )
-		})
-		.catch(error => {
-			console.log(error.message);
-		})
+		this.authService.LoginWithFacebook();
 	}
+
+
 
 	private saveUserDetails(uid:string, user:User)
 	{

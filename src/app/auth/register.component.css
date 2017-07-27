@@ -8,7 +8,6 @@
 
 	width:350px;
 
-
 	margin:20px auto;
 
 	padding:20px 20px 50px 20px;
@@ -44,6 +43,10 @@
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 }
+#form-wrapper .facebook:hover {
+	background-color:#29487d;
+	cursor: pointer;
+}
 
 #form-wrapper .login {
 	-webkit-border-radius: 5px;
@@ -59,6 +62,7 @@
 }
 #form-wrapper .login:hover {
 	background-color: lightgray;
+	cursor: pointer;
 }
 
 #errors {
@@ -87,9 +91,8 @@ form .submit {
 }
 form .submit:hover {
 	background-color: teal;
+	cursor: pointer;
 }
-
-
 
 form input {
 	font-size: 10px;

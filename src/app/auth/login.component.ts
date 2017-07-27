@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AuthService } from './auth.service';
 
 @Component({
 	selector: 'login',
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit
 		private firebase:AngularFire,
 		private _router:Router,
 		private _route: ActivatedRoute,
+		private authService: AuthService
 	){}
 
 	ngOnInit()
@@ -55,6 +57,11 @@ export class LoginComponent implements OnInit
 		else if (redirect === 'unauth') {
 			this._redirect = "Please log in.";
 		}
+	}
+
+	LoginWithFacebook()
+	{
+		this.authService.LoginWithFacebook();
 	}
 
 	ToDashboard()

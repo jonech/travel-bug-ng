@@ -1,3 +1,4 @@
 <div class="going-user">
-		<img class="circle-sm" *ngIf="(_user | async)?.profileImage" [src]="sanitize('data:image/jpg;base64,' + (_user | async)?.profileImage)">
+		<img class="circle-sm" *ngIf="(_user | async)?.profileImage" 
+		[src]="sanitize('data:image/jpg;base64,' + (_user | async)?.profileImage)">
 </div>

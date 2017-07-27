@@ -25,6 +25,7 @@ import { AboutComponent } from './static/about.component';
 import { PrivacyPolicyComponent } from './static/privacy_policy.component';
 import { TeamComponent } from './static/team.component';
 import { TermsConditionComponent } from './static/terms_cond.component';
+import { FacebookModule } from 'ngx-facebook';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
@@ -34,6 +35,7 @@ import { ClickEditLongTextComponent } from './reuseable/click_edit_long_text.com
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
+import { AuthService } from './auth/auth.service';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TripListComponent } from './dashboard/trip_list.component';
@@ -59,8 +61,14 @@ import { ActivityDetailComponent } from './daytripview/activity_detail.component
 import { CommentComponent } from './daytripview/comment.component';
 
 import { DetailViewComponent } from './activitydetail/detail_view.component';
-import { InviteMembersComponentComponent } from './dashboard/invite-members-component/invite-members-component.component';
+import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
+import { InviteService } from './tripview/invite-members-component/invite.service';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import { FriendListComponent } from './tripview/invite-members-component/friend-list/friend-list.component';
+import { FriendItemComponent } from './tripview/invite-members-component/friend-list/friend-item.component';
+import { ChosenFriendComponent } from './tripview/invite-members-component/chosen-friend/chosen-friend.component';
 
 
 @NgModule({
@@ -115,9 +123,10 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 
 	// activity detail
 	DetailViewComponent,
-
 	InviteMembersComponentComponent,
-
+	FriendListComponent,
+	FriendItemComponent,
+	ChosenFriendComponent,
   ],
   imports: [
     BrowserModule,
@@ -128,6 +137,7 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 
 	AgmCoreModule.forRoot(googleConfig),
 	AngularFireModule.initializeApp(firebaseConfig),
+	FacebookModule.forRoot()
 
   ],
   providers: [
@@ -136,6 +146,12 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 
 	  // services
 	  GoogleService,
+
+	  //services
+	  AuthService,
+
+	  //services
+	  InviteService
 	],
   bootstrap: [AppComponent]
 })
