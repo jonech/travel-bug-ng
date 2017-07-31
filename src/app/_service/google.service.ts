@@ -1,7 +1,8 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers } from '@angular/http'
-import { MapsAPILoader } from 'angular2-google-maps/core';
+//import { MapsAPILoader } from 'angular2-google-maps/core';
+import { MapsAPILoader } from '@agm/core';
 import 'rxjs/add/operator/map';
 import { DomSanitizer } from '@angular/platform-browser'
 

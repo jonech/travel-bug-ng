@@ -3,10 +3,10 @@
 	<p>There's nothing here, start planning now!</p>
 </div>
 
-<div class="section group" *ngFor="let activity of _activities | async">
+<div class="section group" [dragula]='"bag-one"' [dragulaModel]='_activities|async' *ngFor="let activity of _activities | async">
 
-	<location-row *ngIf="activity.location" [dayTripId]="_dayTripId" [activityId]="activity.$key" [location]="activity"></location-row>
-
+	<!--<location-row *ngIf="activity.location" [dayTripId]="_dayTripId" [activityId]="activity.$key" [location]="activity"></location-row>-->
+  <location-row *ngIf="!activity.transport" [dayTripId]="_dayTripId" [activityId]="activity.$key" [location]="activity"></location-row>
 	<transport-row *ngIf="activity.transport" [activityId]="activity.$key" [transport]="activity"></transport-row>
 
 </div>

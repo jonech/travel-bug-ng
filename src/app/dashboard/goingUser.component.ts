@@ -21,6 +21,7 @@ export class GoingUserComponent implements OnInit
 
 	ngOnInit()
 	{
+        console.log(`fetching image for user ${this.goingUserId}`);
 		this._user = this.firebase.database.object(`/User/${this.goingUserId}/UserDetails`);
 	}
 

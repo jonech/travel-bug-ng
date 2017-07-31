@@ -13,7 +13,7 @@
 	<div class="section group" *ngFor="let activity of _activities | async">
 			<div *ngIf="activity.eventName" class="activity">
 				<!--<div class="activity-pic col"></div>-->
-				<small-round-image class="col" [placeId]="activity.location.id"></small-round-image>
+				<small-round-image class="col" [placeId]="activity.location?.id"></small-round-image>
 				<div class="col">
 					<div class="activity-name">{{ activity.eventName }}</div>
 					<div class="activity-location" *ngIf="activity.location">

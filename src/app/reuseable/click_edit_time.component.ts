@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 
+
 @Component({
-    selector: 'click-edit-long-text',
+    selector: 'click-edit-time',
     host: {
 		'(document:click)': 'handleMouseClick($event)'
 	},
-    styleUrls: ['click_edit_long_text.component.css'],
+    styleUrls: ['click_edit_time.component.css'],
     template:
     `
         <div #container>
@@ -14,9 +15,8 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, 
             </div>
 
             <div [hidden]="!editing">
-                <form>
-                    <textarea value="{{ value }}" #modValueElef></textarea>
-                </form>
+                <input value="{{value}}" class="time" type="time" #time>
+                <br/>
                 <button class="save" (click)="SaveEdit()">save</button>
                 <button class="cancel" (click)="CancelEdit()">cancel</button>
             </div>
@@ -24,7 +24,7 @@ import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, 
     `
 })
 
-export class ClickEditLongTextComponent implements OnInit, OnChanges
+export class ClickEditTimeComponent implements OnInit, OnChanges
 {
     @Input('permission') permission: boolean;
     @Input('value') value: string;
@@ -35,6 +35,7 @@ export class ClickEditLongTextComponent implements OnInit, OnChanges
 
     @ViewChild('container') container: ElementRef;
     @ViewChild('modValueElef') modValueElement: ElementRef;
+    @ViewChild('time') time: ElementRef;
 
     editing: boolean;
     firstclick: boolean = true;
@@ -42,7 +43,7 @@ export class ClickEditLongTextComponent implements OnInit, OnChanges
     constructor()
     {
         this.permission = true;
-        this.value = "Write a description...";
+        this.value = "Insert a time";
         this.editing = false;
     }
 
@@ -50,18 +51,18 @@ export class ClickEditLongTextComponent implements OnInit, OnChanges
     ngOnInit()
     {
         if (this.value == null || this.value == '') {
-            this.value = "Write a description...";
+            this.value = "Insert a time";
         }
     }
 
-    public ngOnChanges(changes: SimpleChanges)
-	{
-		if (changes['value']) {
+    ngOnChanges(changes: SimpleChanges)
+    {
+        if (changes['value']) {
 			if (this.value == null || this.value == '') {
-				this.value = "Write a description...";
+				this.value = "Insert a time";
 			};
 		}
-	}
+    }
 
     ToggleEdit()
     {
@@ -88,8 +89,9 @@ export class ClickEditLongTextComponent implements OnInit, OnChanges
 
     UpdateChanges()
     {
-        if (this.value !== this.modValueElement.nativeElement.value) {
-            this.value = this.modValueElement.nativeElement.value;
+        if (this.value !== this.time.nativeElement.value) {
+            this.value = this.time.nativeElement.value;
+            //console.log(GetTimeSort(this.value));
             this.OnSave.emit(this.value);
         }
     }

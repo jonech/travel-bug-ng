@@ -55,3 +55,34 @@ hr {
 	color: #9F9F9F;
 	background-color:#9F9F9F;
 }
+
+.tool-row {
+    margin-top: 10px;
+}
+.vote {
+    margin-right: 15px;
+}
+.fa {
+    padding-right: 5px;
+}
+
+.fa-map-marker {
+    color: #ff6666;
+}
+
+.fa-smile-o, .fa-frown-o{
+    font-size: 30px;
+}
+.fa-smile-o:hover {
+    color: #00cc99;
+}
+.fa-frown-o:hover {
+    color: #ff8080;
+}
+
+.upvoted {
+    color: #00cc99;
+}
+.downvoted {
+    color: #ff8080;
+}

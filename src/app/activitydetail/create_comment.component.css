@@ -1,9 +1,13 @@
+.wrapper {
+    padding-top: 15px;
+}
+
 form {
     width: 100%;
 }
 textarea {
     width: 100%;
-    height: 150px;
+    height: 50px;
     padding: 9px 6px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -21,17 +25,10 @@ button {
     font-size: 15px;
     color: white;
 }
-
-.save {
+.comment-button {
+    float: right;
     background-color: #24b20e;
 }
-.save:hover {
+.comment-button:hover {
     background-color: #1c910a;
-}
-
-.cancel {
-    background-color: #db5757;
-}
-.cancel:hover {
-    background-color: #a02e2e;
 }

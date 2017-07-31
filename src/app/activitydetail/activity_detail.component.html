@@ -1,0 +1,80 @@
+<div class="modal">
+
+	<div class="modal-content" #container>
+		<div class="modal-header">
+			<div (click)="closePopUp()" class="close">&times;</div>
+      <div class="title">
+        <click-edit-text
+          [permission]="true"
+          [id]="'eventName'"
+          [value]="(_activity | async)?.eventName"
+          [classstyle]="'title'"
+          (OnSave)="HandleTitleChange($event)">
+        </click-edit-text>
+      </div>
+		</div>
+
+		<div class="modal-body">
+
+      <div class="section group">
+        <google-place-image  [placeId]="(_activity|async)?.location?.id"></google-place-image>
+      </div>
+
+      <div class="section group">
+        <div id="time">Time:
+          <click-edit-time
+            [permission]="true"
+            [id]="'time'"
+            [value]="(_activity | async)?.time"
+            [classstyle]="'time'"
+            (OnSave)="HandleTimeChange($event)">
+          </click-edit-time>
+        </div>
+
+        <div id="location_name">Location:
+          <click-edit-place
+            [permission]="true"
+            [id]="'location'"
+            [value]="(_activity | async)?.location?.name"
+            [classstyle]="'location'"
+            (OnSave)="HandleLocationChange($event)">
+          </click-edit-place>
+        </div>
+
+        <div id="description">Description<br>
+          <click-edit-long-text
+            [permission]="true"
+            [id]="'description'"
+            [value]="(_activity | async)?.description"
+            (OnSave)="HandleDescriptionChange($event)">
+          </click-edit-long-text>
+        </div>
+
+        <div class="tool-row">
+          <span class="vote" [ngClass]="{'upvoted': upvoted}">
+            <i class="fa fa-smile-o" (click)="Upvote(); false" aria-hidden="false"></i>
+            {{ (_upVotes | async)?.length }}
+          </span>
+          <span class="vote" [ngClass]="{'downvoted': downvoted}">
+            <i class="fa fa-frown-o" (click)="Downvote(); false" aria-hidden="false"></i>
+            {{ (_downVotes | async)?.length }}
+          </span>
+        </div>
+        <hr/>
+      </div>
+
+      <div class="section group">
+        <div *ngFor="let comment of _comments | async; let i = index">
+          <comment-component [commentId]="comment.$key" [userId]="comment.$value" [index]="i"></comment-component>
+        </div>
+      </div>
+
+      <div class="section group">
+        <create-comment-component (OnSave)="HandleCommentCreate($event)">
+        </create-comment-component>
+      </div>
+
+    </div>
+  </div>
+
+</div>

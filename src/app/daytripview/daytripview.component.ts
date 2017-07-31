@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
@@ -24,6 +24,7 @@ export class DayTripViewComponent implements OnInit
 
 	constructor(
 		private route: ActivatedRoute,
+        private router: Router,
 		private firebase: AngularFire
 	)
 	{
@@ -66,4 +67,18 @@ export class DayTripViewComponent implements OnInit
 	{
 		this._show = !this._show;
 	}
+
+    AddActivity()
+    {
+        if (this._currentDay == null) {
+            return;
+        }
+
+        var tempAcc = this.firebase.database.list(`/DayTrip/${this._currentDay}`).push({});
+        console.log(tempAcc.key);
+        //console.log(this.router.url);
+        console.log(`${this.router.url}/(pop-up:${tempAcc.key})`);
+        //this.router.navigate([{ outlets: { 'pop-up': [ tempAcc.key] }}]);
+        this.router.navigateByUrl(`${this.router.url}/(pop-up:${tempAcc.key})`);
+    }
 }

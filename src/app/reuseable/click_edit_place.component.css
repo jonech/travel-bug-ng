@@ -1,16 +1,11 @@
-form {
-    width: 100%;
+.editable:hover {
+    outline: 1px #333333 solid;
 }
-textarea {
+
+.location > input[type="text"] {
+    padding: 2px;
+    font-size: 15px;
     width: 100%;
-    height: 150px;
-    padding: 9px 6px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    font-size: 16px;
-    resize: none;
 }
 
 button {
@@ -20,6 +15,14 @@ button {
     border-radius: 5px;
     font-size: 15px;
     color: white;
+}
+
+.fa {
+    padding-right: 5px;
+}
+
+.fa-map-marker {
+    color: #ff6666;
 }
 
 .save {

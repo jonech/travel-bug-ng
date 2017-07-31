@@ -16,3 +16,18 @@ export function DateCount(startDate: string, daynum: string)
 
     return `${finalDay}/${match[2]}/${match[3]}`
 }
+
+export function GetCurrentDateTime() : string
+{
+    var dt = new Date();
+
+    var date = dt.getDate();
+    var month = dt.getMonth() + 1;
+    var year = dt.getFullYear();
+
+    var hour = dt.getHours();
+    var minute = dt.getMinutes();
+    var sec = dt.getSeconds();
+
+    return `${date}/${month}/${year} ${hour}:${minute}:${sec}`
+}

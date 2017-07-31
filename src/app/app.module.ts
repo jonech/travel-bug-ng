@@ -16,7 +16,9 @@ import { firebaseConfig } from '../environments/firebase.config';
 import { googleConfig } from '../environments/google.config';
 
 import { AngularFireModule } from 'angularfire2';
-import { AgmCoreModule } from "angular2-google-maps/core"
+//import { AgmCoreModule } from "angular2-google-maps/core"
+import { AgmCoreModule } from '@agm/core';
+import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
 
@@ -32,6 +34,8 @@ import { SmallRoundImageComponent } from './reuseable/small_round_image.componen
 import { GooglePlaceImageComponent } from './reuseable/google_place_image.component';
 import { ClickEditTextComponent } from './reuseable/click_edit_text.component';
 import { ClickEditLongTextComponent } from './reuseable/click_edit_long_text.component';
+import { ClickEditPlaceComponent } from './reuseable/click_edit_place.component';
+import { ClickEditTimeComponent } from './reuseable/click_edit_time.component';
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
@@ -57,12 +61,14 @@ import { LocationFormComponent } from './daytripview/location_form.component';
 import { LocationRowComponent } from './daytripview/location_row.component';
 import { TransportFormComponent } from './daytripview/transport_form.component';
 import { TransportRowComponent } from './daytripview/transport_row.component';
-import { ActivityDetailComponent } from './daytripview/activity_detail.component';
-import { CommentComponent } from './daytripview/comment.component';
 
-import { DetailViewComponent } from './activitydetail/detail_view.component';
+
 import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
 import { InviteService } from './tripview/invite-members-component/invite.service';
+
+import { ActivityDetailComponent } from './activitydetail/activity_detail.component';
+import { CommentComponent } from './activitydetail/comment.component';
+import { CreateCommentComponent } from './activitydetail/create_comment.component';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -95,6 +101,8 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 	GooglePlaceImageComponent,
     ClickEditTextComponent,
     ClickEditLongTextComponent,
+    ClickEditPlaceComponent,
+    ClickEditTimeComponent,
 
 	// Dashboard
 	DashboardComponent,
@@ -118,11 +126,13 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 	LocationRowComponent,
 	TransportFormComponent,
 	TransportRowComponent,
-	ActivityDetailComponent,
-	CommentComponent,
+
 
 	// activity detail
-	DetailViewComponent,
+	ActivityDetailComponent,
+	CommentComponent,
+    CreateCommentComponent,
+
 	InviteMembersComponentComponent,
 	FriendListComponent,
 	FriendItemComponent,
@@ -137,8 +147,9 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 
 	AgmCoreModule.forRoot(googleConfig),
 	AngularFireModule.initializeApp(firebaseConfig),
-	FacebookModule.forRoot()
 
+	FacebookModule.forRoot(),
+    DragulaModule,
   ],
   providers: [
 	  // guards
