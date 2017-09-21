@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -145,6 +146,8 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 	ReactiveFormsModule,
     HttpModule,
 	Routing,
+    BrowserAnimationsModule,
+    NgZorroAntdModule.forRoot(),
 
 	AgmCoreModule.forRoot(googleConfig),
 	AngularFireModule.initializeApp(firebaseConfig),
