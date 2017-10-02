@@ -1,6 +1,7 @@
 import { Component, Input, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { DomSanitizer  } from '@angular/platform-browser';
-import { FirebaseListObservable, AngularFire } from 'angularfire2'
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 //import { MapsAPILoader } from 'angular2-google-maps/core';
 import { MapsAPILoader } from '@agm/core';
 
@@ -68,7 +69,8 @@ export class LocationRowComponent implements OnInit
 	constructor(
 		private googleAPILoader: MapsAPILoader,
 		private sanitizer: DomSanitizer,
-		private firebase: AngularFire
+        private firebase: AngularFireDatabase,
+        private afAuth: AngularFireAuth
 	)
 	{}
 
@@ -77,15 +79,15 @@ export class LocationRowComponent implements OnInit
 		if (this._location.location != null && this._location.location.id != null)
 			this.getImageUrl(this._location.location.id, this.image);
 
-		this._comments = this.firebase.database.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`)
+		this._comments = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`)
 
-		this._upVotes = this.firebase.database.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes`,
+		this._upVotes = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes`,
 			{ query: {
 				orderByValue: true,
 				equalTo: 'true'
 			}});
 
-		this._downVotes = this.firebase.database.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes`,
+		this._downVotes = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes`,
 			{ query: {
 				orderByValue: true,
 				equalTo: 'false'
@@ -96,9 +98,9 @@ export class LocationRowComponent implements OnInit
 
     CheckUpDownVoteComment()
     {
-        this.firebase.auth.subscribe((user) => {
+        this.afAuth.authState.subscribe((user) => {
 
-            this.firebase.database.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`, {
+            this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`, {
                 preserveSnapshot: true
             }).subscribe(snapshot => {
                 if (snapshot.val() == "true") {
@@ -114,7 +116,7 @@ export class LocationRowComponent implements OnInit
                 }
             });
 
-            this.firebase.database.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`, {
+            this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`, {
                 preserveSnapshot: true,
                 query: {
                     orderByValue: true,
@@ -131,8 +133,8 @@ export class LocationRowComponent implements OnInit
     Upvote()
     {
         if (this.voteable) {
-            this.firebase.auth.subscribe((user) => {
-                this.firebase.database.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("true");
+            this.afAuth.authState.subscribe((user) => {
+                this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("true");
             });
         }
     }
@@ -140,8 +142,8 @@ export class LocationRowComponent implements OnInit
     Downvote()
     {
         if (this.voteable) {
-            this.firebase.auth.subscribe((user) => {
-                this.firebase.database.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("false");
+            this.afAuth.authState.subscribe((user) => {
+                this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("false");
             });
         }
     }

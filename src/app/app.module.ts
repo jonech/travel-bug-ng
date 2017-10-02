@@ -17,8 +17,13 @@ import { StringToDatePipe } from './_pipe/string-to-date.pipe';
 import { firebaseConfig } from '../environments/firebase.config';
 import { googleConfig } from '../environments/google.config';
 
-import { AngularFireModule } from 'angularfire2';
+import {AngularFireModule} from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 //import { AgmCoreModule } from "angular2-google-maps/core"
+
+
 import { AgmCoreModule } from '@agm/core';
 import { DragulaModule } from 'ng2-dragula';
 
@@ -150,7 +155,10 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     NgZorroAntdModule.forRoot(),
 
 	AgmCoreModule.forRoot(googleConfig),
+
 	AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
 
 	FacebookModule.forRoot(),
     DragulaModule,

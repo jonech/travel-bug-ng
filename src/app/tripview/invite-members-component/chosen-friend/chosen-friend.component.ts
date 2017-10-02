@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { InviteService } from '../invite.service';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { FirebaseObjectObservable} from 'angularfire2/database';
 
 @Component({
   selector: 'chosen-friend',

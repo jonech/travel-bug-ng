@@ -3,14 +3,14 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import { Friend } from '../../_model/friend';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2'
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { FacebookService } from 'ngx-facebook';
 
 @Injectable()
 export class InviteService {
 
-  constructor(private af: AngularFire,
-              private fb: FacebookService) { }
+  constructor(private fb: FacebookService) { }
 
   newMember = new Subject();
   isChecked = new Subject();

@@ -2,23 +2,25 @@ import { Injectable, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FbUser } from '../_model/fb-user.model';
 import { ProfileDefaultBase64 } from '../_util/string.util';
-import { AngularFire, FirebaseObjectObservable, AuthProviders, AuthMethods } from 'angularfire2'
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class AuthService {
     constructor(
-		private _firebase: AngularFire,
+		private _afAuth: AngularFireAuth,
+		private _afDB: AngularFireDatabase,
 		private _router: Router,
 		private fb: FacebookService
 	) {}
     //TODO: change default photo 
 	LoginWithFacebook()
 	{
-		this._firebase.auth.login({
-			provider: AuthProviders.Facebook,
-			method: AuthMethods.Popup
-		})
+		this._afAuth.auth
+		.signInWithPopup(new firebase.auth.FacebookAuthProvider())
 		.then(resolve => {
 			console.log(resolve);
 			
@@ -53,7 +55,7 @@ export class AuthService {
 
 	private saveFbUserDetails(uid:string, fBuser:FbUser)
 	{
-		this._firebase.database.object(`/User/${uid}/UserDetails`).update(
+		this._afDB.object(`/User/${uid}/UserDetails`).update(
 			{
 				email: fBuser.email,
 				facebookUserId: fBuser.facebookUserId,

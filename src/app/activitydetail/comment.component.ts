@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FirebaseObjectObservable, AngularFire } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
 	selector: 'comment-component',
@@ -45,13 +46,13 @@ export class CommentComponent implements OnInit
     isOdd: boolean;
 
 	constructor(
-		private firebase: AngularFire
+		private firebase: AngularFireDatabase
 	) { }
 
 	ngOnInit()
 	{
-		this._comment = this.firebase.database.object(`/Comment/${this.commentId}`);
-        this._user = this.firebase.database.object(`/User/${this.userId}/UserDetails`);
+		this._comment = this.firebase.object(`/Comment/${this.commentId}`);
+        this._user = this.firebase.object(`/User/${this.userId}/UserDetails`);
 
         if (this.index % 2 != 0) {
             this.isOdd = true;

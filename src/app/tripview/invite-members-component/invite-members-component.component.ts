@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef} from '@angular/core';
-import { AngularFire, FirebaseListObservable, AngularFireAuth, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { NgForm } from '@angular/forms';
 import { InviteService } from './invite.service';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
@@ -39,8 +40,8 @@ export class InviteMembersComponentComponent implements OnInit {
   numberOfInviters: number;
 
     constructor(
-    private firebase: AngularFire,
-    private auth: AngularFireAuth,
+    private firebase: AngularFireDatabase,
+    private afAuth: AngularFireAuth,
     private inviteService: InviteService,
     private route: ActivatedRoute,
     private router: Router,
@@ -63,7 +64,7 @@ export class InviteMembersComponentComponent implements OnInit {
     this.paramSub = this.route.parent.params.subscribe(params => {
       this.tripId = params['id'];
     })
-    this.auth.subscribe(
+    this.afAuth.authState.subscribe(
       auth => {
         if(auth)
           this.myUid = auth.uid;
@@ -91,9 +92,9 @@ export class InviteMembersComponentComponent implements OnInit {
       this.hasChosenFriend = checked;
     });    
 
-    this.trip = this.firebase.database.object(`/Trip/${this.tripId}`);
-    this.tripRegulars = this.firebase.database.list(`/Trip/${this.tripId}/User/Regular`);
-    this.tripAdmins = this.firebase.database.list(`/Trip/${this.tripId}/User/Admin`);
+    this.trip = this.firebase.object(`/Trip/${this.tripId}`);
+    this.tripRegulars = this.firebase.list(`/Trip/${this.tripId}/User/Regular`);
+    this.tripAdmins = this.firebase.list(`/Trip/${this.tripId}/User/Admin`);
 
     this.numberOfInviters = this.inviteService.getChosenFriends().length;
     this.inviteService.numberOfInvi.subscribe(
@@ -146,7 +147,7 @@ export class InviteMembersComponentComponent implements OnInit {
 
   inviteByEmail(emailAdd:string) {
     this.email = emailAdd;
-    this.invitedUser = this.firebase.database.list('/User', {
+    this.invitedUser = this.firebase.list('/User', {
       preserveSnapshot: true,
       query: {
         orderByChild: 'UserDetails/email',

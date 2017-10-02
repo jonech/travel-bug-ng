@@ -1,7 +1,8 @@
 import { Component, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 
 @Component({
 	selector: 'activity-list',
@@ -16,7 +17,7 @@ export class ActivityListComponent implements OnChanges
 	_activities: FirebaseListObservable<any[]>;
 
 	constructor(
-		private firebase: AngularFire,
+		private firebase: AngularFireDatabase,
 		private route: ActivatedRoute
 	){}
 
@@ -25,13 +26,13 @@ export class ActivityListComponent implements OnChanges
 		//console.log(this._dayTripId);
 		// if (changes['dayTripId'] && this._dayTripId != null) {
 		// 	console.log(this._dayTripId);
-		// 	this._activities = this.firebase.database.list(`/DayTrip/${this._dayTripId}`, {
+		// 	this._activities = this.firebase.list(`/DayTrip/${this._dayTripId}`, {
 		// 		query: {
 		// 			orderByChild: 'timeSort'
 		// 		}
 		// 	});
 		// }
-		this._activities = this.firebase.database.list(`/DayTrip/${this._dayTripId}`, {
+		this._activities = this.firebase.list(`/DayTrip/${this._dayTripId}`, {
 			query: {
 				orderByChild: 'timeSort'
 			}

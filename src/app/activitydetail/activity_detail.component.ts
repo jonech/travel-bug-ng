@@ -1,7 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 import { GoogleService } from '../_service/google.service';
 import { GetCurrentDateTime, GetTimeSort } from '../_util/datetime.util';
 
@@ -37,7 +38,8 @@ export class ActivityDetailComponent implements OnInit
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
-		private firebase: AngularFire,
+        private firebase: AngularFireDatabase,
+        private afAuth: AngularFireAuth,
 		private elementRef: ElementRef,
 		private google: GoogleService,
 	)
@@ -55,17 +57,17 @@ export class ActivityDetailComponent implements OnInit
 		this.route.params.subscribe(params => {
 			this.activityId = params['activityId'];
             console.log(params['activityId']);
-			this._activity = this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`);
+			this._activity = this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}`);
 
-			this._comments = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments`)
+			this._comments = this.firebase.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments`)
 
-			this._upVotes = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes`,
+			this._upVotes = this.firebase.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes`,
             { query: {
                 orderByValue: true,
                 equalTo: 'true'
             }});
 
-			this._downVotes = this.firebase.database.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes`,
+			this._downVotes = this.firebase.list(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes`,
             { query: {
                 orderByValue: true,
                 equalTo: 'false'
@@ -104,9 +106,9 @@ export class ActivityDetailComponent implements OnInit
 
     CheckUpDownVote()
     {
-        this.firebase.auth.subscribe((user) => {
+        this.afAuth.authState.subscribe((user) => {
 
-            this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`, {
+            this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`, {
                 preserveSnapshot: true
             }).subscribe(snapshot => {
                 if (snapshot.val() == "true") {
@@ -129,8 +131,8 @@ export class ActivityDetailComponent implements OnInit
     Upvote()
     {
         if (this.voteable) {
-            this.firebase.auth.subscribe((user) => {
-                this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`).set("true");
+            this.afAuth.authState.subscribe((user) => {
+                this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`).set("true");
             });
         }
     }
@@ -138,8 +140,8 @@ export class ActivityDetailComponent implements OnInit
     Downvote()
     {
         if (this.voteable) {
-            this.firebase.auth.subscribe((user) => {
-                this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`).set("false");
+            this.afAuth.authState.subscribe((user) => {
+                this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Votes/${user.uid}`).set("false");
             });
         }
     }
@@ -148,34 +150,34 @@ export class ActivityDetailComponent implements OnInit
     {
         var time = changes;
         var timesort = GetTimeSort(time);
-        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({time: time, timeSort: timesort});
+        this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({time: time, timeSort: timesort});
         //console.log(changes);
     }
 
     HandleTitleChange(changes)
     {
-        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({eventName: changes});
+        this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({eventName: changes});
     }
 
     HandleLocationChange(changes)
     {
         //console.log(changes);
-        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/location`).update(changes);
+        this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}/location`).update(changes);
     }
 
     HandleDescriptionChange(changes)
     {
-        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({description: changes});
+        this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}`).update({description: changes});
     }
 
     HandleCommentCreate(comment)
     {
         this.CheckLocationNull((location) => {
             if (location) {
-                this.firebase.auth.subscribe(user => {
+                this.afAuth.authState.subscribe(user => {
                     // push to comment table
 
-                    var tempComment = this.firebase.database.list(`/Comment`).push({
+                    var tempComment = this.firebase.list(`/Comment`).push({
                         activityId : this.activityId, // match with corresponding activity
                         comment : comment,
                         date : GetCurrentDateTime(),
@@ -183,7 +185,7 @@ export class ActivityDetailComponent implements OnInit
                     });
 
                     // add to daytrip as reference
-                    this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments/${tempComment.key}`).set(user.uid);
+                    this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}/Comments/${tempComment.key}`).set(user.uid);
                 });
             }
         });
@@ -193,7 +195,7 @@ export class ActivityDetailComponent implements OnInit
     /* need activity to have a location, otherwise wont be listed out on list because thats how we differentiate location and transport */
     CheckLocationNull(x: (location: boolean) => void)
     {
-        this.firebase.database.object(`/DayTrip/${this.dayTripId}/${this.activityId}/location`, {
+        this.firebase.object(`/DayTrip/${this.dayTripId}/${this.activityId}/location`, {
             preserveSnapshot: true
         }).subscribe(snapshot => {
             console.log(snapshot.val());

@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router'
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 
 @Component({
 	selector: 'trip',
@@ -17,16 +18,16 @@ export class TripComponent implements OnInit
 	_tripAdmins: FirebaseListObservable<any[]>;
 
 	constructor(
-		private firebase: AngularFire,
+		private firebase: AngularFireDatabase,
 		private router: Router,
 	){}
 
 	ngOnInit()
 	{
-		this._trip = this.firebase.database.object(`/Trip/${this.tripId}`);
-		this._tripDays = this.firebase.database.list(`/Trip/${this.tripId}/Days`);
-		this._tripRegulars = this.firebase.database.list(`/Trip/${this.tripId}/User/Regular`);
-		this._tripAdmins = this.firebase.database.list(`/Trip/${this.tripId}/User/Admin`);
+		this._trip = this.firebase.object(`/Trip/${this.tripId}`);
+		this._tripDays = this.firebase.list(`/Trip/${this.tripId}/Days`);
+		this._tripRegulars = this.firebase.list(`/Trip/${this.tripId}/User/Regular`);
+		this._tripAdmins = this.firebase.list(`/Trip/${this.tripId}/User/Admin`);
 		//this._tripRegulars.push(this._tripAdmins);
 	}
 

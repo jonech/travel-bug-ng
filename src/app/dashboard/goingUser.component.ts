@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 
 @Component({
 	selector: 'going-user',
@@ -15,14 +16,14 @@ export class GoingUserComponent implements OnInit
 	_user: FirebaseObjectObservable<any>;
 
 	constructor(
-		private firebase: AngularFire,
+		private firebase: AngularFireDatabase,
 		private sanitizer: DomSanitizer
 	){}
 
 	ngOnInit()
 	{
         console.log(`fetching image for user ${this.goingUserId}`);
-		this._user = this.firebase.database.object(`/User/${this.goingUserId}/UserDetails`);
+		this._user = this.firebase.object(`/User/${this.goingUserId}/UserDetails`);
 	}
 
 	sanitize(url: string)

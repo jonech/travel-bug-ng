@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 
 @Component({
 	//moduleId: module.id,
@@ -21,12 +22,12 @@ export class HostComponent implements OnInit {
 	@Input('userId') userId: string;
 
 	constructor(
-		private firebase: AngularFire
+		private firebase: AngularFireDatabase
 	) { }
 
 	ngOnInit()
 	{
-		this._host = this.firebase.database.object(`/User/${this.userId}/UserDetails`);
+		this._host = this.firebase.object(`/User/${this.userId}/UserDetails`);
 		console.log(this.userId);
 	}
 }

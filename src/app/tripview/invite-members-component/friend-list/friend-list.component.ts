@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef } from '@angular/core';
-import { AngularFire, FirebaseListObservable, AngularFireAuth } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { NgForm } from '@angular/forms';
 import { InviteService } from '../invite.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
 import { Friend } from '../../../_model/friend';
 import { ActivatedRoute } from '@angular/router';
@@ -20,7 +21,7 @@ export class FriendListComponent implements OnInit {
 
  
   constructor(
-    private firebase: AngularFire,
+    private firebase: AngularFireDatabase,
     private auth: AngularFireAuth,
     private inviteService: InviteService,
     private route: ActivatedRoute,

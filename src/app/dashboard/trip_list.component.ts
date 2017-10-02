@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 @Component({
 	selector: 'trip-list',
@@ -13,17 +14,18 @@ export class TripListComponent implements OnInit
 	//_Users: Observable<any[]>;
 
 	constructor(
-		private firebase: AngularFire
+		private _afAuth: AngularFireAuth,
+		private _afDB: AngularFireDatabase
 	)
 	{}
 
 	ngOnInit()
 	{
-		this.firebase.auth.subscribe(auth => {
+		this._afAuth.authState.subscribe(auth => {
 			if (!auth) { return; }
 
 			let uid = auth.uid;
-			this._trips = this.firebase.database.list(`/User/${uid}/Trip`);
+			this._trips = this._afDB.list(`/User/${uid}/Trip`);
 		});
 	}
 }

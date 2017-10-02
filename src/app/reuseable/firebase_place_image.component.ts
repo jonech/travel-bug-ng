@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { environment } from '../../environments/environment';
-import { AngularFire, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 
 @Component({
 	selector: 'firebase-place-image',
@@ -16,7 +17,7 @@ export class FirebasePlaceImageComponent implements OnInit {
 	_placeImage: FirebaseObjectObservable<any>;
 
 	constructor(
-		private firebase: AngularFire,
+		private firebase: AngularFireDatabase,
 		private sanitizer: DomSanitizer
 	){}
 
@@ -27,7 +28,7 @@ export class FirebasePlaceImageComponent implements OnInit {
 			return;
 		}
 		console.log(this.placeId);
-		this._placeImage = this.firebase.database.object(`/Location/${this.placeId}`);
+		this._placeImage = this.firebase.object(`/Location/${this.placeId}`);
 	}
 
 	sanitize(base64Image: string)

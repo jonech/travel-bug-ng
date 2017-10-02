@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from './auth.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit
 
 	constructor
 	(
-		private firebase:AngularFire,
+		private _afAuth:AngularFireAuth,
 		private _router:Router,
 		private _route: ActivatedRoute,
 		private authService: AuthService
@@ -31,14 +31,15 @@ export class LoginComponent implements OnInit
 
 	LoginWithEmail(emailEl:any, passwordEl:any)
 	{
-		this.firebase.auth.login({
-			email: emailEl.value,
-			password: passwordEl.value
-		},
-		{
-			provider: AuthProviders.Password,
-			method: AuthMethods.Password
-		})
+		// this._afAuth.auth.login({
+		// 	email: emailEl.value,
+		// 	password: passwordEl.value
+		// },
+		// {
+		// 	provider: AuthProviders.Password,
+		// 	method: AuthMethods.Password
+		// })
+		this._afAuth.auth.signInWithEmailAndPassword(emailEl.value, passwordEl.value)
 		.then((success) => {
 			//localStorage.setItem('currentUserId', success.auth.uid);
 			this.ToDashboard();

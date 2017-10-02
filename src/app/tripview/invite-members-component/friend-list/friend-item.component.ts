@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { Friend } from '../../../_model/friend';
 import { InviteService } from '../../invite-members-component/invite.service';
 @Component({
@@ -19,7 +19,7 @@ export class FriendItemComponent implements OnInit {
   _isChecked:boolean=false;
   
   constructor(
-    private firebase: AngularFire,
+    private firebase: AngularFireDatabase,
     private sanitizer: DomSanitizer,
     private inviteService: InviteService
   ) {}
@@ -32,7 +32,7 @@ export class FriendItemComponent implements OnInit {
   }
 
   findAllFbFriends() {
-      this.firebase.database.list('/User', {
+      this.firebase.list('/User', {
       preserveSnapshot: true,
       query: {
         orderByChild: 'UserDetails/facebookUserId',
@@ -46,7 +46,7 @@ export class FriendItemComponent implements OnInit {
           console.log("all facebook friends id: "+this.userId);
           console.log("tripid: "+this.tripId);
           
-          this.firebase.database.object(`/Trip/${this.tripId}/User/Regular/${this.userId}`)
+          this.firebase.object(`/Trip/${this.tripId}/User/Regular/${this.userId}`)
           .subscribe((user1) => {
             if(user1.$value===null){
               this._hasInvitedUser1 = false;             
@@ -56,7 +56,7 @@ export class FriendItemComponent implements OnInit {
             console.log(this._hasInvitedUser1);
           });
 
-          this.firebase.database.object(`/Trip/${this.tripId}/User/Admin/${this.userId}`)
+          this.firebase.object(`/Trip/${this.tripId}/User/Admin/${this.userId}`)
           .subscribe((user2) => {
             if(user2.$value===null){
               this._hasInvitedUser2 = false;                          
@@ -67,7 +67,7 @@ export class FriendItemComponent implements OnInit {
           });     
 
 
-          this._Inviteduser = this.firebase.database.object(`/User/${this.userId}/UserDetails`);
+          this._Inviteduser = this.firebase.object(`/User/${this.userId}/UserDetails`);
         })
       });
   }
