@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFire } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
+import { FacebookService } from 'ngx-facebook';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +13,16 @@ import { AngularFire } from 'angularfire2';
 export class AppComponent
 {
 	_isLogin: boolean = false;
+	_isfbLogin: boolean = false;
 
 	constructor(
-		private firebase: AngularFire,
-		private router: Router
+		private firebase: AngularFireDatabase,
+		private afAuth: AngularFireAuth,
+		private router: Router,
+		private fb: FacebookService
 	)
 	{
-		firebase.auth.subscribe(auth => {
+		this.afAuth.authState.subscribe(auth => {
 			if (auth) {
 				this._isLogin = true;
 			}
@@ -28,8 +33,10 @@ export class AppComponent
 	}
 
 	private logout()
-	{
-		this.firebase.auth.logout();
-		this.router.navigate(['/'])
+	{	
+		this.afAuth.auth.signOut();
+		console.log("Log out successfully");
+		
+ 		this.router.navigate(['/']);
 	}
 }

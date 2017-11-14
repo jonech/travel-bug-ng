@@ -1,0 +1,157 @@
+.splash {
+    position: fixed;
+    background: rgba(255,255,255,0.95);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 500;
+    opacity: 1;
+    visibility: visible;
+    overflow: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    transition: opacity 0.5s, visibility 0s 0.5s;
+    -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+}
+
+.splash-open.splash {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+}
+
+.splash .splash-inner {
+    width: 100%;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translate3d(0,0,150px);
+    transform: translate3d(0,0,150px);
+    -webkit-transition: -webkit-transform 0.5s;
+    transition: transform 0.5s;
+}
+
+.splash-open.splash .splash-inner {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+.splash .splash-content {
+    width: 660px;
+    height: 350px;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin: -175px 0 0 -330px;
+    color: black;
+    font-size: 18px;
+}
+.splash .splash-content2 {
+    width: 660px;
+    height: 350px;
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    /* left: 69%; */
+    margin: -350px 0 0 -330px;
+    color: black;
+    font-size: 18px;
+}
+
+.title {
+    margin-left: 60px;
+}
+.subtitle {
+    margin-left: -120px;
+}
+.splash .splash-content3 {
+    width: 660px;
+    height: 350px;
+    position: absolute;
+    top: 80%;
+    left: 80%;
+    /* left: 69%; */
+    margin: -350px 0 0 -330px;
+    color: black;
+    font-size: 18px;
+}
+ /* input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}  */
+
+
+.help-block {
+    font-size: 12px;
+    color: red;
+}
+
+.invitationForm {
+    padding: 40px 0px 0px -40px;
+}
+
+#email {
+    width: 270px;
+}
+
+.att-list{
+	overflow: auto;
+	height:200px;
+	width:200px;
+	padding:34px 0 0 100px;
+	/*border-left: 1px solid #EDEDED;*/
+}
+
+.att-list1{
+	overflow:auto;
+	height:70px;
+	width:200px;
+	padding:10px;
+	/*border-left: 1px solid #EDEDED;*/
+}
+
+.att-list ul li{
+	list-style: none;
+	font-size: 14px;
+	font-weight: 400;
+	
+	color: black;
+    text-transform: none;
+
+}
+.att-list1 ul li{
+	list-style: none;
+	font-size: 14px;
+	font-weight: 400;
+	
+	color: black;
+    text-transform: none;
+}
+.att-list1 ul{
+	margin-top: 0;
+	margin-left: -40px;
+	list-style-type: none;
+}
+.att-list ul{
+	margin-top: 0;
+	margin-left: -40px;
+	list-style-type: none;
+}
+.remove {
+    margin: 8px 0 0 10px;
+}
+
+.hasInvitedUser {
+   margin: -100px 0 0 400px;
+}
+
+.divide{
+	border-left: 1px solid black;
+	padding-left: 30px;
+}
+
+.numberof {
+    margin: -45px 0 0 30px;
+    font-size: 14px;
+}

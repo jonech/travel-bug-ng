@@ -39,11 +39,16 @@
 	font-size:10px;
 	font-weight: 200;
 	padding:10px 15px 10px 15px;
-	margin:10px;
+	margin:0px 45px 10px 45px;
 
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
+}
+
+#form-wrapper .facebook:hover {
+	background-color:#29487d;
+	cursor: pointer;
 }
 
 #form-wrapper .login{
@@ -52,6 +57,7 @@
 	border-radius: 5px;
 
 	padding:5px 25px 5px 25px;
+	
 
 	border:1px solid #9F9F9F;
 	background-color: #F7F7F7;
@@ -80,7 +86,10 @@ form .submit{
 	background-color: #41E2B0;
 }
 
-
+form .submit:hover {
+	background-color: teal;
+	cursor: pointer;
+}
 
 form input {
 	font-size: 10px;
@@ -93,7 +102,21 @@ form input {
 	border:none;
 }
 
+.or-divider {
+	width: 90%;
+	text-align: center;
+	border-bottom: 1px solid lightgray;
+	line-height: 0.1em;
+	margin: 30px 15px 30px;
 
+	font-size: 8px;
+	color: lightgray;
+}
+
+.or-divider span {
+	background-color: #F7F7F7;
+    padding:0 10px;
+}
 
 
 

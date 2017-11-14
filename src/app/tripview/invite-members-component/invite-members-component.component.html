@@ -1,0 +1,70 @@
+<div class="splash">
+    <div class="splash-inner splash-open"> 
+		<div class="splash-content text-center title">
+			<div class="tripInfo">
+				<h3>Invite Members</h3>
+				<h4>
+					{{ ( trip | async )?.tripName }}
+				<span style="color:#9F9F9F">{{ ( trip | async )?.startDate }} - {{ ( trip | async )?.endDate }}</span>
+				</h4>
+			</div>
+			<div class="hasInvitedUser">
+				<div class="att-list1 divide">
+					<ul>
+						<li *ngFor="let user of tripRegulars | async">
+							<going-user [goingUserId]="user.$key"></going-user>
+						</li>
+						<li *ngFor="let user of tripAdmins | async">
+							<going-user [goingUserId]="user.$key"></going-user>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+		<div class="splash-content2 text-center">
+			<div class="invitationForm" >
+				<form  #invitForm >
+					<div class="form-group">
+						<div *ngIf="_error_flag">
+							<div class="help-block"> {{ _error }} </div>
+						</div>
+						<!-- use label for to allow clicking on label to navigate cursor to the specific input field -->
+						<input 
+							type="email"
+							id="email" 
+							class="form-control"				 
+							ngModel
+							name="email"
+							required
+							pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+							#input="ngModel"
+							placeholder="type email or facebook friend's name"
+							(keyup)=search(input.value)>
+						 <span class="help-block" *ngIf="(!input.valid && !matchname && input.touched)">Please enter a valid email or a name!</span> 
+					</div>			
+					<friend-list [friends]="filtered" [tripId]="tripId"></friend-list>
+					<div class="form-group">
+									<button 
+										class="invite" 
+										[disabled]="!input.valid && !hasChosenFriend" 
+										(click)="inviteMembers(input); false">Invite
+									</button>
+					</div>
+				</form>	
+				
+				<button class="btn btn-lg btn-outline" (click)="closeInvitation()">Cancel</button>
+			</div>
+		</div>
+		<div class="splash-content3 text-center att-list">
+			<div class="numberof"><p>Number of inviters: {{numberOfInviters}}</p></div>
+				<ul>
+					<li *ngFor="let chosenFriend of chosenFriends; let i=index">
+						<chosen-friend [chosenFriend]="chosenFriend"></chosen-friend>
+					</li>					
+				</ul>
+				
+			</div>
+	</div>
+</div>
+

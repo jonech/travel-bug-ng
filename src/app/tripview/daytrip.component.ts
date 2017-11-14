@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router'
-import { AngularFire,  FirebaseListObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { DateCount } from '../_util/datetime.util';
 
 @Component({
@@ -21,18 +22,18 @@ export class DayTripComponent implements OnInit
 	_activityNoLimit: FirebaseListObservable<any[]>;
 
 	constructor(
-		private firebase: AngularFire,
+		private firebase: AngularFireDatabase,
 		private router: Router,
 	){}
 
 	public ngOnInit()
 	{
-		this._activities = this.firebase.database.list(`/DayTrip/${this.dayTripId}`,
+		this._activities = this.firebase.list(`/DayTrip/${this.dayTripId}`,
 			{ query: {
 				orderByChild: 'timeSort',
 				limitToFirst: 3
 			}});
-		this._activityNoLimit = this.firebase.database.list(`/DayTrip/${this.dayTripId}`);
+		this._activityNoLimit = this.firebase.list(`/DayTrip/${this.dayTripId}`);
 	}
 
 	ToDayTripView()

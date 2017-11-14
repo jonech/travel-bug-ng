@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 //import { MapsAPILoader } from 'angular2-google-maps/core';
 import { MapsAPILoader } from '@agm/core';
 import { Location } from '../_model/location.model';
@@ -29,12 +30,12 @@ export class LocationFormComponent implements OnInit
 	constructor(
 		private googleApiLoader: MapsAPILoader,
 		private ngZone: NgZone,
-		private firebase: AngularFire
+		private firebase: AngularFireDatabase
 	) { }
 
 	ngOnInit()
 	{
-		this.dayTripRef = this.firebase.database.list(`/DayTrip/${this.dayTripId}`);
+		this.dayTripRef = this.firebase.list(`/DayTrip/${this.dayTripId}`);
 		this._locationSearchControl = new FormControl();
 
 		this.googleApiLoader.load().then(() => {

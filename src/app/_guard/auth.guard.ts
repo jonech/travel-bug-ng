@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
-import { AngularFireAuth } from 'angularfire2';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Observable } from "rxjs/Rx";
 
 @Injectable()
@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate
 
 		// return this.isAuth;
 
-        return this.fireAuth.map((auth) => {
+        return this.fireAuth.authState.map((auth) => {
             if (auth) {
  				console.log("authed!");
  				return true;

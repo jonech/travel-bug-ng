@@ -2,10 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AngularFire, FirebaseObjectObservable, AuthProviders, AuthMethods } from 'angularfire2'
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 
 import { User } from '../_model/user.model';
+import { FbUser } from '../_model/fb-user.model';
 import { ProfileDefaultBase64, EmailRegEx } from '../_util/string.util';
+
+import{ AuthService } from './auth.service';
 
 @Component({
 	selector: 'register',
@@ -20,11 +25,14 @@ export class RegisterComponent implements OnInit
 
 	_userRef: FirebaseObjectObservable<any>;
 	_error: string;
+	
 
 	constructor(
-		private _firebase: AngularFire,
+		private _afAuth: AngularFireAuth,
+		private _afDB: AngularFireDatabase,
 		private _formBuild: FormBuilder,
 		private _router: Router,
+		private authService: AuthService
 	) {}
 
 	ngOnInit()
@@ -52,10 +60,8 @@ export class RegisterComponent implements OnInit
 		this._submitted = true;
 		//this.registerForm.reset();
 
-		this._firebase.auth.createUser({
-			email: user.email,
-			password: user.matchingPwd.password
-		})
+		this._afAuth.auth.
+		createUserWithEmailAndPassword(user.email, user.matchingPwd.password)
 		.then(resolve => {
 			console.log(resolve);
 			this.saveUserDetails(resolve.uid, user);
@@ -67,23 +73,17 @@ export class RegisterComponent implements OnInit
 		});
 	}
 
+//TODO: change default photo 
 	LoginWithFacebook()
 	{
-		this._firebase.auth.login({
-			provider: AuthProviders.Facebook,
-			method: AuthMethods.Popup
-		})
-		.then(resolve => {
-			//localStorage.setItem('currentUser', )
-		})
-		.catch(error => {
-			console.log(error.message);
-		})
+		this.authService.LoginWithFacebook();
 	}
+
+
 
 	private saveUserDetails(uid:string, user:User)
 	{
-		this._firebase.database.object(`/User/${uid}/UserDetails`).update(
+		this._afDB.object(`/User/${uid}/UserDetails`).update(
 			{
 				email: user.email,
 				firstName: user.firstname,

@@ -33,19 +33,17 @@
 				</div>
 		</div>-->
 		<div class="att-list divide">
-			<table id="going-user-row">
-				<tr>
-					<td *ngFor="let user of _tripRegulars | async">
-						<going-user [goingUserId]="user.$key"></going-user>
-					</td>
-				</tr>
-			</table>
+			<ul  >
+				<li *ngFor="let user of _tripRegulars | async">
+					<going-user [goingUserId]="user.$key"></going-user>
+				</li>
+			</ul>
 		</div>
 	</div>
 	<div class="trip-details col">
 		<div id="button-row">
 				<div >
-					<a class="invitation" (click)="OpenInvitation()">Invite members + </a>
+					<a class="invitation" [routerLink]="['invite']">Invite members + </a>
 				</div>
 		</div>
 	</div>
@@ -55,6 +53,7 @@
 		<day-trip [tripId]="_tripId" [dayTripId]="daytrip?.$value" [day]="daytrip?.$key" [startDate]="(_trip|async)?.startDate"></day-trip>
 	</div>
 </div>
-<div *ngIf="_isInvitationOpen">
-	<app-invite-members-component (newMember)="inviteMembers($event)" (closeSplash)="closeInvitation()"></app-invite-members-component>
-</div>
+<router-outlet></router-outlet>
+<!-- <div *ngIf="_isInvitationOpen">
+	<app-invite-members-component (closeSplash)="closeInvitation()" [tripId]="_tripId"></app-invite-members-component>
+</div> -->

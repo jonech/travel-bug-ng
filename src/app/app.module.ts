@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { Routing } from './app.routes';
 
@@ -15,8 +17,13 @@ import { StringToDatePipe } from './_pipe/string-to-date.pipe';
 import { firebaseConfig } from '../environments/firebase.config';
 import { googleConfig } from '../environments/google.config';
 
-import { AngularFireModule } from 'angularfire2';
+import {AngularFireModule} from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
 //import { AgmCoreModule } from "angular2-google-maps/core"
+
+
 import { AgmCoreModule } from '@agm/core';
 import { DragulaModule } from 'ng2-dragula';
 
@@ -27,6 +34,7 @@ import { AboutComponent } from './static/about.component';
 import { PrivacyPolicyComponent } from './static/privacy_policy.component';
 import { TeamComponent } from './static/team.component';
 import { TermsConditionComponent } from './static/terms_cond.component';
+import { FacebookModule } from 'ngx-facebook';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
@@ -38,6 +46,7 @@ import { ClickEditTimeComponent } from './reuseable/click_edit_time.component';
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
+import { AuthService } from './auth/auth.service';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TripListComponent } from './dashboard/trip_list.component';
@@ -60,12 +69,19 @@ import { LocationRowComponent } from './daytripview/location_row.component';
 import { TransportFormComponent } from './daytripview/transport_form.component';
 import { TransportRowComponent } from './daytripview/transport_row.component';
 
+
+import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
+import { InviteService } from './tripview/invite-members-component/invite.service';
+
 import { ActivityDetailComponent } from './activitydetail/activity_detail.component';
 import { CommentComponent } from './activitydetail/comment.component';
 import { CreateCommentComponent } from './activitydetail/create_comment.component';
 
-import { InviteMembersComponentComponent } from './dashboard/invite-members-component/invite-members-component.component';
-
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import { FriendListComponent } from './tripview/invite-members-component/friend-list/friend-list.component';
+import { FriendItemComponent } from './tripview/invite-members-component/friend-list/friend-item.component';
+import { ChosenFriendComponent } from './tripview/invite-members-component/chosen-friend/chosen-friend.component';
 
 
 @NgModule({
@@ -125,7 +141,9 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
     CreateCommentComponent,
 
 	InviteMembersComponentComponent,
-
+	FriendListComponent,
+	FriendItemComponent,
+	ChosenFriendComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,11 +151,17 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 	ReactiveFormsModule,
     HttpModule,
 	Routing,
+    BrowserAnimationsModule,
+    NgZorroAntdModule.forRoot(),
 
 	AgmCoreModule.forRoot(googleConfig),
-	AngularFireModule.initializeApp(firebaseConfig),
-    DragulaModule,
 
+	AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
+
+	FacebookModule.forRoot(),
+    DragulaModule,
   ],
   providers: [
 	  // guards
@@ -145,6 +169,12 @@ import { InviteMembersComponentComponent } from './dashboard/invite-members-comp
 
 	  // services
 	  GoogleService,
+
+	  //services
+	  AuthService,
+
+	  //services
+	  InviteService
 	],
   bootstrap: [AppComponent]
 })

@@ -1,9 +1,15 @@
-.going-user {
+.clicked-user {
 	/*float: left;
 	display: block;*/
+	width: 200px;
+	height: 40px;
 	margin: 1px 5px 0px 0px;
+	cursor: pointer;
+	
 }
-
+.clicked-user:hover {
+    color: #1D80CF;
+}
 .circle-sm {
 	background-size: cover;
 	background-position: center;
@@ -15,4 +21,18 @@
 	height: 35px;
 	background-color: #41E2B0;
 	/*display: block;*/
+}
+
+img {
+	float: left;
+}
+
+.friend-name{
+	margin: 10px 0 0 15px;
+	float: left;
+}
+
+input {
+	margin: 10px 0 0 15px;
+	float: left;
 }

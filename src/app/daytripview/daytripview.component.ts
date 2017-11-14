@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -25,7 +25,7 @@ export class DayTripViewComponent implements OnInit
 	constructor(
 		private route: ActivatedRoute,
         private router: Router,
-		private firebase: AngularFire
+		private firebase: AngularFireDatabase
 	)
 	{
 		this.daySubject = new Subject();
@@ -33,12 +33,12 @@ export class DayTripViewComponent implements OnInit
 		this.route.params.subscribe(params => {
 
 			this._tripId = params['tripId'];
-			this._dayTripListRef = this.firebase.database.list(`/Trip/${this._tripId}/Days`, {
+			this._dayTripListRef = this.firebase.list(`/Trip/${this._tripId}/Days`, {
                 query: { orderByValue: true }
             });
 
 			// dayref will be varrying depending on which day is nav to
-			firebase.database.list(`/Trip/${this._tripId}/Days`,
+			firebase.list(`/Trip/${this._tripId}/Days`,
 			{
 				query: {
 					orderByValue: true,
@@ -74,7 +74,7 @@ export class DayTripViewComponent implements OnInit
             return;
         }
 
-        var tempAcc = this.firebase.database.list(`/DayTrip/${this._currentDay}`).push({});
+        var tempAcc = this.firebase.list(`/DayTrip/${this._currentDay}`).push({});
         console.log(tempAcc.key);
         //console.log(this.router.url);
         console.log(`${this.router.url}/(pop-up:${tempAcc.key})`);
