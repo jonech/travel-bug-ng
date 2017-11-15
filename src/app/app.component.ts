@@ -37,7 +37,7 @@ export class AppComponent
 		this.afAuth.auth.signOut();
 		console.log("Log out successfully");
 		
- 		this.router.navigate(['/']);
+ 		this.goToExternalURL("https://travelbuggg42.wixsite.com/travel-bug");
 	}
 
 	private goToExternalURL(url: string) {
