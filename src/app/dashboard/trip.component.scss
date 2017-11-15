@@ -1,27 +1,25 @@
-.ant-card-body {
-  padding: 0;
-}
+@import '../../assets/sass/variables.scss';
 
-.trip .card-right:hover {
-	background-color: lightgrey;
-}
-.trip {
-  position: relative;
+.card-wrapper {
+  padding: 10px;
 }
 
 :host ::ng-deep {
-  .custom-image img {
+  .card-top img {
     width: 100%;
+    height: 170px;
     display: block;
   }
-  custom-card {
-    padding: 10px 16px;
+  .card-bottom {
+    height: 220px;
+    padding: 35px 16px 10px 16px;
   }
-  .custom-card p {
-    color: red;
+  .card-bottom p {
+    color: black;
   }
   .ant-card-body {
     padding: 0;
+    position: relative;
   }
 }
 
@@ -30,29 +28,45 @@
 	-moz-border-radius: 6px;
 	border-radius: 6px;
 	background-color: white;
-	border: 1px solid #9F9F9F;
-	height:40px;
-	width: 40px;
-	position:relative;
-	top:60px;
-	left:150px;
+  border: 1px solid $light-gray;
+  text-align: center;
 
-	text-align: center;
+	height: 60px;
+  width: 60px;
+
+	position: absolute;
+	top: 140px;   // card-top's height - (date-box height / 2)
+  left: 15px;
+
+  .date {
+    font-size: 25px;
+    font-weight: 100;
+  }
+  .month {
+    text-transform: uppercase;
+    font-size: 15px;
+    font-weight: lighter;
+    margin-top: -5px;   // move closer to the date text
+  }
 }
 
-.date-box .date{
+.trip-heading {
+  border-top: 0.5px solid $mid-gray;
+  border-bottom: 0.5px solid $mid-gray;
+  padding: 3px 0;
 
-	font-size: 23px;
-	font-weight: 200;
-
+  .trip-title {
+    font-weight: 500;
+    font-size: 18px;
+  }
+  .trip-date {
+    font-weight: 400;
+    font-size: 15px;
+    color: $dark-gray;
+    margin-top: -5px;
+  }
 }
 
-.date-box .month{
-	text-transform: uppercase;
-	font-size: 10px;
-	font-weight: lighter;
-	margin-top: -3px;
-}
 .card-block{
 	opacity: 0;
     -webkit-transition: opacity 2s ease-in;
