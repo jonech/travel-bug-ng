@@ -1,8 +1,28 @@
+.ant-card-body {
+  padding: 0;
+}
+
 .trip .card-right:hover {
 	background-color: lightgrey;
 }
 .trip {
-	position: relative;
+  position: relative;
+}
+
+:host ::ng-deep {
+  .custom-image img {
+    width: 100%;
+    display: block;
+  }
+  custom-card {
+    padding: 10px 16px;
+  }
+  .custom-card p {
+    color: red;
+  }
+  .ant-card-body {
+    padding: 0;
+  }
 }
 
 .date-box{

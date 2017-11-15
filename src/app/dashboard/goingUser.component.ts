@@ -6,7 +6,7 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} 
 @Component({
 	selector: 'going-user',
 	templateUrl: './goingUser.component.html',
-	styleUrls: ['./goingUser.component.css', './dashboard.component.css']
+	styleUrls: ['./goingUser.component.css']
 })
 
 export class GoingUserComponent implements OnInit

@@ -5,8 +5,8 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} 
 
 @Component({
 	selector: 'trip',
-	templateUrl: './trip.component.html',
-	styleUrls: ['./trip.component.css']
+	templateUrl: 'trip.component.html',
+	styleUrls: ['trip.component.scss']
 })
 
 export class TripComponent implements OnInit

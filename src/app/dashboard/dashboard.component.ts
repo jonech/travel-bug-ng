@@ -7,8 +7,8 @@ import { Trip } from '../_model/trip.model';
 
 @Component({
 	selector: 'dashboard',
-	templateUrl: './dashboard.component.html',
-	styleUrls: ['./dashboard.component.css']
+	templateUrl: 'dashboard.component.html',
+	styleUrls: ['dashboard.component.scss']
 })
 
 export class DashboardComponent implements OnInit

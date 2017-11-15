@@ -1,4 +1,4 @@
-<div  class="trip" [routerLink]="['/trip', (_trip|async)?.$key]">
+<!-- <div nz-col [nzSpan]="8" class="trip" [routerLink]="['/trip', (_trip|async)?.$key]">
 	<div class="date-box">
 		<div class="date">{{ (_trip | async)?.startDate | stringToDate | date:'d' }}</div>
 		<div class="month">{{ (_trip | async)?.startDate | stringToDate | date:'MMM' }}</div>
@@ -17,7 +17,6 @@
 					<host [userId]="user.$key"></host>
 				</div>
 			</div>
-			<!--<div *ngIf="(_tripRegulars|async)?.length <=0"> no one... </div>-->
 			<table id="going-user-row">
 				<tr>
 					<td *ngFor="let user of _tripRegulars | async">
@@ -30,4 +29,16 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
+
+<nz-card style="width: 240px;">
+  <ng-template #body>
+    <div class="custom-image">
+      <img alt="example" src="https://i.pinimg.com/736x/f7/ba/65/f7ba654d396fc5b904ccc2c2532435a5--eerie-photography-creative-photography.jpg"/>
+    </div>
+    <div class="custom-card">
+      <h3>Europe Street beat</h3>
+      <p>www.instagram.com</p>
+    </div>
+  </ng-template>
+</nz-card>
