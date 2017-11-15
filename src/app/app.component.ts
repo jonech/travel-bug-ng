@@ -39,4 +39,8 @@ export class AppComponent
 		
  		this.router.navigate(['/']);
 	}
+
+	private goToExternalURL(url: string) {
+		window.location.href=url;
+	}
 }

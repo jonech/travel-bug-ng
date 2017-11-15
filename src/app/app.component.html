@@ -3,7 +3,7 @@
 		<ul>
 			<div id="leftnav">
 
-				<li><a [routerLink]="['/']"><img src="/assets/img/logoblack.png" style="width:20px;"></a></li>
+				<li><a href="https://travelbuggg42.wixsite.com/travel-bug"><img src="/assets/img/logoblack.png" style="width:20px;"></a></li>
 
 				<li *ngIf="_isLogin"><div class="link" [routerLink]="['/dashboard']">My Trip</div></li>
 
@@ -18,7 +18,7 @@
 
 					<li *ngIf="_isLogin" class="vertical-line"><div class="link" (click)="logout()">Logout</div></li>
 
-					<li><div class="link" [routerLink]="['/about']">Contact</div></li>
+					<li><div class="link" (click)="goToExternalURL('https://travelbuggg42.wixsite.com/travel-bug/contact')">Contact</div></li>
 
 					<!--<li><a [routerLink]="['/about']">About</a></li>-->
 
@@ -43,19 +43,19 @@
 				</li>
 				<div id="responsive-footer"  class="hide2">
 					<li>
-						<a [routerLink]="['/team']">MEET THE TEAM</a>
+						<a href="https://travelbuggg42.wixsite.com/travel-bug/meet-the-team">MEET THE TEAM</a>
 					</li>
 					<li>
-						<a [routerLink]="['/tnc']">TERM AND CONDITIONS</a>
+						<a href="https://travelbuggg42.wixsite.com/travel-bug/terms-and-conditions">TERM AND CONDITIONS</a>
 					</li>
 					<li>
-						<a [routerLink]="['/']" class="bug0"><img src="assets/img/logoblack.png" style="width:25px;"></a>
+						<a href="https://travelbuggg42.wixsite.com/travel-bug" class="bug0"><img src="assets/img/logoblack.png" style="width:25px;"></a>
 					</li>
 					<li>
-						<a [routerLink]="['/privacyandpolicy']">PRIVACY POLICY</a>
+						<a href = "https://travelbuggg42.wixsite.com/travel-bug/privacy-policy">PRIVACY POLICY</a>
 					</li>
 					<li>
-						<a [routerLink]="['/about']">CONTACT</a>
+						<a href="https://travelbuggg42.wixsite.com/travel-bug/contact">CONTACT</a>
 					</li>
 				</div>
 			</ul>
