@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 	moduleId: module.id,
 	selector: 'privacy-policy',
 	templateUrl: 'privacy_policy.component.html',
-	styleUrls: ['./privacy_policy.component.css']
+	styleUrls: ['privacy_policy.component.scss']
 })
 
 export class PrivacyPolicyComponent

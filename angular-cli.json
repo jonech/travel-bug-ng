@@ -18,7 +18,7 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "./assets/css/base.css",
+        "./assets/sass/base.scss",
         "../node_modules/dragula/dist/dragula.css"
       ],
       "scripts": [
@@ -41,7 +41,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "prefixInterfaces": false,
     "inline": {
       "style": false,
