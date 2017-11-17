@@ -12,7 +12,7 @@ import { AuthGuard } from './_guard/auth.guard';
 import { GoogleService } from './_service/google.service';
 
 import { StringToDatePipe } from './_pipe/string-to-date.pipe';
-
+import { AvatarLetters } from './_pipe/avatar-letters.pipe';
 
 import { firebaseConfig } from '../environments/firebase.config';
 import { googleConfig } from '../environments/google.config';
@@ -57,7 +57,7 @@ import { TripComponent } from './dashboard/trip.component';
 import { GoingUserComponent } from './dashboard/goingUser.component';
 import { HostComponent } from './dashboard/host.component';
 import { CreateTripComponent } from './dashboard/create_trip.component';
-
+import { TripUsersComponent } from './dashboard/trip_users.component';
 
 import { TripViewComponent } from './tripview/tripview.component';
 import { DayTripListComponent } from './tripview/daytriplist.component';
@@ -90,6 +90,7 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
   declarations: [
     // pipes
     StringToDatePipe,
+    AvatarLetters,
 
     AppComponent,
     HeaderComponent,
@@ -123,6 +124,7 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     GoingUserComponent,
     HostComponent,
     CreateTripComponent,
+    TripUsersComponent,
 
     // tripview or fullview
     TripViewComponent,
