@@ -5,8 +5,8 @@ import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/databas
 
 @Component({
 	selector: 'past-trip',
-	templateUrl: './past_trip.component.html',
-	styleUrls: ['./dashboard.component.css', './past_trip.component.css'],
+	templateUrl: 'past_trip.component.html',
+	styleUrls: ['dashboard.component.scss'],
 })
 
 export class PastTripComponent implements OnInit

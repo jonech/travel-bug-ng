@@ -5,7 +5,7 @@ import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} 
 @Component({
 	//moduleId: module.id,
 	selector: 'host',
-	styleUrls:['./trip.component.css'],
+	styleUrls:['trip.component.scss'],
 	template:
 	`
 		<span>

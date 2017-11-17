@@ -28,6 +28,8 @@ import { AgmCoreModule } from '@agm/core';
 import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './layout/header.component';
+import { FooterComponent } from './layout/footer.component';
 
 import { HomeComponent } from './static/home.component';
 import { AboutComponent } from './static/about.component';
@@ -86,81 +88,83 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 
 @NgModule({
   declarations: [
-	// pipes
-	StringToDatePipe,
+    // pipes
+    StringToDatePipe,
 
     AppComponent,
+    HeaderComponent,
+    FooterComponent,
 
-	// static
-	HomeComponent,
-	AboutComponent,
-	PrivacyPolicyComponent,
-	TeamComponent,
+    // static
+    HomeComponent,
+    AboutComponent,
+    PrivacyPolicyComponent,
+    TeamComponent,
     TermsConditionComponent,
 
-	// auth
-	RegisterComponent,
-	LoginComponent,
+    // auth
+    RegisterComponent,
+    LoginComponent,
 
-	// reuse
-	FirebasePlaceImageComponent,
-	SmallRoundImageComponent,
-	GooglePlaceImageComponent,
+    // reuse
+    FirebasePlaceImageComponent,
+    SmallRoundImageComponent,
+    GooglePlaceImageComponent,
     ClickEditTextComponent,
     ClickEditLongTextComponent,
     ClickEditPlaceComponent,
     ClickEditTimeComponent,
 
-	// Dashboard
-	DashboardComponent,
-	TripListComponent,
-	PastTripComponent,
-	TripComponent,
-	GoingUserComponent,
-	HostComponent,
-	CreateTripComponent,
+    // Dashboard
+    DashboardComponent,
+    TripListComponent,
+    PastTripComponent,
+    TripComponent,
+    GoingUserComponent,
+    HostComponent,
+    CreateTripComponent,
 
-	// tripview or fullview
-	TripViewComponent,
-	DayTripListComponent,
-	DayTripComponent,
-	DayTripImageComponent,
+    // tripview or fullview
+    TripViewComponent,
+    DayTripListComponent,
+    DayTripComponent,
+    DayTripImageComponent,
 
-	// daytripview
-	DayTripViewComponent,
-	ActivityListComponent,
-	LocationFormComponent,
-	LocationRowComponent,
-	TransportFormComponent,
-	TransportRowComponent,
+    // daytripview
+    DayTripViewComponent,
+    ActivityListComponent,
+    LocationFormComponent,
+    LocationRowComponent,
+    TransportFormComponent,
+    TransportRowComponent,
 
 
-	// activity detail
-	ActivityDetailComponent,
-	CommentComponent,
+    // activity detail
+    ActivityDetailComponent,
+    CommentComponent,
     CreateCommentComponent,
 
-	InviteMembersComponentComponent,
-	FriendListComponent,
-	FriendItemComponent,
-	ChosenFriendComponent,
+    InviteMembersComponentComponent,
+    FriendListComponent,
+    FriendItemComponent,
+    ChosenFriendComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-	ReactiveFormsModule,
+	  ReactiveFormsModule,
     HttpModule,
-	Routing,
+	  Routing,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),
 
-	AgmCoreModule.forRoot(googleConfig),
+	  AgmCoreModule.forRoot(googleConfig),
 
-	AngularFireModule.initializeApp(firebaseConfig),
+	  AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
 
-	FacebookModule.forRoot(),
+    FacebookModule.forRoot(),
     DragulaModule,
   ],
   providers: [

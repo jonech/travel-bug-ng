@@ -1,12 +1,21 @@
-<div id="trip-heading">Upcoming Trip</div>
-<div id="card-column">
+
+<div nz-row>
+  <div nz-col [nzSpan]="24">
+    <h2 class="trip-heading">Upcoming Trip</h2>
+  </div>
+</div>
+<div nz-row [nzJustify]="'center'" [nzAlign]="'middle'">
 
 	<div id="no-trips" *ngIf="(_trips | async)?.length <= 0">
 		Looks like you have no plans yet.<br>
 		Ready to start planning? Click on add trip!
 	</div>
 
-	<div *ngFor="let trip of _trips | async">
+	<!-- <div *ngFor="let trip of _trips | async">
 			<trip [tripId]="trip.$key"></trip>
-	</div>
+  </div> -->
+
+  <div *ngFor="let number of [0,1,2,3,4]">
+    <trip></trip>
+  </div>
 </div>

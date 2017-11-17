@@ -1,0 +1,16 @@
+@import '../assets/sass/variables.scss';
+
+
+#layout {
+  min-height: 100%;
+  position: relative;
+  background: $background-white;
+}
+
+#content {
+  padding-top: 70px;       // heigh of header
+  padding-bottom: 120px;    // heigh of footer
+  padding-left: 15px;
+  padding-right: 15px;
+  align-content: center;
+}

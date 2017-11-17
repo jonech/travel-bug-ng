@@ -1,8 +1,7 @@
-<div id="wrapper">
-	<div id="header" class="static-top">
-		<ul>
-			<div id="leftnav">
+<nz-layout id="layout">
+  <header></header>
 
+<<<<<<< HEAD
 				<li><a href="https://travelbuggg42.wixsite.com/travel-bug"><img src="/assets/img/logoblack.png" style="width:20px;"></a></li>
 
 				<li *ngIf="_isLogin"><div class="link" [routerLink]="['/dashboard']">My Trip</div></li>
@@ -74,5 +73,13 @@
 
 	</div>
 </div>
+=======
+  <nz-content id="content">
+      <router-outlet></router-outlet>
+  </nz-content>
+
+  <footer></footer>
+</nz-layout>
+>>>>>>> 16c68ff62e38a01ac62f2c5bbab70bb0e1ad321e
 
 
