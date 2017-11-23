@@ -10,6 +10,7 @@ import { Routing } from './app.routes';
 import { AuthGuard } from './_guard/auth.guard';
 
 import { GoogleService } from './_service/google.service';
+import { AuthService } from './_service/auth.service';
 
 import { StringToDatePipe } from './_pipe/string-to-date.pipe';
 import { AvatarLetters } from './_pipe/avatar-letters.pipe';
@@ -48,7 +49,7 @@ import { ClickEditTimeComponent } from './reuseable/click_edit_time.component';
 
 import { RegisterComponent } from './auth/register.component';
 import { LoginComponent } from './auth/login.component';
-import { AuthService } from './auth/auth.service';
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TripListComponent } from './dashboard/trip_list.component';

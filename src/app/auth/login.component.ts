@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AuthService } from './auth.service';
+import { AuthService } from '../_service/auth.service';
 
 @Component({
 	selector: 'login',
@@ -31,23 +31,13 @@ export class LoginComponent implements OnInit
 
 	LoginWithEmail(emailEl:any, passwordEl:any)
 	{
-		// this._afAuth.auth.login({
-		// 	email: emailEl.value,
-		// 	password: passwordEl.value
-		// },
-		// {
-		// 	provider: AuthProviders.Password,
-		// 	method: AuthMethods.Password
-		// })
-		this._afAuth.auth.signInWithEmailAndPassword(emailEl.value, passwordEl.value)
-		.then((success) => {
-			//localStorage.setItem('currentUserId', success.auth.uid);
-			this.ToDashboard();
-		})
-		.catch((error) => {
-			this._error = error.message;
-			console.log(JSON.stringify(error));
-		});
+    this.authService.loginWithEmail(emailEl.value, passwordEl.value)
+      .subscribe((res) => {
+        if (res) this.ToDashboard();
+      }, (err) => {
+        //TODO: prompt user
+        console.log(err);
+      });
 	}
 
 	private handleRedirectMsg(redirect:string)
