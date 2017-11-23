@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { Routing } from './app.routes';
@@ -156,7 +156,7 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     BrowserModule,
     FormsModule,
 	  ReactiveFormsModule,
-    HttpModule,
+    HttpClientModule,
 	  Routing,
     BrowserAnimationsModule,
     NgZorroAntdModule.forRoot(),

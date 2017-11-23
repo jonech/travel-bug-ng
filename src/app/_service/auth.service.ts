@@ -1,5 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+//import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpEventType, HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { FbUser } from '../_model/fb-user.model';
@@ -13,6 +14,11 @@ import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
 import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 
+interface LoginResponse {
+  jwt?: string
+  errors?: any
+}
+
 @Injectable()
 export class AuthService {
 
@@ -24,7 +30,7 @@ export class AuthService {
 		private _afAuth: AngularFireAuth,
 		private _afDB: AngularFireDatabase,
     private _router: Router,
-    private http: Http,
+    private http: HttpClient,
 		private fb: FacebookService
 	) {}
     //TODO: change default photo
@@ -61,13 +67,14 @@ export class AuthService {
 		})
 	}
 
-  public loginWithEmail(email: string, password: string): Observable<string> {
-    return this.http.post(this.loginUrl, {
+  public loginWithEmail(email: string, password: string): Observable<boolean> {
+    return this.http.post<LoginResponse>(this.loginUrl, {
               email: email,
               password: password
             })
-            .map((res: Response) => {
-              localStorage.setItem(this.JWT, res.json().jwt);
+            .map((res) => {
+              if (res.errors) return false;
+              localStorage.setItem(this.JWT, res.jwt);
               return true;
             })
             .catch((error: any) => Observable.throw(error.json() || 'Server error'));
@@ -79,7 +86,7 @@ export class AuthService {
       Observable.throw('Require login');
     }
     return this.http.get(`${this.validateUrl}?jwt=${jwt}`)
-            .map((res: Response) => res.json())
+            .map((res: Response) => res)
             .catch((error: any) => Observable.throw(error.json() || 'Server error'));
   }
 
