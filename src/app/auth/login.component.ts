@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit
       }, (err) => {
         //TODO: prompt user
         console.log(err);
+        alert(err);
       });
 	}
 
