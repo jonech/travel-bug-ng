@@ -17,53 +17,49 @@
 			<p>{{ _error }}</p>
 		</span>
 	</div>
-
-	<form class="" [formGroup]="registerForm" novalidate>
-		<div class="form-group">
-			<small class="reactive-error" [hidden]="registerForm.get('email').valid || (registerForm.get('email').pristine && !_submitted)">
-					Valid email required.
-					<br>
-			</small>
-			<input class="form-control span_69" id="email" type="text" placeholder="email" formControlName="email">
+	<!-- REGISTER FORM START -->
+	<form nz-form>
+		<div nz-form-item>
+			<div nz-form-control [nzValidateStatus]="'error'">
+				<nz-input [ngModel]="'unavailable choice'" [nzSize]="'large'" name="errorValid">
+				</nz-input>
+				<div nz-form-explain>Should be combination of numbers & alphabets</div>
+			</div>
 		</div>
-
-		<div class="form-group">
-			<small class="reactive-error" [hidden]="registerForm.get('firstname').valid || (registerForm.get('firstname').pristine && !_submitted)">
-					First name required (minimum 2 characters).
-					<br>
-			</small>
-			<input class="form-control span_69" id="firstname" type="text" placeholder="firstname" formControlName="firstname">
+		<div nz-form-item>
+			<div nz-form-control [nzValidateStatus]="'warning'" nz-col [nzSpan]="12">
+				<nz-input [ngModel]="'Warning'" [nzSize]="'large'" name="warningValid">
+				</nz-input>
+			</div>
 		</div>
-
-		<div class="form-group">
-			<small class="reactive-error" [hidden]="registerForm.get('lastname').valid || (registerForm.get('lastname').pristine && !_submitted)">
-					Last name required (minimum 2 characters).
-					<br>
-			</small>
-			<input class="form-control span_69" id="lastname" type="text" placeholder="lastname" formControlName="lastname">
+		<div nz-form-item>
+			<div nz-form-control [nzValidateStatus]="'validating'" nzHasFeedback>
+				<nz-input [ngModel]="'The content is being validating'" [nzSize]="'large'" name="validating">
+				</nz-input>
+				<div nz-form-explain>I'm the content is being validating</div>
+			</div>
 		</div>
-
-		<div class="form-group" formGroupName="matchingPwd">
-			<small class="reactive-error" [hidden]="registerForm.get('matchingPwd').get('password').valid || (registerForm.get('matchingPwd').get('password').pristine && !_submitted)">
-					Password required (minimum 8 characters).
-					<br>
-			</small>
-			<input class="form-control span_69" id="password" type="password" placeholder="password (min 8 characters)" formControlName="password">
+		<div nz-form-item>
+			<div nz-form-control [nzValidateStatus]="'success'" nzHasFeedback>
+				<nz-input [ngModel]="'The content'" [nzSize]="'large'" name="successValid">
+				</nz-input>
+			</div>
 		</div>
-
-		<div class="form-group" formGroupName="matchingPwd">
-			<small class="reactive-error" [hidden]="registerForm.get('matchingPwd').valid || (!registerForm.get('matchingPwd').touched && !_submitted)">
-					Password mismatch.
-					<br/>
-			</small>
-			<input class="form-control span_69" id="passwordconf" type="password" placeholder="confirm password" formControlName="passwordconf">
+		<div nz-form-item>
+			<div nz-form-control [nzValidateStatus]="'warning'" nzHasFeedback>
+				<nz-input [ngModel]="'Warning'" [nzSize]="'large'" name="warningHighValid">
+				</nz-input>
+				<div nz-form-explain>Should be combination of numbers & alphabets</div>
+			</div>
 		</div>
-
-
-		<div class="form-group">
-			<button type="submit" class="submit span_69" (click)="RegisterWithEmail(registerForm.value, registerForm.valid); false">REGISTER</button>
+		<div nz-form-item>
+			<div nz-form-control [nzValidateStatus]="'error'" nzHasFeedback>
+				<nz-input [ngModel]="'unavailable choice'" [nzSize]="'large'" name="invalidValid">
+				</nz-input>
+				<div nz-form-explain>Should be combination of numbers & alphabets</div>
+			</div>
 		</div>
-
 	</form>
+<!-- REGISTER FORM END -->
 
 </div>
