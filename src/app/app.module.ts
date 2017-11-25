@@ -4,6 +4,19 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+
+import {AngularFireModule} from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import * as firebase from 'firebase/app';
+import { AgmCoreModule } from '@agm/core';
+import { DragulaModule } from 'ng2-dragula';
+import { FacebookModule } from 'ngx-facebook';
+
+import { firebaseConfig } from '../environments/firebase.config';
+import { googleConfig } from '../environments/google.config';
 
 import { Routing } from './app.routes';
 
@@ -11,33 +24,27 @@ import { AuthGuard } from './_guard/auth.guard';
 
 import { GoogleService } from './_service/google.service';
 import { AuthService } from './_service/auth.service';
+import { InviteService } from './tripview/invite-members-component/invite.service';
 
 import { StringToDatePipe } from './_pipe/string-to-date.pipe';
 import { AvatarLetters } from './_pipe/avatar-letters.pipe';
 
-import { firebaseConfig } from '../environments/firebase.config';
-import { googleConfig } from '../environments/google.config';
+import { AuthEffect } from './effect/auth.effects';
+import { reducers } from './reducer';
 
-import {AngularFireModule} from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
-//import { AgmCoreModule } from "angular2-google-maps/core"
-
-
-import { AgmCoreModule } from '@agm/core';
-import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './layout/header.component';
-import { FooterComponent } from './layout/footer.component';
+import { HeaderComponent } from './core/layout/header/header.component';
+import { FooterComponent } from './core/layout/footer/footer.component';
 
-import { HomeComponent } from './static/home.component';
-import { AboutComponent } from './static/about.component';
-import { PrivacyPolicyComponent } from './static/privacy_policy.component';
-import { TeamComponent } from './static/team.component';
-import { TermsConditionComponent } from './static/terms_cond.component';
-import { FacebookModule } from 'ngx-facebook';
+import { RegisterComponent } from './core/auth/register/register.component';
+import { LoginComponent } from './core/auth/login/login.component';
+
+import { HomeComponent } from './core/static/home/home.component';
+import { AboutComponent } from './core/static/about/about.component';
+import { PrivacyPolicyComponent } from './core/static/privacy-policy/privacy-policy.component';
+import { TeamComponent } from './core/static/team.component';
+import { TermsConditionComponent } from './core/static/terms-n-conditions/terms-n-conditions.component';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
 import { SmallRoundImageComponent } from './reuseable/small_round_image.component';
@@ -47,21 +54,14 @@ import { ClickEditLongTextComponent } from './reuseable/click_edit_long_text.com
 import { ClickEditPlaceComponent } from './reuseable/click_edit_place.component';
 import { ClickEditTimeComponent } from './reuseable/click_edit_time.component';
 
-import { RegisterComponent } from './auth/register/register.component';
-import { LoginComponent } from './auth/login/login.component';
-import { AuthEffect } from './auth/auth.effects';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { reducers } from './reducer';
-
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TripListComponent } from './dashboard/trip_list.component';
-import { PastTripComponent } from './dashboard/past_trip.component';
-import { TripComponent } from './dashboard/trip.component';
-import { GoingUserComponent } from './dashboard/goingUser.component';
-import { HostComponent } from './dashboard/host.component';
-import { CreateTripComponent } from './dashboard/create_trip.component';
-import { TripUsersComponent } from './dashboard/trip_users.component';
+import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { TripListComponent } from './core/dashboard/trip-list/trip-list.component';
+import { PastTripComponent } from './core/dashboard/past-trip/past-trip.component';
+import { TripComponent } from './core/dashboard/trip/trip.component';
+import { GoingUserComponent } from './core/dashboard/goingUser.component';
+import { HostComponent } from './core/dashboard/host.component';
+import { CreateTripComponent } from './core/dashboard/create-trip/create-trip.component';
+import { TripUsersComponent } from './core/dashboard/trip-user/trip-users.component';
 
 import { TripViewComponent } from './tripview/tripview.component';
 import { DayTripListComponent } from './tripview/daytriplist.component';
@@ -74,17 +74,11 @@ import { LocationFormComponent } from './daytripview/location_form.component';
 import { LocationRowComponent } from './daytripview/location_row.component';
 import { TransportFormComponent } from './daytripview/transport_form.component';
 import { TransportRowComponent } from './daytripview/transport_row.component';
-
-
-import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
-import { InviteService } from './tripview/invite-members-component/invite.service';
-
 import { ActivityDetailComponent } from './activitydetail/activity_detail.component';
 import { CommentComponent } from './activitydetail/comment.component';
 import { CreateCommentComponent } from './activitydetail/create_comment.component';
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
+import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
 import { FriendListComponent } from './tripview/invite-members-component/friend-list/friend-list.component';
 import { FriendItemComponent } from './tripview/invite-members-component/friend-list/friend-item.component';
 import { ChosenFriendComponent } from './tripview/invite-members-component/chosen-friend/chosen-friend.component';

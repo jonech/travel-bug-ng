@@ -7,7 +7,7 @@ import { InviteService } from './invite-members-component/invite.service';
 @Component({
 	selector: 'daytriplist',
 	templateUrl: './daytriplist.component.html',
-	styleUrls: ['./daytriplist.component.css', '../dashboard/goingUser.component.scss'],
+	styleUrls: ['./daytriplist.component.css'],
 	//encapsulation: ViewEncapsulation.None //Make css style in this component globally
 })
 
