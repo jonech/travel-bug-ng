@@ -47,9 +47,12 @@ import { ClickEditLongTextComponent } from './reuseable/click_edit_long_text.com
 import { ClickEditPlaceComponent } from './reuseable/click_edit_place.component';
 import { ClickEditTimeComponent } from './reuseable/click_edit_time.component';
 
-import { RegisterComponent } from './auth/register.component';
-import { LoginComponent } from './auth/login.component';
-
+import { RegisterComponent } from './auth/register/register.component';
+import { LoginComponent } from './auth/login/login.component';
+import { AuthEffect } from './auth/auth.effects';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { reducers } from './reducer';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { TripListComponent } from './dashboard/trip_list.component';
@@ -159,6 +162,10 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     HttpClientModule,
 	  Routing,
     BrowserAnimationsModule,
+
+    //StoreModule.(reducers),
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffect]),
     NgZorroAntdModule.forRoot(),
 
 	  AgmCoreModule.forRoot(googleConfig),

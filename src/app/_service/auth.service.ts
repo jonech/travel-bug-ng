@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
 import { FbUser } from '../_model/fb-user.model';
 import { User } from '../_model/user.model';
+import { Auth } from '../_model/auth.model';
 
 import { ProfileDefaultBase64 } from '../_util/string.util';
 import { AngularFireModule } from 'angularfire2';
@@ -67,27 +68,31 @@ export class AuthService {
 		})
 	}
 
-  public loginWithEmail(email: string, password: string): Observable<boolean> {
+  public loginWithEmail(email: string, password: string): Observable<Auth> {
     return this.http.post<LoginResponse>(this.loginUrl, {
               email: email,
               password: password
             })
             .map((res) => {
-              if (res.errors) return false;
+              if (res.errors) return Observable.throw(res.errors || 'Server error');
               localStorage.setItem(this.JWT, res.jwt);
-              return true;
+              return new Auth({ jwt: res.jwt, isLogin: true });
             })
-            .catch((error: any) => Observable.throw(error.json() || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
-  public validateJWT(): Observable<string> {
+  public validateJWT(): Observable<Auth> {
     let jwt = localStorage.getItem(this.JWT);
     if (jwt == null) {
       Observable.throw('Require login');
+      return;
     }
-    return this.http.get(`${this.validateUrl}?jwt=${jwt}`)
-            .map((res: Response) => res)
-            .catch((error: any) => Observable.throw(error.json() || 'Server error'));
+    return this.http.get<LoginResponse>(`${this.validateUrl}?jwt=${jwt}`)
+            .map((res) => {
+              if (res.errors) Observable.throw(res.errors || 'Server error');
+              return new Auth({ jwt: res.jwt, isLogin: true })
+            })
+            .catch((error: any) => Observable.throw(error|| 'Server error'));
   }
 
   public logout() {

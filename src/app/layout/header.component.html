@@ -3,10 +3,11 @@
     <img src="/assets/img/logoblack.png">
   </div>
   <ul nz-menu id="header-menu" [nzMode]="'horizontal'">
-    <li nz-menu-item *ngIf="_isLogin" class="link" [routerLink]="['/dashboard']">My Trip</li>
-    <li nz-menu-item *ngIf="!_isLogin" class="link" [routerLink]="['/login']">Login</li>
-    <li nz-menu-item *ngIf="!_isLogin" class="vertical-line" class="link" [routerLink]="['/register']">Register</li>
-    <li nz-menu-item *ngIf="_isLogin" class="vertical-line" class="link" (click)="logout()">Logout</li>
+    <li nz-menu-item *ngIf="(auth | async)?.isLogin" class="link" [routerLink]="['/dashboard']">My Trip</li>
+    <li nz-menu-item *ngIf="!(auth | async)?.isLogin" class="link" [routerLink]="['/login']">Login</li>
+    <li nz-menu-item *ngIf="!(auth | async)?.isLogin" class="vertical-line" class="link" [routerLink]="['/register']">Register</li>
+    <li nz-menu-item *ngIf="(auth | async)?.isLogin" class="vertical-line" class="link" (click)="logout()">Logout</li>
+
     <li nz-menu-item class="link" [routerLink]="['/about']">Contact</li>
   </ul>
 </nz-header>

@@ -1,0 +1,45 @@
+<div id = "form-wrapper" style="margin-top:20px;height:250px;padding-top:20px;">
+
+    <img style="padding-bottom:20px;" src="assets/img/logo.png"/>
+
+    <div *ngIf="_redirect">
+      <span style="color: teal; font-size: 10px;">
+        {{ _redirect }}
+      </span>
+    </div>
+
+    <div *ngIf="_error">
+      <span style="color: red; font-size: 10px;">
+        {{ _error }}
+      </span>
+    </div>
+
+    <!--<div *ngIf="_error">
+      <span style="color: red; font-size: 10px;">
+        <p>You email address has not been verified</p>
+        <p>Please check your inbox for verification link to verify your email</p>
+      </span>
+    </div>-->
+
+
+    <div class="facebook" (click)="LoginWithFacebook()">CONTINUE WITH FACEBOOK</div>
+
+    <div class="or-divider"><span>OR</span></div>
+
+    <form #loginForm>
+      <div class="form-group">
+        <input class="form-control span_69" id="email" type="text" placeholder="email" value="" #email>
+      </div>
+
+      <div class="form-group">
+        <input class="form-control span_69" id="password" type="password" placeholder="password" value="" #password>
+      </div>
+
+      <div class="form-group">
+        <button class="submit span_69" (click)="LoginWithEmail(email,password); false">LOGIN</button>
+      </div>
+
+    </form>
+
+  </div>
+
