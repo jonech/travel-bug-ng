@@ -11,6 +11,7 @@ import { AuthGuard } from './_guard/auth.guard';
 
 import { GoogleService } from './_service/google.service';
 import { AuthService } from './_service/auth.service';
+import { EmitterService } from './_service/event-emitter.service';
 
 import { StringToDatePipe } from './_pipe/string-to-date.pipe';
 import { AvatarLetters } from './_pipe/avatar-letters.pipe';
@@ -178,7 +179,8 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 	  GoogleService,
 
 	  //services
-	  AuthService,
+    AuthService,
+    EmitterService,
 
 	  //services
 	  InviteService

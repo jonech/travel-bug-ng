@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 import { FacebookService } from 'ngx-facebook';
 import { AuthService } from '../_service/auth.service';
-
+import { EmitterService } from '../_service/event-emitter.service';
 @Component({
   selector: 'header',
   styleUrls: ['header.component.scss'],
   templateUrl: 'header.component.html'
 })
 
-export class HeaderComponent
+export class HeaderComponent implements OnInit
 {
 	_isLogin: boolean = false;
 	_isfbLogin: boolean = false;
@@ -22,8 +22,7 @@ export class HeaderComponent
 		private router: Router,
     private fb: FacebookService,
     private auth: AuthService
-	)
-	{
+	) {
 		this.auth.validateJWT().subscribe(res => {
 			if (res) {
 				this._isLogin = true;
@@ -36,11 +35,19 @@ export class HeaderComponent
     })
 	}
 
-	private logout()
-	{
+  ngOnInit() {
+    EmitterService.get('LoginComponent').subscribe((isLogin: boolean) => {
+      if (isLogin) {
+        this._isLogin = true;
+      }
+    })
+  }
+
+	private logout() {
 		this.auth.logout();
     console.log("Log out successfully");
     this._isLogin = false;
  		this.router.navigate(['/']);
-	}
+  }
+
 }

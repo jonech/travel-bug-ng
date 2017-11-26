@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../_service/auth.service';
+import { EmitterService } from '../_service/event-emitter.service';
 
 @Component({
 	selector: 'login',
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit
 		private _afAuth:AngularFireAuth,
 		private _router:Router,
 		private _route: ActivatedRoute,
-		private authService: AuthService
+    private authService: AuthService
 	){}
 
 	ngOnInit()
@@ -33,7 +34,10 @@ export class LoginComponent implements OnInit
 	{
     this.authService.loginWithEmail(emailEl.value, passwordEl.value)
       .subscribe((res) => {
-        if (res) this.ToDashboard();
+        if (res) {
+          EmitterService.get('LoginComponent').emit(true);
+          this.ToDashboard();
+        };
       }, (err) => {
         //TODO: prompt user
         console.log(err);
@@ -51,13 +55,11 @@ export class LoginComponent implements OnInit
 		}
 	}
 
-	LoginWithFacebook()
-	{
+	LoginWithFacebook() {
 		this.authService.LoginWithFacebook();
 	}
 
-	ToDashboard()
-	{
+	ToDashboard() {
 		this._router.navigate(['/dashboard']);
 	}
 
