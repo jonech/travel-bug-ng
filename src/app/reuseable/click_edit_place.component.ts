@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output, ElementRef, ViewChild, NgZone, SimpleChanges, OnChanges } from '@angular/core';
 import { MapsAPILoader } from '@agm/core';
-import { GoogleLocation } from '../_model/googleLocation.model';
+import { GoogleLocation } from '../models/googleLocation.model';
 
 
 @Component({

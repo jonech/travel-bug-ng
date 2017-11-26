@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router'
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
-import { DateCount } from '../_util/datetime.util';
+import { DateCount } from '../shared/util/datetime.util';
 
 @Component({
 	selector: 'day-trip',

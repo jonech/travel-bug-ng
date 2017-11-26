@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { InviteService } from '../invite.service';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
-import { Friend } from '../../../_model/friend';
+import { Friend } from '../../../models/friend';
 import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'friend-list',
@@ -19,7 +19,7 @@ export class FriendListComponent implements OnInit {
 
 
 
- 
+
   constructor(
     private firebase: AngularFireDatabase,
     private auth: AngularFireAuth,

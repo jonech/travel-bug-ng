@@ -4,7 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} 
 import { NgForm } from '@angular/forms';
 import { InviteService } from './invite.service';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
-import { Friend } from '../../_model/friend';
+import { Friend } from '../../models/friend';
 import { ActivatedRoute, Router } from '@angular/router';
 import {Location} from '@angular/common';
 
@@ -76,7 +76,7 @@ export class InviteMembersComponentComponent implements OnInit {
       if(suc.status==='connected') {
         console.log("facebookUserId: "+suc.authResponse.userID);
         console.log("accessToken: "+suc.authResponse.accessToken);
-        
+
         this.accessToken = suc.authResponse.accessToken;
         this.findAllFriends();
       }
@@ -84,13 +84,13 @@ export class InviteMembersComponentComponent implements OnInit {
     })
     .catch((error)=>{
       console.log(error);
-    })    
+    })
 
     this.chosenFriends = this.inviteService.getChosenFriends();
 
     this.inviteService.isChecked.subscribe((checked:boolean)=>{
       this.hasChosenFriend = checked;
-    });    
+    });
 
     this.trip = this.firebase.object(`/Trip/${this.tripId}`);
     this.tripRegulars = this.firebase.list(`/Trip/${this.tripId}/User/Regular`);
@@ -101,14 +101,14 @@ export class InviteMembersComponentComponent implements OnInit {
       (numberOf: number)=>{
         this.numberOfInviters = numberOf;
       }
-      
+
     );
   }
 
   private findAllFriends() {
      this.facebook.api('/me/friends','get',{access_token: this.accessToken})
       .then((friendsList)=>{
-        this.allFriends = this.filtered = friendsList.data;  
+        this.allFriends = this.filtered = friendsList.data;
         console.log(this.allFriends);
       })
       .catch((error)=>{
@@ -139,10 +139,10 @@ export class InviteMembersComponentComponent implements OnInit {
   inviteFbFriends() {
     for(let fbFriend of this.chosenFriends) {
       fbFriend.subscribe( facebookFriend =>{
-        this.inviteByEmail(facebookFriend.email);       
+        this.inviteByEmail(facebookFriend.email);
       });
     }
-    
+
   }
 
   inviteByEmail(emailAdd:string) {
@@ -154,7 +154,7 @@ export class InviteMembersComponentComponent implements OnInit {
         equalTo: emailAdd
       }
     });
- 
+
     this.invitedUser
       .subscribe(snapshots =>{
         if(snapshots.length!=0){
@@ -169,7 +169,7 @@ export class InviteMembersComponentComponent implements OnInit {
           this._error_flag = true;
           this._error = 'User email does not exist!';
         }
-      }); 
+      });
 
   }
 

@@ -3,10 +3,10 @@ import { Injectable, ElementRef } from '@angular/core';
 import { HttpEventType, HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Router } from '@angular/router';
-import { FbUser } from '../_model/fb-user.model';
-import { User } from '../_model/user.model';
+import { FbUser } from '../models/fb-user.model';
+import { User } from '../models/user.model';
 
-import { ProfileDefaultBase64 } from '../_util/string.util';
+import { ProfileDefaultBase64 } from '../shared/util/string.util';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';

@@ -6,9 +6,9 @@ import { routes as TripViewRoutes } from './tripview/tripview.routes';
 import { routes as DayTripViewRoutes } from './daytripview/daytripview.routes';
 
 const routes: Routes = [
-	...StaticRoutes,
-	...AuthRoutes,
-	...DashboardRoutes,
+	//...StaticRoutes,
+	//...AuthRoutes,
+	//...DashboardRoutes,
 	...TripViewRoutes,
 	...DayTripViewRoutes
 ];

@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 import { FacebookService } from 'ngx-facebook';
-import { AuthService } from '../_service/auth.service';
-import { EmitterService } from '../_service/event-emitter.service';
+import { AuthService } from '../../../services/auth.service';
+import { EmitterService } from '../../../services/event-emitter.service';
 @Component({
   selector: 'header',
   styleUrls: ['header.component.scss'],

@@ -1,12 +1,12 @@
 import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild, NgZone } from '@angular/core';
 import { MapsAPILoader } from 'angular2-google-maps/core';
-import { Trip } from '../_model/trip.model';
+import { Trip } from '../../models/trip.model';
 
 @Component({
 	moduleId: module.id,
 	selector: 'create-trip-component',
-	templateUrl: 'create_trip.component.html',
-	styleUrls: ['./create_trip.component.css']
+	templateUrl: 'create-trip.component.html',
+	styleUrls: ['create-trip.component.css']
 })
 
 export class CreateTripComponent implements OnInit

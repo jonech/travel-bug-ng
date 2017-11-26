@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 
-import { GoogleService } from '../_service/google.service'
+import { GoogleService } from '../services/google.service'
 
 @Component({
 	moduleId: module.id,

@@ -6,16 +6,16 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 
-import { User } from '../_model/user.model';
-import { FbUser } from '../_model/fb-user.model';
-import { ProfileDefaultBase64, EmailRegEx } from '../_util/string.util';
+import { User } from '../../models/user.model';
+import { FbUser } from '../../models/fb-user.model';
+import { ProfileDefaultBase64, EmailRegEx } from '../../shared/util/string.util';
 
-import{ AuthService } from '../_service/auth.service';
+import{ AuthService } from '../../services/auth.service';
 
 @Component({
 	selector: 'register',
-	templateUrl: './register.component.html',
-	styleUrls: ['./register.component.css'],
+	templateUrl: 'register.component.html',
+	styleUrls: ['register.component.css'],
 })
 
 export class RegisterComponent implements OnInit

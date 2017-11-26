@@ -1,13 +1,13 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AuthService } from '../_service/auth.service';
-import { EmitterService } from '../_service/event-emitter.service';
+import { AuthService } from '../../services/auth.service';
+import { EmitterService } from '../../services/event-emitter.service';
 
 @Component({
 	selector: 'login',
-	templateUrl: './login.component.html',
-	styleUrls: ['./auth.component.css'],
+	templateUrl: 'login.component.html',
+	styleUrls: ['../auth.component.css'],
 })
 
 export class LoginComponent implements OnInit

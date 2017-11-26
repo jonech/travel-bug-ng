@@ -5,9 +5,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 //import { MapsAPILoader } from 'angular2-google-maps/core';
 import { MapsAPILoader } from '@agm/core';
-import { Location } from '../_model/location.model';
+import { Location } from '../models/location.model';
 
-import { GetTimeSort } from '../_util/datetime.util';
+import { GetTimeSort } from '../shared/util/datetime.util';
 
 @Component({
 	moduleId: module.id,

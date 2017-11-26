@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase} from 'angularfire2/database';
 
-import { Trip } from '../_model/trip.model';
+import { Trip } from '../models/trip.model';
 
 @Component({
 	selector: 'dashboard',

@@ -2,7 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
-import { Friend } from '../../_model/friend';
+import { Friend } from '../../models/friend';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { FacebookService } from 'ngx-facebook';
@@ -17,7 +17,7 @@ export class InviteService {
   numberOfInvi = new Subject();
   private chosenFriends: FirebaseObjectObservable<any>[] = [];
 
-  getChosenFriends(){   
+  getChosenFriends(){
     this.checkLength();
     return this.chosenFriends;
   }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
     selector: 'terms-cond-component',
-    templateUrl: 'terms_cond.component.html',
-    styleUrls: ['privacy_policy.component.scss']
+    templateUrl: 'terms-n-conditions.component.html',
+    //styleUrls: ['privacy-policy.component.scss']
 })
 
 export class TermsConditionComponent implements OnInit {

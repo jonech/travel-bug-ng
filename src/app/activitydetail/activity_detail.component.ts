@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
-import { GoogleService } from '../_service/google.service';
-import { GetCurrentDateTime, GetTimeSort } from '../_util/datetime.util';
+import { GoogleService } from '../services/google.service';
+import { GetCurrentDateTime, GetTimeSort } from '../shared/util/datetime.util';
 
 @Component({
 	selector: 'activity-detail',

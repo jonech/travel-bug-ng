@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'trip-users',
-  templateUrl: 'trip_users.component.html',
-  styleUrls: ['trip.component.scss']
+  templateUrl: 'trip-users.component.html',
+  styleUrls: ['../trip/trip.component.scss']
 })
 
 export class TripUsersComponent implements OnInit

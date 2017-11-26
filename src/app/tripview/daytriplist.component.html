@@ -10,9 +10,9 @@
 
     <div *ngIf="(_trip|async)?.isPast">(PAST)</div>
 
-		<div *ngFor="let admin of _tripAdmins | async" class="host">
+		<!-- <div *ngFor="let admin of _tripAdmins | async" class="host">
 			Host by <host [userId]="admin.$key"></host>
-		</div>
+		</div> -->
 		<hr align="left">
 		<div class="location">
 			<i class="fa fa-map-marker" aria-hidden="true"></i>{{ ( _trip | async )?.location }}
@@ -33,10 +33,10 @@
 				</div>
 		</div>-->
 		<div class="att-list divide">
-			<ul  >
-				<li *ngFor="let user of _tripRegulars | async">
+			<ul>
+				<!-- <li *ngFor="let user of _tripRegulars | async">
 					<going-user [goingUserId]="user.$key"></going-user>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 	</div>

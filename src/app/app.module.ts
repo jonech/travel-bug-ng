@@ -7,14 +7,14 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 
 import { Routing } from './app.routes';
 
-import { AuthGuard } from './_guard/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 
-import { GoogleService } from './_service/google.service';
-import { AuthService } from './_service/auth.service';
-import { EmitterService } from './_service/event-emitter.service';
+import { GoogleService } from './services/google.service';
+import { AuthService } from './services/auth.service';
+import { EmitterService } from './services/event-emitter.service';
 
-import { StringToDatePipe } from './_pipe/string-to-date.pipe';
-import { AvatarLetters } from './_pipe/avatar-letters.pipe';
+import { StringToDatePipe } from './shared/pipes/string-to-date.pipe';
+import { AvatarLetters } from './shared/pipes/avatar-letters.pipe';
 
 import { firebaseConfig } from '../environments/firebase.config';
 import { googleConfig } from '../environments/google.config';
@@ -30,14 +30,9 @@ import { AgmCoreModule } from '@agm/core';
 import { DragulaModule } from 'ng2-dragula';
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './layout/header.component';
-import { FooterComponent } from './layout/footer.component';
+import { CoreModule } from './core/core.module';
+import { StaticModule } from './static/static.module';
 
-import { HomeComponent } from './static/home.component';
-import { AboutComponent } from './static/about.component';
-import { PrivacyPolicyComponent } from './static/privacy_policy.component';
-import { TeamComponent } from './static/team.component';
-import { TermsConditionComponent } from './static/terms_cond.component';
 import { FacebookModule } from 'ngx-facebook';
 
 import { FirebasePlaceImageComponent } from './reuseable/firebase_place_image.component';
@@ -48,18 +43,8 @@ import { ClickEditLongTextComponent } from './reuseable/click_edit_long_text.com
 import { ClickEditPlaceComponent } from './reuseable/click_edit_place.component';
 import { ClickEditTimeComponent } from './reuseable/click_edit_time.component';
 
-import { RegisterComponent } from './auth/register.component';
-import { LoginComponent } from './auth/login.component';
-
-
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { TripListComponent } from './dashboard/trip_list.component';
-import { PastTripComponent } from './dashboard/past_trip.component';
-import { TripComponent } from './dashboard/trip.component';
-import { GoingUserComponent } from './dashboard/goingUser.component';
-import { HostComponent } from './dashboard/host.component';
-import { CreateTripComponent } from './dashboard/create_trip.component';
-import { TripUsersComponent } from './dashboard/trip_users.component';
+import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 import { TripViewComponent } from './tripview/tripview.component';
 import { DayTripListComponent } from './tripview/daytriplist.component';
@@ -91,23 +76,10 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 @NgModule({
   declarations: [
     // pipes
-    StringToDatePipe,
-    AvatarLetters,
+    // StringToDatePipe,
+    // AvatarLetters,
 
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
-
-    // static
-    HomeComponent,
-    AboutComponent,
-    PrivacyPolicyComponent,
-    TeamComponent,
-    TermsConditionComponent,
-
-    // auth
-    RegisterComponent,
-    LoginComponent,
 
     // reuse
     FirebasePlaceImageComponent,
@@ -117,16 +89,6 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     ClickEditLongTextComponent,
     ClickEditPlaceComponent,
     ClickEditTimeComponent,
-
-    // Dashboard
-    DashboardComponent,
-    TripListComponent,
-    PastTripComponent,
-    TripComponent,
-    GoingUserComponent,
-    HostComponent,
-    CreateTripComponent,
-    TripUsersComponent,
 
     // tripview or fullview
     TripViewComponent,
@@ -141,7 +103,6 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     LocationRowComponent,
     TransportFormComponent,
     TransportRowComponent,
-
 
     // activity detail
     ActivityDetailComponent,
@@ -160,6 +121,12 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     HttpClientModule,
 	  Routing,
     BrowserAnimationsModule,
+
+    AuthModule,
+    StaticModule,
+    CoreModule,
+    DashboardModule,
+
     NgZorroAntdModule.forRoot(),
 
 	  AgmCoreModule.forRoot(googleConfig),

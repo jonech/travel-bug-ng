@@ -10,9 +10,9 @@ import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/data
 		<div class="comment"
             [ngClass]="{'even-row': isEven, 'odd-row': isOdd}">
             <div class="section group">
-                <div class="col user-image">
+                <!--<div class="col user-image">
                     <going-user [goingUserId]="userId"></going-user>
-                </div>
+                </div>-->
 
                 <div class="col span_70">
                     <div class="username">
