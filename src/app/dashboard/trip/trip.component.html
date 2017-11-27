@@ -6,13 +6,13 @@
         <img alt="example" src="https://i.pinimg.com/736x/f7/ba/65/f7ba654d396fc5b904ccc2c2532435a5--eerie-photography-creative-photography.jpg"/>
       </div>
       <div class="date-box">
-        <p class="date">30</p>
-        <p class="month">oct</p>
+        <p class="date">{{ trip.startDate | date:'d' }}</p>
+        <p class="month">{{ trip.startDate | date:'MMM' }}</p>
       </div>
       <div class="card-bottom">
         <div class="trip-heading">
-          <p class="trip-title">Melbourne</p>
-          <p class="trip-date">23 Oct - 30 Oct</p>
+          <p class="trip-title">{{ trip.tripName || "Unamed Trip" }}</p>
+          <p class="trip-date">{{ trip.startDate | date:'MMM d' }} - {{ trip.endDate | date:'MMM d' }} </p>
         </div>
 
         <trip-users></trip-users>

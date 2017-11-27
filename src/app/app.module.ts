@@ -4,14 +4,17 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { Routing } from './app.routes';
 
 import { AuthGuard } from './guards/auth.guard';
 
 import { GoogleService } from './services/google.service';
-import { AuthService } from './services/auth.service';
-import { EmitterService } from './services/event-emitter.service';
+import {
+  AuthService,
+  EmitterService
+} from './services';
 
 import { StringToDatePipe } from './shared/pipes/string-to-date.pipe';
 import { AvatarLetters } from './shared/pipes/avatar-letters.pipe';
@@ -150,7 +153,7 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     EmitterService,
 
 	  //services
-	  InviteService
+    InviteService
 	],
   bootstrap: [AppComponent]
 })

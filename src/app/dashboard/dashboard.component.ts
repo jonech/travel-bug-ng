@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase} from 'angularfire2/database';
-
 import { Trip } from '../models/trip.model';
 
 @Component({
@@ -17,16 +14,11 @@ export class DashboardComponent implements OnInit
 	private uid:string;
 
 	constructor(
-		private _afAuth: AngularFireAuth,
-		private _afDB: AngularFireDatabase
 	){}
 
 	ngOnInit()
 	{
-		this._afAuth.authState.subscribe(auth => {
-			if (auth)
-				this.uid = auth.uid;
-		})
+
 	}
 
 	OpenCreateTrip()
@@ -42,22 +34,22 @@ export class DashboardComponent implements OnInit
 
 	CreateNewTrip(trip: Trip)
 	{
-		var days = {};
-		for (var i=0; i< Number(trip.numberOfDays); i++) {
-			var temp = this._afDB.list(`/DayTrip`).push({});
-			days[`Day${i+1}`] = temp.key;
-		}
-
-		trip.Days = days;
-		console.log(trip.Days);
-		console.log(trip);
-		// for (var day in trip.Days) {
-		// 	console.log(day);
+		// var days = {};
+		// for (var i=0; i< Number(trip.numberOfDays); i++) {
+		// 	var temp = this._afDB.list(`/DayTrip`).push({});
+		// 	days[`Day${i+1}`] = temp.key;
 		// }
-		var tempTrip = this._afDB.list(`/Trip`).push(trip);
 
-		this._afDB.object(`/Trip/${tempTrip.key}/User/Admin/${this.uid}`).set('not sure');
-		this._afDB.object(`/User/${this.uid}/Trip/${tempTrip.key}`).set('not sure');
-		this.CloseCreateTrip();
+		// trip.Days = days;
+		// console.log(trip.Days);
+		// console.log(trip);
+		// // for (var day in trip.Days) {
+		// // 	console.log(day);
+		// // }
+		// var tempTrip = this._afDB.list(`/Trip`).push(trip);
+
+		// this._afDB.object(`/Trip/${tempTrip.key}/User/Admin/${this.uid}`).set('not sure');
+		// this._afDB.object(`/User/${this.uid}/Trip/${tempTrip.key}`).set('not sure');
+		// this.CloseCreateTrip();
 	}
 }

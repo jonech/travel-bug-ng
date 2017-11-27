@@ -94,6 +94,10 @@ export class AuthService {
     localStorage.removeItem(this.JWT);
   }
 
+  public getJWT() {
+    return localStorage.getItem(this.JWT);
+  }
+
 	private saveFbUserDetails(uid:string, fBuser:FbUser) {
 		this._afDB.object(`/User/${uid}/UserDetails`).update(
 			{

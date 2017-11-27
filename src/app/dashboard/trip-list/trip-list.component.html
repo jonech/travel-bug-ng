@@ -6,7 +6,7 @@
 </div>
 <div nz-row [nzJustify]="'center'" [nzAlign]="'middle'">
 
-	<div id="no-trips" *ngIf="(_trips | async)?.length <= 0">
+	<div id="no-trips" *ngIf="(trips | async)?.length <= 0">
 		Looks like you have no plans yet.<br>
 		Ready to start planning? Click on add trip!
 	</div>
@@ -15,7 +15,7 @@
 			<trip [tripId]="trip.$key"></trip>
   </div> -->
 
-  <div *ngFor="let number of [0,1,2,3,4]">
-    <trip></trip>
+  <div *ngFor="let t of trips | async">
+    <trip [trip]="t"></trip>
   </div>
 </div>
