@@ -5,8 +5,7 @@ import { MapsAPILoader } from 'angular2-google-maps/core';
 import { Trip } from '../../models/trip.model';
 
 @Component({
-	moduleId: module.id,
-	selector: 'create-trip-form',
+	selector: 'trip-form',
   template: `
     <form nz-form [nzType]="'vertical'" [formGroup]="tripForm">
       <!-- Trip Name -->
@@ -45,24 +44,18 @@ import { Trip } from '../../models/trip.model';
 
       <div nz-form-item nz-row>
         <div nz-form-control nz-col [nzSpan]="12" [nzOffset]="6">
-          <button nz-button [nzType]="'primary'" [nzSize]="'large'">Submit</button>
+          <button nz-button (click)="submitForm()" [nzType]="'primary'" [nzSize]="'large'" [nzLoading]="isLoading">Submit</button>
         </div>
       </div>
     </form>
   `
 })
 
-export class CreateTripFormComponent implements OnInit
+export class TripFormComponent implements OnInit
 {
   tripForm: FormGroup;
-	@Output() CloseSplash = new EventEmitter<any>();
-	@Output() NewTrip = new EventEmitter<Trip>();
-
-	@ViewChild('location') locationElement: ElementRef;
-	@ViewChild('tripForm') tripFormElement: ElementRef;
-
-	_error:string = "";
-	trip: Trip = new Trip();
+	@Output() formSubmit = new EventEmitter<Trip>();
+  isLoading: boolean = false;
 
 	constructor(
 		// private googleApi: MapsAPILoader,
@@ -73,7 +66,6 @@ export class CreateTripFormComponent implements OnInit
 	ngOnInit()
 	{
     this.tripForm = this.fb.group({
-      formLayout: [ 'vertical' ],
       tripName: [ null, [ Validators.required ] ],
       startDate: [ null ],
       endDate: [ null ]
@@ -100,50 +92,20 @@ export class CreateTripFormComponent implements OnInit
 		// });
 	}
 
-	CloseCreateTrip() {
-		this.CloseSplash.emit();
-	}
-
   submitForm() {
     for (const i in this.tripForm.controls) {
       this.tripForm.controls[ i ].markAsDirty();
     }
+    if (this.tripForm.valid) {
+      this.isLoading = true;
+      this.formSubmit.emit(this.tripForm.value);
+    }
   }
 
-	CreateTrip(tripNameElef:any, startElef:any, endElef:any)
-	{
-		// TODO: Need better param checking, with different case, for location
-		// selected a location, but then cancel etc
-		this._error = '';
-		if (!endElef.value || !startElef.value) {
-			this._error = 'Please fill in the dates.';
-			return;
-		}
-
-		if (tripNameElef.value == '') {
-			this._error = 'Please give it a trip name.';
-			return;
-		}
-
-		if (this.trip.location == null) {
-			this._error = 'Please insert a location.'
-			return;
-		}
-
-		var startDate = new Date(startElef.value);
-		var endDate = new Date(endElef.value);
-		var numOfDays = this.dateDiffInDays(startDate, endDate) + 1;
-
-		// +1 for month because January is 0
-		this.trip.startDate = `${startDate.getDate()}/${startDate.getMonth()+1}/${startDate.getFullYear()}`;
-		this.trip.endDate = `${endDate.getDate()}/${endDate.getMonth()+1}/${endDate.getFullYear()}`;
-
-		this.trip.tripName = tripNameElef.value;
-		this.trip.numberOfDays = numOfDays.toString();
-
-		this.NewTrip.emit(this.trip);
-		this.tripFormElement.nativeElement.reset();
-	}
+  resetForm() {
+    this.isLoading = false;
+    this.tripForm.reset();
+  }
 
 	private dateDiffInDays(a:Date, b:Date): number
 	{

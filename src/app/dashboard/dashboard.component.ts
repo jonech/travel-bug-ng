@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+import { EmitterService } from '../services/event-emitter.service';
 import { Trip } from '../models/trip.model';
 
 @Component({
@@ -12,13 +13,16 @@ import { Trip } from '../models/trip.model';
 
     <div id="button-row">
       <div>
-        <a id="create-trip-button" class="right" (click)="OpenCreateTrip()">new trip+</a>
+        <a id="create-trip-button" class="right" (click)="openCreateTrip()">new trip+</a>
       </div>
     </div>
 
     <router-outlet></router-outlet>
 
-    <create-trip-modal [isVisible]="isCreateTripOpen" (createTripClose)="CloseCreateTrip($event)"></create-trip-modal>
+    <create-trip-modal
+      [isVisible]="isCreateTripOpen"
+      (createTripClose)="closeCreateTrip($event)">
+    </create-trip-modal>
   `,
 	styleUrls: ['dashboard.component.scss']
 })
@@ -35,32 +39,11 @@ export class DashboardComponent implements OnInit
 
 	}
 
-	OpenCreateTrip() {
-		this.isCreateTripOpen = true;
+	openCreateTrip() {
+    this.isCreateTripOpen = true;
 	}
 
-	CloseCreateTrip(event: any) {
+	closeCreateTrip() {
 		this.isCreateTripOpen = false;
-	}
-
-	CreateNewTrip(trip: Trip)
-	{
-		// var days = {};
-		// for (var i=0; i< Number(trip.numberOfDays); i++) {
-		// 	var temp = this._afDB.list(`/DayTrip`).push({});
-		// 	days[`Day${i+1}`] = temp.key;
-		// }
-
-		// trip.Days = days;
-		// console.log(trip.Days);
-		// console.log(trip);
-		// // for (var day in trip.Days) {
-		// // 	console.log(day);
-		// // }
-		// var tempTrip = this._afDB.list(`/Trip`).push(trip);
-
-		// this._afDB.object(`/Trip/${tempTrip.key}/User/Admin/${this.uid}`).set('not sure');
-		// this._afDB.object(`/User/${this.uid}/Trip/${tempTrip.key}`).set('not sure');
-		// this.CloseCreateTrip();
 	}
 }

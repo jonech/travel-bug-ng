@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 
 import { Trip } from '../models/trip.model';
 import { Observable } from 'rxjs/Observable';
-
+import { EmitterService } from './event-emitter.service';
 
 interface TripResponse {
   errors?: any
@@ -25,9 +25,15 @@ export class TripService {
   public getTrips(): Observable<Trip[]> {
     return this.http.get(this.tripUrl)
             .map((res: any) => {
-              // return res.map(trip => {
-              //   return new Trip(trip);
-              // });
+              return res;
+            })
+            .catch((error: any) => Observable.throw(error || 'Server error'))
+  }
+
+  public createTrip(trip: Trip): Observable<Trip> {
+    return this.http.post(this.tripUrl, { trip: trip})
+            .map((res: Trip) => {
+              EmitterService.get('[Trip] Created').emit(res);
               return res;
             })
             .catch((error: any) => Observable.throw(error || 'Server error'))

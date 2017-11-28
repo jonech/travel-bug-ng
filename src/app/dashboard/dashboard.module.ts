@@ -7,7 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
 
-import { CreateTripFormComponent } from './create-trip/create-trip-form.component';
+import { TripFormComponent } from './create-trip/trip-form.component';
 import { CreateTripModalComponent } from './create-trip/create-trip-modal.component';
 import { TripComponent } from './trip/trip.component';
 import { TripListComponent } from './trip-list/trip-list.component';
@@ -33,7 +33,7 @@ import {
     HttpClientModule,
   ],
   declarations: [
-    CreateTripFormComponent,
+    TripFormComponent,
     CreateTripModalComponent,
     TripComponent,
     TripListComponent,
@@ -45,11 +45,7 @@ import {
     EmitterService,
     AuthService,
     TripService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
 })
 export class DashboardModule {}
