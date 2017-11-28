@@ -4,32 +4,43 @@ import { Trip } from '../models/trip.model';
 
 @Component({
 	selector: 'dashboard',
-	templateUrl: 'dashboard.component.html',
+  template: `
+    <div class="trip-heading">
+      <a [routerLink]="['trips']">My Trips</a>  |
+      <a [routerLink]="['past_trip']">Past Trips</a>
+    </div>
+
+    <div id="button-row">
+      <div>
+        <a id="create-trip-button" class="right" (click)="OpenCreateTrip()">new trip+</a>
+      </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <create-trip-modal [isVisible]="isCreateTripOpen" (createTripClose)="CloseCreateTrip($event)"></create-trip-modal>
+  `,
 	styleUrls: ['dashboard.component.scss']
 })
 
 export class DashboardComponent implements OnInit
 {
-	_isSplashOpen:boolean = false;
+	isCreateTripOpen: boolean = false;
 	private uid:string;
 
 	constructor(
 	){}
 
-	ngOnInit()
-	{
+	ngOnInit() {
 
 	}
 
-	OpenCreateTrip()
-	{
-		this._isSplashOpen = true;
-		console.log(this._isSplashOpen)
+	OpenCreateTrip() {
+		this.isCreateTripOpen = true;
 	}
 
-	CloseCreateTrip()
-	{
-		this._isSplashOpen = false;
+	CloseCreateTrip(event: any) {
+		this.isCreateTripOpen = false;
 	}
 
 	CreateNewTrip(trip: Trip)
