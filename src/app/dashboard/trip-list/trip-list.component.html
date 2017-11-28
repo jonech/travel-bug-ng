@@ -6,16 +6,19 @@
 </div>
 <div nz-row [nzJustify]="'center'" [nzAlign]="'middle'">
 
-	<div id="no-trips" *ngIf="(trips | async)?.length <= 0">
+	<div id="no-trips" *ngIf="(trips$ | async)?.length <= 0 && !isLoading$ | async">
 		Looks like you have no plans yet.<br>
 		Ready to start planning? Click on add trip!
 	</div>
 
+  <div id="no-trips" *ngIf="isLoading$ | async">
+		<nz-spin [nzSize]="'large'"></nz-spin>
+	</div>
 	<!-- <div *ngFor="let trip of _trips | async">
 			<trip [tripId]="trip.$key"></trip>
   </div> -->
 
-  <div *ngFor="let t of trips | async">
+  <div *ngFor="let t of trips$ | async">
     <trip [trip]="t"></trip>
   </div>
 </div>
