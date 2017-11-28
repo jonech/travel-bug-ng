@@ -13,22 +13,12 @@ import { Observable } from 'rxjs/Observable';
 export class TripListComponent implements OnInit
 {
 	trips: Observable<Trip[]>;
-	//_Users: Observable<any[]>;
 
 	constructor(
     private tripService: TripService
-	)
-	{}
+	) {}
 
-	ngOnInit()
-	{
-		// this._afAuth.authState.subscribe(auth => {
-		// 	if (!auth) { return; }
-
-		// 	let uid = auth.uid;
-    //   //this.trips = this._afDB.list(`/User/${uid}/Trip`);
-
-    // });
+	ngOnInit() {
     this.trips = this.tripService.getTrips();
   }
 }

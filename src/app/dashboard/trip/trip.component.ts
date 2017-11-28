@@ -17,18 +17,11 @@ export class TripComponent implements OnInit
 		private router: Router,
 	){}
 
-	ngOnInit()
-	{
+	ngOnInit() {
     console.log(this.trip);
-		// this._trip = this.firebase.object(`/Trip/${this.tripId}`);
-		// this._tripDays = this.firebase.list(`/Trip/${this.tripId}/Days`);
-		// this._tripRegulars = this.firebase.list(`/Trip/${this.tripId}/User/Regular`);
-		// this._tripAdmins = this.firebase.list(`/Trip/${this.tripId}/User/Admin`);
-		//this._tripRegulars.push(this._tripAdmins);
 	}
 
-	showTripDetail(id: string)
-	{
+	showTripDetail(id: string) {
 		if (id != null) {
 			this.router.navigate(['/trip', id]);
 		}

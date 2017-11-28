@@ -1,7 +1,10 @@
 <div nz-row class="trip-users">
     <div *ngFor="let tp of display">
         <div nz-col [nzSpan]="5">
-            <nz-avatar nzText="{{ tp.user.id | avatarLetters }}" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
+            <nz-avatar
+              nzText="{{ tp.user.firstName + ' ' + tp.user.lastName | avatarLetters }}"
+              style="color:#f56a00; background-color:#fde3cf;">
+            </nz-avatar>
         </div>
     </div>
 
