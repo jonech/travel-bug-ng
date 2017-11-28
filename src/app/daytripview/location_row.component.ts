@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, OnInit, ElementRef } from '@angular/core';
 import { DomSanitizer  } from '@angular/platform-browser';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 //import { MapsAPILoader } from 'angular2-google-maps/core';
 import { MapsAPILoader } from '@agm/core';
 
@@ -57,9 +57,9 @@ export class LocationRowComponent implements OnInit
 	@ViewChild('image') image;
 	_imageUrl: string;
 
-	_comments: FirebaseListObservable<any[]>;
-	_upVotes: FirebaseListObservable<any[]>;
-	_downVotes: FirebaseListObservable<any[]>;
+	// _comments: FirebaseListObservable<any[]>;
+	// _upVotes: FirebaseListObservable<any[]>;
+	// _downVotes: FirebaseListObservable<any[]>;
 
     upvoted: boolean;
     downvoted: boolean;
@@ -69,8 +69,8 @@ export class LocationRowComponent implements OnInit
 	constructor(
 		private googleAPILoader: MapsAPILoader,
 		private sanitizer: DomSanitizer,
-        private firebase: AngularFireDatabase,
-        private afAuth: AngularFireAuth
+        //private firebase: AngularFireDatabase,
+        //private afAuth: AngularFireAuth
 	)
 	{}
 
@@ -79,73 +79,73 @@ export class LocationRowComponent implements OnInit
 		if (this._location.location != null && this._location.location.id != null)
 			this.getImageUrl(this._location.location.id, this.image);
 
-		this._comments = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`)
+		// this._comments = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`)
 
-		this._upVotes = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes`,
-			{ query: {
-				orderByValue: true,
-				equalTo: 'true'
-			}});
+		// this._upVotes = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes`,
+		// 	{ query: {
+		// 		orderByValue: true,
+		// 		equalTo: 'true'
+		// 	}});
 
-		this._downVotes = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes`,
-			{ query: {
-				orderByValue: true,
-				equalTo: 'false'
-			}});
+		// this._downVotes = this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes`,
+		// 	{ query: {
+		// 		orderByValue: true,
+		// 		equalTo: 'false'
+		// 	}});
 
         this.CheckUpDownVoteComment();
 	}
 
     CheckUpDownVoteComment()
     {
-        this.afAuth.authState.subscribe((user) => {
+        // this.afAuth.authState.subscribe((user) => {
 
-            this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`, {
-                preserveSnapshot: true
-            }).subscribe(snapshot => {
-                if (snapshot.val() == "true") {
-                    this.upvoted = true;
-                    this.voteable = true;
-                }
-                else if (snapshot.val() == "false") {
-                    this.downvoted = true;
-                    this.voteable = true;
-                }
-                else {
-                    this.voteable = true;
-                }
-            });
+        //     this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`, {
+        //         preserveSnapshot: true
+        //     }).subscribe(snapshot => {
+        //         if (snapshot.val() == "true") {
+        //             this.upvoted = true;
+        //             this.voteable = true;
+        //         }
+        //         else if (snapshot.val() == "false") {
+        //             this.downvoted = true;
+        //             this.voteable = true;
+        //         }
+        //         else {
+        //             this.voteable = true;
+        //         }
+        //     });
 
-            this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`, {
-                preserveSnapshot: true,
-                query: {
-                    orderByValue: true,
-                    equalTo: user.uid
-                }
-            }).subscribe(snapshots => {
-                if (snapshots.length > 0) {
-                    this.commented = true;
-                }
-            });
-        });
+        //     this.firebase.list(`/DayTrip/${this._dayTripId}/${this._activityId}/Comments`, {
+        //         preserveSnapshot: true,
+        //         query: {
+        //             orderByValue: true,
+        //             equalTo: user.uid
+        //         }
+        //     }).subscribe(snapshots => {
+        //         if (snapshots.length > 0) {
+        //             this.commented = true;
+        //         }
+        //     });
+        // });
     }
 
     Upvote()
     {
-        if (this.voteable) {
-            this.afAuth.authState.subscribe((user) => {
-                this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("true");
-            });
-        }
+        // if (this.voteable) {
+        //     this.afAuth.authState.subscribe((user) => {
+        //         this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("true");
+        //     });
+        // }
     }
 
     Downvote()
     {
-        if (this.voteable) {
-            this.afAuth.authState.subscribe((user) => {
-                this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("false");
-            });
-        }
+        // if (this.voteable) {
+        //     this.afAuth.authState.subscribe((user) => {
+        //         this.firebase.object(`/DayTrip/${this._dayTripId}/${this._activityId}/Votes/${user.uid}`).set("false");
+        //     });
+        // }
     }
 
 	getImageUrl(placeId: string, eleRef: ElementRef)

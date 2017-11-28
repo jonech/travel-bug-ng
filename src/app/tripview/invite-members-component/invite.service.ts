@@ -3,8 +3,8 @@ import { Subject } from 'rxjs/Subject';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 import { Friend } from '../../models/friend';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { FacebookService } from 'ngx-facebook';
 
 @Injectable()
@@ -15,24 +15,24 @@ export class InviteService {
   newMember = new Subject();
   isChecked = new Subject();
   numberOfInvi = new Subject();
-  private chosenFriends: FirebaseObjectObservable<any>[] = [];
+  private chosenFriends: any; //FirebaseObjectObservable<any>[] = [];
 
   getChosenFriends(){
     this.checkLength();
     return this.chosenFriends;
   }
 
-  deleteChosenFriend(chosenFriend: FirebaseObjectObservable<any>) {
+  deleteChosenFriend(chosenFriend: any /*FirebaseObjectObservable<any>*/) {
     this.chosenFriends.splice(this.chosenFriends.indexOf(chosenFriend), 1);
     this.checkLength();
   }
 
-  addChosenFriends(chosenFriends: FirebaseObjectObservable<any>[]) {
+  addChosenFriends(chosenFriends: any /*FirebaseObjectObservable<any>[]*/) {
     Array.prototype.push.apply(this.chosenFriends, chosenFriends);
     this.checkLength();
   }
 
-  addChosenFriend(chosenFriend: FirebaseObjectObservable<any>) {
+  addChosenFriend(chosenFriend: any /*FirebaseObjectObservable<any>*/) {
     this.chosenFriends.push(chosenFriend);
     this.checkLength();
   }

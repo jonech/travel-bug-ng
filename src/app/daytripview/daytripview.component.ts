@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -15,7 +15,7 @@ export class DayTripViewComponent implements OnInit
 {
 	_tripId: string;
 	_dayTripId: string;
-	_dayTripListRef: FirebaseListObservable<any[]>;
+	// _dayTripListRef: FirebaseListObservable<any[]>;
 
 	_currentDay: string; // display of current day on dropdown nav
 	_show: boolean = false; // dropdown list show or not
@@ -25,7 +25,7 @@ export class DayTripViewComponent implements OnInit
 	constructor(
 		private route: ActivatedRoute,
         private router: Router,
-		private firebase: AngularFireDatabase
+		// private firebase: AngularFireDatabase
 	)
 	{
 		this.daySubject = new Subject();
@@ -33,22 +33,22 @@ export class DayTripViewComponent implements OnInit
 		this.route.params.subscribe(params => {
 
 			this._tripId = params['tripId'];
-			this._dayTripListRef = this.firebase.list(`/Trip/${this._tripId}/Days`, {
-                query: { orderByValue: true }
-            });
+			// this._dayTripListRef = this.firebase.list(`/Trip/${this._tripId}/Days`, {
+      //           query: { orderByValue: true }
+      //       });
 
-			// dayref will be varrying depending on which day is nav to
-			firebase.list(`/Trip/${this._tripId}/Days`,
-			{
-				query: {
-					orderByValue: true,
-					equalTo: this.daySubject
-				},
-				preserveSnapshot: true
-			})
-			.subscribe(snapshots => {
-				this._currentDay = snapshots[0].key;
-			});
+			// // dayref will be varrying depending on which day is nav to
+			// firebase.list(`/Trip/${this._tripId}/Days`,
+			// {
+			// 	query: {
+			// 		orderByValue: true,
+			// 		equalTo: this.daySubject
+			// 	},
+			// 	preserveSnapshot: true
+			// })
+			// .subscribe(snapshots => {
+			// 	this._currentDay = snapshots[0].key;
+			// });
 		});
 	}
 
@@ -74,11 +74,11 @@ export class DayTripViewComponent implements OnInit
             return;
         }
 
-        var tempAcc = this.firebase.list(`/DayTrip/${this._currentDay}`).push({});
-        console.log(tempAcc.key);
-        //console.log(this.router.url);
-        console.log(`${this.router.url}/(pop-up:${tempAcc.key})`);
-        //this.router.navigate([{ outlets: { 'pop-up': [ tempAcc.key] }}]);
-        this.router.navigateByUrl(`${this.router.url}/(pop-up:${tempAcc.key})`);
+        // var tempAcc = this.firebase.list(`/DayTrip/${this._currentDay}`).push({});
+        // console.log(tempAcc.key);
+        // //console.log(this.router.url);
+        // console.log(`${this.router.url}/(pop-up:${tempAcc.key})`);
+        // //this.router.navigate([{ outlets: { 'pop-up': [ tempAcc.key] }}]);
+        // this.router.navigateByUrl(`${this.router.url}/(pop-up:${tempAcc.key})`);
     }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
 	selector: 'comment-component',
@@ -39,26 +39,26 @@ export class CommentComponent implements OnInit
 	@Input() userId : string;
     @Input() index: number;
 
-	_comment: FirebaseObjectObservable<any>;
-    _user: FirebaseObjectObservable<any>;
+	// _comment: FirebaseObjectObservable<any>;
+  //   _user: FirebaseObjectObservable<any>;
 
     isEven: boolean;
     isOdd: boolean;
 
 	constructor(
-		private firebase: AngularFireDatabase
+		//private firebase: AngularFireDatabase
 	) { }
 
 	ngOnInit()
 	{
-		this._comment = this.firebase.object(`/Comment/${this.commentId}`);
-        this._user = this.firebase.object(`/User/${this.userId}/UserDetails`);
+		// this._comment = this.firebase.object(`/Comment/${this.commentId}`);
+    //     this._user = this.firebase.object(`/User/${this.userId}/UserDetails`);
 
-        if (this.index % 2 != 0) {
-            this.isOdd = true;
-        }
-        else {
-            this.isEven = true;
-        }
+    //     if (this.index % 2 != 0) {
+    //         this.isOdd = true;
+    //     }
+    //     else {
+    //         this.isEven = true;
+    //     }
 	}
 }

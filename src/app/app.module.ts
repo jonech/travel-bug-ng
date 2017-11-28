@@ -22,10 +22,10 @@ import { AvatarLetters } from './shared/pipes/avatar-letters.pipe';
 import { firebaseConfig } from '../environments/firebase.config';
 import { googleConfig } from '../environments/google.config';
 
-import {AngularFireModule} from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import * as firebase from 'firebase/app';
+// import {AngularFireModule} from 'angularfire2';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+// import * as firebase from 'firebase/app';
 //import { AgmCoreModule } from "angular2-google-maps/core"
 
 
@@ -134,9 +134,9 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 
 	  AgmCoreModule.forRoot(googleConfig),
 
-	  AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
+	  //AngularFireModule.initializeApp(firebaseConfig),
+    //AngularFireDatabaseModule,
+    //AngularFireAuthModule,
 
     FacebookModule.forRoot(),
     DragulaModule,

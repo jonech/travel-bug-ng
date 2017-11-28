@@ -7,11 +7,8 @@ import { FbUser } from '../models/fb-user.model';
 import { User } from '../models/user.model';
 
 import { ProfileDefaultBase64 } from '../shared/util/string.util';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
-import * as firebase from 'firebase/app';
+// import * as firebase from 'firebase/app';
 import { Observable } from 'rxjs/Observable';
 
 interface LoginResponse {
@@ -27,44 +24,42 @@ export class AuthService {
   private validateUrl = `${environment.apiUrl}/user/validate`;
 
   constructor(
-		private _afAuth: AngularFireAuth,
-		private _afDB: AngularFireDatabase,
     private _router: Router,
     private http: HttpClient,
 		private fb: FacebookService
 	) {}
     //TODO: change default photo
 	LoginWithFacebook() {
-		this._afAuth.auth
-		.signInWithPopup(new firebase.auth.FacebookAuthProvider())
-		.then(resolve => {
-			console.log(resolve);
+		// this._afAuth.auth
+		// .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+		// .then(resolve => {
+		// 	console.log(resolve);
 
-			let fbUser: FbUser = new FbUser();
+		// 	let fbUser: FbUser = new FbUser();
 
-			let fullName: string[] = resolve.auth.providerData[0].displayName.split(" ");
+		// 	let fullName: string[] = resolve.auth.providerData[0].displayName.split(" ");
 
-			fbUser.firstname = fullName[0];
-			fbUser.lastname = fullName[1];
-			fbUser.facebookUserId = resolve.auth.providerData[0].uid;
+		// 	fbUser.firstname = fullName[0];
+		// 	fbUser.lastname = fullName[1];
+		// 	fbUser.facebookUserId = resolve.auth.providerData[0].uid;
 
-			let emailTemp: string = resolve.auth.providerData[0].email;
-			console.log(emailTemp);
-			console.log(fbUser.facebookUserId );
+		// 	let emailTemp: string = resolve.auth.providerData[0].email;
+		// 	console.log(emailTemp);
+		// 	console.log(fbUser.facebookUserId );
 
-			if(emailTemp==null){
-				fbUser.email = "No Email Added";
-			}else{
-				fbUser.email = emailTemp;
-			}
+		// 	if(emailTemp==null){
+		// 		fbUser.email = "No Email Added";
+		// 	}else{
+		// 		fbUser.email = emailTemp;
+		// 	}
 
-			this.saveFbUserDetails(resolve.uid, fbUser);
+		// 	this.saveFbUserDetails(resolve.uid, fbUser);
 
-			this.ToDashBoard();
-		})
-		.catch(error => {
-			console.log(error.message);
-		})
+		// 	this.ToDashBoard();
+		// })
+		// .catch(error => {
+		// 	console.log(error.message);
+		// })
 	}
 
   public loginWithEmail(email: string, password: string): Observable<boolean> {
@@ -99,16 +94,16 @@ export class AuthService {
   }
 
 	private saveFbUserDetails(uid:string, fBuser:FbUser) {
-		this._afDB.object(`/User/${uid}/UserDetails`).update(
-			{
-				email: fBuser.email,
-				facebookUserId: fBuser.facebookUserId,
-				firstName: fBuser.firstname,
-				lastName: fBuser.lastname,
-				phone: "No Phone Added",
-				profileImage: ProfileDefaultBase64
-			}
-		)
+		// this._afDB.object(`/User/${uid}/UserDetails`).update(
+		// 	{
+		// 		email: fBuser.email,
+		// 		facebookUserId: fBuser.facebookUserId,
+		// 		firstName: fBuser.firstname,
+		// 		lastName: fBuser.lastname,
+		// 		phone: "No Phone Added",
+		// 		profileImage: ProfileDefaultBase64
+		// 	}
+		// )
 	}
 
   ToDashBoard() {

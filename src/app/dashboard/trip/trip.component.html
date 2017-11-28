@@ -15,7 +15,7 @@
           <p class="trip-date">{{ trip.startDate | date:'MMM d' }} - {{ trip.endDate | date:'MMM d' }} </p>
         </div>
 
-        <trip-users></trip-users>
+        <trip-users [tripPermissions]="trip.tripPermissions"></trip-users>
       </div>
     </ng-template>
   </nz-card>

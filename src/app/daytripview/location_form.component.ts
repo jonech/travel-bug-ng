@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, NgZone, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 //import { MapsAPILoader } from 'angular2-google-maps/core';
 import { MapsAPILoader } from '@agm/core';
 import { Location } from '../models/location.model';
@@ -22,7 +22,7 @@ export class LocationFormComponent implements OnInit
 	_locationSearchControl: FormControl;
 	newLocation: Location;
 
-	dayTripRef: FirebaseListObservable<any[]>;
+	// dayTripRef: FirebaseListObservable<any[]>;
 
 	@ViewChild('location') locationElement: ElementRef;
 	@ViewChild('activityForm') locationForm: ElementRef;
@@ -30,12 +30,12 @@ export class LocationFormComponent implements OnInit
 	constructor(
 		private googleApiLoader: MapsAPILoader,
 		private ngZone: NgZone,
-		private firebase: AngularFireDatabase
+		// private firebase: AngularFireDatabase
 	) { }
 
 	ngOnInit()
 	{
-		this.dayTripRef = this.firebase.list(`/DayTrip/${this.dayTripId}`);
+		//this.dayTripRef = this.firebase.list(`/DayTrip/${this.dayTripId}`);
 		this._locationSearchControl = new FormControl();
 
 		this.googleApiLoader.load().then(() => {
@@ -84,7 +84,7 @@ export class LocationFormComponent implements OnInit
 		this.newLocation.description = desc.value;
 		this.newLocation.eventName = actname.value;
 
-		this.dayTripRef.push(this.newLocation);
+		//this.dayTripRef.push(this.newLocation);
 		this.locationForm.nativeElement.reset();
 	}
 }

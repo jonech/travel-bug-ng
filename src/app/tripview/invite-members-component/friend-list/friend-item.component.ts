@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { Friend } from '../../../models/friend';
 import { InviteService } from '../../invite-members-component/invite.service';
 @Component({
@@ -13,13 +13,13 @@ export class FriendItemComponent implements OnInit {
   @Input() friend: Friend;
   @Input() tripId: string;
   userId: string;
-  _Inviteduser: FirebaseObjectObservable<any>;
+  // _Inviteduser: FirebaseObjectObservable<any>;
   _hasInvitedUser1: boolean ;
   _hasInvitedUser2: boolean ;
   _isChecked:boolean=false;
 
   constructor(
-    private firebase: AngularFireDatabase,
+    // private firebase: AngularFireDatabase,
     private sanitizer: DomSanitizer,
     private inviteService: InviteService
   ) {}
@@ -32,44 +32,44 @@ export class FriendItemComponent implements OnInit {
   }
 
   findAllFbFriends() {
-      this.firebase.list('/User', {
-      preserveSnapshot: true,
-      query: {
-        orderByChild: 'UserDetails/facebookUserId',
-        equalTo: this.friend.id
-      }
-    })
-      .subscribe(snapshots =>{
-        snapshots.forEach(snapshot=>{
-          console.log(snapshot.key);
-          this.userId = snapshot.key;
-          console.log("all facebook friends id: "+this.userId);
-          console.log("tripid: "+this.tripId);
+    //   this.firebase.list('/User', {
+    //   preserveSnapshot: true,
+    //   query: {
+    //     orderByChild: 'UserDetails/facebookUserId',
+    //     equalTo: this.friend.id
+    //   }
+    // })
+    //   .subscribe(snapshots =>{
+    //     snapshots.forEach(snapshot=>{
+    //       console.log(snapshot.key);
+    //       this.userId = snapshot.key;
+    //       console.log("all facebook friends id: "+this.userId);
+    //       console.log("tripid: "+this.tripId);
 
-          this.firebase.object(`/Trip/${this.tripId}/User/Regular/${this.userId}`)
-          .subscribe((user1) => {
-            if(user1.$value===null){
-              this._hasInvitedUser1 = false;
-            }else{
-              this._hasInvitedUser1 = true;
-            }
-            console.log(this._hasInvitedUser1);
-          });
+          // this.firebase.object(`/Trip/${this.tripId}/User/Regular/${this.userId}`)
+          // .subscribe((user1) => {
+          //   if(user1.$value===null){
+          //     this._hasInvitedUser1 = false;
+          //   }else{
+          //     this._hasInvitedUser1 = true;
+          //   }
+          //   console.log(this._hasInvitedUser1);
+          // });
 
-          this.firebase.object(`/Trip/${this.tripId}/User/Admin/${this.userId}`)
-          .subscribe((user2) => {
-            if(user2.$value===null){
-              this._hasInvitedUser2 = false;
-            }else{
-              this._hasInvitedUser2 = true;
-            }
-            console.log(this._hasInvitedUser2);
-          });
+          // this.firebase.object(`/Trip/${this.tripId}/User/Admin/${this.userId}`)
+          // .subscribe((user2) => {
+          //   if(user2.$value===null){
+          //     this._hasInvitedUser2 = false;
+          //   }else{
+          //     this._hasInvitedUser2 = true;
+          //   }
+          //   console.log(this._hasInvitedUser2);
+          // });
 
 
-          this._Inviteduser = this.firebase.object(`/User/${this.userId}/UserDetails`);
-        })
-      });
+          // this._Inviteduser = this.firebase.object(`/User/${this.userId}/UserDetails`);
+       // })
+      //});
   }
 
   	sanitize(url: string)
@@ -81,10 +81,10 @@ export class FriendItemComponent implements OnInit {
     if(!(this._hasInvitedUser2 || this._hasInvitedUser1)) {
       if(this._isChecked){
         this._isChecked = false;
-        this.inviteService.deleteChosenFriend(this._Inviteduser);
+        // this.inviteService.deleteChosenFriend(this._Inviteduser);
       }else{
         this._isChecked = true;
-        this.inviteService.addChosenFriend(this._Inviteduser);
+        // this.inviteService.addChosenFriend(this._Inviteduser);
       }
     }
   }
@@ -92,10 +92,10 @@ export class FriendItemComponent implements OnInit {
   checkbox(){
     if(this._isChecked){
       this._isChecked = false;
-      this.inviteService.deleteChosenFriend(this._Inviteduser);
+      // this.inviteService.deleteChosenFriend(this._Inviteduser);
     }else{
       this._isChecked = true;
-      this.inviteService.addChosenFriend(this._Inviteduser);
+      // this.inviteService.addChosenFriend(this._Inviteduser);
     }
   }
 

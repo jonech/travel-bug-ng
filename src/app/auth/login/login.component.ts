@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../../services/auth.service';
 import { EmitterService } from '../../services/event-emitter.service';
 
@@ -17,7 +16,6 @@ export class LoginComponent implements OnInit
 
 	constructor
 	(
-		private _afAuth:AngularFireAuth,
 		private _router:Router,
 		private _route: ActivatedRoute,
     private authService: AuthService

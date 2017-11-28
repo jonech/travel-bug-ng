@@ -1,13 +1,13 @@
 <div nz-row class="trip-users">
-    <div *ngFor="let name of displayUsers">
+    <div *ngFor="let tp of display">
         <div nz-col [nzSpan]="5">
-            <nz-avatar nzText="{{ name | avatarLetters }}" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
+            <nz-avatar nzText="{{ tp.user.id | avatarLetters }}" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
         </div>
     </div>
 
-    <div *ngIf="totalHiddenUser > 0">
+    <div *ngIf="totalHidden > 0">
         <div nz-col [nzSpan]="4">
-            <nz-avatar nzText="+{{ totalHiddenUser }}" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
+            <nz-avatar nzText="+{{ totalHidden }}" style="color:#f56a00; background-color:#fde3cf;"></nz-avatar>
         </div>
     </div>
 </div>

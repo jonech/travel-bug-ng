@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 @Component({
 	selector: 'transport-form',
@@ -11,10 +11,10 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 export class TransportFormComponent implements OnInit
 {
 	@Input() dayTripId: string;
-	dayTripRef: FirebaseListObservable<any[]>;
+	// dayTripRef: FirebaseListObservable<any[]>;
 
 	constructor(
-		private firebase: AngularFireDatabase
+		// private firebase: AngularFireDatabase
 	){}
 
 	ngOnInit()

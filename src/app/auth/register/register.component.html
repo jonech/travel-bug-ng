@@ -28,19 +28,19 @@
 		</div>
 
 		<div class="form-group">
-			<small class="reactive-error" [hidden]="registerForm.get('firstname').valid || (registerForm.get('firstname').pristine && !_submitted)">
+			<small class="reactive-error" [hidden]="registerForm.get('firstName').valid || (registerForm.get('firstName').pristine && !_submitted)">
 					First name required (minimum 2 characters).
 					<br>
 			</small>
-			<input class="form-control span_69" id="firstname" type="text" placeholder="firstname" formControlName="firstname">
+			<input class="form-control span_69" id="firstName" type="text" placeholder="firstName" formControlName="firstName">
 		</div>
 
 		<div class="form-group">
-			<small class="reactive-error" [hidden]="registerForm.get('lastname').valid || (registerForm.get('lastname').pristine && !_submitted)">
+			<small class="reactive-error" [hidden]="registerForm.get('lastName').valid || (registerForm.get('lastName').pristine && !_submitted)">
 					Last name required (minimum 2 characters).
 					<br>
 			</small>
-			<input class="form-control span_69" id="lastname" type="text" placeholder="lastname" formControlName="lastname">
+			<input class="form-control span_69" id="lastName" type="text" placeholder="lastName" formControlName="lastName">
 		</div>
 
 		<div class="form-group" formGroupName="matchingPwd">

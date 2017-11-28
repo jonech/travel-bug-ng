@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireModule } from 'angularfire2';
+// import { AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2/database';
 
 import { User } from '../../models/user.model';
 import { FbUser } from '../../models/fb-user.model';
@@ -23,13 +23,13 @@ export class RegisterComponent implements OnInit
 	public registerForm: FormGroup;
 	_submitted: boolean = false;
 
-	_userRef: FirebaseObjectObservable<any>;
+	//_userRef: FirebaseObjectObservable<any>;
 	_error: string;
 
 
 	constructor(
-		private _afAuth: AngularFireAuth,
-		private _afDB: AngularFireDatabase,
+		// private _afAuth: AngularFireAuth,
+		// private _afDB: AngularFireDatabase,
 		private _formBuild: FormBuilder,
 		private _router: Router,
 		private authService: AuthService
@@ -60,17 +60,17 @@ export class RegisterComponent implements OnInit
 		this._submitted = true;
 		//this.registerForm.reset();
 
-		this._afAuth.auth.
-		createUserWithEmailAndPassword(user.email, user.password)
-		.then(resolve => {
-			console.log(resolve);
-			this.saveUserDetails(resolve.uid, user);
-			this.ToLogin();
-			this.registerForm.reset;
-		})
-		.catch(error => {
-			this._error = error.message;
-		});
+		// this._afAuth.auth.
+		// createUserWithEmailAndPassword(user.email, user.password)
+		// .then(resolve => {
+		// 	console.log(resolve);
+		// 	this.saveUserDetails(resolve.uid, user);
+		// 	this.ToLogin();
+		// 	this.registerForm.reset;
+		// })
+		// .catch(error => {
+		// 	this._error = error.message;
+		// });
 	}
 
 //TODO: change default photo
@@ -83,15 +83,15 @@ export class RegisterComponent implements OnInit
 
 	private saveUserDetails(uid:string, user:User)
 	{
-		this._afDB.object(`/User/${uid}/UserDetails`).update(
-			{
-				email: user.email,
-				firstName: user.firstname,
-				lastName: user.lastname,
-				phone: "No Phone Added",
-				profileImage: ProfileDefaultBase64
-			}
-		)
+		// this._afDB.object(`/User/${uid}/UserDetails`).update(
+		// 	{
+		// 		email: user.email,
+		// 		firstName: user.firstName,
+		// 		lastName: user.lastName,
+		// 		phone: "No Phone Added",
+		// 		profileImage: ProfileDefaultBase64
+		// 	}
+		// )
 	}
 
 	private matchingPassword(password:string, passwordconf:string)

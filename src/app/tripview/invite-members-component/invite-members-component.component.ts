@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output, ViewChild, ElementRef} from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import { NgForm } from '@angular/forms';
 import { InviteService } from './invite.service';
 import { FacebookService, InitParams, AuthResponse } from 'ngx-facebook';
@@ -19,7 +19,7 @@ export class InviteMembersComponentComponent implements OnInit {
   tripId:string;
   allFriends: Friend[];
   filtered: Friend[];
-  chosenFriends: FirebaseObjectObservable<any>[] = [];
+  //chosenFriends: FirebaseObjectObservable<any>[] = [];
   myUid: string;
   accessToken:string;
   fbUserId: string;
@@ -28,20 +28,20 @@ export class InviteMembersComponentComponent implements OnInit {
   private paramSub: any;
   uid: string;
   email: string;
-  invitedUser: FirebaseListObservable<any[]>;
+  //invitedUser: FirebaseListObservable<any[]>;
   _error: string = "";
   _error_flag: boolean = false;
   matchname:boolean;
 
-  trip: FirebaseObjectObservable<any>;
-  tripRegulars: FirebaseListObservable<any[]>;
-  tripAdmins: FirebaseListObservable<any[]>;
+  // trip: FirebaseObjectObservable<any>;
+  // tripRegulars: FirebaseListObservable<any[]>;
+  // tripAdmins: FirebaseListObservable<any[]>;
 
   numberOfInviters: number;
 
     constructor(
-    private firebase: AngularFireDatabase,
-    private afAuth: AngularFireAuth,
+    // private firebase: AngularFireDatabase,
+    // private afAuth: AngularFireAuth,
     private inviteService: InviteService,
     private route: ActivatedRoute,
     private router: Router,
@@ -64,12 +64,12 @@ export class InviteMembersComponentComponent implements OnInit {
     this.paramSub = this.route.parent.params.subscribe(params => {
       this.tripId = params['id'];
     })
-    this.afAuth.authState.subscribe(
-      auth => {
-        if(auth)
-          this.myUid = auth.uid;
-      }
-    );
+    // this.afAuth.authState.subscribe(
+    //   auth => {
+    //     if(auth)
+    //       this.myUid = auth.uid;
+    //   }
+    // );
 
     this.facebook.getLoginStatus()
     .then((suc)=>{
@@ -86,15 +86,15 @@ export class InviteMembersComponentComponent implements OnInit {
       console.log(error);
     })
 
-    this.chosenFriends = this.inviteService.getChosenFriends();
+    //this.chosenFriends = this.inviteService.getChosenFriends();
 
     this.inviteService.isChecked.subscribe((checked:boolean)=>{
       this.hasChosenFriend = checked;
     });
 
-    this.trip = this.firebase.object(`/Trip/${this.tripId}`);
-    this.tripRegulars = this.firebase.list(`/Trip/${this.tripId}/User/Regular`);
-    this.tripAdmins = this.firebase.list(`/Trip/${this.tripId}/User/Admin`);
+    // this.trip = this.firebase.object(`/Trip/${this.tripId}`);
+    // this.tripRegulars = this.firebase.list(`/Trip/${this.tripId}/User/Regular`);
+    // this.tripAdmins = this.firebase.list(`/Trip/${this.tripId}/User/Admin`);
 
     this.numberOfInviters = this.inviteService.getChosenFriends().length;
     this.inviteService.numberOfInvi.subscribe(
@@ -130,46 +130,46 @@ export class InviteMembersComponentComponent implements OnInit {
       this.inviteByEmail(emailAdd.value);
     }
     //console.log(emailAdd.value);
-    if(this.chosenFriends.length>0) {
-      this.inviteFbFriends();
-    }
+    // if(this.chosenFriends.length>0) {
+    //   this.inviteFbFriends();
+    // }
     this.closeInvitation();
   }
 
   inviteFbFriends() {
-    for(let fbFriend of this.chosenFriends) {
-      fbFriend.subscribe( facebookFriend =>{
-        this.inviteByEmail(facebookFriend.email);
-      });
-    }
+    // for(let fbFriend of this.chosenFriends) {
+    //   fbFriend.subscribe( facebookFriend =>{
+    //     this.inviteByEmail(facebookFriend.email);
+    //   });
+    // }
 
   }
 
   inviteByEmail(emailAdd:string) {
     this.email = emailAdd;
-    this.invitedUser = this.firebase.list('/User', {
-      preserveSnapshot: true,
-      query: {
-        orderByChild: 'UserDetails/email',
-        equalTo: emailAdd
-      }
-    });
+    // this.invitedUser = this.firebase.list('/User', {
+    //   preserveSnapshot: true,
+    //   query: {
+    //     orderByChild: 'UserDetails/email',
+    //     equalTo: emailAdd
+    //   }
+    // });
 
-    this.invitedUser
-      .subscribe(snapshots =>{
-        if(snapshots.length!=0){
-          snapshots.forEach(snapshot => {
-            this.uid = snapshot.key;
-            this.inviteService.newMember.next(this.uid);
-            //console.log(this.uid);
-            this.invitationForm.nativeElement.reset();
-            //alert("Invite "+ this.email+" successfully.")
-          })
-        }else{
-          this._error_flag = true;
-          this._error = 'User email does not exist!';
-        }
-      });
+    // this.invitedUser
+    //   .subscribe(snapshots =>{
+    //     if(snapshots.length!=0){
+    //       snapshots.forEach(snapshot => {
+    //         this.uid = snapshot.key;
+    //         this.inviteService.newMember.next(this.uid);
+    //         //console.log(this.uid);
+    //         this.invitationForm.nativeElement.reset();
+    //         //alert("Invite "+ this.email+" successfully.")
+    //       })
+    //     }else{
+    //       this._error_flag = true;
+    //       this._error = 'User email does not exist!';
+    //     }
+    //   });
 
   }
 

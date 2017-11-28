@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { TripPermission } from '../../models';
 
 @Component({
   selector: 'trip-users',
@@ -8,20 +9,25 @@ import { Component, OnInit } from '@angular/core';
 
 export class TripUsersComponent implements OnInit
 {
-  goingUsers: Array<string>;
-  displayUsers: Array<string>;
+  @Input() tripPermissions: TripPermission[];
+
+  //goingUsers: Array<Trip>;
+  display: Array<TripPermission>;
   maxDisplay: number = 4;
-  totalHiddenUser: number = 0;
+  totalHidden: number = 0;
 
   constructor() {
-    this.goingUsers = ["Alex May", "Tony Jaja", "Bob Adam", "Bruce Lee", "Santa Clause", "Ninja Turtle", "Bruce Wayne"];
+    // this.goingUsers = ["Alex May", "Tony Jaja", "Bob Adam", "Bruce Lee", "Santa Clause", "Ninja Turtle", "Bruce Wayne"];
   }
 
   ngOnInit() {
+    if (this.tripPermissions == null) {
+      return;
+    }
 
-    this.displayUsers = this.goingUsers.slice(0, this.maxDisplay);
-    if (this.goingUsers.length > this.maxDisplay) {
-      this.totalHiddenUser = this.goingUsers.length - this.maxDisplay;
+    this.display = this.tripPermissions.slice(0, this.maxDisplay);
+    if (this.tripPermissions.length > this.maxDisplay) {
+      this.totalHidden = this.tripPermissions.length - this.maxDisplay;
     }
   }
 }

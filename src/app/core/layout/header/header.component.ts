@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
+// import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseObjectObservable, FirebaseListObservable} from 'angularfire2/database';
 import { FacebookService } from 'ngx-facebook';
 import { AuthService } from '../../../services/auth.service';
 import { EmitterService } from '../../../services/event-emitter.service';
@@ -17,8 +17,8 @@ export class HeaderComponent implements OnInit
 	_isfbLogin: boolean = false;
 
 	constructor(
-		private firebase: AngularFireDatabase,
-		private afAuth: AngularFireAuth,
+		// private firebase: AngularFireDatabase,
+		// private afAuth: AngularFireAuth,
 		private router: Router,
     private fb: FacebookService,
     private auth: AuthService
