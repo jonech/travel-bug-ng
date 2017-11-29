@@ -15,7 +15,6 @@ interface TripResponse {
 export class TripService {
 
   private tripUrl = `${environment.apiUrl}/trip`;
-  private create
 
   constructor(
     private http: HttpClient,
@@ -33,9 +32,34 @@ export class TripService {
   public createTrip(trip: Trip): Observable<Trip> {
     return this.http.post(this.tripUrl, { trip: trip})
             .map((res: Trip) => {
-              EmitterService.get('[Trip] Created').emit(res);
+              EmitterService.get('[Trip] Refresh').emit(res);
               return res;
             })
             .catch((error: any) => Observable.throw(error || 'Server error'))
+  }
+
+  public deleteTrip(tripId: number): Observable<string> {
+    return this.http.delete(`${this.tripUrl}/${tripId}`)
+            .map((res: any) => {
+              EmitterService.get('[Trip] Refresh').emit(res);
+              return res;
+            })
+            .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
+
+  public updateTrip(trip: Trip): Observable<Trip> {
+    return this.http.post(`${this.tripUrl}/${trip.id}`,
+      {
+        trip: {
+          tripName: trip.tripName,
+          startDate: trip.startDate,
+          endDate: trip.endDate
+        }
+      })
+      .map((res: Trip) => {
+        EmitterService.get('[Trip] Refresh').emit(res);
+        return res;
+      })
+      .catch((error: any) => Observable.throw(error || 'Server error'))
   }
 }

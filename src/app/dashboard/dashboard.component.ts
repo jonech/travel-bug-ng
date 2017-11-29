@@ -21,29 +21,39 @@ import { Trip } from '../models/trip.model';
 
     <create-trip-modal
       [isVisible]="isCreateTripOpen"
-      (createTripClose)="closeCreateTrip($event)">
+      (createTripClose)="closeCreateTrip()">
     </create-trip-modal>
+
+    <!-- edit trip listen to trip component -->
+    <edit-trip-modal></edit-trip-modal>
   `,
 	styleUrls: ['dashboard.component.scss']
 })
 
 export class DashboardComponent implements OnInit
 {
-	isCreateTripOpen: boolean = false;
+  isCreateTripOpen: boolean = false;
+  isEditTripOpen: boolean = false;
 	private uid:string;
 
 	constructor(
 	){}
 
 	ngOnInit() {
-
-	}
+  }
 
 	openCreateTrip() {
     this.isCreateTripOpen = true;
 	}
-
 	closeCreateTrip() {
 		this.isCreateTripOpen = false;
-	}
+  }
+
+  openEditTrip() {
+    this.isEditTripOpen = true;
+  }
+  closeEditTrip() {
+    this.isEditTripOpen = false;
+  }
+
 }

@@ -29,7 +29,7 @@ export class TripListComponent implements OnInit, OnDestroy
     });
 
     // listen to trip creation
-    EmitterService.get('[Trip] Created').subscribe(trip => {
+    EmitterService.get('[Trip] Refresh').subscribe(trip => {
       this.isLoading$.next(true);
       this.trips$ = this.tripService.getTrips().finally(() => {
         this.isLoading$.next(false);

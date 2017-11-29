@@ -7,8 +7,9 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
 
-import { TripFormComponent } from './create-trip/trip-form.component';
-import { CreateTripModalComponent } from './create-trip/create-trip-modal.component';
+import { TripFormComponent } from './trip-modal/trip-form.component';
+import { CreateTripModalComponent } from './trip-modal/create-trip-modal.component';
+import { EditTripModalComponent } from './trip-modal/edit-trip-modal.component';
 import { TripComponent } from './trip/trip.component';
 import { TripListComponent } from './trip-list/trip-list.component';
 import { TripUsersComponent } from './trip-user/trip-users.component';
@@ -35,6 +36,7 @@ import {
   declarations: [
     TripFormComponent,
     CreateTripModalComponent,
+    EditTripModalComponent,
     TripComponent,
     TripListComponent,
     TripUsersComponent,

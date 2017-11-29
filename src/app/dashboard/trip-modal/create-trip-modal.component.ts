@@ -58,6 +58,7 @@ export class CreateTripModalComponent implements OnInit, OnChanges {
       },
       (error) => {
         console.log(error);
+        this.tripForm.resetForm();
         this.closeModal();
       }
     );

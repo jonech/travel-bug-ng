@@ -1,4 +1,10 @@
-import { Component, OnInit, EventEmitter, Output, ElementRef, ViewChild, NgZone } from '@angular/core';
+import {
+  Component, OnInit,
+  EventEmitter, Output,
+  Input, ElementRef,
+  ViewChild, NgZone,
+  OnChanges, SimpleChanges
+} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { MapsAPILoader } from 'angular2-google-maps/core';
@@ -51,9 +57,10 @@ import { Trip } from '../../models/trip.model';
   `
 })
 
-export class TripFormComponent implements OnInit
+export class TripFormComponent implements OnInit, OnChanges
 {
   tripForm: FormGroup;
+  @Input() trip: Trip;
 	@Output() formSubmit = new EventEmitter<Trip>();
   isLoading: boolean = false;
 
@@ -61,7 +68,9 @@ export class TripFormComponent implements OnInit
 		// private googleApi: MapsAPILoader,
     // private ngZone: NgZone,
     private fb: FormBuilder
-	){}
+  ) {
+    this.trip = new Trip();
+  }
 
 	ngOnInit()
 	{
@@ -92,6 +101,16 @@ export class TripFormComponent implements OnInit
 		// });
 	}
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.trip != null) {
+      console.log(changes)
+      //let trip = changes.trip as Trip;
+      if (this.tripForm != null && this.trip != null) {
+        this.updateForm(this.trip);
+      }
+    }
+  }
+
   submitForm() {
     for (const i in this.tripForm.controls) {
       this.tripForm.controls[ i ].markAsDirty();
@@ -105,6 +124,24 @@ export class TripFormComponent implements OnInit
   resetForm() {
     this.isLoading = false;
     this.tripForm.reset();
+  }
+
+  updateForm(trip: Trip) {
+    this.tripForm.controls['tripName'].setValue(trip.tripName);
+
+    if (trip.startDate != null) {
+      this.tripForm.controls['startDate'].setValue(new Date(trip.startDate));
+    }
+    else {
+      this.tripForm.controls['startDate'].setValue(null);
+    }
+
+    if (trip.endDate != null) {
+      this.tripForm.controls['endDate'].setValue(new Date(trip.endDate));
+    }
+    else {
+      this.tripForm.controls['endDate'].setValue(null);
+    }
   }
 
 	private dateDiffInDays(a:Date, b:Date): number
