@@ -6,17 +6,12 @@ import { Trip } from '../models/trip.model';
 @Component({
 	selector: 'dashboard',
   template: `
-    <div class="trip-heading">
-      <a [routerLink]="['trips']">My Trips</a>  |
-      <a [routerLink]="['past_trip']">Past Trips</a>
-    </div>
 
-    <div id="button-row">
-      <div>
+    <div nz-row [nzType]="'flex'" [nzJustify]="'end'" [nzAlign]="'bottom'" class="top-row">
+      <div nz-col [nzSpan]="4">
         <a id="create-trip-button" class="right" (click)="openCreateTrip()">new trip+</a>
       </div>
     </div>
-
     <router-outlet></router-outlet>
 
     <create-trip-modal

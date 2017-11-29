@@ -5,11 +5,6 @@
 	font-size: 20px;
 }
 
-#button-row, #card-column{
-	font-weight: 300;
-	padding:10px 20% 10px 20%;
-}
-
 #no-trips{
 	text-align: center;
 	font-size: 20px;
@@ -23,7 +18,13 @@
 	font-weight: 300;
 	padding-top:60px;
 }
+.top-row {
+  padding: 20px 0;
 
-#create-trip-button {
-	cursor: pointer;
+  #create-trip-button {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 300;
+  }
 }
+
