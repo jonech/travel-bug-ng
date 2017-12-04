@@ -10,7 +10,7 @@ import { User } from '../_model/user.model';
 import { FbUser } from '../_model/fb-user.model';
 import { ProfileDefaultBase64, EmailRegEx } from '../_util/string.util';
 
-import{ AuthService } from './auth.service';
+import{ AuthService } from '../_service/auth.service';
 
 @Component({
 	selector: 'register',
@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit
 
 	_userRef: FirebaseObjectObservable<any>;
 	_error: string;
-	
+
 
 	constructor(
 		private _afAuth: AngularFireAuth,
@@ -61,7 +61,7 @@ export class RegisterComponent implements OnInit
 		//this.registerForm.reset();
 
 		this._afAuth.auth.
-		createUserWithEmailAndPassword(user.email, user.matchingPwd.password)
+		createUserWithEmailAndPassword(user.email, user.password)
 		.then(resolve => {
 			console.log(resolve);
 			this.saveUserDetails(resolve.uid, user);
@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit
 		});
 	}
 
-//TODO: change default photo 
+//TODO: change default photo
 	LoginWithFacebook()
 	{
 		this.authService.LoginWithFacebook();
