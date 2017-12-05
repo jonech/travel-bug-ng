@@ -9,7 +9,8 @@
 
 #content {
   padding-top: 70px;       // heigh of header
-  padding-bottom: 120px;    // heigh of footer
+  /*padding-bottom: 120px; ---> height could be changed when screen width changes*/    // heigh of footer
+  position: relative;
   padding-left: 15px;
   padding-right: 15px;
   align-content: center;

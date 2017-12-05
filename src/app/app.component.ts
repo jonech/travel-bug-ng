@@ -30,6 +30,7 @@ export class AppComponent
 	// 	})
 	// }
 
+
 	// private logout()
 	// {
 	// 	this.afAuth.auth.signOut();
@@ -37,4 +38,5 @@ export class AppComponent
 
  	// 	this.router.navigate(['/']);
 	// }
+
 }
