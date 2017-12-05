@@ -4,11 +4,16 @@
 	
 		<div class="title">Join Travel Bug</div>
 		<p>Already have an account with us?</p>
-		<div class="login" (click)="ToLogin()">Log in</div>
+		<!--<button class="login" (click)="ToLogin()">Log in</button>-->
+		<button nz-button [nzType]="'primary'"  class="login" (click)="ToLogin()">
+			<span>LOGIN</span>
+		</button>
 	
 		<div class="or-divider"><span>OR</span></div>
-	
-			<div class="facebook" (click)="LoginWithFacebook()">CONTINUE WITH WITH FACEBOOK</div>
+			<button nz-button [nzType]="'primary'"  class="facebook" (click)="LoginWithFacebook()">
+				<span>CONTINUE WITH WITH FACEBOOK</span>
+			</button>
+			<!--<button class="facebook" (click)="LoginWithFacebook()">CONTINUE WITH WITH FACEBOOK</button>-->
 	
 		<div class="or-divider"><span>OR</span></div>
 	

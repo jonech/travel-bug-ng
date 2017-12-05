@@ -1,16 +1,16 @@
+@import '../../assets/sass/_mixins.scss';
+
 #form-wrapper {
 	text-align: center;
 	background-color: #F7F7F7;
 
-	-webkit-border-radius: 25px;
-	-moz-border-radius: 25px;
-	border-radius: 25px;
+	@include rounded(25px);
 
 	/*width:350px; could result in overflow when using mobile phone whose screen width is smaller than 350px */
 
 	margin:20px auto;
 
-	padding:20px 20px 50px 20px;
+	padding:20px;
 }
 
 #form-wrapper .title {
@@ -30,18 +30,16 @@
 }
 
 #form-wrapper .facebook {
+	@include rounded;
+
 	border:none;
 	background-color:#3b5998;
 	color:white;
 
 	font-size:10px;
-	font-weight: 200;
 	padding:10px 15px 10px 15px;
 	margin:10px;
-
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	width: 80%;
 }
 #form-wrapper .facebook:hover {
 	background-color:#29487d;
@@ -49,16 +47,16 @@
 }
 
 #form-wrapper .login {
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	@include rounded;
 
 	padding:5px 25px 5px 25px;
+	margin: 10px;
 
 	border:1px solid #9F9F9F;
 	background-color: #F7F7F7;
 	color:#9F9F9F;
 	font-size: 10px;
+	width: 80%;
 }
 #form-wrapper .login:hover {
 	background-color: lightgray;
@@ -76,9 +74,7 @@
 }
 
 form .submit {
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	@include rounded;
 
 	border:none;
 	margin-top:10px;
@@ -88,6 +84,7 @@ form .submit {
 
 	color:white;
 	background-color: #41E2B0;
+	width: 80%;
 }
 form .submit:hover {
 	background-color: teal;
@@ -99,11 +96,10 @@ form input {
 	padding:10px;
 	margin-top: 3px;
 	margin-bottom: 5px;
-
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
+	width: 80%;
 	border:none;
+
+	@include rounded;
 }
 
 .or-divider {
@@ -120,6 +116,12 @@ form input {
 .or-divider span {
 	background-color: #F7F7F7;
     padding:0 10px;
+}
+
+@media only screen and (min-width: 600px) {
+	/* for tablets and desktop */
+	#form-wrapper{ width: 350px; }
+
 }
 
 
