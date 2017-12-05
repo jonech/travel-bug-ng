@@ -13,10 +13,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
+    if (req.url.indexOf('signin') > 0 || req.url.indexOf('signup') > 0) {
+      return next.handle(req);
+    }
+
     let auth = this.injector.get(AuthService);
     let authHeader = auth.getJWT();
     let authReq = req.clone({setHeaders: {Authorization: authHeader}});
-
     return next.handle(authReq);
   }
 }

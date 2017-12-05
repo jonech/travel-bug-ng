@@ -72,7 +72,7 @@ export class AuthService {
               localStorage.setItem(this.JWT, res.jwt);
               return true;
             })
-            .catch((error: any) => Observable.throw(error.json() || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   public validateJWT(): Observable<string> {
@@ -82,7 +82,7 @@ export class AuthService {
     }
     return this.http.get(`${this.validateUrl}?jwt=${jwt}`)
             .map((res: Response) => res)
-            .catch((error: any) => Observable.throw(error.json() || 'Server error'));
+            .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
   public logout() {
