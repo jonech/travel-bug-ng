@@ -1,65 +1,69 @@
 <div id = "form-wrapper">
-
-	<img style="padding-bottom:20px;" src="assets/img/logo.png"/>
-
-	<div class="title">Join Travel Bug</div>
-	<p>Already have an account with us?</p>
-	<div class="login" (click)="ToLogin()">Log in</div>
-
-	<div class="or-divider"><span>OR</span></div>
-
-		<div class="facebook" (click)="LoginWithFacebook()">CONTINUE WITH WITH FACEBOOK</div>
-
-	<div class="or-divider"><span>OR</span></div>
-
-	<div *ngIf="_error">
-		<span style="color: red; font-size: 10px;">
-			<p>{{ _error }}</p>
-		</span>
+	
+		<img style="padding-bottom:20px;" src="assets/img/logo.png"/>
+	
+		<div class="title">Join Travel Bug</div>
+		<p>Already have an account with us?</p>
+		<div class="login" (click)="ToLogin()">Log in</div>
+	
+		<div class="or-divider"><span>OR</span></div>
+	
+			<div class="facebook" (click)="LoginWithFacebook()">CONTINUE WITH WITH FACEBOOK</div>
+	
+		<div class="or-divider"><span>OR</span></div>
+	
+		<div *ngIf="_error">
+			<span style="color: red; font-size: 10px;">
+				<p>{{ _error }}</p>
+			</span>
+		</div>
+	
+		<form class="" [formGroup]="registerForm" novalidate>
+			<div class="form-group">
+				<small class="reactive-error" [hidden]="registerForm.get('email').valid || (registerForm.get('email').pristine && !_submitted)">
+						Valid email required.
+						<br>
+				</small>
+				<input class="form-control span_69" id="email" type="text" placeholder="email" formControlName="email">
+			</div>
+	
+			<div class="form-group">
+				<small class="reactive-error" [hidden]="registerForm.get('firstname').valid || (registerForm.get('firstname').pristine && !_submitted)">
+						First name required (minimum 2 characters).
+						<br>
+				</small>
+				<input class="form-control span_69" id="firstname" type="text" placeholder="firstname" formControlName="firstname">
+			</div>
+	
+			<div class="form-group">
+				<small class="reactive-error" [hidden]="registerForm.get('lastname').valid || (registerForm.get('lastname').pristine && !_submitted)">
+						Last name required (minimum 2 characters).
+						<br>
+				</small>
+				<input class="form-control span_69" id="lastname" type="text" placeholder="lastname" formControlName="lastname">
+			</div>
+	
+			<div class="form-group" formGroupName="matchingPwd">
+				<small class="reactive-error" [hidden]="registerForm.get('matchingPwd').get('password').valid || (registerForm.get('matchingPwd').get('password').pristine && !_submitted)">
+						Password required (minimum 8 characters).
+						<br>
+				</small>
+				<input class="form-control span_69" id="password" type="password" placeholder="password (min 8 characters)" formControlName="password">
+			</div>
+	
+			<div class="form-group" formGroupName="matchingPwd">
+				<small class="reactive-error" [hidden]="registerForm.get('matchingPwd').valid || (!registerForm.get('matchingPwd').touched && !_submitted)">
+						Password mismatch.
+						<br/>
+				</small>
+				<input class="form-control span_69" id="passwordconf" type="password" placeholder="confirm password" formControlName="passwordconf">
+			</div>
+	
+	
+			<div class="form-group">
+				<button type="submit" class="submit span_69" (click)="RegisterWithEmail(registerForm.value, registerForm.valid); false">REGISTER</button>
+			</div>
+	
+		</form>
+	
 	</div>
-	<!-- REGISTER FORM START -->
-	<form nz-form [formGroup] = "registerForm">
-		<div nz-form-item>
-			<div nz-form-control [nzValidateStatus]="registerForm.get('email')" nzHasFeedback>
-				<nz-input id="email" formControlName="email" [nzPlaceHolder]="'email'" [nzType]="'email'" [nzSize]="'large'">
-				</nz-input>
-				<div nz-form-explain [hidden] ="(registerForm.get('email').valid || (registerForm.get('email').pristine && !_submitted))">Valid Email Required</div>
-			</div>
-		</div>
-		<div nz-form-item>
-			<div nz-form-control [nzValidateStatus]="registerForm.get('firstname')">
-				<nz-input id="firstname" [nzType]="'text'" formControlName="firstname" [nzPlaceHolder]="'firstname'" [nzSize]="'large'">
-				</nz-input>
-			</div>
-		</div>
-		<div nz-form-item>
-			<div nz-form-control [nzValidateStatus]="'validating'" nzHasFeedback>
-				<nz-input [ngModel]="'The content is being validating'" [nzSize]="'large'" name="validating">
-				</nz-input>
-				<div nz-form-explain>I'm the content is being validating</div>
-			</div>
-		</div>
-		<div nz-form-item>
-			<div nz-form-control [nzValidateStatus]="'success'" nzHasFeedback>
-				<nz-input [ngModel]="'The content'" [nzSize]="'large'" name="successValid">
-				</nz-input>
-			</div>
-		</div>
-		<div nz-form-item>
-			<div nz-form-control [nzValidateStatus]="'warning'" nzHasFeedback>
-				<nz-input [ngModel]="'Warning'" [nzSize]="'large'" name="warningHighValid">
-				</nz-input>
-				<div nz-form-explain>Should be combination of numbers & alphabets</div>
-			</div>
-		</div>
-		<div nz-form-item>
-			<div nz-form-control [nzValidateStatus]="'error'" nzHasFeedback>
-				<nz-input [ngModel]="'unavailable choice'" [nzSize]="'large'" name="invalidValid">
-				</nz-input>
-				<div nz-form-explain>Should be combination of numbers & alphabets</div>
-			</div>
-		</div>
-	</form>
-<!-- REGISTER FORM END -->
-
-</div>

@@ -6,7 +6,7 @@
 	-moz-border-radius: 25px;
 	border-radius: 25px;
 
-	width:350px;
+	/*width:350px; could result in overflow when using mobile phone whose screen width is smaller than 350px */
 
 	margin:20px auto;
 
