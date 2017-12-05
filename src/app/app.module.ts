@@ -22,12 +22,6 @@ import { AvatarLetters } from './shared/pipes/avatar-letters.pipe';
 import { firebaseConfig } from '../environments/firebase.config';
 import { googleConfig } from '../environments/google.config';
 
-// import {AngularFireModule} from 'angularfire2';
-// import { AngularFireAuthModule } from 'angularfire2/auth';
-// import { AngularFireDatabaseModule } from 'angularfire2/database';
-// import * as firebase from 'firebase/app';
-//import { AgmCoreModule } from "angular2-google-maps/core"
-
 
 import { AgmCoreModule } from '@agm/core';
 import { DragulaModule } from 'ng2-dragula';
@@ -48,29 +42,17 @@ import { ClickEditTimeComponent } from './reuseable/click_edit_time.component';
 
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { DayTripViewModule } from './day-trip-view/day-trip-view.module';
 
 import { TripViewComponent } from './tripview/tripview.component';
 import { DayTripListComponent } from './tripview/daytriplist.component';
 import { DayTripComponent } from './tripview/daytrip.component';
 import { DayTripImageComponent } from './tripview/daytripImage.component';
 
-import { DayTripViewComponent } from './daytripview/daytripview.component';
-import { ActivityListComponent } from './daytripview/activity_list.component';
-import { LocationFormComponent } from './daytripview/location_form.component';
-import { LocationRowComponent } from './daytripview/location_row.component';
-import { TransportFormComponent } from './daytripview/transport_form.component';
-import { TransportRowComponent } from './daytripview/transport_row.component';
-
 
 import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
 import { InviteService } from './tripview/invite-members-component/invite.service';
 
-import { ActivityDetailComponent } from './activitydetail/activity_detail.component';
-import { CommentComponent } from './activitydetail/comment.component';
-import { CreateCommentComponent } from './activitydetail/create_comment.component';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
 import { FriendListComponent } from './tripview/invite-members-component/friend-list/friend-list.component';
 import { FriendItemComponent } from './tripview/invite-members-component/friend-list/friend-item.component';
 import { ChosenFriendComponent } from './tripview/invite-members-component/chosen-friend/chosen-friend.component';
@@ -99,19 +81,6 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     DayTripComponent,
     DayTripImageComponent,
 
-    // daytripview
-    DayTripViewComponent,
-    ActivityListComponent,
-    LocationFormComponent,
-    LocationRowComponent,
-    TransportFormComponent,
-    TransportRowComponent,
-
-    // activity detail
-    ActivityDetailComponent,
-    CommentComponent,
-    CreateCommentComponent,
-
     InviteMembersComponentComponent,
     FriendListComponent,
     FriendItemComponent,
@@ -129,6 +98,7 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     StaticModule,
     CoreModule,
     DashboardModule,
+    DayTripViewModule,
 
     NgZorroAntdModule.forRoot(),
 

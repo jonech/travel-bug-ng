@@ -6,7 +6,6 @@ import { Trip } from '../models/trip.model';
 @Component({
 	selector: 'dashboard',
   template: `
-
     <div nz-row [nzType]="'flex'" [nzJustify]="'end'" [nzAlign]="'bottom'" class="top-row">
       <div nz-col [nzSpan]="4">
         <a id="create-trip-button" class="right" (click)="openCreateTrip()">new trip+</a>

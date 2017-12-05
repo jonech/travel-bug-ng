@@ -1,0 +1,11 @@
+.left-side-bar {
+  //padding-top: 5px;
+  position: fixed;
+  overflow-y: scroll;
+}
+
+:host ::ng-deep {
+  .ant-affix {
+   position: inherit;
+  }
+}

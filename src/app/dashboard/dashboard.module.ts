@@ -19,7 +19,6 @@ import { AuthGuard } from '../guards/auth.guard';
 import {
   AuthInterceptor,
   TripService,
-  AuthService,
   EmitterService
 } from '../services';
 
@@ -45,7 +44,6 @@ import {
   providers: [
     AuthGuard,
     EmitterService,
-    AuthService,
     TripService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],

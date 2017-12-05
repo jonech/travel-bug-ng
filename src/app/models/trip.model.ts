@@ -11,12 +11,8 @@ export interface TripPermission {
 }
 
 export class Trip {
-  constructor(param: Trip = {}) {
-    this.id = param.id;
-    this.startDate = param.startDate;
-    this.endDate = param.endDate;
-    this.tripName = param.tripName;
-    this.tripPermissions = param.tripPermissions;
+  public constructor(init?: Partial<Trip>) {
+    Object.assign(this, init);
   }
 
 	public id?: number;

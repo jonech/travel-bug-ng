@@ -26,3 +26,11 @@ li {
 *:focus {
   outline: none;
 }
+
+.main-content {
+  padding-top: 70px;       // heigh of header
+  padding-bottom: 120px;    // heigh of footer
+  padding-left: 15px;
+  padding-right: 15px;
+  align-content: center;
+}
