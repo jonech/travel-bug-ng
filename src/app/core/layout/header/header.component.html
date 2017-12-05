@@ -1,5 +1,5 @@
 <nz-header id="header" class="static-top">
-  <div id="logo" class="link" [routerLink]="['/']">
+  <div id="logo" class="link" (click) = "goToExternalURL('https://travelbuggg42.wixsite.com/travel-bug')">
     <img src="/assets/img/logoblack.png">
   </div>
   <ul nz-menu id="header-menu" [nzMode]="'horizontal'">
@@ -7,6 +7,6 @@
     <li nz-menu-item *ngIf="!_isLogin" class="link" [routerLink]="['/login']">Login</li>
     <li nz-menu-item *ngIf="!_isLogin" class="vertical-line" class="link" [routerLink]="['/register']">Register</li>
     <li nz-menu-item *ngIf="_isLogin" class="vertical-line" class="link" (click)="logout()">Logout</li>
-    <li nz-menu-item class="link" [routerLink]="['/about']">Contact</li>
+    <li nz-menu-item class="link" (click)="goToExternalURL('https://travelbuggg42.wixsite.com/travel-bug/contact')">Contact</li>
   </ul>
 </nz-header>
