@@ -19,6 +19,7 @@ import { EventComponent } from './activity/event.component';
 import { TransportComponent } from './activity/transport.component';
 import { CreateEventComponent } from './modal/create-event.component';
 import { CreateTransportComponent } from './modal/create-transport.component';
+import { EventFormComponent } from './modal/event-form.component';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { CreateTransportComponent } from './modal/create-transport.component';
     EventComponent,
     TransportComponent,
     CreateEventComponent,
-    CreateTransportComponent
+    CreateTransportComponent,
+    EventFormComponent
   ],
   providers: [
     AuthGuard,

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-// import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
-
 import { Subject } from 'rxjs/Subject';
-import { DayTripService } from '../services';
+
+import { DayTripService } from 'app/services';
+import { EmitterService } from 'app/services';
+import * as String from 'app/shared/util/string.util';
 import { DayTrip } from 'app/models/day-trip.model';
 
 @Component({
@@ -42,12 +42,13 @@ import { DayTrip } from 'app/models/day-trip.model';
 
       <div nz-col [nzSpan]="6">
         <div class="right-side-bar">
-          <button class="activity-button"><i class="anticon anticon-plus"></i><br><span>Add Activity</span></button>
+          <button class="activity-button" (click)="createEvent()"><i class="anticon anticon-plus"></i><br><span>Add Activity</span></button>
           <button class="activity-button"><i class="anticon anticon-plus"></i><br>Add Transport</button>
         </div>
       </div>
     </div>
 
+    <create-event-modal></create-event-modal>
   `
 })
 export class DayTripViewComponent implements OnInit {
@@ -59,10 +60,6 @@ export class DayTripViewComponent implements OnInit {
 
   dayTripId: string;
   numbers: Array<string> = new Array<string>();
-
-
-	_currentDay: string; // display of current day on dropdown nav
-	_show: boolean = false; // dropdown list show or not
 
 	daySubject: Subject<any>;
 
@@ -76,13 +73,6 @@ export class DayTripViewComponent implements OnInit {
 	}
 
 	ngOnInit() {
-    // for (var i=0; i<20; i++) {
-    //   this.numbers.push(String(i));
-    //   console.log(i);
-    // }
-    // console.log(this.numbers);
-		// always close dropdown nav when navigated to another day
-		this._show = false;
 		this.route.params.subscribe(params => {
       this.tripId = params['tripId'];
 
@@ -99,21 +89,8 @@ export class DayTripViewComponent implements OnInit {
 
 	}
 
-	showDropDown() {
-		this._show = !this._show;
-	}
-
-  AddActivity() {
-    if (this._currentDay == null) {
-        return;
-    }
-
-    // var tempAcc = this.firebase.list(`/DayTrip/${this._currentDay}`).push({});
-    // console.log(tempAcc.key);
-    // //console.log(this.router.url);
-    // console.log(`${this.router.url}/(pop-up:${tempAcc.key})`);
-    // //this.router.navigate([{ outlets: { 'pop-up': [ tempAcc.key] }}]);
-    // this.router.navigateByUrl(`${this.router.url}/(pop-up:${tempAcc.key})`);
+  createEvent() {
+    EmitterService.get(String.CREATE_EVENT).emit(true);
   }
 
   createDayTrip() {
