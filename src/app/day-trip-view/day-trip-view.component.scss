@@ -1,3 +1,5 @@
+@import '../../assets/sass/variables.scss';
+
 .left-vertical-bar {
     padding-top: 5px;
     padding-left: 10px;
@@ -5,13 +7,55 @@
 }
 
 .day-trip {
-  height: 500px;
+  height: 100vh;
   position:relative;
   span {
     position: absolute;
     top: -70px;
   }
 }
+
+.left-side-bar {
+  //padding-top: 5px;
+  position: fixed;
+  overflow-y: scroll;
+
+  .timeline {
+    margin: 10px 0;
+  }
+}
+
+.right-side-bar {
+  position: fixed;
+  overflow-y: scroll;
+
+  .activity-button {
+    font-size: 20px;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    width: 180px;
+    margin: 10px;
+
+    &:hover {
+      background-color: $second-color;
+    }
+    &:focus {
+      border: none;
+    }
+  }
+}
+
+:host ::ng-deep {
+  .ant-affix {
+    position: inherit;
+  }
+}
+
+
+//////////////////////////////
+
 
 .dropdown-nav {
 	background: lightseagreen;;

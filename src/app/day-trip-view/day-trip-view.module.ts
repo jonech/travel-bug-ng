@@ -15,6 +15,10 @@ import {
 
 import { DayTripViewComponent } from './day-trip-view.component';
 import { DayListComponent } from './day-trip-sider/day-list.component';
+import { EventComponent } from './activity/event.component';
+import { TransportComponent } from './activity/transport.component';
+import { CreateEventComponent } from './modal/create-event.component';
+import { CreateTransportComponent } from './modal/create-transport.component';
 
 @NgModule({
   imports: [
@@ -28,7 +32,11 @@ import { DayListComponent } from './day-trip-sider/day-list.component';
   ],
   declarations: [
     DayTripViewComponent,
-    DayListComponent
+    DayListComponent,
+    EventComponent,
+    TransportComponent,
+    CreateEventComponent,
+    CreateTransportComponent
   ],
   providers: [
     AuthGuard,

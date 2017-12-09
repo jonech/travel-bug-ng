@@ -19,7 +19,7 @@ export class DayTripService {
 
   public getDayTrips(tripId): Observable<DayTrip[]> {
     return this.http.get(`${this.baseUrl}/trip/${tripId}/day`)
-            .map((res) => { return res })
+            .map((res: any) => { return res.map(d => new DayTrip(d)) })
             .catch((err) => Observable.throw(err || 'Server error'));
   }
 

@@ -5,7 +5,8 @@ import {
   Output,
   OnChanges,
   SimpleChanges,
-  EventEmitter
+  EventEmitter,
+  IterableDiffers
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { DayTrip } from '../../models';
@@ -27,7 +28,8 @@ import { DayTrip } from '../../models';
   `
 })
 export class DayListComponent implements OnInit, OnChanges {
-  dayList: Array<DayTrip> = [];
+
+  @Input() dayList: Array<DayTrip> = [];
   private _data = new BehaviorSubject<DayTrip[]>([]);
 
   @Input()
@@ -42,15 +44,21 @@ export class DayListComponent implements OnInit, OnChanges {
   @Output() createDayTripClick:EventEmitter<any> = new EventEmitter();
 
   constructor(
+    private iterableDiffers: IterableDiffers
   ) { }
 
   ngOnInit() {
 
   }
 
+  ngDoCheck() {
+  }
+
   ngOnChanges(changes: SimpleChanges) {
     // only run when property "data" changed
+    console.log(changes['dayList'])
     if (changes['dayList']) {
+      console.log(changes['dayList'])
       this.dayList = changes['dayList'] as any;
     }
   }

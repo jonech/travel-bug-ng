@@ -1,0 +1,67 @@
+@import '../../../assets/sass/variables.scss';
+
+:host ::ng-deep {
+  .ant-card-body {
+    padding: 15px;
+  }
+
+  .time {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16px;
+  }
+
+  .location-img {
+    background-size: cover;
+    background-position: center;
+
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: $main-color;
+    background-image: url('https://media-cdn.tripadvisor.com/media/photo-s/09/a2/d0/01/prakruth-resort.jpg');
+  }
+
+  .event-name {
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+}
+
+.card-wrapper {
+  padding: 5px 0;
+
+  .card {
+    cursor: pointer;
+
+    // hover onto card and make toolbox appear
+    &:hover .tools {
+      opacity: 1;
+    }
+
+    .tools {
+      position: absolute;
+      right: 0.7rem;
+      top: 0.7rem;
+
+      i {
+        font-size: 16px;
+
+        &:hover {
+          color: $second-color;
+        }
+      }
+
+      opacity: 0;
+      transition: opacity ease-in-out .3s;
+      -moz-transition: opacity ease-in-out .3s;
+      -webkit-transition: opacity ease-in-out .3s;
+    }
+  }
+}
+
