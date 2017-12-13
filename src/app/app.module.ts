@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-
-import { Routing } from './app.routes';
 
 import { AuthGuard } from './guards/auth.guard';
 
@@ -44,19 +43,6 @@ import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DayTripViewModule } from './day-trip-view/day-trip-view.module';
 
-import { TripViewComponent } from './tripview/tripview.component';
-import { DayTripListComponent } from './tripview/daytriplist.component';
-import { DayTripComponent } from './tripview/daytrip.component';
-import { DayTripImageComponent } from './tripview/daytripImage.component';
-
-
-import { InviteMembersComponentComponent } from './tripview/invite-members-component/invite-members-component.component';
-import { InviteService } from './tripview/invite-members-component/invite.service';
-
-import { FriendListComponent } from './tripview/invite-members-component/friend-list/friend-list.component';
-import { FriendItemComponent } from './tripview/invite-members-component/friend-list/friend-item.component';
-import { ChosenFriendComponent } from './tripview/invite-members-component/chosen-friend/chosen-friend.component';
-
 
 @NgModule({
   declarations: [
@@ -76,22 +62,14 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
     ClickEditTimeComponent,
 
     // tripview or fullview
-    TripViewComponent,
-    DayTripListComponent,
-    DayTripComponent,
-    DayTripImageComponent,
-
-    InviteMembersComponentComponent,
-    FriendListComponent,
-    FriendItemComponent,
-    ChosenFriendComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
 	  ReactiveFormsModule,
     HttpClientModule,
-	  Routing,
+    RouterModule.forRoot([]),
+	  //Routing,
     BrowserAnimationsModule,
 
     AuthModule,
@@ -121,9 +99,6 @@ import { ChosenFriendComponent } from './tripview/invite-members-component/chose
 	  //services
     AuthService,
     EmitterService,
-
-	  //services
-    InviteService
 	],
   bootstrap: [AppComponent]
 })

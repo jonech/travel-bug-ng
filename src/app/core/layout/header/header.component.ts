@@ -43,11 +43,11 @@ export class HeaderComponent implements OnInit
     })
   }
 
-	private goToExternalURL(url){
+	goToExternalURL(url){
 		window.location.href=url;
 	}
 
-	private logout() {
+	logout() {
 		this.auth.logout();
     console.log("Log out successfully");
     this._isLogin = false;

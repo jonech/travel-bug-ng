@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 	selector: 'firebase-place-image',
 	template:
 	`
-		<img [src]="sanitize( (_placeImage|async)?.image )">
+		<!--<img [src]="sanitize( (_placeImage|async)?.image )">-->
 	`
 })
 export class FirebasePlaceImageComponent implements OnInit {

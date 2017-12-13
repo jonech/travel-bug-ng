@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "travel-bugg"
+    "default": "buggy-travel",
+    "v2": "buggy-travel"
   }
 }

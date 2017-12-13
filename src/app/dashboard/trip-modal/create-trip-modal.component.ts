@@ -42,7 +42,7 @@ export class CreateTripModalComponent implements OnInit, OnChanges {
     this.isVisible = changes.isVisible.currentValue
   }
 
-  handleCancel() {
+  handleCancel(event) {
     this.closeModal();
   }
 
