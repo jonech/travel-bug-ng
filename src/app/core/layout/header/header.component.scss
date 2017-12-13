@@ -1,21 +1,29 @@
 @import '../../../../assets/sass/variables.scss';
 
-#header {
+.navigation-content {
   background: white;
   padding: 0;
+  border-bottom: 1px solid $mid-gray;
+  height: 64px;
 }
 
 #logo {
-  float: left;
-  margin: 0 20px;
+
   img {
     width: 20px;
+    position: absolute;
+    left: 20px;
+    top: 30%;
   }
+  z-index: 1;
+  
 }
 
 #header-menu {
-  line-height: 64px;
-  border-bottom: 1px solid $mid-gray;
+  line-height: 62px;
+  position: absolute;
+  right: 0;
+  
 }
 
 .static-top {

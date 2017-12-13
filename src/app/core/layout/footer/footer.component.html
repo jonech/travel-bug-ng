@@ -1,4 +1,4 @@
-<nz-footer id="footer">
+<nz-footer id="footer" class="navigation-content center">
   <!-- <div id = "links" class="responsive">
     <ul>
       <li class="icon" id="footer-bars">
@@ -23,5 +23,18 @@
       </div>
     </ul>
   </div> -->
-  <p>© TravelBug 2016. All rights reserved. Use of this site constitutes acceptance of our User Agreement and Privacy Policy. The material on this site may not be reproduced, distributed, transmitted, cached or otherwised, except with prior written permission of Travel Bug.</p>
+
+  <ul nz-menu id="footer-menu">
+    <li nz-menu-item class="link" (click)="goToExternalURL('https://travelbuggg42.wixsite.com/travel-bug/meet-the-team')">MEET THE TEAM</li>
+    <li nz-menu-item class="link" (click)="goToExternalURL('https://travelbuggg42.wixsite.com/travel-bug/terms-and-conditions')">TERM AND CONDITIONS</li>
+    <li nz-menu-item class="link" (click) = "goToExternalURL('https://travelbuggg42.wixsite.com/travel-bug')">
+      <img src="assets/img/logoblack.png" style="width:25px;">
+    </li>
+    <li nz-menu-item class="link" (click)="goToExternalURL('https://travelbuggg42.wixsite.com/travel-bug/privacy-policy')">PRIVACY POLICY</li>
+    <li nz-menu-item class="link" (click)="goToExternalURL('https://travelbuggg42.wixsite.com/travel-bug/contact')">CONTACT</li>
+  </ul>
+  <div class="text-content">
+      <p>© TravelBug 2016. All rights reserved. Use of this site constitutes acceptance of our User Agreement and Privacy Policy. The material on this site may not be reproduced, distributed, transmitted, cached or otherwised, except with prior written permission of Travel Bug.</p>
+  </div>
+  
 </nz-footer>
