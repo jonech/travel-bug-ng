@@ -4,3 +4,4 @@ export { EmitterService } from './event-emitter.service';
 export { AuthService } from './auth.service';
 export { TripService } from './trip.service';
 export { DayTripService } from './day-trip.service';
+export { ActivityService } from './activity.service';

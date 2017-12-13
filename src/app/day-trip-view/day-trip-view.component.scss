@@ -46,6 +46,22 @@
       border: none;
     }
   }
+
+  #temp-heading {
+    margin: 5px 15px;
+    border-bottom: solid 1px $dark-gray;
+  }
+  .temp-box {
+    margin: 10px 15px;
+    padding: 5px;
+    // -moz-box-shadow:    inset 0 0 .5px #000000;
+    // -webkit-box-shadow: inset 0 0 .5px #000000;
+    // box-shadow:         inset 0 0 .5px #000000;
+
+    // background: $light-gray;
+    height: 60vh;
+    overflow-y: scroll;
+  }
 }
 
 :host ::ng-deep {

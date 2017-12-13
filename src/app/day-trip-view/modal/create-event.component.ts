@@ -1,11 +1,13 @@
 import {
   Component,
   OnInit,
-  ViewChild
+  ViewChild,
+  OnDestroy
 } from '@angular/core';
-import { EmitterService } from 'app/services/event-emitter.service';
+import { EmitterService, ActivityService } from 'app/services';
 import { EventActivity } from 'app/models';
 import * as String from 'app/shared/util/string.util';
+import { EventFormComponent } from './event-form.component';
 
 @Component({
   selector: 'create-event-modal',
@@ -24,14 +26,18 @@ import * as String from 'app/shared/util/string.util';
   `,
 })
 
-export class CreateEventComponent implements OnInit {
+export class CreateEventComponent implements OnInit, OnDestroy {
 
   isVisible: boolean = false;
+  @ViewChild(EventFormComponent) eventForm: EventFormComponent;
 
-  constructor() { }
+  constructor(
+    private activityService: ActivityService
+  ) { }
 
   ngOnInit() {
-    EmitterService.get(String.CREATE_EVENT).subscribe((modalOpen) => {
+    // listen to create event button click
+    EmitterService.get(String.CREATE_TEMP_EVENT).subscribe((modalOpen) => {
       if (modalOpen) {
         this.isVisible = true;
       }
@@ -42,7 +48,7 @@ export class CreateEventComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    EmitterService.get(String.CREATE_EVENT).unsubscribe();
+    EmitterService.get(String.CREATE_TEMP_EVENT).unsubscribe();
   }
 
   handleCancel(event) {
@@ -51,5 +57,12 @@ export class CreateEventComponent implements OnInit {
 
   handleSubmit(event: EventActivity) {
     console.log(typeof event, event);
+    EmitterService.get(String.CREATE_TEMP_EVENT_SUBMIT).emit(event);
+    this.eventForm.resetForm();
+    this.isVisible = false;
+  }
+
+  createEvent(event: EventActivity) {
+    //this.activityService.createEvent()
   }
 }

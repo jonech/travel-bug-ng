@@ -2,5 +2,8 @@ export const ProfileDefaultBase64 = "iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJ
 
 export const EmailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const CREATE_EVENT = '[Event] Create';
+export const CREATE_TEMP_EVENT = '[Event] Create';
 export const EDIT_EVENT = '[Event] Edit';
+export const CREATE_TEMP_EVENT_SUBMIT = '[Event] Create Temp Submit';
+export const EDIT_TEMP_EVENT = '[Event] Edit Temp';
+export const EDIT_TEMP_EVENT_SUBMIT = '[Event] Edit Temp Submit';

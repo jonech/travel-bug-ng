@@ -11,14 +11,17 @@ import {
   AuthInterceptor,
   EmitterService,
   DayTripService,
+  ActivityService
 } from '../services';
 
 import { DayTripViewComponent } from './day-trip-view.component';
 import { DayListComponent } from './day-trip-sider/day-list.component';
 import { EventComponent } from './activity/event.component';
 import { TransportComponent } from './activity/transport.component';
+import { TempEventComponent } from './activity/temp-event.component';
 import { CreateEventComponent } from './modal/create-event.component';
 import { CreateTransportComponent } from './modal/create-transport.component';
+import { EditTempEventComponent } from './modal/edit-temp-event.component';
 import { EventFormComponent } from './modal/event-form.component';
 
 @NgModule({
@@ -35,8 +38,10 @@ import { EventFormComponent } from './modal/event-form.component';
     DayTripViewComponent,
     DayListComponent,
     EventComponent,
+    TempEventComponent,
     TransportComponent,
     CreateEventComponent,
+    EditTempEventComponent,
     CreateTransportComponent,
     EventFormComponent
   ],
@@ -44,6 +49,7 @@ import { EventFormComponent } from './modal/event-form.component';
     AuthGuard,
     EmitterService,
     DayTripService,
+    ActivityService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
 })

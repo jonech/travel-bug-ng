@@ -1,0 +1,58 @@
+@import '../../../assets/sass/variables.scss';
+
+:host ::ng-deep {
+  .ant-card-body {
+    padding: 0;
+  }
+}
+
+.temp-event {
+  padding: 5px;
+  margin: 2px 0;
+  height: 10vh;
+  width: 100%;
+}
+
+.card {
+  cursor: pointer;
+
+  // hover onto card and make toolbox appear
+  &:hover .tools {
+    opacity: 1;
+  }
+
+  .tools {
+    position: absolute;
+    right: 0.4rem;
+    top: 0.4rem;
+
+    i {
+      font-size: 14px;
+
+      &:hover {
+        color: $second-color;
+      }
+    }
+
+    opacity: 0;
+    transition: opacity ease-in-out .3s;
+    -moz-transition: opacity ease-in-out .3s;
+    -webkit-transition: opacity ease-in-out .3s;
+  }
+
+  .time {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 14px;
+  }
+
+  .description {
+    text-overflow: ellipsis;
+    font-size: 12px;
+  }
+}
+
+.title {
+
+}
+
+

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { EmitterService } from './event-emitter.service';
 import { DayTrip } from '../models/day-trip.model';
 
+
 @Injectable()
 export class DayTripService {
 

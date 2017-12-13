@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 
 import { DayTripService } from 'app/services';
 import { EmitterService } from 'app/services';
 import * as String from 'app/shared/util/string.util';
-import { DayTrip } from 'app/models/day-trip.model';
+import { DayTrip, EventActivity } from 'app/models';
 
 @Component({
   selector: 'day-trip-view',
@@ -44,16 +44,25 @@ import { DayTrip } from 'app/models/day-trip.model';
         <div class="right-side-bar">
           <button class="activity-button" (click)="createEvent()"><i class="anticon anticon-plus"></i><br><span>Add Activity</span></button>
           <button class="activity-button"><i class="anticon anticon-plus"></i><br>Add Transport</button>
+
+          <div id="temp-heading">Temporary Activities</div>
+          <div class="temp-box">
+            <div *ngFor="let temp of tempEventList">
+              <temp-event [event]="temp"></temp-event>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
     <create-event-modal></create-event-modal>
+    <edit-temp-event-modal></edit-temp-event-modal>
   `
 })
-export class DayTripViewComponent implements OnInit {
+export class DayTripViewComponent implements OnInit, OnDestroy {
 
   dayTripList: Array<DayTrip> = [];
+  tempEventList: Array<EventActivity> = [];
   tripId: string;
 
   addDayTripLoading: boolean = false;
@@ -77,20 +86,23 @@ export class DayTripViewComponent implements OnInit {
       this.tripId = params['tripId'];
 
       let responded = false;
+      // fetch list of daytrips
       this.dayTripService.getDayTrips(this.tripId)
         .takeWhile(() => !responded)
         .subscribe(res => {
-          console.log(res);
           this.dayTripList = res;
           responded = true;
-        })
+        });
+
+      // listen to create event
+      EmitterService.get(String.CREATE_TEMP_EVENT_SUBMIT).subscribe((temp) => {
+        this.tempEventList.push(temp);
+      });
     });
-
-
 	}
 
   createEvent() {
-    EmitterService.get(String.CREATE_EVENT).emit(true);
+    EmitterService.get(String.CREATE_TEMP_EVENT).emit(true);
   }
 
   createDayTrip() {
@@ -104,5 +116,9 @@ export class DayTripViewComponent implements OnInit {
         this.addDayTripLoading = false;
         responded = true;
       })
+  }
+
+  ngOnDestroy() {
+    EmitterService.get(String.CREATE_TEMP_EVENT).unsubscribe();
   }
 }
