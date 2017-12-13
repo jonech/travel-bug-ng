@@ -21,6 +21,7 @@ export class AuthService {
 
   public JWT = 'jwtoken';
   private loginUrl = `${environment.apiUrl}/user/signin`;
+  private registerUrl = `${environment.apiUrl}/user/signup`;
   private validateUrl = `${environment.apiUrl}/user/validate`;
 
   constructor(
@@ -73,6 +74,14 @@ export class AuthService {
               return true;
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
+  }
+
+  public registerWithEmail(user: User): Observable<boolean> {
+    return this.http.post(this.registerUrl, { user: user })
+            .map((res) => {
+              return true;
+            })
+            .catch((error: any) => Observable.throw(error || 'server error'));
   }
 
   public validateJWT(): Observable<string> {
