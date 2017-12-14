@@ -19,7 +19,7 @@
       "mobile": false,
       "styles": [
         "./assets/sass/base.scss",
-        "../node_modules/dragula/dist/dragula.css"
+        "../node_modules/dragula/dist/dragula.min.css"
       ],
       "scripts": [
 	  ],

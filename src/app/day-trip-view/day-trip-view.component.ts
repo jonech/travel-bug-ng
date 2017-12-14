@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
+import { DragulaService } from 'ng2-dragula';
 
 import { DayTripService } from 'app/services';
 import { EmitterService } from 'app/services';
@@ -34,9 +35,13 @@ import { DayTrip, EventActivity } from 'app/models';
           <span [id]="'item-'+i"></span>
           <h4>{{ d.dayTripName }} {{ d.date }}</h4>
 
-          <div *ngFor="let a of d.activities; let j = index">
-            <event></event>
+          <div nz-row [dragula]="'bag-activity'"  [dragulaModel]="d.activities">
+            <event *ngFor="let a of d.activities; let j = index" [event]="a"></event>
           </div>
+        </div>
+
+        <div *ngIf="dayTripList.length <= 0">
+          <h3>Create a new day trip and start planning!</h3>
         </div>
       </div>
 
@@ -46,10 +51,8 @@ import { DayTrip, EventActivity } from 'app/models';
           <button class="activity-button"><i class="anticon anticon-plus"></i><br>Add Transport</button>
 
           <div id="temp-heading">Temporary Activities</div>
-          <div class="temp-box">
-            <div *ngFor="let temp of tempEventList">
-              <temp-event [event]="temp"></temp-event>
-            </div>
+          <div class="temp-box" [dragula]="'bag-activity'" [dragulaModel]="tempEventList">
+            <temp-event *ngFor="let temp of tempEventList; let i = index" [event]="temp"></temp-event>
           </div>
         </div>
       </div>
@@ -75,10 +78,16 @@ export class DayTripViewComponent implements OnInit, OnDestroy {
 	constructor(
 		private route: ActivatedRoute,
     private router: Router,
-    private dayTripService: DayTripService
-		// private firebase: AngularFireDatabase
+    private dayTripService: DayTripService,
+    private dragulaService: DragulaService
 	) {
-		this.daySubject = new Subject();
+    this.daySubject = new Subject();
+
+    dragulaService.drop.subscribe((value) => {
+      console.log(`drop: ${value[0]}`);
+      console.log(value)
+      this.onDrop(value.slice(1));
+    });
 	}
 
 	ngOnInit() {
@@ -120,5 +129,12 @@ export class DayTripViewComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     EmitterService.get(String.CREATE_TEMP_EVENT).unsubscribe();
+  }
+
+  private onDrop(args) {
+    let [e, el] = args;
+    // do something
+    console.log(args);
+    console.log(this.tempEventList);
   }
 }

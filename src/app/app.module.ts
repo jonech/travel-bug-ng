@@ -23,7 +23,7 @@ import { googleConfig } from '../environments/google.config';
 
 
 import { AgmCoreModule } from '@agm/core';
-import { DragulaModule } from 'ng2-dragula';
+
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
@@ -87,7 +87,6 @@ import { DayTripViewModule } from './day-trip-view/day-trip-view.module';
     //AngularFireAuthModule,
 
     FacebookModule.forRoot(),
-    DragulaModule,
   ],
   providers: [
 	  // guards

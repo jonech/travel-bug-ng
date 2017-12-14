@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { DragulaModule } from 'ng2-dragula';
 import { SharedModule } from '../shared/shared.module';
 import { DayTripViewRoutingModule } from './day-trip-view-routing.module';
 
@@ -33,6 +34,7 @@ import { EventFormComponent } from './modal/event-form.component';
     NgZorroAntdModule.forRoot(),
     SharedModule,
     HttpClientModule,
+    DragulaModule,
   ],
   declarations: [
     DayTripViewComponent,

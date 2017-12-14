@@ -13,13 +13,13 @@ import { EventActivity } from '../../models';
       <nz-card class="card">
         <ng-template #body>
           <div nz-row [nzType]="'flex'" [nzAlign]="'middle'">
-            <div nz-col [nzSpan]="3"><div class="time">09:00</div></div>
+            <div nz-col [nzSpan]="3"><div class="time">{{ event.time }}</div></div>
             <div nz-col [nzSpan]="5">
               <div class="location-img"></div>
             </div>
             <div nz-col [nzSpan]="16">
-              <h4 class="event-name">Event Name</h4>
-              <p class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.</p>
+              <h4 class="event-name">{{ event.eventName }}</h4>
+              <p class="description">{{ event.description }}</p>
             </div>
           </div>
           <div class="tools">
@@ -32,6 +32,8 @@ import { EventActivity } from '../../models';
 })
 
 export class EventComponent implements OnInit {
+
+  coolStuff = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam quis risus eget urna mollis ornare vel eu leo. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.";
 
   @Input() event: EventActivity;
 
