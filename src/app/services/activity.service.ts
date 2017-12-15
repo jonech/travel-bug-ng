@@ -26,4 +26,11 @@ export class ActivityService {
       .map((res) => { return new EventActivity(res) })
       .catch((err) => Observable.throw(err || 'Server error'));
   }
+
+  public editEvent(event): Observable<EventActivity> {
+    return this.http
+      .post(`${this.baseUrl}/trip/${event.tripId}/day/${event.dayTripId}/event/${event.id}`, { event: event })
+      .map((res: any) => new EventActivity(res.event))
+      .catch(err => Observable.throw(err || 'Server Error'));
+  }
 }

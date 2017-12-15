@@ -60,6 +60,7 @@ import { DayTrip, EventActivity } from 'app/models';
 
     <create-event-modal></create-event-modal>
     <edit-temp-event-modal></edit-temp-event-modal>
+    <edit-event-modal></edit-event-modal>
   `
 })
 export class DayTripViewComponent implements OnInit, OnDestroy {

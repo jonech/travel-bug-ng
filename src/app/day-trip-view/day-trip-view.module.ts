@@ -23,6 +23,7 @@ import { TempEventComponent } from './activity/temp-event.component';
 import { CreateEventComponent } from './modal/create-event.component';
 import { CreateTransportComponent } from './modal/create-transport.component';
 import { EditTempEventComponent } from './modal/edit-temp-event.component';
+import { EditEventComponent } from './modal/edit-event.component';
 import { EventFormComponent } from './modal/event-form.component';
 
 @NgModule({
@@ -44,6 +45,7 @@ import { EventFormComponent } from './modal/event-form.component';
     TransportComponent,
     CreateEventComponent,
     EditTempEventComponent,
+    EditEventComponent,
     CreateTransportComponent,
     EventFormComponent
   ],

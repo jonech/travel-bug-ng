@@ -1,6 +1,7 @@
 export class Activity {
   public id: number;
   public dayTripId: number;
+  public tripId: number;
   public createdBy: number;
   public type: string;
   public position?: number;

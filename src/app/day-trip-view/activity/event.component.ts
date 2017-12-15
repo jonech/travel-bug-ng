@@ -3,7 +3,9 @@ import {
   OnInit,
   Input
 } from '@angular/core';
-import { EventActivity } from '../../models';
+import { EventActivity } from 'app/models';
+import { ActivityService, EmitterService } from 'app/services';
+import * as String from 'app/shared/util/string.util';
 
 @Component({
   selector: 'event',
@@ -23,7 +25,7 @@ import { EventActivity } from '../../models';
             </div>
           </div>
           <div class="tools">
-            <div class="setting"><i class="anticon anticon-edit"></i></div>
+            <div class="setting" (click)="editEvent()"><i class="anticon anticon-edit"></i></div>
           </div>
         </ng-template>
       </nz-card>
@@ -40,4 +42,19 @@ export class EventComponent implements OnInit {
   constructor() { }
 
   ngOnInit() { }
+
+  editEvent() {
+    EmitterService.get(String.EDIT_EVENT).emit(this.event);
+
+    let responded = false;
+    EmitterService.get(String.EDIT_EVENT_SUBMIT)
+      .takeWhile(() => !responded)
+      .subscribe((event) => {
+        if (event == null) {
+          responded = true;
+          return;
+        }
+        this.event = event;
+      });
+  }
 }
