@@ -9,7 +9,7 @@ import * as String from 'app/shared/util/string.util';
     <nz-card class="temp-event card">
       <ng-template #body>
         <h4 class="title">{{ event.eventName }}</h4>
-        <p class="time">{{ event.time | date:'HH:mm' }}</p>
+        <p class="time">{{ event.getTimeDate() | date:'HH:mm' }}</p>
         <p class="description">{{ event.description }}</p>
         <div class="tools">
           <div class="setting" (click)="editTempEvent()"><i class="anticon anticon-edit"></i></div>

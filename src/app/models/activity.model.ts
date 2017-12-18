@@ -12,6 +12,23 @@ export class Activity {
   public constructor(init?: Partial<Activity>) {
     Object.assign(this, init);
   }
+
+  public setTimeDate(value: Date) {
+    if (value == null) {
+      return;
+    }
+    this.time = `${value.getHours()}:${value.getMinutes()}`;
+  }
+  public getTimeDate(): Date {
+    if (this.time == null) {
+      return null;
+    }
+
+    let date = new Date();
+    date.setHours(Number(this.time.split(':')[0]))
+    date.setMinutes(Number(this.time.split(':')[1]))
+    return date;
+  }
 }
 
 export class EventActivity extends Activity {

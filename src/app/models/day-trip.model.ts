@@ -1,4 +1,4 @@
-import { Activity } from '.';
+import { Activity, EventActivity, TransportActivity  } from '.';
 
 export class DayTrip {
   public id: number;
@@ -9,6 +9,17 @@ export class DayTrip {
 
   public constructor(init?: Partial<DayTrip>) {
     Object.assign(this, init);
+    this.activities = this.activities.map(activity => {
+      if (activity.type === 'EventActivity') {
+        return new EventActivity(activity);
+      }
+      else if (activity.type === 'TransportActivity') {
+        return new TransportActivity(activity);
+      }
+      else {
+        return new Activity(activity);
+      }
+    });
   }
 
   public getDayTripNameTag(): String {

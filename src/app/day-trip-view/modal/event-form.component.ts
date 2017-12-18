@@ -82,7 +82,6 @@ export class EventFormComponent implements OnInit, OnChanges
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.event != null) {
-      console.log(this.event)
       if (this.eventForm != null && this.event != null) {
         this.updateForm(this.event);
       }
@@ -95,7 +94,9 @@ export class EventFormComponent implements OnInit, OnChanges
     }
     if (this.eventForm.valid) {
       this.isLoading = true;
-      this.formSubmit.emit(new EventActivity(this.eventForm.value));
+      let updated = new EventActivity(this.eventForm.value);
+      updated.setTimeDate(this.eventForm.value.time);
+      this.formSubmit.emit(updated);
     }
   }
 
@@ -115,7 +116,7 @@ export class EventFormComponent implements OnInit, OnChanges
     }
 
     if (event.time != null) {
-      this.eventForm.controls['time'].setValue(event.time);
+      this.eventForm.controls['time'].setValue(event.getTimeDate());
     }
     else {
       this.eventForm.controls['time'].setValue(null);
