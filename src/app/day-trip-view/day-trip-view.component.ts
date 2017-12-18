@@ -35,7 +35,7 @@ import { DayTrip, EventActivity } from 'app/models';
           <span [id]="'item-'+i"></span>
           <h4>{{ d.dayTripName }} {{ d.date }}</h4>
 
-          <div nz-row [dragula]="'bag-activity'"  [dragulaModel]="d.activities">
+          <div [dragula]="'bag-activity'"  [dragulaModel]="d.activities">
             <event *ngFor="let a of d.activities; let j = index" [event]="a"></event>
           </div>
         </div>
@@ -47,8 +47,10 @@ import { DayTrip, EventActivity } from 'app/models';
 
       <div nz-col [nzSpan]="6">
         <div class="right-side-bar">
-          <button class="activity-button" (click)="createEvent()"><i class="anticon anticon-plus"></i><br><span>Add Activity</span></button>
-          <button class="activity-button"><i class="anticon anticon-plus"></i><br>Add Transport</button>
+          <div nz-row>
+            <button class="activity-button" (click)="createEvent()"><i class="anticon anticon-plus"></i><br><span>Add Activity</span></button>
+            <!--<button class="activity-button"><i class="anticon anticon-plus"></i><br>Add Transport</button>-->
+          </div>
 
           <div id="temp-heading">Temporary Activities</div>
           <div class="temp-box" [dragula]="'bag-activity'" [dragulaModel]="tempEventList">

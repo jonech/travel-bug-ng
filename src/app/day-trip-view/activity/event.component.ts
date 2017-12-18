@@ -11,11 +11,11 @@ import * as String from 'app/shared/util/string.util';
   selector: 'event',
   styleUrls: ['event.component.scss'],
   template: `
-    <div nz-col [nzSpan]="24" class="card-wrapper">
+    <div nz-row class="card-wrapper">
       <nz-card class="card">
         <ng-template #body>
           <div nz-row [nzType]="'flex'" [nzAlign]="'middle'">
-            <div nz-col [nzSpan]="3"><div class="time">{{ event.time }}</div></div>
+            <div nz-col [nzSpan]="3"><div class="time">{{ event.getTimeDate() | date:'HH:mm' }}</div></div>
             <div nz-col [nzSpan]="5">
               <div class="location-img"></div>
             </div>
