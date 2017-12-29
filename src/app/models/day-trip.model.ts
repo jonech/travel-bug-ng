@@ -1,4 +1,6 @@
-import { Activity, EventActivity, TransportActivity  } from '.';
+import { Activity } from './activity.model';
+import { EventActivity } from './activity.model';
+import { TransportActivity } from './activity.model';
 
 export class DayTrip {
   public id: number;

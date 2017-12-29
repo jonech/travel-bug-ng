@@ -17,6 +17,7 @@ import {
 
 import { DayTripViewComponent } from './day-trip-view.component';
 import { DayListComponent } from './day-trip-sider/day-list.component';
+import { ActivityListComponent } from './activity/activity-list.component';
 import { EventComponent } from './activity/event.component';
 import { TransportComponent } from './activity/transport.component';
 import { TempEventComponent } from './activity/temp-event.component';
@@ -41,6 +42,7 @@ import { EventFormComponent } from './modal/event-form.component';
     DayTripViewComponent,
     DayListComponent,
     EventComponent,
+    ActivityListComponent,
     TempEventComponent,
     TransportComponent,
     CreateEventComponent,

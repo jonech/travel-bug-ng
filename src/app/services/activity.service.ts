@@ -33,4 +33,18 @@ export class ActivityService {
       .map((res: any) => new EventActivity(res.event))
       .catch(err => Observable.throw(err || 'Server Error'));
   }
+
+  public deleteActivity(activity): Observable<boolean> {
+    return this.http
+      .delete(`${this.baseUrl}/trip/${activity.tripId}/day/${activity.dayTripId}/activity/${activity.id}`)
+      .map(res => { return true })
+      .catch(err => Observable.throw(err || 'Server Error'));
+  }
+
+  public reorderActivity(reorderParam, dayTripId, tripId): Observable<EventActivity> {
+    return this.http
+      .post(`${this.baseUrl}/trip/${tripId}/day/${dayTripId}/reorder`, { activity: reorderParam })
+      .map(res => { return new EventActivity(res) })
+      .catch(err => Observable.throw(err || 'Server Error'));
+  }
 }

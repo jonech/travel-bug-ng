@@ -3,6 +3,8 @@ import {
   OnInit,
   Input
 } from '@angular/core';
+import { NzModalService } from 'ng-zorro-antd';
+
 import { EventActivity } from 'app/models';
 import { ActivityService, EmitterService } from 'app/services';
 import * as String from 'app/shared/util/string.util';
@@ -14,6 +16,8 @@ import * as String from 'app/shared/util/string.util';
     <div nz-row class="card-wrapper">
       <nz-card class="card">
         <ng-template #body>
+          <h4>{{ event.id || 'no id' }}</h4>
+          <h4>{{ event.dayTripId || 'no id' }}</h4>
           <div nz-row [nzType]="'flex'" [nzAlign]="'middle'">
             <div nz-col [nzSpan]="3"><div class="time">{{ event.getTimeDate() | date:'HH:mm' }}</div></div>
             <div nz-col [nzSpan]="5">
@@ -26,6 +30,7 @@ import * as String from 'app/shared/util/string.util';
           </div>
           <div class="tools">
             <div class="setting" (click)="editEvent()"><i class="anticon anticon-edit"></i></div>
+            <div class="delete" (click)="deleteEvent()"><i class="anticon anticon-delete"></i></div>
           </div>
         </ng-template>
       </nz-card>
@@ -39,7 +44,10 @@ export class EventComponent implements OnInit {
 
   @Input() event: EventActivity;
 
-  constructor() { }
+  constructor(
+    private activityService: ActivityService,
+    private modalService: NzModalService,
+  ) { }
 
   ngOnInit() { }
 
@@ -56,5 +64,23 @@ export class EventComponent implements OnInit {
         }
         this.event = event;
       });
+  }
+
+  deleteEvent() {
+    let modal = this.modalService.confirm({
+      title: 'Deleting event',
+      content: 'Are you sure you want to delete this event?',
+      okText: 'OK',
+      cancelText: 'Cancel',
+      showConfirmLoading: true,
+      onOk: () => {
+        let responded = false;
+        this.activityService.deleteActivity(this.event)
+          .takeWhile(() => !responded)
+          .subscribe(() => {
+            EmitterService.get(String.DELETE_ACTIVITY_SUCCESS).emit(this.event);
+          });
+      }
+    });
   }
 }
