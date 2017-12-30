@@ -2,8 +2,10 @@ import {
   Component,
   OnInit,
   ViewChild,
+  OnDestroy
 } from '@angular/core';
 import { NzNotificationService } from 'ng-zorro-antd';
+import { Subject } from 'rxjs/Subject';
 
 import { TripFormComponent } from './trip-form.component';
 import { TripService } from '../../services/trip.service';
@@ -27,7 +29,8 @@ import { Trip } from '../../models';
   `
 })
 
-export class EditTripModalComponent implements OnInit {
+export class EditTripModalComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe: Subject<any> = new Subject();
   isVisible: boolean = false;
   trip: Trip = new Trip();
   @ViewChild(TripFormComponent) tripForm: TripFormComponent;
@@ -38,11 +41,19 @@ export class EditTripModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    EmitterService.get('[Trip] Edit').subscribe((trip: Trip) => {
-      console.log(trip)
-      this.trip = trip;
-      this.isVisible = true;
-    })
+    EmitterService.get('[Trip] Edit')
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((trip: Trip) => {
+        console.log(trip)
+        this.trip = trip;
+        this.isVisible = true;
+      });
+  }
+
+  ngOnDestroy() {
+    //EmitterService.get(String.EDIT_EVENT).unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   handleCancel(event) {
@@ -55,10 +66,13 @@ export class EditTripModalComponent implements OnInit {
   }
 
   private updateTrip(trip: Trip) {
-    this.tripService.updateTrip(trip).subscribe(
-      res => {
+    let responded = false;
+    this.tripService.updateTrip(trip)
+      .takeWhile(() => !responded)
+      .subscribe(res => {
         this.tripForm.resetForm();
         this.isVisible = false;
+        responded = true;
       },
       (error) => {
         console.log(error)
@@ -66,6 +80,7 @@ export class EditTripModalComponent implements OnInit {
         this.tripForm.resetForm();
         this.isVisible = false;
         this.trip = null; // need to set trip to null to update onChanges
+        responded = true;
       }
     );
   }

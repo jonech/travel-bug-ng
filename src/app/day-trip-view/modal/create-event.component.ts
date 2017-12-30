@@ -8,6 +8,7 @@ import { EmitterService, ActivityService } from 'app/services';
 import { EventActivity } from 'app/models';
 import * as String from 'app/shared/util/string.util';
 import { EventFormComponent } from './event-form.component';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'create-event-modal',
@@ -27,7 +28,7 @@ import { EventFormComponent } from './event-form.component';
 })
 
 export class CreateEventComponent implements OnInit, OnDestroy {
-
+  private ngUnsubscribe: Subject<any> = new Subject();
   isVisible: boolean = false;
   @ViewChild(EventFormComponent) eventForm: EventFormComponent;
 
@@ -37,18 +38,21 @@ export class CreateEventComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // listen to create event button click
-    EmitterService.get(String.CREATE_TEMP_EVENT).subscribe((modalOpen) => {
-      if (modalOpen) {
-        this.isVisible = true;
-      }
-      else {
-        this.isVisible = false;
-      }
-    })
+    EmitterService.get(String.CREATE_TEMP_EVENT)
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((modalOpen) => {
+        if (modalOpen) {
+          this.isVisible = true;
+        }
+        else {
+          this.isVisible = false;
+        }
+      });
   }
 
   ngOnDestroy() {
-    EmitterService.get(String.CREATE_TEMP_EVENT).unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   handleCancel(event) {

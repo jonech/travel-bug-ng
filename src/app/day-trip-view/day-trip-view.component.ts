@@ -10,62 +10,11 @@ import { DayTrip, EventActivity } from 'app/models';
 @Component({
   selector: 'day-trip-view',
   styleUrls: ['day-trip-view.component.scss'],
-  template: `
-    <div nz-row>
-      <div nz-col [nzSpan]="4">
-        <div class="left-side-bar">
-          <nz-affix class="timeline">
-            <nz-anchor>
-              <nz-link *ngFor="let day of dayTripList; let i = index"
-                nzHref="#item-{{i}}"
-                nzTitle="{{ day.dayTripName }}">
-              </nz-link>
-            </nz-anchor>
-          </nz-affix>
-          <button nz-button [nzLoading]="addDayTripLoading" [nzType]="'primary'" (click)="createDayTrip()">
-            <span>Add Day Trip</span><i class="anticon anticon-plus"></i>
-          </button>
-        </div>
-      </div>
-
-      <div nz-col [nzSpan]="14">
-        <div *ngFor="let d of dayTripList; let i = index" class="day-trip">
-          <!-- anchor -->
-          <span [id]="'item-'+i"></span>
-          <h4>{{ d.dayTripName }} {{ d.date }}</h4>
-
-          <!--<div [dragula]="'bag-activity'"  [dragulaModel]="d.activities">
-            <event *ngFor="let a of d.activities; let j = index" [event]="a"></event>
-          </div>-->
-          <activity-list [dayTripId]="d.id" [tripId]="d.tripId" [activities]="d.activities"></activity-list>
-        </div>
-
-        <div *ngIf="dayTripList.length <= 0">
-          <h3>Create a new day trip and start planning!</h3>
-        </div>
-      </div>
-
-      <div nz-col [nzSpan]="6">
-        <div class="right-side-bar">
-          <div nz-row>
-            <button class="activity-button" (click)="createTempEvent()"><i class="anticon anticon-plus"></i><br><span>Add Activity</span></button>
-            <!--<button class="activity-button"><i class="anticon anticon-plus"></i><br>Add Transport</button>-->
-          </div>
-
-          <div id="temp-heading">Temporary Activities</div>
-          <div class="temp-box" [dragula]="'bag-activity'" [dragulaModel]="tempEventList">
-            <temp-event attr.activity-id="{{ temp.id }}" *ngFor="let temp of tempEventList; let i = index" [event]="temp"></temp-event>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <create-event-modal></create-event-modal>
-    <edit-temp-event-modal></edit-temp-event-modal>
-    <edit-event-modal></edit-event-modal>
-  `
+  templateUrl: 'day-trip-view.component.html'
 })
-export class DayTripViewComponent implements OnInit, OnDestroy {
+export class DayTripViewComponent implements OnInit {
+
+  private ngUnsubscribe: Subject<any> = new Subject();
 
   dayTripList: Array<DayTrip> = [];
   tempEventList: Array<EventActivity> = [];
@@ -76,8 +25,6 @@ export class DayTripViewComponent implements OnInit, OnDestroy {
 
   numbers: Array<string> = new Array<string>();
 
-	daySubject: Subject<any>;
-
 	constructor(
 		private route: ActivatedRoute,
     private router: Router,
@@ -85,9 +32,10 @@ export class DayTripViewComponent implements OnInit, OnDestroy {
     private dragulaService: DragulaService,
     private activityService: ActivityService
 	) {
-    this.daySubject = new Subject();
+	}
 
-    dragulaService.drop.subscribe((value) => {
+  dragulaStuff() {
+    this.dragulaService.drop.subscribe((value) => {
       let responded = false;
       let activityId = parseInt(value[1].getAttribute('activity-id')) || null;
       let dayTrip = this.findDroppedDayTrip(activityId);
@@ -103,43 +51,57 @@ export class DayTripViewComponent implements OnInit, OnDestroy {
         }
       }
     });
-	}
+  }
 
 	ngOnInit() {
-		this.route.params.subscribe(params => {
+    this.route.params
+    .takeUntil(this.ngUnsubscribe)
+    .subscribe(params => {
       this.tripId = params['tripId'];
+      this.dragulaStuff();
 
-      let responded = false;
       // fetch list of daytrips
+      let responded = false;
       this.dayTripService.getDayTrips(this.tripId)
         .takeWhile(() => !responded)
         .subscribe(res => {
           this.dayTripList = res;
           responded = true;
+        }, err => {
+          console.log(err);
+          responded = true;
         });
 
       // listen to create temp event
-      EmitterService.get(string.CREATE_TEMP_EVENT_SUBMIT).subscribe((temp) => {
-        this.tempEventList.push(temp);
-      });
+      EmitterService.get(string.CREATE_TEMP_EVENT_SUBMIT)
+        .takeUntil(this.ngUnsubscribe)
+        .subscribe((temp) => {
+            this.tempEventList.push(temp);
+        });
 
       // listen to event delete
-      EmitterService.get(string.DELETE_ACTIVITY_SUCCESS).subscribe((activity: EventActivity) => {
-        // process of update and remove the deleted activities after delete success
-        let dayTripIndex = this.dayTripList.findIndex(d => d.id === activity.dayTripId);
-        let deletedIndex = this.dayTripList[dayTripIndex].activities.findIndex(a => a.id === activity.id);
-        this.dayTripList[dayTripIndex].activities.splice(deletedIndex, 1);
-      });
+      EmitterService.get(string.DELETE_ACTIVITY_SUCCESS)
+        .takeUntil(this.ngUnsubscribe)
+        .subscribe((activity: EventActivity) => {
+          // process of update and remove the deleted activities after delete success
+          let dayTripIndex = this.dayTripList.findIndex(d => d.id === activity.dayTripId);
+          let deletedIndex = this.dayTripList[dayTripIndex].activities.findIndex(a => a.id === activity.id);
+          this.dayTripList[dayTripIndex].activities.splice(deletedIndex, 1);
+        });
 
       // listen to event created
-      EmitterService.get(string.CREATE_EVENT_SUCCESS).subscribe((event: EventActivity) => {
-        let dayTripIndex = this.dayTripList.findIndex(d => d.id === event.dayTripId);
-      })
+      EmitterService.get(string.CREATE_EVENT_SUCCESS)
+        .takeUntil(this.ngUnsubscribe)
+        .subscribe((event: EventActivity) => {
+          let dayTripIndex = this.dayTripList.findIndex(d => d.id === event.dayTripId);
+        });
     });
 	}
 
   ngOnDestroy() {
-    EmitterService.get(string.CREATE_TEMP_EVENT).unsubscribe();
+    //EmitterService.get(string.CREATE_TEMP_EVENT).unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   createTempEvent() {
@@ -159,7 +121,7 @@ export class DayTripViewComponent implements OnInit, OnDestroy {
       }, err => {
         console.log(err);
         responded = true;
-      })
+      });
   }
 
   private handleNewActivityDrop(event: EventActivity, dayTrip: DayTrip) {

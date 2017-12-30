@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { EmitterService, ActivityService } from 'app/services';
+import { Subject } from 'rxjs/Subject';
+
 import { EventActivity } from 'app/models';
 import { EventFormComponent } from './event-form.component';
 import * as String from 'app/shared/util/string.util';
@@ -22,6 +24,7 @@ import * as String from 'app/shared/util/string.util';
 })
 
 export class EditEventComponent implements OnInit, OnDestroy {
+  private ngUnsubscribe: Subject<any> = new Subject();
   isVisible: boolean = false;
   event: EventActivity = new EventActivity();
   @ViewChild(EventFormComponent) eventForm: EventFormComponent;
@@ -30,11 +33,12 @@ export class EditEventComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // listen to edit event button click in event activity
-    EmitterService.get(String.EDIT_EVENT).subscribe((event: EventActivity) => {
-      this.isVisible = true;
-      console.log(event);
-      this.event = event;
-    });
+    EmitterService.get(String.EDIT_EVENT)
+      .takeUntil(this.ngUnsubscribe)
+      .subscribe((event: EventActivity) => {
+        this.isVisible = true;
+        this.event = event;
+      });
   }
 
   handleCancel(event) {
@@ -63,6 +67,8 @@ export class EditEventComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    EmitterService.get(String.EDIT_EVENT).unsubscribe();
+    //EmitterService.get(String.EDIT_EVENT).unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

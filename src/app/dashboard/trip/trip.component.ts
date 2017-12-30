@@ -9,7 +9,7 @@ import { EmitterService } from '../../services/event-emitter.service';
 	selector: 'trip',
   styleUrls: ['trip.component.scss'],
   template: `
-  <div nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" [nzLg]="8" [nzXl]="8" class="card-wrapper">
+  <div routerLink="/daytrip/{{trip.id}}" nz-col [nzXs]="24" [nzSm]="24" [nzMd]="8" [nzLg]="8" [nzXl]="8" class="card-wrapper">
     <nz-card class="card">
       <ng-template #body>
         <div class="card-top">
@@ -66,8 +66,15 @@ export class TripComponent implements OnInit {
       cancelText: 'Cancel',
       showConfirmLoading: true,
       onOk: () => {
+        let responded = false;
         this.tripService.deleteTrip(this.trip.id)
-          .subscribe(() => { console.log('deleted') }, err => console.log(err));
+          .takeWhile(() => !responded)
+          .subscribe(() => {
+            responded = true;
+            console.log('deleted');
+          },
+          err => console.log(err)
+        );
       }
     });
   }

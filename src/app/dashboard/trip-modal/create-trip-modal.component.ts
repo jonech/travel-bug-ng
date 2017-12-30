@@ -7,7 +7,10 @@ import {
   SimpleChanges,
   EventEmitter,
   ViewChild,
+  OnDestroy
 } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
+
 import { TripFormComponent } from './trip-form.component';
 import { TripService } from '../../services/trip.service';
 import { Trip } from '../../models';
@@ -33,6 +36,8 @@ export class CreateTripModalComponent implements OnInit, OnChanges {
   @Output() createTripClose = new EventEmitter();
   @ViewChild(TripFormComponent) tripForm: TripFormComponent;
 
+  private ngUnsubscribe: Subject<any> = new Subject();
+
   constructor(private tripService: TripService) { }
 
   ngOnInit() {
@@ -40,6 +45,12 @@ export class CreateTripModalComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.isVisible = changes.isVisible.currentValue
+  }
+
+  ngOnDestroy() {
+    //EmitterService.get(String.EDIT_EVENT).unsubscribe();
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 
   handleCancel(event) {
@@ -51,15 +62,19 @@ export class CreateTripModalComponent implements OnInit, OnChanges {
   }
 
   private createTrip(trip: Trip) {
-    this.tripService.createTrip(trip).subscribe(
-      res => {
+    let responded = false;
+    this.tripService.createTrip(trip)
+      .takeWhile(() => !responded)
+      .subscribe(res => {
         this.tripForm.resetForm();
         this.closeModal();
+        responded = true;
       },
       (error) => {
         console.log(error);
         this.tripForm.resetForm();
         this.closeModal();
+        responded = true;
       }
     );
   }
