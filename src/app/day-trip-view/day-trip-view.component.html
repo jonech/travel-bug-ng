@@ -18,8 +18,10 @@
   <div nz-col class="mid-col" [nzSpan]="14">
     <div *ngFor="let d of dayTripList; let i = index" class="day-trip">
       <!-- anchor -->
-      <span [id]="'item-'+i"></span>
-      <h4>{{ d.dayTripName }} {{ d.date }}</h4>
+      <span class="anchor-id" [id]="'item-'+i"></span>
+      <div class="day-trip-name">
+        <h2><span class="line-text">{{ d.dayTripName }} {{ d.date }}</span></h2>
+      </div>
 
       <!--<div [dragula]="'bag-activity'"  [dragulaModel]="d.activities">
         <event *ngFor="let a of d.activities; let j = index" [event]="a"></event>
