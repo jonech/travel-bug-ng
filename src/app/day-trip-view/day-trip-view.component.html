@@ -1,5 +1,5 @@
 <div nz-row>
-  <div nz-col [nzSpan]="4">
+  <div nz-col class="side-col" [nzSpan]="4">
     <div class="left-side-bar">
       <nz-affix class="timeline">
         <nz-anchor>
@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div nz-col [nzSpan]="14">
+  <div nz-col class="mid-col" [nzSpan]="14">
     <div *ngFor="let d of dayTripList; let i = index" class="day-trip">
       <!-- anchor -->
       <span [id]="'item-'+i"></span>
@@ -32,7 +32,7 @@
     </div>
   </div>
 
-  <div nz-col [nzSpan]="6">
+  <div nz-col class="side-col" [nzSpan]="6">
     <div class="right-side-bar">
       <div nz-row>
         <button class="activity-button" (click)="createTempEvent()"><i class="anticon anticon-plus"></i><br><span>Add Activity</span></button>

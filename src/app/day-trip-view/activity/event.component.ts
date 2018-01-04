@@ -16,14 +16,14 @@ import * as String from 'app/shared/util/string.util';
     <div nz-row class="card-wrapper">
       <nz-card class="card">
         <ng-template #body>
-          <h4>{{ event.id || 'no id' }}</h4>
-          <h4>{{ event.dayTripId || 'no id' }}</h4>
+          <!--<h4>{{ event.id || 'no id' }}</h4>
+          <h4>{{ event.dayTripId || 'no id' }}</h4>-->
           <div nz-row [nzType]="'flex'" [nzAlign]="'middle'">
-            <div nz-col [nzSpan]="3"><div class="time">{{ event.getTimeDate() | date:'HH:mm' }}</div></div>
-            <div nz-col [nzSpan]="5">
+            <div nz-col [nzXs]="24" [nzSm]="3" [nzMd]="3"><div class="time">{{ event.getTimeDate() | date:'HH:mm' }}</div></div>
+            <div nz-col [nzXs]="24" [nzSm]="5" [nzMd]="5">
               <div class="location-img"></div>
             </div>
-            <div nz-col [nzSpan]="16">
+            <div nz-col [nzXs]="24" [nzSm]="16" [nzMd]="16">
               <h4 class="event-name">{{ event.eventName }}</h4>
               <p class="description">{{ event.description }}</p>
             </div>

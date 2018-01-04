@@ -71,6 +71,17 @@
   }
 }
 
+@media screen and (max-width: 768px) {
+  // hide side bars in smaller screen
+  .side-col {
+    visibility: hidden;
+    width: 0;
+  }
+  .mid-col {
+    width: 100%;
+  }
+}
+
 
 //////////////////////////////
 
