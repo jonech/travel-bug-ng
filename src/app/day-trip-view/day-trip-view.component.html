@@ -26,7 +26,11 @@
       <!--<div [dragula]="'bag-activity'"  [dragulaModel]="d.activities">
         <event *ngFor="let a of d.activities; let j = index" [event]="a"></event>
       </div>-->
-      <activity-list [dayTripId]="d.id" [tripId]="d.tripId" [activities]="d.activities"></activity-list>
+      <!--<activity-list [dayTripId]="d.id" [tripId]="d.tripId" [activities]="d.activities"></activity-list>-->
+
+      <div class="activity-box" [dragula]="'bag-activity'"  [dragulaModel]="d.activities">
+        <event attr.activity-id="{{ a.id }}" *ngFor="let a of d.activities; let j = index" [event]="a"></event>
+      </div>
     </div>
 
     <div *ngIf="dayTripList.length <= 0">

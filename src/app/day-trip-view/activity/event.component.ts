@@ -16,8 +16,8 @@ import * as String from 'app/shared/util/string.util';
     <div nz-row class="card-wrapper">
       <nz-card class="card">
         <ng-template #body>
-          <!--<h4>{{ event.id || 'no id' }}</h4>
-          <h4>{{ event.dayTripId || 'no id' }}</h4>-->
+          <!--<h4>Event ID: {{ event.id || 'no id' }}</h4>
+          <h4>DayTripID: {{ event.dayTripId || 'no id' }}</h4>-->
           <div nz-row [nzType]="'flex'" [nzAlign]="'middle'">
             <div nz-col [nzXs]="24" [nzSm]="3" [nzMd]="3"><div class="time">{{ event.getTimeDate() | date:'HH:mm' }}</div></div>
             <div nz-col [nzXs]="24" [nzSm]="5" [nzMd]="5">

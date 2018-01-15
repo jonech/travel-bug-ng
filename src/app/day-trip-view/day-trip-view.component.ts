@@ -143,14 +143,18 @@ export class DayTripViewComponent implements OnInit {
   }
 
   private findDropActivityPosition(activities: EventActivity[], targetActivityId?: number): number {
+    console.log(activities);
     for (var i=0; i<=activities.length; i++) {
       if (activities[i].id == targetActivityId) {
         // always take the position of the next element while not last
         if (i + 1 < activities.length) {
           return activities[i+1].position;
         }
-        else {
+        else if (i - 1 > 0){
           return activities[i-1].position + 1;
+        }
+        else {
+          return 1
         }
       }
     }
@@ -185,6 +189,8 @@ export class DayTripViewComponent implements OnInit {
 
   private reorderEvent(reorderParam, dayTripId: number) {
     let responded = false;
+    console.log('new order', reorderParam);
+    console.log('from daytripId', dayTripId);
     this.activityService.reorderActivity(reorderParam, dayTripId, this.tripId)
       .takeWhile(() => !responded)
       .subscribe(resEvent => {

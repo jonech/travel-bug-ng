@@ -7,8 +7,11 @@
 }
 
 .day-trip {
-  min-height: 100vh;
+  //min-height: 100vh;
   position:relative;
+  .activity-box {
+    min-height: 90vh;
+  }
   .anchor-id {
     position: absolute;
     top: -70px;
