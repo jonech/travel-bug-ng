@@ -44,7 +44,12 @@ export class HeaderComponent implements OnInit
   }
 
 	goToExternalURL(url){
-		window.location.href=url;
+    if (this._isLogin) {
+      this.router.navigate(['/dashboard']);
+    }
+    else {
+      window.location.href=url;
+    }
 	}
 
 	logout() {
