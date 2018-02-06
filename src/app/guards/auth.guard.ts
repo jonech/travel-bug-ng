@@ -21,7 +21,6 @@ export class AuthGuard implements CanActivate
 	{
       return this.auth.validateJWT().map(e => {
               if (e) {
-                console.log(e);
                 return true;
               }}).catch((e) => {
                 console.log(e)
