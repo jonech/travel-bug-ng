@@ -7,6 +7,7 @@ notifications:
 branches:
   only:
   - master
+  - chee2
 
 before_install:
 - openssl aes-256-cbc -K $encrypted_cbf83cf799e1_key -iv $encrypted_cbf83cf799e1_iv
@@ -19,6 +20,5 @@ script:
 
 deploy:
   provider: firebase
-  token:
-    secure: j9Kz06Xtwaz8CNh9vERGDmrCrepW6FjJDEsiC/bulazS2xJpv5GjL1M85j+cDCSzK9EN3kJQLTeU3jM5Lirts1VZqAyiIbAHHbrKWWHeS5jE3NiGgHofro3c5JS6TgObx5gsvJr9Sc53aVV2KgKfgGVGRN+vESkI4skjK+VZ/wWtP6SEuCpRKktk7sgYTn7L52aLiX/Tayy/as3IGoube68ZhSXP5TEutXiZ21vCtVLTcL9cgNPyrtvg8cYkdaeSI49zqTqHxwxpQGmmXvlbX3Bdoywz781pddeT9t2CrWvwaTMYv68Lhhev2sFCr5SUBiJLz8NFrsdeW6/T2fcUGoaWWOl4rsgxydaBLIszImDRCtmGsokvIG3dzI9qLxB6zrvZd17nnbqwmQ4j+HFVIpTTTeWErtDQ5Wjepw1zLjGS6f2OMaIHSh1iCpW1vzPI17hAezj/LeK62uIot5SjifalM5xWNmoKWwDXxBZmjbakNnSNhddOs+7CZRCrZ5lms+ZAvUdTQVAnHo063Gqp5MVzkZu97IxxqUEhqPojppf+L7SAdAjzq84W8y0y/5BC1vtYaYyhcfoKun+QVqhwMxLIknxNQE9B2Ey30upcAeDTJ+DiEgMnHKerG6w4yGKcc7PErSVucjBQEag0XIn6HSfuWQsQc9a7w6vbtXmV/aQ=
-  project: travel-bugg
+  token: $FIREBASE_TOKEN
+  project: buggy-travel
