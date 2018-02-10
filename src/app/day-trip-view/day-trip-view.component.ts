@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, QueryList, TemplateRef, ViewChild, ViewChildren, ViewContainerRef  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs/Subject';
 import { DragulaService } from 'ng2-dragula';
@@ -99,7 +99,6 @@ export class DayTripViewComponent implements OnInit {
 	}
 
   ngOnDestroy() {
-    //EmitterService.get(string.CREATE_TEMP_EVENT).unsubscribe();
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
   }
@@ -207,4 +206,22 @@ export class DayTripViewComponent implements OnInit {
     );
   }
 
+
+
+  // @ViewChild('anchor-template')
+  // template: TemplateRef<any>
+
+  // @ViewChildren('dayTripLink', { read: ViewContainerRef })
+  // items: QueryList<ViewContainerRef>
+
+  // ngAfterViewInit() {
+  //   setTimeout(() => {
+  //     this.items.forEach(i => i.createEmbeddedView(this.template))
+  //   }, 1000)
+  // }
+
+  getSideAnchorTemplate()
+  {
+    return "<template><span>带图标的Tooltip</span></template>";
+  }
 }

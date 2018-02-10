@@ -3,7 +3,7 @@
     <div class="left-side-bar">
       <nz-affix class="timeline">
         <nz-anchor>
-          <nz-link *ngFor="let day of dayTripList; let i = index"
+          <nz-link #dayTripLink *ngFor="let day of dayTripList; let i = index"
             nzHref="#item-{{i}}"
             nzTitle="{{ day.dayTripName }}">
           </nz-link>
@@ -19,9 +19,7 @@
     <div *ngFor="let d of dayTripList; let i = index" class="day-trip">
       <!-- anchor -->
       <span class="anchor-id" [id]="'item-'+i"></span>
-      <div class="day-trip-name">
-        <h2><span class="line-text">{{ d.dayTripName }} {{ d.date }}</span></h2>
-      </div>
+      <day-trip-title [dayTrip]="d"></day-trip-title>
 
       <!--<div [dragula]="'bag-activity'"  [dragulaModel]="d.activities">
         <event *ngFor="let a of d.activities; let j = index" [event]="a"></event>
@@ -56,3 +54,7 @@
 <create-event-modal></create-event-modal>
 <edit-temp-event-modal></edit-temp-event-modal>
 <edit-event-modal></edit-event-modal>
+
+<!-- <nz-template #anchor-template>
+  <span>template</span>
+</nz-template> -->

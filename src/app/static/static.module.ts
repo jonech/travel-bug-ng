@@ -8,7 +8,7 @@ import { AboutComponent } from './about/about.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { TeamComponent } from './team/team.component';
 import { TermsConditionComponent } from './terms-n-conditions/terms-n-conditions.component';
-
+import { TestComponent } from './playground/test.component';
 
 @NgModule({
   imports: [
@@ -22,7 +22,8 @@ import { TermsConditionComponent } from './terms-n-conditions/terms-n-conditions
     AboutComponent,
     PrivacyPolicyComponent,
     TeamComponent,
-    TermsConditionComponent
+    TermsConditionComponent,
+    TestComponent
   ]
 })
 export class StaticModule { }

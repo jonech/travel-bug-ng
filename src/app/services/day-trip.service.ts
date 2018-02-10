@@ -32,4 +32,13 @@ export class DayTripService {
             .map((res) => { return res })
             .catch((err) => Observable.throw(err || 'Server error'));
   }
+
+  public updateDayTrip(tripId, dayTrip): Observable<DayTrip> {
+    return this.http.post(`${this.baseUrl}/trip/${tripId}/day/${dayTrip.id}`,
+            {
+              dayTrip: dayTrip
+            })
+            .map((res) => { return res })
+            .catch((err) => Observable.throw(err || 'Server error'));
+  }
 }

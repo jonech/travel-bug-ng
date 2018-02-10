@@ -15,7 +15,7 @@
   "dependencies": {
     "@agm/core": "^1.0.0-beta.2",
     "@angular/animations": "^4.4.6",
-    "@angular/cli": "^1.5.4",
+    "@angular/cli": "^1.6.7",
     "@angular/common": "^4.4.6",
     "@angular/compiler": "^4.4.6",
     "@angular/core": "^4.4.6",
@@ -26,30 +26,30 @@
     "@angular/platform-server": "^4.4.6",
     "@angular/router": "^4.4.6",
     "angular2-google-maps": "^0.17.0",
-    "core-js": "^2.4.1",
+    "core-js": "^2.5.3",
     "ng-zorro-antd": "^0.5.5",
     "ng2-dragula": "^1.5.0",
     "ngx-facebook": "^2.4.0",
-    "rxjs": "^5.5.2",
+    "rxjs": "^5.5.6",
     "ts-helpers": "^1.1.1",
     "zone.js": "^0.7.2"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^4.4.6",
-    "@types/googlemaps": "^3.30.0",
+    "@types/googlemaps": "^3.30.5",
     "@types/jasmine": "2.5.38",
-    "@types/node": "^6.0.92",
+    "@types/node": "^6.0.96",
     "codelyzer": "~2.0.0-beta.1",
     "jasmine-core": "2.5.2",
     "jasmine-spec-reporter": "2.5.0",
     "karma": "1.2.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-cli": "^1.0.1",
-    "karma-jasmine": "^1.0.2",
+    "karma-jasmine": "^1.1.1",
     "karma-remap-istanbul": "^0.2.1",
     "protractor": "~4.0.13",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
-    "typescript": "^2.4.0"
+    "typescript": "^2.7.1"
   }
 }

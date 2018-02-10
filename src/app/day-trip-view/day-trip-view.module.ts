@@ -20,6 +20,8 @@ import { DayListComponent } from './day-trip-sider/day-list.component';
 import { EventComponent } from './activity/event.component';
 import { TransportComponent } from './activity/transport.component';
 import { TempEventComponent } from './activity/temp-event.component';
+import { DayTripTitleComponent } from './day-trip-sider/day-trip-title.component';
+
 import { CreateEventComponent } from './modal/create-event.component';
 import { CreateTransportComponent } from './modal/create-transport.component';
 import { EditTempEventComponent } from './modal/edit-temp-event.component';
@@ -44,6 +46,7 @@ import { EventFormComponent } from './modal/event-form.component';
     TempEventComponent,
     TransportComponent,
     CreateEventComponent,
+    DayTripTitleComponent,
     EditTempEventComponent,
     EditEventComponent,
     CreateTransportComponent,
