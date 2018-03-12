@@ -87,7 +87,7 @@ export class AuthService {
   public validateJWT(): Observable<string> {
     let jwt = localStorage.getItem(this.JWT);
     if (jwt == null) {
-      Observable.throw('Require login');
+      return Observable.throw('Require login');
     }
     return this.http.get(`${this.validateUrl}?jwt=${jwt}`)
             .map((res: Response) => res)
