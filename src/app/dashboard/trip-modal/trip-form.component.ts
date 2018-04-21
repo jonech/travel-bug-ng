@@ -9,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 import { MapsAPILoader } from 'angular2-google-maps/core';
 import { Trip } from '../../models/trip.model';
+import { GetYMDFromDate } from 'app/shared/util/datetime.util';
 
 @Component({
 	selector: 'trip-form',
@@ -117,6 +118,8 @@ export class TripFormComponent implements OnInit, OnChanges
     }
     if (this.tripForm.valid) {
       this.isLoading = true;
+      this.tripForm.value.startDate = GetYMDFromDate(this.tripForm.value.startDate);
+      this.tripForm.value.endDate = GetYMDFromDate(this.tripForm.value.endDate);
       this.formSubmit.emit(this.tripForm.value);
     }
   }
