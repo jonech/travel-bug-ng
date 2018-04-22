@@ -31,7 +31,13 @@ export class DayTripViewComponent implements OnInit {
     private dayTripService: DayTripService,
     private dragulaService: DragulaService,
     private activityService: ActivityService
-	) {
+  )
+  {
+    dragulaService.setOptions('bag-activity', {
+      moves: function (el, container, handle) {
+        return (handle.className as string).includes('handle-bar');
+      }
+    });
 	}
 
   dragulaStuff() {

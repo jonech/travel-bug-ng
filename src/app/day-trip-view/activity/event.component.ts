@@ -29,6 +29,7 @@ import * as String from 'app/shared/util/string.util';
             </div>
           </div>
           <div class="tools">
+            <div><i class="handle-bar fas fa-expand-arrows-alt"></i></div>
             <div class="setting" (click)="editEvent()"><i class="anticon anticon-edit"></i></div>
             <div class="delete" (click)="deleteEvent()"><i class="anticon anticon-delete"></i></div>
           </div>

@@ -32,10 +32,10 @@ export function GetCurrentDateTime() : string
     return `${date}/${month}/${year} ${hour}:${minute}:${sec}`
 }
 
-export function GetYMDFromDate(dt: Date)
-{
+export function GetYMDFromDate(dt: Date) : string {
   var date = dt.getDate();
   var month = dt.getMonth() + 1;
   var year = dt.getFullYear();
   return `${date}-${month}-${year}`;
 }
+
