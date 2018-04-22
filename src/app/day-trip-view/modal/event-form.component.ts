@@ -32,7 +32,7 @@ import { EventActivity } from '../../models';
           <label nz-form-item>Description</label>
         </div>
         <div nz-form-control nz-col>
-          <nz-input formControlName="description" [nzPlaceHolder]="'A brief description for this activity'" [nzSize]="'large'">
+          <nz-input nzType="textarea" nzAutosize formControlName="description" [nzPlaceHolder]="'A brief description for this activity'" [nzSize]="'large'">
           </nz-input>
         </div>
       </div>
